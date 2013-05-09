@@ -1,0 +1,20 @@
+<?php
+	$host="localhost"; // nombre o IP del Host
+	$user="desarrollo"; // Usuario de Mysql
+	$password="1"; // Password de Mysql 
+	$db_name="gfr4nc0g_sgtelmex"; // Nombre de la base de datos
+
+	$con = mysql_connect("$host", "$user", "$password");
+
+	if (!$con)
+	  {
+	  die('Could not connect: ' . mysql_error());
+	  }
+/*	else
+	{
+		echo "Hay conexi&oacute;n<br>";
+		}
+*/
+	mysql_select_db("$db_name");
+
+?>
