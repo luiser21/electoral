@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=ISO-8859-1'); 
 	session_start();
     include_once "includes/GestionBD.new.class.php";
 	$DBGestion = new GestionBD('AGENDAMIENTO');	
@@ -29,6 +30,8 @@
 		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
 	<link rel="stylesheet" type="text/css" href="css/menu.css"/>
 	<script src="js/superfish.js"></script>
+	  <script type="text/javascript" src="js/jquery.js"></script>
+   <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 		<script src="js/slide.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/cufon-yui.js"></script>
 		<script type="text/javascript" src="js/cufon-replace.js"></script>  
@@ -108,7 +111,7 @@
 					<nav>
 					<div id="menu">
 					    <ul class="sf-menu" >
-					    		<li class="active"><a href="index.html"><span>Partidos Politicos</span></a></li>
+					    		<li class="active"><a href="partidos_politicos.php"><span>Partidos Politicos</span></a></li>
 											<li><a href="Company.html"><span>Candidatos</span></a></li>
 											<li><a href="Solutions.html"><span>Lideres</span></a></li>
 											<li><a href="Services.html"><span>Usuarios</span></a></li>
