@@ -3,12 +3,12 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 	session_start();
     include_once "includes/GestionBD.new.class.php";
 	$DBGestion = new GestionBD('AGENDAMIENTO');	
-	// Si la sesion no está activa y/o autenticada ingresa a este paso
-	if ($_SESSION["active"] == 1)
+	// Si la sesion no estï¿½ activa y/o autenticada ingresa a este paso
+	if (!isset($_SESSION["active"]) == 1)
 	{
 		header("location:index.php");
 	}
-	// Si la sesion está activa y autenticada ingresa a este paso
+	// Si la sesion estï¿½ activa y autenticada ingresa a este paso
 	else
 	{
 		// toma las variables de sesion y de edicion de contenidos		

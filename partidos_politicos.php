@@ -1,4 +1,5 @@
 <?php require_once('topadmin.php');?>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">   
   <link rel="stylesheet" type="text/css" href="css/style2.css" />
 		<script type="text/javascript" src="js/modernizr.custom.04022.js"></script>	
 <style type="text/css">
@@ -11,6 +12,17 @@
   .datagrid table tfoot td { padding: 0; font-size: 15px } 
   .datagrid table tfoot td div{ padding: 1px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #F5F5F5;background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7D7D7D; color: #F5F5F5; background: none; background-color:#8C8C8C;}
 </style>
+<!--[if lt IE 9]>
+			<style>
+				.content{
+					height: auto;
+					margin: 0;
+				}
+				.content div {
+					position: relative;
+				}
+			</style>
+		<![endif]-->
 <script type="text/javascript">
 
 function OcultarFilas(Fila, Fila2) {
@@ -78,8 +90,125 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 			    <div class="clear-shadow"></div>
 			
 		        <div class="content">
-			        <div class="content-1">
+			        <div class="content-1 datagrid">
+				<table width="100%" border="1">
+  <tr>
+    <th scope="row" width="36%"><h2>Senado</h2>
+					<br/>
+					<img src="images/chart.png" >
+					<br/><br/><br/>
+					
+						<?php 
+		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="36%" border='1' cellpadding="1" cellspacing="1">
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+							 $descripcion = $datos['DESCRIPCION'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					
+							<td align="left"><?php echo $descripcion?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
 						
+					<?php
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table>
+			</th>
+    <th scope="row" width="36%"><h2>Camara</h2>
+					<br/>
+					<img src="images/chart.png" >
+					<br/><br/><br/>
+					
+						<?php 
+		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="36%" border='1' cellpadding="1" cellspacing="1">
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+							 $descripcion = $datos['DESCRIPCION'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					
+							<td align="left"><?php echo $descripcion?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
+						
+					<?php
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table></th>
+    
+    <th scope="row" width="36%"><h2>Parlamento Andino</h2>
+					<br/>
+					<img src="images/chart.png" >
+					<br/><br/><br/>
+					
+						<?php 
+		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="36%" border='1' cellpadding="1" cellspacing="1">
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+							 $descripcion = $datos['DESCRIPCION'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					
+							<td align="left"><?php echo $descripcion?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
+						
+					<?php
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table></th>
+  </tr>
+</table>
+	
+					
+		
+		
 					</div>
 			        <div class="content-2">
 						

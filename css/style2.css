@@ -1,7 +1,7 @@
 .tabs {
     position: relative;
 	margin: 40px auto;
-	//width: 750px;
+	width: 955px;
 }
 
 .tabs input {
@@ -38,10 +38,10 @@
 	line-height: 40px;
 	height: 40px;
 	position: relative;
-	padding: 0 20px;
+	padding: 0 14px;
     float: left;
 	display: block;
-	//width: 80px;
+	//width: 90px;
 	color: #385c5b;
 	letter-spacing: 1px;
 	//text-transform: uppercase;
@@ -102,8 +102,8 @@
 .content {
     background: #fff;
 	position: relative;
-    width: 168%;
-	height: 770px;
+    width: 100%;
+	height: 870px;
 	z-index: 5;
 	overflow: hidden;
     box-shadow: 0 -2px 3px -2px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.1);
