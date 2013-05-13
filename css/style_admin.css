@@ -26,7 +26,8 @@ p {padding-bottom:24px}
 /* ============================= header ====================== */
 header {height:179px}
 #page1 header {height:562px}
-#logo {margin-left: 189px; display:block;text-indent:-9999px;background:url(../images/logo.png) 0 0 no-repeat;width:240px;height:44px}
+#logo {margin-left: 270px; display:block;text-indent:-9999px;background:url(../images/logo2_2.png) 0px 0px no-repeat;width:250px;height:90px}
+#logo2 {position:abosulete; float: left; margin-left: 189px; display:block;text-indent:-9999px;background:url(../images/logo.png) 0px 0px no-repeat;width:250px;height:90px}
 #search {float:right;padding:50px 10px 0 0 }
 #search .bg {background:url(../images/search.png) 0 0 no-repeat;width:220px;height:23px}
 #search .input {background:none;padding:3px 13px;font:14px Arial, Helvetica, sans-serif;color:#000;height:17px;width:194px;margin:0}

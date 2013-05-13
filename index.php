@@ -5,26 +5,26 @@
 				<div id="slider">
 					<ul class="items">
 						<li>
-							<img src="images/img1.jpg" alt="">
+							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">We Have</span><span class="color1">Propositions</span><span>For Everybody</span></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor.</p>
+								<span class="title"><span class="color2">Conviertase </span><span class="color1">en el Lider </span><span>que desea ser</span></span>
+								<p>Aumente su capacidad de Comunicaci&oacute;n generando credibilidad y confianza.</p>
 								
 							</div>
 						</li>
 						<li>
-							<img src="images/img2.jpg" alt="" >
+							<img src="images/img2.png" alt="" >
 							<div class="banner">
-								<span class="title"><span class="color2">Fresh Ideas</span><span class="color1">For Growing</span><span>Your Business</span></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor.</p>
+								<span class="title"><span class="color2">Exhibase, Vendase</span><span class="color1">y Publicitese bajo</span><span style="font-size:36px">estrategias bien elaboradas</span></span>
+								<p >En donde las encuestas y estrategias sean aplicadas correctamente, obteniendo el exito de su campaña</p>
 								
 							</div>
 						</li>
 						<li>
-							<img src="images/img3.jpg" alt="">
+							<img src="images/img3.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">The Best</span><span class="color1">You Can Find</span><span>On The Web</span></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor.</p>
+								<span class="title"><span class="color2">Controle la</span><span class="color1">Informacion de sus</span><span>Simpatizantes y</span></span>
+								<p>Puestos de Votaci&oacute;n asegurando votos. Obtenga informaci&oacute;n detallada para ganar sus elecciones.</p>
 							
 							</div>
 						</li>
@@ -42,15 +42,15 @@
 						<p>Superior.com is one of <a href="http://blog.templatemonster.com/free-website-templates/" target="_blank">free website templates</a> created by TemplateMonster.com. It is also XHTML & CSS valid.</p>
 					</div>
 					<div class="col1 marg_right1">
-						<h2>Analysis</h2>
+						<h2>An&aacute;lisis</h2>
 						<p>This website template has sev- eral pages: <a href="index.html">Home</a>, <a href="Company.html">Company</a>, <a href="Solutions.html">Solutions</a>, <a href="Services.html">Services</a>, <a href="Contacts.html">Contact Us</a> (contact form – doesn’t work).</p>
 					</div>
 					<div class="col1 marg_right1">
-						<h2>Strategy</h2>
+							<h2>Estrategias</h2>
 						<p>This <a href="http://blog.templatemonster.com/2011/11/14/free-website-template-jquery-slider-business-project/" target="_blank" rel="nofollow">Superior Template</a> goes with two packages. PSD source files are available for the registered members.</p>
 					</div>
 					<div class="col1">
-						<h2>Services</h2>
+						<h2>Servicios</h2>
 						<ul class="list1">
 							<li><a href="#">Sed ut perspiciatis unde </a></li>
 							<li><a href="#">Omnis iste natus errorsitvo</a></li>

@@ -72,7 +72,7 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 	<header>
 	<div style=" position:absolute; top:190px">
 	<h3>Partidos Politicos de Colombia</h3>
-		<h1 style="padding: 0px 0 20px 0px;">Informacion tomada de la Registraduria Nacional de Colombia</h1>
+		<h1 style="padding: 0px 0 0px 0px;">Informacion tomada de la Registraduria Nacional de Colombia</h1>
 		
 				<section class="tabs">
 	            <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
@@ -93,17 +93,17 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 			        <div class="content-1 datagrid">
 				<table width="100%" border="1">
   <tr>
-    <th scope="row" width="36%"><h2>Senado</h2>
+    <th scope="row" width="50%" style="border: 1px solid #CCCCCC;"><h2>Senado</h2>
 					<br/>
-					<img src="images/chart.png" >
-					<br/><br/><br/>
+					<p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/chart.png" ></p>
+					<br/>
 					
 						<?php 
 		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
 				$circun=$DBGestion->datos;		
 		?>
-		<table width="36%" border='1' cellpadding="1" cellspacing="1">
+		<table width="50%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
 				<tbody >
 					
 				<?php	
@@ -129,18 +129,69 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 					 ?>	
 					</tbody>
 				</table>
+		<h3>Partidos Con Mayor  Votaci&oacute;n</h3>
+					
+				<br/><br/>
+					
+						<?php 
+		$sql="SELECT
+				partidos_politicos.NOMBRE,
+				elecciones_senado.VOTOS,
+				elecciones_senado.PARTICIPACION
+				FROM
+				elecciones_senado
+				INNER JOIN partidos_politicos ON partidos_politicos.IDPARTIDO = elecciones_senado.IDPARTIDO
+				where elecciones_senado.TIPO='5' and
+				elecciones_senado.INDIGENA='0' and elecciones_senado.ELECCIONES='2010'
+				ORDER BY partidos_politicos.IDPARTIDO asc";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="50%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+					if($i<4){
+							 $nombre = $datos['NOMBRE'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					
+							<td align="left"><?php echo $nombre?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
+						
+					<?php 
+					
+					}else{
+					break;
+					}
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table><br/><br/><br/>
+				
+			
 			</th>
-    <th scope="row" width="36%"><h2>Camara</h2>
+    <th scope="row" width="70%"  style="border: 1px solid #CCCCCC;"><h2>Camara</h2>
 					<br/>
-					<img src="images/chart.png" >
-					<br/><br/><br/>
+					<p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/chart.png" ></p>
+					<br/>
 					
 						<?php 
-		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='6' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
 				$circun=$DBGestion->datos;		
 		?>
-		<table width="36%" border='1' cellpadding="1" cellspacing="1">
+		<table width="70%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
 				<tbody >
 					
 				<?php	
@@ -165,44 +216,49 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 						}
 					 ?>	
 					</tbody>
-				</table></th>
+				</table>
+				<h3>Departamentos con Mayor Nivel de Reporte</h3>
+					<br/><br/>
+					
+						<?php 
+		$sql="SELECT
+				departamentos.NOMBRE
+				FROM
+				eleccions_camara_departamento AS Tabla1
+				INNER JOIN eleccions_camara_departamento AS Tabla2 ON Tabla2.MESAS = Tabla1.MESAS_PROCESADAS
+				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = Tabla1.IDDEPARTAMENTO
+				where Tabla1.ELECCION='2010'";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="70%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+							 $nombre = $datos['NOMBRE'];
+						
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					
+							<td align="left"><?php echo $nombre?></td>
+							<td align="center"><?php echo '100.00%'?></td>
+							
+							
+						</tr>			
+						
+					<?php
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table>
+				</th>
     
-    <th scope="row" width="36%"><h2>Parlamento Andino</h2>
-					<br/>
-					<img src="images/chart.png" >
-					<br/><br/><br/>
-					
-						<?php 
-		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
-				$DBGestion->ConsultaArray($sql);
-				$circun=$DBGestion->datos;		
-		?>
-		<table width="36%" border='1' cellpadding="1" cellspacing="1">
-				<tbody >
-					
-				<?php	
-				$i=0;
-				foreach ($circun as $datos){
-							 $descripcion = $datos['DESCRIPCION'];
-							 $votos = $datos['VOTOS'];
-							 $participacion = $datos['PARTICIPACION'];		
-							 
-							  			 
-				?>
-						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
-					
-							<td align="left"><?php echo $descripcion?></td>
-							<td align="center"><?php echo $votos?></td>
-							<td align="center"><?php echo $participacion ?></td>
-							
-						</tr>			
-						
-					<?php
-					$i++;
-						}
-					 ?>	
-					</tbody>
-				</table></th>
+ 
   </tr>
 </table>
 	

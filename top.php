@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title></title>
+	<link rel="shortcut icon" href="images/favicon(2).ico">
+		<title>SOPAC</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -95,7 +96,7 @@ function verif(){
 
 		
 				<div class="wrapper">
-					<h1><a href="index.html" id="logo">SIPGE</a></h1>
+					<h1><a href="index.html" id="logo2"></a><a href="index.html" id="logo">SOPAC </a> </h1>
 					
 						<fieldset>
 							<div class="bg">      </div>

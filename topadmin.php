@@ -21,7 +21,8 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title></title>
+	<link rel="shortcut icon" href="images/favicon(2).ico">
+		<title>SOPAC</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -30,8 +31,8 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
 	<link rel="stylesheet" type="text/css" href="css/menu.css"/>
 	<script src="js/superfish.js"></script>
-	  <script type="text/javascript" src="js/jquery.js"></script>
-   <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+ <!-- 	  <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> -->
 		<script src="js/slide.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/cufon-yui.js"></script>
 		<script type="text/javascript" src="js/cufon-replace.js"></script>  
@@ -101,7 +102,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 
 			
 					<div class="wrapper">
-						<h1><a href="index.html" id="logo">SIPGE</a></h1>
+							<h1><a href="index.html" id="logo2"></a><a href="index.html" id="logo">SOPAC </a> </h1>
 						
 							<fieldset>
 								<div class="bg">      </div>
