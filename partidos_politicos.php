@@ -12,6 +12,19 @@
   .datagrid table tfoot td { padding: 0; font-size: 15px } 
   .datagrid table tfoot td div{ padding: 1px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #F5F5F5;background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7D7D7D; color: #F5F5F5; background: none; background-color:#8C8C8C;}
 </style>
+		  <link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" />
+		  		  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
+		<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#example').dataTable( {
+					"sScrollY": 525,
+					"bJQueryUI": true,
+					"sPaginationType": "full_numbers"
+				} );
+			} );
+		</script>
 <!--[if lt IE 9]>
 			<style>
 				.content{
@@ -272,7 +285,8 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 			        <div class="content-3">
 						
 				    </div>
-				    <div class="content-4 datagrid">
+				    <div class="content-4" id="demo">
+					
 				<br/>
 						<?php 
 		$sql="SELECT * FROM PARTIDOS_POLITICOS ";
@@ -282,8 +296,8 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 				
 		
 		?>
-		
-		<table width="100%" >
+	<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">	
+	<!--	<table width="100%" > -->
 			<thead>
 				<tr>
 					<th align="center" ></th>
@@ -296,6 +310,15 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 					--><th align="center" width="26%"><span style="font-weight: bold">Director(a) y/&oacute; Presidente(a)</span></th>
 				</tr>
 			</thead>
+			<tfoot>
+		<tr>
+			<th>Rendering engine</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Engine version</th>
+			<th>CSS grade</th>
+		</tr>
+	</tfoot>
 			
 					<tbody>
 					
