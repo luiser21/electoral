@@ -1,5 +1,4 @@
 <?php require_once('topadmin.php');?> 
-  	<script type="text/javascript" src="js/jquery.js"></script>
 		  <link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" />
 		  		  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
 		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>

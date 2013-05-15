@@ -25,13 +25,26 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		<title>SOPAC</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
 			<link rel="stylesheet" href="css/slide.css" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 	
 	<link rel="stylesheet" type="text/css" href="css/menu.css"/>
 
- <!-- 	  <script type="text/javascript" src="js/jquery.js"></script>
- <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> -->
+	  <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
+ 	<script type="text/javascript" src="js/jquery-1.6.js" ></script>
+	<script src="js/superfish.js"></script>
+		<script src="js/slide.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/cufon-yui.js"></script>
+		<script type="text/javascript" src="js/cufon-replace.js"></script>  
+		<script type="text/javascript" src="js/Vegur_300.font.js"></script>
+		<script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
+		<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
+		<script type="text/javascript" src="js/tms-0.3.js"></script>
+		<script type="text/javascript" src="js/tms_presets.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
 	
 
 		<?php 

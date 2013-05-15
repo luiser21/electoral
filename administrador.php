@@ -4,12 +4,15 @@ include_once "includes/GestionBD.new.class.php";
 require("secure/hash.class.php");
 
 $DBGestion = new GestionBD('AGENDAMIENTO');
+
+//imprimir($_POST);
+//imprimir($_SESSION);
 	// Si la sesion no está activa y/o autenticada ingresa a este paso
 	if (@$_SESSION["active"] != 2)
 	{
 		
 			@$usuario = (!empty($_POST["log"]))?  $_POST["log"] : "";
-			@$password = (!empty($_POST["pwd"]))?  $_POST["pwd"] : "";
+			echo @$password = (!empty($_POST["pwd"]))?  $_POST["pwd"] : "";
 
             if(@$usuario != ""){
 			
@@ -80,7 +83,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 		// toma las variables de sesion y de edicion de contenidos
 		@$usuario = $_SESSION["username"];
 		@$per = $_SESSION["permiso"];	
-		if(!isset($usuario)){
+		 @$nombre = $_SESSION['nombre'];		
+		if(!empty($usuario)){
 			if(@$usuario != "" && $per == 1){
 				header('Location: adetom.php');	    
 			}

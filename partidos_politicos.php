@@ -279,83 +279,40 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 		
 		
 					</div>
-			        <div class="content-2">
-						
-				    </div>
-			        <div class="content-3">
-						
-				    </div>
-				    <div class="content-4" id="demo">
+			        <div class="content-2 datagrid" style="  height: 800px;
+    overflow-y: scroll;
+    width: 91%;">
+					<table width="100%" style="overflow:scroll;">
+					<tr><td>
+						<h2>Resultado por Partidos Pol&iacute;ticos</h2>
+						<h1 style="font-size:18px">CIRCUNSCRIPCI&Oacute;N NACIONAL</h1>
+					<br/>
+						<br/>
 					
-				<br/>
 						<?php 
-		$sql="SELECT * FROM PARTIDOS_POLITICOS ";
+		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
-				$partidos=$DBGestion->datos;
-				
-				
-		
+				$circun=$DBGestion->datos;		
 		?>
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">	
-	<!--	<table width="100%" > -->
-			<thead>
-				<tr>
-					<th align="center" ></th>
-					 <th align="center" ></th>
-					 <th align="center" width="46%"><span style="font-weight: bold">Nombre</span></th>
-					<th align="center" width="1%"><span style="font-weight: bold">A&ntilde;o de 	fundaci&oacute;n</span></th>
-					<th align="center" width="18%"><span style="font-weight: bold">Posici&oacute;n frente al gobierno 2010-2014</span></th>
-					<!--   <th align="center" width="1%"><span style="font-weight: bold">N&uacute;mero de Senadores</span></th>
-					<th align="center" width="1%"><span style="font-weight: bold">N&uacute;mero de Representantes</span></th>
-					--><th align="center" width="26%"><span style="font-weight: bold">Director(a) y/&oacute; Presidente(a)</span></th>
-				</tr>
-			</thead>
-			<tfoot>
-		<tr>
-			<th>Rendering engine</th>
-			<th>Browser</th>
-			<th>Platform(s)</th>
-			<th>Engine version</th>
-			<th>CSS grade</th>
-		</tr>
-	</tfoot>
-			
-					<tbody>
+		<table width="100%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
+				<tbody >
 					
 				<?php	
 				$i=0;
-				foreach ($partidos as $datos){
-							 $id = $datos['IDPARTIDO'];
-							 $nombre = $datos['NOMBRE'];
-							 $fundacion = $datos['FUNDACION'];		
-							 $pagina = $datos['PAGINAWEB'];	
-							 $posicion = $datos['POSICIOGOBIERNO'];
-							 $senadores = $datos['NUMEROSENADORES'];
-							 $representantes= $datos['NUMEROREPRESENTANTES'];	
-							 $director = $datos['DIRECTOR'];	
-							  $logo = $datos['LOGO'];	
+				foreach ($circun as $datos){
+							 $descripcion = $datos['DESCRIPCION'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
 							  			 
 				?>
 						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
-						<td align="center">
-						<img src="images/list-add.png" onClick="javascript:MostrarFilas('ajax_<?php echo $id?>','Op2_<?php echo $id?>'),llamadasincrona('<?php echo $id?>')" id="Op2_<?php echo $id?>" name="Op2_<?php echo $id?>" title="Ver Info Adicional" style="cursor:pointer;"/>
-						<img src="images/list-remove.png" onclick="javascript:OcultarFilas('ajax_<?php echo $id?>','Op2_<?php echo $id?>')" id="ajax_<?php echo $id?>" name="ajax_<?php echo $id?>" style="display:none" title="Ocultar" style="cursor:pointer;"/>
-						</td>
-							<td align="center"><img src="<?php echo $logo?>" width="45" height="25"></td>
-							<td><a href="http://<?php echo $pagina?>" style="cursor:pointer; color:#666666;  text-decoration: none " target="_blank"><?php echo $nombre?></a></td>
-							<td align="center"><?php echo $fundacion?></td>
-							<td><?php echo $posicion?></td>
-						<!-- <td align="center"><?php echo $senadores?></td>
-							<td align="center"><?php echo $representantes?></td> -->	
-							<td><?php echo $director ?></td>
+					
+							<td align="left"><?php echo $descripcion?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
 							
-						</tr>
-						 <tr align="center"  style="display:none" id="ajax_<?php echo $id?>" name="ajax_<?php echo $id?>">
-                              <td height="550" colspan="11"> 
-							  		<div style="height:550px; overflow:scroll; overflow-x: hidden" id="contenido_<?php echo $id?>">
-									</div>
-								</td>
-                            </tr>
+						</tr>			
 						
 					<?php
 					$i++;
@@ -363,6 +320,149 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 					 ?>	
 					</tbody>
 				</table>
+				<br/><br/>
+						<?php 
+		$sql="SELECT
+				partidos_politicos.NOMBRE,
+				elecciones_senado.VOTOS,
+				elecciones_senado.PARTICIPACION
+				FROM
+				elecciones_senado
+				INNER JOIN partidos_politicos ON partidos_politicos.IDPARTIDO = elecciones_senado.IDPARTIDO
+				where elecciones_senado.TIPO='5' and
+				elecciones_senado.INDIGENA='0' and elecciones_senado.ELECCIONES='2010'
+				ORDER BY partidos_politicos.IDPARTIDO asc";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="100%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
+<thead>				<tr>
+					<th width="1%"></th>
+					<th>Partidos Pol&iacute;ticos</th>
+					<th>Votos</th>
+					<th>Participaci&oacute;n (VotosPartido/VotosV&aacute;lidos)</th>
+				</tr></thead>
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+				//	if($i<4){
+							 $nombre = $datos['NOMBRE'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					<td align="center"><img src="images/list-add.png" title="Ver Candidatos que se lanzaron" style="cursor:pointer"></td>
+							<td align="left"><?php echo $nombre?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
+						
+					<?php 
+					
+					
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table>
+						<h1 style="font-size:18px">CIRCUNSCRIPCI&Oacute;N INDIGENA</h1>
+					<br/>
+						<br/>
+					
+						<?php 
+		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='1' AND ELECCIONES='2010' ORDER BY ID";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="100%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+							 $descripcion = $datos['DESCRIPCION'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+					
+							<td align="left"><?php echo $descripcion?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
+						
+					<?php
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table>
+				<br/><br/>
+						<?php 
+		$sql="SELECT
+				partidos_politicos.NOMBRE,
+				elecciones_senado.VOTOS,
+				elecciones_senado.PARTICIPACION
+				FROM
+				elecciones_senado
+				INNER JOIN partidos_politicos ON partidos_politicos.IDPARTIDO = elecciones_senado.IDPARTIDO
+				where elecciones_senado.TIPO='5' and
+				elecciones_senado.INDIGENA='1' and elecciones_senado.ELECCIONES='2010'
+				ORDER BY partidos_politicos.IDPARTIDO asc";
+				$DBGestion->ConsultaArray($sql);
+				$circun=$DBGestion->datos;		
+		?>
+		<table width="100%" border='1' cellpadding="1" cellspacing="1"  style="border: 1px solid #CCCCCC;">
+				<thead>				<tr>
+					<th width="1%"></th>
+					<th>Partidos Pol&iacute;ticos</th>
+					<th>Votos</th>
+					<th>Participaci&oacute;n (VotosPartido/VotosV&aacute;lidos)</th>
+				</tr></thead>
+				<tbody >
+					
+				<?php	
+				$i=0;
+				foreach ($circun as $datos){
+				//	if($i<4){
+							 $nombre = $datos['NOMBRE'];
+							 $votos = $datos['VOTOS'];
+							 $participacion = $datos['PARTICIPACION'];		
+							 
+							  			 
+				?>
+						<tr <?php if($i%2!=0){ ?> class="alt" <?php }?>>
+						<td align="center"><img src="images/list-add.png" title="Ver Candidatos que se lanzaron" style="cursor:pointer"></td>
+							<td align="left"><?php echo $nombre?></td>
+							<td align="center"><?php echo $votos?></td>
+							<td align="center"><?php echo $participacion ?></td>
+							
+						</tr>			
+						
+					<?php 
+					
+					
+					$i++;
+						}
+					 ?>	
+					</tbody>
+				</table> 
+				</td></tr></table>
+				    </div>
+			        <div class="content-3">
+						
+				    </div>
+				    <div class="content-4">
+					
+			
 			
 				    </div>
 		        </div>
