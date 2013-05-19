@@ -1,4 +1,10 @@
 <?php require_once('topadmin.php');?>
+<style>
+.bg1 {
+    background: none repeat scroll 0 0 #090909;
+    margin-top: 185px;
+}
+</style>
 <script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />
 <script type="text/javascript">

@@ -3,6 +3,10 @@
   <link rel="stylesheet" type="text/css" href="css/style2.css" />
 		<script type="text/javascript" src="js/modernizr.custom.04022.js"></script>	
 <style type="text/css">
+.bg1 {
+    background: none repeat scroll 0 0 #090909;
+    margin-top: 455px;
+}
 .datagrid table { border-collapse: collapse; text-align: left; width: 100%; }
  .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #ffffff; -webkit-border-radius: 1px; -moz-border-radius: 1px; border-radius: 1px; }
  .datagrid table td, .datagrid table th { padding: 4px 10px; }
@@ -471,4 +475,4 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 	  </div>		
 	</header>			
 </div>	
-<?php //require_once('bottom.php'); ?>		
+<?php require_once('bottom.php'); ?>		
