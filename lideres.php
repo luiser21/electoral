@@ -13,8 +13,8 @@
 		</script>
 <div class="main">	
 <header>
-		<div style=" position:absolute; top:190px">
-			<h3>Partidos Politicos de Colombia</h3>
+		<div style=" position:absolute; top:190px"><br/>
+			<h4>Lideres</h4>
 				<div id="demo" style="width:950px">
 					<?php 
 		$sql="SELECT * FROM PARTIDOS_POLITICOS ";

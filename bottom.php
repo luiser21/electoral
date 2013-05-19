@@ -1,13 +1,7 @@
 	<div class="bg1">
 
 
-				<div class="main2">
-			
-				<article id="content2">
 				
-				  <div class="wrapper"></div>
-				</article>
-			</div>
 		    <div class="main2">
 			
               <!--content end-->
@@ -19,6 +13,10 @@ border: 1px solid black;
 
 
 border-top-color:#FFFFFF
+}
+.bg1 {
+    background: none repeat scroll 0 0 #090909;
+    margin-top: 185px;
 }
 			  </style>
               <footer>

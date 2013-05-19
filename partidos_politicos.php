@@ -84,9 +84,8 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 <div class="main">					
 	<header>
 	<div style=" position:absolute; top:190px">
-	<h3>Partidos Politicos de Colombia</h3>
-		<h1 style="padding: 0px 0 0px 0px;">Informacion tomada de la Registraduria Nacional de Colombia</h1>
-		
+	<h4>Partidos Politicos de Colombia</h4>
+	
 				<section class="tabs">
 	            <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
 		        <label for="tab-1" class="tab-label-1">Resumen Nacional</label>

@@ -28,6 +28,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
 			<link rel="stylesheet" href="css/slide.css" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+				<link rel="stylesheet" href="css/master.css" type="text/css" media="all">
 	
 	<link rel="stylesheet" type="text/css" href="css/menu.css"/>
 
@@ -116,7 +117,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 					<div id="menu">
 					    <ul class="sf-menu" >
 					    		<li class="active"><a href="partidos_politicos.php"><span>Partidos Politicos</span></a></li>
-											<li><a href="Company.html"><span>Candidatos</span></a></li>
+											<li><a href="candidatos.php"><span>Candidatos</span></a></li>
 											<li><a href="lideres.php"><span>Lideres</span></a></li>
 											<li><a href="Services.html"><span>Usuarios</span></a></li>
 											<li class="last"><a href="Contacts.html"><span>Miembros</span></a></li>
