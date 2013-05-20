@@ -9326,7 +9326,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(filtrado de _MAX_ entradas en total)",
 		
 		
 			/**
@@ -9512,7 +9512,7 @@
 			 * displayed after filtering. sEmptyTable is shown when there is simply no
 			 * information in the table at all (regardless of filtering).
 			 *  @type string
-			 *  @default No matching records found
+			 *  @default No hay registros coincidentes encontrados
 			 *  @dtopt Language
 			 * 
 			 *  @example
@@ -9524,7 +9524,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "No hay registros coincidentes encontrados"
 		},
 	
 	
