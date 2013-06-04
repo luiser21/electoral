@@ -1,26 +1,7 @@
 <?php
-
-  //  include_once "includes/GestionBD.new.class.php";
-	//$DBGestion2 = new GestionBD('AGENDAMIENTO');	
 require_once "php/jqUtils.php";
 require_once "php/jqChart.php";
 ini_set("display_errors","1");
-
-
-
-$arreglo=array(
-	array('Firefox',   85.0),
-	array('IE',       6.8),
-	array("name"=> 'Chrome', 
-				"y"=> 2.8,
-               "sliced"=> true,
-               "selected"=> true
-            ),
-	array('Safari',    8.5),
-	array('Opera',     6.2),
-	array('Others',   0.7));
-	
-	
 	$sql="SELECT
 				partidos_politicos.NOMBRECORTO,
 				elecciones_senado.VOTOS,
@@ -39,20 +20,15 @@ $arreglo=array(
 		if($i==0){
 			$nuevoarreglo[$i]['name']=$circun2[$i]['NOMBRECORTO'];
 			$nuevoarreglo[$i]['y']=(float)(str_replace('%', '', $circun2[$i]['PARTICIPACION']));
-			
-		//	str_replace('%', '', $circun[$i]['PARTICIPACION']); 
 			$nuevoarreglo[$i]['sliced']=true;
-			$nuevoarreglo[$i]['selected']=true;
-			 
+			$nuevoarreglo[$i]['selected']=true;			 
 		}else{
 			$nuevoarreglo[$i][$y]=$circun2[$i]['NOMBRECORTO'];
-			$nuevoarreglo[$i][$y+1]=(float)(str_replace('%', '', $circun2[$i]['PARTICIPACION']));
-	
+			$nuevoarreglo[$i][$y+1]=(float)(str_replace('%', '', $circun2[$i]['PARTICIPACION']));	
 		}
 	}	
-
 $chart = new jqChart();
-$chart->setTitle(array('text'=>'Partidos con Mayor Votacion, 2010 - 2014 SENADO'))
+$chart->setTitle(array('text'=>'Partidos con Mayor Votacion, 2010 - 2014 '))
 ->setTooltip(array("formatter"=>"function(){return '<b>'+ this.point.name +'</b>: '+ this.y +' %';}"))
 ->setPlotOptions(array(
 	"pie"=> array(
@@ -68,8 +44,5 @@ $chart->setTitle(array('text'=>'Partidos con Mayor Votacion, 2010 - 2014 SENADO'
 ))
 ->addSeries('Browser share', $nuevoarreglo)
 ->setSeriesOption('Browser share', 'type','pie');
-echo $chart->renderChart('', true, 500, 250);
-
-				
-			
+echo $chart->renderChart('', true, 500, 250);				
 ?>

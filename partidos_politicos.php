@@ -1,7 +1,11 @@
 <?php require_once('topadmin.php');?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">   
-  <link rel="stylesheet" type="text/css" href="css/style2.css" />
-		<script type="text/javascript" src="js/modernizr.custom.04022.js"></script>	
+<link rel="stylesheet" type="text/css" href="css/style2.css" />
+<script type="text/javascript" src="js/modernizr.custom.04022.js"></script>	
+<link rel="stylesheet" type="text/css" media="screen" href="themes/redmond/jquery-ui-custom.css" />
+<script src="js/jquery.jqChart.min.js" type="text/javascript"></script>     
+<script src="js/jquery-ui-custom.min.js" type="text/javascript"></script>
+	
 <style type="text/css">
 .bg1 {
     background: none repeat scroll 0 0 #090909;
@@ -40,57 +44,13 @@
 				}
 			</style>
 		<![endif]-->
-<script type="text/javascript">
-
-function OcultarFilas(Fila, Fila2) {
-    var elementos = document.getElementsByName(Fila);
-	var elementos2 = document.getElementsByName(Fila2);
-    for (k = 0; k< elementos.length; k++) {
-               elementos[k].style.display = "none";
-    }
-	for (kk = 0; kk< elementos2.length; kk++) {
-               elementos2[kk].style.display ="inline";
-    }
-	
-}
-function MostrarFilas(Fila, Fila2) {
-	
-var elementos = document.getElementsByName(Fila);
-    for (i = 0; i< elementos.length; i++) {
-        if(navigator.appName.indexOf("Microsoft") > -1){
-               var visible = 'block'
-        } else {
-               var visible = 'table-row';
-        }
-	elementos[i].style.display = visible;
-        }
 		
-var elementos2 = document.getElementsByName(Fila2);
-    for (ii = 0; ii< elementos2.length; ii++) {
-        if(navigator.appName.indexOf("Microsoft") > -1){
-               var visible = 'block'
-        } else {
-               var visible = 'table-row';
-        }
-	elementos2[ii].style.display = "none";
-        }
-}
-
-function llamadasincrona(id) {
-
-var pagina= "Ajax_info_adicional.php";
-var capa = "contenido_"+id;
-$.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+capa).html(data);});
-
-}
-
-</script>		
 <div class="main">					
 	<header>
 	<div style=" position:absolute; top:190px">
 	<h4>Partidos Politicos de Colombia</h4>
 	<div>
-		<?php include ("grafico_partido_conmayorvotacion.php");?>
+		<?php include ("grafico_partido_mayorvotacion.php");?>
       </div>
 				<section class="tabs">
 	            <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
@@ -462,18 +422,12 @@ $.get(pagina, { "id": id, "nocache": Math.random()}, function(data) {  $('#'+cap
 				</table> 
 				</td></tr></table>
 				    </div>
-			        <div class="content-3">
-						
+			        <div class="content-3">						
 				    </div>
-				    <div class="content-4">
-					
-			
-			
+				    <div class="content-4">			
 				    </div>
 		        </div>
 			</section>
-	 
-
 	  </div>		
 	</header>			
 </div>	
