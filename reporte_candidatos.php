@@ -49,7 +49,19 @@
 			
 				<div id="demo"  >
 					<?php 
-		$sql="SELECT * FROM PARTIDOS_POLITICOS where FUNDACION>2000";
+		$sql="SELECT
+					candidato.ID,
+					candidato.NOMBRES,
+					candidato.APELLIDOS,
+					candidato.CEDULA,
+					tipo_eleccion.NOMBRE as TIPOCANDIDATO,
+					candidato.NTARJETON,
+					partidos_politicos.NOMBRECORTO as PARTIDO
+					FROM
+					candidato
+					INNER JOIN tipo_eleccion ON tipo_eleccion.IDTIPO = candidato.TIPOCANDIDATO
+					INNER JOIN partidos_politicos ON partidos_politicos.IDPARTIDO = candidato.PARTIDO";
+
 				$DBGestion->ConsultaArray($sql);
 				$partidos=$DBGestion->datos;
 				
@@ -64,6 +76,7 @@
 			<th>Documento</th>
 			<th>Tipo Candidato</th>
 			<th>Partido Politico</th>
+			<th>N Tarjeton</th>
 			
 		</tr>
 	</thead>
@@ -72,23 +85,22 @@
 	<?php	
 				$i=0;
 				foreach ($partidos as $datos){
-							 $id = $datos['IDPARTIDO'];
-							 $nombre = $datos['NOMBRE'];
-							 $fundacion = $datos['FUNDACION'];		
-							 $pagina = $datos['PAGINAWEB'];	
-							 $posicion = $datos['POSICIOGOBIERNO'];
-							 $senadores = $datos['NUMEROSENADORES'];
-							 $representantes= $datos['NUMEROREPRESENTANTES'];	
-							 $director = $datos['DIRECTOR'];	
-							  $logo = $datos['LOGO'];
-							  			 
+							 $id = $datos['ID'];
+							 $nombre = $datos['NOMBRES'];
+							 $apellido = $datos['APELLIDOS'];		
+							 $cedula = $datos['CEDULA'];	
+							 $tipo= $datos['TIPOCANDIDATO'];
+							 $partido = $datos['PARTIDO'];
+							 $tarjeton= $datos['NTARJETON'];	
+							
 				?>
 		<tr >
 				<th><a  class='iframe' href="editar_candidatos.php?id=<?php echo $id?>"><img src="images/edit.png" title="Editar Candidato" ></a>&nbsp;&nbsp;<img src="images/user-trash-full.png"></th>
-			<td><?php echo $nombre?></td>
-			<td class="center"><?php echo $fundacion?></td>
-			<td class="center"><?php echo $posicion?></td>
-			<td ><?php echo $director ?></td>
+			<td><?php echo $nombre.' '.$apellido?></td>
+			<td class="center"><?php echo $cedula?></td>
+			<td class="center"><?php echo $tipo?></td>
+			<td ><?php echo $partido ?></td>
+			<td ><?php echo $tarjeton ?></td>
 		
 		</tr>
 			<?php
