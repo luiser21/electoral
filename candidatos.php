@@ -60,8 +60,23 @@
 						Departamento
 					</label>
 						<select name="departamento" id="departamento">
+                        	<?php 
+		$sql="SELECT * FROM DEPARTAMENTOS";
+				$DBGestion->ConsultaArray($sql);
+				$partidos=$DBGestion->datos;
+		
+		?>
 						<option value="">Seleccione....</option>
-						</select>
+                        <?php
+						foreach ($partidos as $datos){
+							 $id = $datos['IDDEPARTAMETO'];
+							 $nombre = $datos['NOMBRE'];
+							 
+							  			 
+				?>
+						<option value="<?php echo $id?>"><?php echo $nombre?></option>
+						<?php } ?>
+                        </select>
 				</li>
 				<li>
 					<label for="celular">
@@ -86,6 +101,16 @@
 					</label>
 						<select name="tipo" id="tipo">
 						<option value="">Seleccione....</option>
+                        	<?php 
+		$sql="SELECT * FROM tipo_eleccion";
+				$DBGestion->ConsultaArray($sql);
+				$partidos=$DBGestion->datos;
+					foreach ($partidos as $datos){
+							 $id = $datos['IDTIPO'];
+							 $nombre = $datos['NOMBRE'];
+							 
+		?>	<option value="<?php echo $id?>"><?php echo $nombre?></option>
+						<?php } ?>
 						</select>
 				</li>
 				<li>
@@ -95,6 +120,16 @@
 					</label>
 						<select name="partido" id="partido">
 						<option value="">Seleccione....</option>
+                        <?php 
+		$sql="SELECT * FROM PARTIDOS_POLITICOS";
+				$DBGestion->ConsultaArray($sql);
+				$partidos=$DBGestion->datos;
+					foreach ($partidos as $datos){
+							 $id = $datos['IDPARTRIDO'];
+							 $nombre = $datos['NOMBRE'];
+							 
+		?>	<option value="<?php echo $id?>"><?php echo $nombre?></option>
+						<?php } ?>
 						</select>
 				</li>
 				<h2>Informaci&oacute;n de Acceso</h2>
