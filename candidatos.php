@@ -2,7 +2,9 @@
 <style>
 .bg1 {
     background: none repeat scroll 0 0 #090909;
-    margin-top: 185px;
+	float:left;
+	width:100%;
+
 }
 </style>
 <script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
@@ -227,4 +229,4 @@
 		</div>
 		</header>
 </div>	
-<?php require_once('bottom.php'); ?>		
+<?php //require_once('bottom.php'); ?>		
