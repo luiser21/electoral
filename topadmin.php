@@ -31,24 +31,26 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 				<link rel="stylesheet" href="css/master.css" type="text/css" media="all"> 
 				
 	
-	<!-- <link rel="stylesheet" type="text/css" href="css/menu.css"/> -->
+
 
 <script type='text/javascript' src='js/jquery.min.js'></script>
 	  <script type="text/javascript" src="js/jquery.js"></script>
  <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
  	<script type="text/javascript" src="js/jquery-1.6.js" ></script> 
-
+	<script type="text/javascript" src="js/FAjax.js"></script>
+		
 	<script src="js/superfish.js"></script>
 		<script src="js/slide.js" type="text/javascript"></script>
-		<script type="text/javascript" src="js/cufon-yui.js"></script>
+ <script type="text/javascript" src="js/cufon-yui.js"></script>
 		<script type="text/javascript" src="js/cufon-replace.js"></script>  
 		<script type="text/javascript" src="js/Vegur_300.font.js"></script>
 		<script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
 		<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
 		<script type="text/javascript" src="js/tms-0.3.js"></script>
 		<script type="text/javascript" src="js/tms_presets.js"></script>
-	
-
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
 
 		<?php 
 			if ($_SESSION["active"] == 1)
@@ -115,9 +117,14 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 							</fieldset>
 						
 					</div>
-					<nav>
+					<nav >
 					<div id="menu">
-						<?php    include_once "menu.php"; ?>
+						<?php    
+						if($permiso=='1'){
+							include_once "menuadmin.php";
+						}else{
+							include_once "menu.php"; 
+						} ?>
 					  <!--  <ul class="sf-menu" >
 					    		<li class="active"><a href="partidos_politicos.php"><span>Partidos Politicos</span></a></li>
 											<li><a href="reporte_candidatos.php"><span>Candidatos</span></a></li>

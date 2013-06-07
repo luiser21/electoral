@@ -14,7 +14,7 @@
 						<li>
 							<img src="images/usuario.png" alt="" >
 							<div class="banner">
-								<span class="title"><span class="color2">Controle la</span><span class="color1">Informacion de sus</span><span>Usuarios</span></span>
+								<span class="title"><span class="color2">Controle los</span><span class="color1">Accesos de</span><span>Usuarios</span></span>
 								<p>Administre la red,los usuarios que acceden al sistemas y realice cargues masivos.</p>
 							
 							</div>

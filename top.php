@@ -9,7 +9,7 @@
 			<link rel="stylesheet" href="css/slide.css" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 		<script type="text/javascript" src="js/jquery-1.6.js" ></script>
-	<link rel="stylesheet" type="text/css" href="css/menu.css"/>
+	<link rel="stylesheet" type="text/css" href="css/menu.css"/> 
 	<script src="js/superfish.js"></script>
 		<script src="js/slide.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/cufon-yui.js"></script>
@@ -103,15 +103,17 @@ function verif(){
 						</fieldset>
 					
 				</div>
-				<nav>
+				<nav >
 				<div id="menu">
-				    <ul class="sf-menu" >
-				    		<li class="active"><a href="index.html"><span>Homepage</span></a></li>
-										<li><a href="Company.html"><span>Company</span></a></li>
-										<li><a href="Solutions.html"><span>Solutions</span></a></li>
-										<li><a href="Services.html"><span>Services</span></a></li>
-										<li class="last"><a href="Contacts.html"><span>Contacts</span></a></li>
-				    </ul>
+					<ul id="nav">
+						<li class="current"><a href="index.php">Inicio</a></li>
+						<li><a href="#">Quienes Somos</a></li>
+						<li><a href="#">T&eacute;rminos Oficiales</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">Acerca del Programa</a></li>
+						<li><a href="#">Casos de Exito</a></li>
+						<li><a href="#">Cont&aacute;ctenos</a></li>
+					</ul>
 				</div>
 					
 				</nav>

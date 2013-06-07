@@ -28,6 +28,15 @@
 			weekStartDay:1*/
 		});
 	};
+function municipios(){
+	var pagina= "Ajax_municipio.php";
+	var capa = "capa_documentos";
+	var departamento = document.getElementById('departamento').value;
+	var valores = 'departamento=' + departamento + '&' + Math.random();
+	if(departamento!=''){ 			
+	    FAjax (pagina,capa,valores,'POST',true)     	 
+	}
+}
 </script>
 <div class="main">
 	<header>
@@ -61,7 +70,7 @@
 						<span class="textRequired"> * </span>
 						Departamento
 					</label>
-						<select name="departamento" id="departamento">
+						<select name="departamento" id="departamento" onclick="municipios()">
                         	<?php 
 		$sql="SELECT * FROM DEPARTAMENTOS";
 				$DBGestion->ConsultaArray($sql);
@@ -71,7 +80,7 @@
 						<option value="">Seleccione....</option>
                         <?php
 						foreach ($partidos as $datos){
-							 $id = $datos['IDDEPARTAMETO'];
+							 $id = $datos['IDDEPARTAMENTO'];
 							 $nombre = $datos['NOMBRE'];
 							 
 							  			 
@@ -185,9 +194,11 @@
 						<span class="textRequired"> * </span>
 						Municipio
 					</label>
+					<span id="capa_documentos" >
 						<select name="municipio" id="municipio">
 						<option value="">Seleccione....</option>
 						</select>
+						</span>
 				</li>
 				<li>
 					<label for="email" style="width: 100px;">

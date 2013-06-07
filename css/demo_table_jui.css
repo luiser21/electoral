@@ -79,6 +79,7 @@ div.dataTables_wrapper .ui-widget-header {
 /*
  * Sort arrow icon positioning
  */
+ 
 table.display thead th div.DataTables_sort_wrapper {
 	position: relative;
 	padding-right: 20px;
@@ -151,6 +152,7 @@ table.display thead th div.DataTables_sort_wrapper span {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables display
  */
+ 
 table.display {
 	margin: 0 auto;
 	width: 100%;
@@ -208,6 +210,7 @@ table.display td.center {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */
+ 
 table.display tr.odd.gradeA {
 	background-color: #ddffdd;
 }
@@ -267,6 +270,7 @@ tr.even {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Misc
  */
+ 
 .dataTables_scroll {
 	clear: both;
 }
@@ -276,8 +280,8 @@ tr.even {
 }
 
 .top, .bottom {
-	padding: 15px;
-	background-color: #F5F5F5;
+padding: 15px;
+	background-color: #F5F5F5; 
 	border: 1px solid #CCCCCC;
 }
 

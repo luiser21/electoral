@@ -31,7 +31,7 @@ header {height:1px}
 #search {float:right;padding:50px 10px 0 0 }
 #search .bg {background:url(../images/search.png) 0 0 no-repeat;width:220px;height:23px}
 #search .input {background:none;padding:3px 13px;font:14px Arial, Helvetica, sans-serif;color:#000;height:17px;width:194px;margin:0}
-#menu  {padding-top:135px}
+#menu  {padding-top:125px}
 #menu > li  {float:left;padding-right:5px}
 #menu .last {padding-right:0px}
 #menu > li > a {width:188px;display:block;font-size:17px;color:#fff;text-transform:uppercase;font-weight:400;height:61px;line-height:58px;border-top:1px solid #1f1f1f;background:#000;text-align:center;border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;-webkit-border-radius:4px 4px 0 0;position:relative}

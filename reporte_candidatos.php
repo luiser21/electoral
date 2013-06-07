@@ -1,6 +1,8 @@
 <?php require_once('topadmin.php');?> 
-		  <link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" />
+	 <link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" /> 
 		  		  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
+			
+				  
 		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
 <link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
 <script src="js/jquery.colorbox.js"></script> 
@@ -30,10 +32,7 @@
    	
     width: 350px;
 }
-.bg1 {
-    background: none repeat scroll 0 0 #090909;
-    margin-top: 85px;
-}
+
 		</style>
 <div class="main">	
 <header>
@@ -114,4 +113,4 @@
 		</header>		
 	 </div>
 
-<?php require_once('bottom.php'); ?>		
+<?php //require_once('bottom.php'); ?>		

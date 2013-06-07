@@ -15,7 +15,7 @@
 						<li>
 							<img src="images/img2.png" alt="" >
 							<div class="banner">
-								<span class="title"><span class="color2">Exhibase, Vendase</span><span class="color1">y Publicitese bajo</span><span style="font-size:36px">estrategias bien elaboradas</span></span>
+								<span class="title"><span class="color2">Vendase</span><span class="color1">y Publicitese bajo</span><span style="font-size:36px">Buenas estrategias</span></span>
 								<p >En donde las encuestas y estrategias sean aplicadas correctamente, obteniendo el exito de su campaña</p>
 								
 							</div>
@@ -23,7 +23,7 @@
 						<li>
 							<img src="images/img3.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Controle la</span><span class="color1">Informacion de sus</span><span>Simpatizantes y</span></span>
+								<span class="title"><span class="color2">Controle los</span><span class="color1">Simpatizantes y</span><span></span>Lideres</span>
 								<p>Puestos de Votaci&oacute;n asegurando votos. Obtenga informaci&oacute;n detallada para ganar sus elecciones.</p>
 							
 							</div>
