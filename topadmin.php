@@ -20,37 +20,39 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 ?>
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-	<link rel="shortcut icon" href="images/favicon(2).ico">
-		<title>SOPAC</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-			<link rel="stylesheet" href="css/slide.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-				<link rel="stylesheet" href="css/master.css" type="text/css" media="all"> 
-				
-	
+<head>
 
-
+<title>SOPAC</title>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="images/favicon(2).ico">
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/slide.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/master.css" type="text/css" media="all"> 
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
+<link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
+<link rel="stylesheet" type="text/css" href="css/menu.css"/> 
+<link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />	
 <script type='text/javascript' src='js/jquery.min.js'></script>
-	  <script type="text/javascript" src="js/jquery.js"></script>
- <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
- 	<script type="text/javascript" src="js/jquery-1.6.js" ></script> 
-	<script type="text/javascript" src="js/FAjax.js"></script>
-		
-	<script src="js/superfish.js"></script>
-		<script src="js/slide.js" type="text/javascript"></script>
- <script type="text/javascript" src="js/cufon-yui.js"></script>
-		<script type="text/javascript" src="js/cufon-replace.js"></script>  
-		<script type="text/javascript" src="js/Vegur_300.font.js"></script>
-		<script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
-		<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
-		<script type="text/javascript" src="js/tms-0.3.js"></script>
-		<script type="text/javascript" src="js/tms_presets.js"></script>
-		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/atooltip.jquery.js"></script>
- <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
+<script type="text/javascript" src="js/jquery-1.6.js" ></script> 
+<script type="text/javascript" src="js/FAjax.js"></script>
+<script type="text/javascript" src="js/jquery.colorbox.js"></script> 
+<script type="text/javascript" src="js/superfish.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/slide.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-replace.js"></script>  
+<script type="text/javascript" src="js/Vegur_300.font.js"></script>
+<script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
+<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
+<script type="text/javascript" src="js/tms-0.3.js"></script>
+<script type="text/javascript" src="js/tms_presets.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/atooltip.jquery.js"></script>
+<script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
 
 		<?php 
 			if ($_SESSION["active"] == 1)
@@ -64,16 +66,12 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		?>
 		</head>
 		<body id="page1">
-		
-		<!-- Panel -->
 	<div id="toppanel">
 		<div id="panel">
 			<div class="content clearfix">
 				<div class="left">
-					
-				</div>
+						</div>
 				<div class="left">
-					<!-- Login Form -->
 					<form class="clearfix" action="#" id="form2" name="form2" method="post" >
 						<h1>Iniciar Session</h1>
 						<label class="grey" for="log">Usuario:</label>
@@ -82,8 +80,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 						<input class="field" type="password" name="pwd" id="pwd" size="23" />
 		            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Recordarme</label>
 	        			<div class="clear"></div>
-						<input  type="button" name="Submit" value="Ingresar" class="bt_login"  onClick="verif()"/>
-						
+						<input  type="button" name="Submit" value="Ingresar" class="bt_login"  onClick="verif()"/>						
 						<a class="lost-pwd" href="#">Olvido su Contrase&ntilde;a?</a>
 					</form>
 				</div>
@@ -91,8 +88,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 					
 				</div>
 			</div>
-	</div> <!-- /login -->	
-		<!-- The tab on top -->	
+	</div> 	
 		<div class="tab">
 			<ul class="login">
 				<li class="left">&nbsp;</li>
@@ -104,18 +100,14 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 				</li>
 				<li class="right">&nbsp;</li>
 			</ul> 
-		</div> <!-- / top -->
-		
-	</div> <!--panel -->
-
-			
+		</div> <!-- / top -->		
+	</div> <!--panel -->			
 					<div class="wrapper">
 							<h1><a href="index.html" id="logo2"></a><a href="index.html" id="logo">SOPAC </a> </h1>
 						
 							<fieldset>
 								<div class="bg">      </div>
-							</fieldset>
-						
+							</fieldset>						
 					</div>
 					<nav >
 					<div id="menu">
@@ -124,16 +116,6 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 							include_once "menuadmin.php";
 						}else{
 							include_once "menu.php"; 
-						} ?>
-					  <!--  <ul class="sf-menu" >
-					    		<li class="active"><a href="partidos_politicos.php"><span>Partidos Politicos</span></a></li>
-											<li><a href="reporte_candidatos.php"><span>Candidatos</span></a></li>
-											<li><a href="lideres.php"><span>Lideres</span></a></li>
-											<li><a href="Services.html"><span>Usuarios</span></a></li>
-											<li class="last"><a href="Contacts.html"><span>Miembros</span></a></li>
-					    </ul>-->
-					</div>
-						
-					</nav>
-					
-				
+						} ?>					 
+					</div>						
+					</nav>			

@@ -7,8 +7,6 @@
 
 }
 </style>
-<script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />
 <script type="text/javascript">
 	window.onload = function(){
 		new JsDatePick({

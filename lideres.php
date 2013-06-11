@@ -1,16 +1,14 @@
 <?php require_once('topadmin.php');?> 
-		  <link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" />
-		  		  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
-		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-		<script type="text/javascript" >
-			$(document).ready(function() {
-				$('#example').dataTable( {
-					"sScrollY": 300,
-					"bJQueryUI": true,
-					"sPaginationType": "full_numbers"
-				} );
-			} );
-		</script>
+<link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" />
+<script type="text/javascript" >
+$(document).ready(function() {
+	$('#example').dataTable( {
+		"sScrollY": 300,
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers"
+	} );
+} );
+</script>
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px"><br/>
@@ -79,4 +77,4 @@
 		</header>		
 	 </div>
 
-<?php require_once('bottom.php'); ?>		
+<?php //require_once('bottom.php'); ?>		

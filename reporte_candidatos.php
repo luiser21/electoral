@@ -1,39 +1,27 @@
 <?php require_once('topadmin.php');?> 
-	 <link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" /> 
-		  		  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
-			
-				  
-		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
-<script src="js/jquery.colorbox.js"></script> 
-		<script type="text/javascript" >
-			$(document).ready(function() {
-				$('#example').dataTable( {
-					"sScrollY": 310,
-					"bJQueryUI": true,
-					"sPaginationType": "full_numbers"
-				});
-				$(".iframe").colorbox({
-					iframe:true, 
-					width:"985px", 
-					height:"510px"
-				});		
-			} );
-			
-
-		</script>
-		
-		<style>
-		select {   
-   			 width: 50px;
-		}
-
-#crudFormLineal label {
-   	
-    width: 350px;
+<link rel="stylesheet" type="text/css" href="css/demo_table_jui.css" /> 
+<script type="text/javascript" >
+	$(document).ready(function() {
+		$('#example').dataTable( {
+			"sScrollY": 310,
+			"bJQueryUI": true,
+			"sPaginationType": "full_numbers"
+		});
+		$(".iframe").colorbox({
+			iframe:true, 
+			width:"985px", 
+			height:"510px"
+		});		
+	} );
+</script>		
+<style>
+select {   
+	 width: 50px;
 }
-
-		</style>
+#crudFormLineal label {
+	width: 350px;
+}
+</style>
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px"><br/>
@@ -44,8 +32,7 @@
 					<div id="tableButtons">
 <input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='candidatos.php'" value="Aderir +" name="cmdexport">
-</div>
-			
+</div>			
 				<div id="demo"  >
 					<?php 
 		$sql="SELECT
@@ -63,9 +50,6 @@
 
 				$DBGestion->ConsultaArray($sql);
 				$partidos=$DBGestion->datos;
-				
-				
-		
 		?>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" >
 	<thead>
@@ -78,8 +62,7 @@
 			<th>N Tarjeton</th>
 			
 		</tr>
-	</thead>
-	
+	</thead>	
 	<tbody>
 	<?php	
 				$i=0;
@@ -90,8 +73,7 @@
 							 $cedula = $datos['CEDULA'];	
 							 $tipo= $datos['TIPOCANDIDATO'];
 							 $partido = $datos['PARTIDO'];
-							 $tarjeton= $datos['NTARJETON'];	
-							
+							 $tarjeton= $datos['NTARJETON'];								
 				?>
 		<tr >
 				<th><a  class='iframe' href="editar_candidatos.php?id=<?php echo $id?>"><img src="images/edit.png" title="Editar Candidato" ></a>&nbsp;&nbsp;<img src="images/user-trash-full.png"></th>
@@ -99,8 +81,7 @@
 			<td class="center"><?php echo $cedula?></td>
 			<td class="center"><?php echo $tipo?></td>
 			<td ><?php echo $partido ?></td>
-			<td ><?php echo $tarjeton ?></td>
-		
+			<td ><?php echo $tarjeton ?></td>		
 		</tr>
 			<?php
 					$i++;
@@ -112,5 +93,4 @@
 			</div></div>
 		</header>		
 	 </div>
-
 <?php //require_once('bottom.php'); ?>		

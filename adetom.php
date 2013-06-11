@@ -46,6 +46,7 @@
 					</div>
 					<div class="col1">
 						<h2>Servicios</h2>
+						<a  class='iframe' href="#"  >Consulte lugar Votaci&oacute;n</a>
 						<ul class="list1">
 							<li><a href="#">Sed ut perspiciatis unde </a></li>
 							<li><a href="#">Omnis iste natus errorsitvo</a></li>

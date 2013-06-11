@@ -1,3 +1,14 @@
+
+<script type="text/javascript" >
+$(document).ready(function() {				
+				$(".iframe").colorbox({
+					iframe:true, 
+					width:"900px", 
+					height:"530px"
+				});		
+			} );
+</script>
+
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
 	<li><a href="#" >Conformaci&oacute;n Senado</a>
@@ -132,5 +143,5 @@
 		</ul>
 		
 	</li>
-	<li><a href="#"  >Privacy Policy</a></li>
+	<li><a  class='iframe' href="consulta.php"  >Consulte lugar Votaci&oacute;n</a></li>
 </ul>

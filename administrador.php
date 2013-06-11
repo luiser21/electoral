@@ -30,41 +30,15 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					 @$nombre = $datos['NOMBRE'];						 
 				}
 				
-				if(@$usu != "" && $per == 1){
+				if(@$usu != "" ){
 				    $_SESSION["username"] = $usu;
 					$_SESSION["active"] = 2;
 					$_SESSION["permiso"] = $per;
 					$_SESSION["nombre"] = $nombre;						
 					header("location:adetom.php");    
 				}
-                if(@$usu != "" && $per == 2){
-				    $_SESSION["username"] = $usu;
-					$_SESSION["active"] = 2;
-					$_SESSION["permiso"] = $per; 
-					$_SESSION["nombre"] = $nombre;	
-				}
+                
 				
-				if(@$usu != "" && $per == 3){
-				    $_SESSION["username"] = $usu;
-					$_SESSION["active"] = 3;
-					$_SESSION["permiso"] = $per;
-					$_SESSION["nombre"] = $nombre;			
-					header('Location: adestructura1.php');	    
-				}
-				if(@$usu != "" && $per == 4){
-				    $_SESSION["username"] = $usu;
-					$_SESSION["active"] = 4;
-					$_SESSION["permiso"] = $per;
-					$_SESSION["nombre"] = $nombre;	
-					header('Location: Sox/Ingresar.php');	    
-				}
-				if(@$usu != "" && $per == 5){
-				    $_SESSION["username"] = $usu;
-					$_SESSION["active"] = 5;
-					$_SESSION["permiso"] = $per;
-					$_SESSION["nombre"] = $nombre;		
-					header('Location: Sox/Ingresar.php');	    
-				}
 			} 
 			else 
 				{
@@ -78,27 +52,15 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 		
 	// Si la sesion está activa y autenticada ingresa a este paso
 	else
-	{
-		
+	{		
 		// toma las variables de sesion y de edicion de contenidos
 		@$usuario = $_SESSION["username"];
 		@$per = $_SESSION["permiso"];	
 		 @$nombre = $_SESSION['nombre'];		
 		if(!empty($usuario)){
-			if(@$usuario != "" && $per == 1){
+			if(@$usuario != ""){
 				header('Location: adetom.php');	    
 			}
-			if(@$usuario != "" && $per == 3){
-				header('Location: adestructura1.php');	    
-			}
-			if(@$usuario != "" && $per == 4){
-				header('Location: Sox/Ingresar.php');	    
-			}
-			if(@$usuario != "" && $per == 5){
-				header('Location: Sox/Ingresar.php');	    
-			}
-		}	
-		
+		}			
 	}
-
 ?>
