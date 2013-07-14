@@ -21,6 +21,10 @@ select {
 #crudFormLineal label {
 	width: 350px;
 }
+.bg1 {  
+	position:relative;
+	top:660px;
+}
 </style>
 <div class="main">	
 <header>
@@ -93,4 +97,4 @@ select {
 			</div></div>
 		</header>		
 	 </div>
-<?php //require_once('bottom.php'); ?>		
+<?php require_once('bottom.php'); ?>		

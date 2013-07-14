@@ -1,10 +1,16 @@
-<?php require_once('topadmin.php');?>
-<style>
-.bg1 {
-    background: none repeat scroll 0 0 #090909;
-	float:left;
-	width:100%;
+<?php require_once('topadmin.php');
 
+@$add = $_GET['add'];
+if(@$add == "1"){
+	imprimir($_POST);
+	echo "hola";
+	exit;
+}
+?>
+<style>
+.bg1 {  
+	position:relative;
+	top:916px;
 }
 </style>
 <script type="text/javascript">
@@ -35,13 +41,45 @@ function municipios(){
 	    FAjax (pagina,capa,valores,'POST',true)     	 
 	}
 }
+function municipiospuestos(){
+	var pagina= "Ajax_municipio.php";
+	var capa = "capa_documentos_municipio";
+	var departamento = document.getElementById('departamento_puestos').value;
+	var valores = 'valor=1&departamento=' + departamento + '&' + Math.random();
+	if(departamento!=''){ 			
+	    FAjax (pagina,capa,valores,'POST',true)     	 
+	}
+}
+function puesto(){
+	var pagina= "Ajax_puestos_votacion.php";
+	var capa = "capa_puestos";
+	var municipio = document.getElementById('municipios_puestos').value;
+	var valores = 'municipio=' + municipio + '&' + Math.random();
+	if(municipio!=''){ 			
+	    FAjax (pagina,capa,valores,'POST',true)     	 
+	}
+}
+function mesa(){
+	var pagina= "Ajax_mesa_votacion.php";
+	var capa = "capa_mesas";
+	var puesto = document.getElementById('puestos').value;
+	var valores = 'puesto=' + puesto + '&' + Math.random();
+	if(puesto!=''){ 			
+	    FAjax (pagina,capa,valores,'POST',true)     	 
+	}
+}
+function validar(){
+   document.enviador.action="candidatos.php?add=1";
+   document.enviador.submit();    
+}
 </script>
 <div class="main">
 	<header>
+	<form name="enviador" method="post" action="" enctype="multipart/form-data">
 	<div style=" position:absolute; top:190px"><br/>
 	<h4>Ingresar Candidato</h4>
-		
-		<div id="crudFormLineal" style="width: 910px; height: 620px; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
+	
+		<div id="crudFormLineal" style="width: 910px; height: 780px; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
 			<h2>Informaci&oacute;n de Contacto</h2><br/>
 			<div  style="width: 510px; height: 425px; background-color:#FFFFFF" >
 			<ol>
@@ -86,6 +124,7 @@ function municipios(){
 						<option value="<?php echo $id?>"><?php echo $nombre?></option>
 						<?php } ?>
                         </select>
+						
 				</li>
 				<li>
 					<label for="celular">
@@ -141,6 +180,45 @@ function municipios(){
 						<?php } ?>
 						</select>
 				</li>
+				
+					<h2>Puesto de Votacion</h2>
+				<br/>
+				<li>
+					<label for="usuario">
+						<span class="textRequired"> * </span>
+						Departamento
+					</label>
+						<select name="departamento_puestos" id="departamento_puestos" onclick="municipiospuestos()">
+                        	<?php 
+		$sql="SELECT * FROM DEPARTAMENTOS";
+				$DBGestion->ConsultaArray($sql);
+				$partidos=$DBGestion->datos;
+		
+		?>
+						<option value="">Seleccione....</option>
+                        <?php
+						foreach ($partidos as $datos){
+							 $id = $datos['IDDEPARTAMENTO'];
+							 $nombre = $datos['NOMBRE'];
+							 
+							  			 
+				?>
+						<option value="<?php echo $id?>"><?php echo $nombre?></option>
+						<?php } ?>
+                        </select>
+				</li>
+					<li>
+					<label for="password" >
+						<span class="textRequired"> * </span>
+						Puesto de Votacion
+					</label>
+						<span id="capa_puestos" >
+						<select name="puestos" id="puestos">
+						<option value="">Seleccione....</option>
+						</select>
+						</span>
+				</li>
+				
 				<h2>Informaci&oacute;n de Acceso</h2>
 				<br/>
 				<li>
@@ -225,17 +303,45 @@ function municipios(){
 							Foto
 					</label>
 						<input name="foto" type="file" size="30" >						
-				</li>	
+				</li>
+				<li>&nbsp;</li>	
+				<br/>	<br/>
+					<li>
+					<label for="muncipio2" style="width: 100px;">
+							<span class="textRequired"> * </span>
+							Municipio
+					</label>
+					<span id="capa_documentos_municipio" >
+						<select name="municipios_puestos" id="municipios_puestos">
+						<option value="">Seleccione....</option>
+						</select>
+						</span>
+							</li>
+							<li>
+					<label for="password" style="width: 100px;">
+						<span class="textRequired"> * </span>
+						Mesa
+					</label>
+						<span id="capa_mesas" >
+						<select name="mesas" id="mesas">
+						<option value="">Seleccione....</option>
+						</select>
+						</span>
+				</li>
 			</ol>
-			</div>
-			<br/>
+			</div><br/>
+			<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	
 				<p class="textRequired"> * Campos Requeridos</p>				
 				<div id="tableButtons">	
 				<input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">			
-					<input id="btnSave" class="button" type="button"  name="btnSave" value="Guardar" style="width: 100px;">
+					<input id="btnSave" class="button" type="button"  name="btnSave" value="Guardar" style="width: 100px;" onclick="validar()">
+					
 		  </div>
 		</div>
 		</div>
+		</form>
 		</header>
-</div>	
-<?php //require_once('bottom.php'); ?>		
+</div>
+<div>
+<?php require_once('bottom.php'); ?>	
+</div>

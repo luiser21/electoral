@@ -1,4 +1,10 @@
-<?php require_once('topadmin.php'); ?>			
+<?php require_once('topadmin.php'); ?>	
+<style>
+.bg1 {  
+	position: absolute;
+	top:800px;
+}
+</style>			
 <div class="main">					
 			<header>				
 				<div id="slider">

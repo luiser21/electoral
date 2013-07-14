@@ -1,15 +1,9 @@
 	<div class="bg1">
-
-
-				
 		    <div class="main2">
-			
               <!--content end-->
               <!--footer -->
 			  
               <footer>
-			  
-               
               
                 <!-- {%FOOTER_LINK} -->
               </footer>
