@@ -34,6 +34,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
 <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
 <link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />	
+<link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
 <script type='text/javascript' src='js/jquery.min.js'></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
@@ -53,7 +54,13 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>
 <script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
-
+<script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script>
+		jQuery(document).ready(function(){
+			jQuery("#form2").validationEngine();
+		});	
+</script>	
 		<?php 
 			if ($_SESSION["active"] == 1)
 			{
@@ -72,17 +79,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 				<div class="left">
 						</div>
 				<div class="left">
-					<form class="clearfix" action="#" id="form2" name="form2" method="post" >
-						<h1>Iniciar Session</h1>
-						<label class="grey" for="log">Usuario:</label>
-						<input class="field" type="text" name="log" id="log" value="" size="23" />
-						<label class="grey" for="pwd">Contrase&ntilde;a:</label>
-						<input class="field" type="password" name="pwd" id="pwd" size="23" />
-		            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Recordarme</label>
-	        			<div class="clear"></div>
-						<input  type="button" name="Submit" value="Ingresar" class="bt_login"  onClick="verif()"/>						
-						<a class="lost-pwd" href="#">Olvido su Contrase&ntilde;a?</a>
-					</form>
+					
 				</div>
 				<div class="left">
 					

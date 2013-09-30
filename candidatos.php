@@ -1,9 +1,27 @@
 <?php require_once('topadmin.php');
 
-@$add = $_GET['add'];
-if(@$add == "1"){
+$add = (isset($_GET['add']) ? $_GET['add'] : 0); ;
+if($add == 1){
 	imprimir($_POST);
-	echo "hola";
+
+    $nombre=(isset($_POST['nombre']) ? $_POST['nombre'] : '');
+    $cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : '');
+    $departamento=(isset($_POST['departamento']) ?  : '');
+    $celular=(isset($_POST['celular']) ? $_POST['celular'] : '');
+    $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : '');
+    $tipo=(isset($_POST['tipo']) ? $_POST['tipo'] : '');
+    $partido=(isset($_POST['partido']) ? $_POST['partido'] : '');
+    $departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : '');
+    $usuario=(isset($_POST['usuario']) ? $_POST['usuario'] : '');
+    $password=(isset($_POST['password']) ? $_POST['password'] : '');
+    $apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : '');
+    $direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : '');
+    $municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : '');
+    $email=(isset($_POST['email']) ? $_POST['email'] : '');
+    $numero=(isset($_POST['numero']) ? $_POST['numero'] : '');
+    $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : '');
+    $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : '');
+
 	exit;
 }
 ?>
@@ -68,14 +86,10 @@ function mesa(){
 	    FAjax (pagina,capa,valores,'POST',true)     	 
 	}
 }
-function validar(){
-   document.enviador.action="candidatos.php?add=1";
-   document.enviador.submit();    
-}
 </script>
 <div class="main">
 	<header>
-	<form name="enviador" method="post" action="" enctype="multipart/form-data">
+	<form name="form2" method="post"  class="formular" action="candidatos.php?add=1" enctype="multipart/form-data" id="form2">
 	<div style=" position:absolute; top:190px"><br/>
 	<h4>Ingresar Candidato</h4>
 	
@@ -92,21 +106,21 @@ function validar(){
 						<span class="textRequired"> * </span>
 							Nombres
 					</label>
-						<input id="nombre" type="text" value="" name="nombre">
+						<input id="nombre" type="text" value="" name="nombre" class="validate[required]">
 				</li>
 				<li>
 					<label for="cedula">
 						<span class="textRequired"> * </span>
 							Cedula
 					</label>
-						<input id="cedula" type="text" value="" name="cedula">
+						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] ">
 				</li>
 				<li>
 					<label for="departamento">
 						<span class="textRequired"> * </span>
 						Departamento
 					</label>
-						<select name="departamento" id="departamento" onclick="municipios()">
+						<select name="departamento" id="departamento" onclick="municipios()" class="validate[required]">
                         	<?php 
 		$sql="SELECT * FROM DEPARTAMENTOS";
 				$DBGestion->ConsultaArray($sql);
@@ -131,7 +145,7 @@ function validar(){
 						<span class="textRequired"> * </span>
 						Telefono / Celular
 					</label>
-						<input id="celular" type="text" name="celular">
+						<input id="celular" type="text" name="celular" class="validate[required,custom[integer],maxSize[10]] ">
 				</li>
 				
 				
@@ -140,14 +154,14 @@ function validar(){
 						<span class="textRequired"> * </span>
 						Fecha de Nacimiento
 					</label>
-						  <input type="text" size="12" id="inputField"  name="fecha"  style="width:200px"/> &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/x-office-calendar.png" id="inputField"  style="cursor:pointer">
+						  <input type="text" size="12" id="inputField"  name="fecha"  class="validate[required]" style="width:200px"/> &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/x-office-calendar.png" id="inputField"  style="cursor:pointer">
 				</li>
 				<li>
 					<label for="tipo">
 						<span class="textRequired"> * </span>
 						Tipo de Candidato
 					</label>
-						<select name="tipo" id="tipo">
+						<select name="tipo" id="tipo" class="validate[required]">
 						<option value="">Seleccione....</option>
                         	<?php 
 		$sql="SELECT * FROM tipo_eleccion";
@@ -166,14 +180,14 @@ function validar(){
 						<span class="textRequired"> * </span>
 						Partido Polit&iacute;co
 					</label>
-						<select name="partido" id="partido">
+						<select name="partido" id="partido" class="validate[required]">
 						<option value="">Seleccione....</option>
                         <?php 
 		$sql="SELECT * FROM PARTIDOS_POLITICOS";
 				$DBGestion->ConsultaArray($sql);
 				$partidos=$DBGestion->datos;
 					foreach ($partidos as $datos){
-							 $id = $datos['IDPARTRIDO'];
+							 $id = $datos['IDPARTIDO'];
 							 $nombre = $datos['NOMBRE'];
 							 
 		?>	<option value="<?php echo $id?>"><?php echo $nombre?></option>
@@ -188,7 +202,7 @@ function validar(){
 						<span class="textRequired"> * </span>
 						Departamento
 					</label>
-						<select name="departamento_puestos" id="departamento_puestos" onclick="municipiospuestos()">
+						<select name="departamento_puestos" id="departamento_puestos" onclick="municipiospuestos()" class="validate[required]">
                         	<?php 
 		$sql="SELECT * FROM DEPARTAMENTOS";
 				$DBGestion->ConsultaArray($sql);
@@ -213,7 +227,7 @@ function validar(){
 						Puesto de Votacion
 					</label>
 						<span id="capa_puestos" >
-						<select name="puestos" id="puestos">
+						<select name="puestos" id="puestos" >
 						<option value="">Seleccione....</option>
 						</select>
 						</span>
@@ -226,14 +240,14 @@ function validar(){
 						<span class="textRequired"> * </span>
 						Usuario
 					</label>
-						<input id="usuario" type="text" name="usuario">
+						<input id="usuario" type="text" name="usuario" class="validate[required]">
 				</li>
 				<li>
 					<label for="password" >
 						<span class="textRequired"> * </span>
 						Contrase&ntilde;a
 					</label>
-						<input id="password"  type="password" name="password">
+						<input id="password"  type="password" name="password" class="validate[required]">
 				</li>
 			</ol>
 			</div>
@@ -256,14 +270,14 @@ function validar(){
 						<span class="textRequired"> * </span>
 							Apellidos
 					</label>
-					<input id="apellido" type="text" value="" name="apellido">
+					<input id="apellido" type="text" value="" name="apellido" class="validate[required]">
 							</li>
 							<li >
 					<label for="direccion" style="width: 100px;">
 						<span class="textRequired"> * </span>
 						Direccion
 					</label>
-						<input id="direccion" type="text" name="direccion">
+						<input id="direccion" type="text" name="direccion" class="validate[required]">
 				</li>
 				<li>
 					<label for="municipio" style="width: 100px;">
@@ -271,7 +285,7 @@ function validar(){
 						Municipio
 					</label>
 					<span id="capa_documentos" >
-						<select name="municipio" id="municipio">
+						<select name="municipio" id="municipio" class="validate[required]">
 						<option value="">Seleccione....</option>
 						</select>
 						</span>
@@ -281,7 +295,7 @@ function validar(){
 						<span class="textRequired"> * </span>
 						Email
 					</label>
-						<input id="email" type="text" name="email">
+						<input id="email" type="text" name="email" class="validate[required,custom[url]]">
 				</li>
 				<li>
 					<label for="edad" style="width: 100px;">
@@ -295,7 +309,7 @@ function validar(){
 						<span class="textRequired">  </span>
 							N&deg; Tarjeton
 					</label>
-					<input id="numero" type="text" value="" name="numero">
+					<input id="numero" type="text" value="" name="numero" class="validate[required,custom[integer]] ">
 							</li>
 				<li>
 					<label for="foto" style="width: 100px;">
@@ -323,7 +337,7 @@ function validar(){
 						Mesa
 					</label>
 						<span id="capa_mesas" >
-						<select name="mesas" id="mesas">
+						<select name="mesas" id="mesas" >
 						<option value="">Seleccione....</option>
 						</select>
 						</span>
@@ -333,8 +347,9 @@ function validar(){
 			<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	
 				<p class="textRequired"> * Campos Requeridos</p>				
 				<div id="tableButtons">	
-				<input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">			
-					<input id="btnSave" class="button" type="button"  name="btnSave" value="Guardar" style="width: 100px;" onclick="validar()">
+				<input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">	
+				<input id="btnSave" class="submit" type="submit" value="Guardar" style="width: 100px;"/>			
+				
 					
 		  </div>
 		</div>
