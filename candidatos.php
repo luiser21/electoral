@@ -1,28 +1,41 @@
 <?php require_once('topadmin.php');
 
+//include_once "../includes/GestionBD.new.class.php";
+
+//$DBGestion = new GestionBD('AGENDAMIENTO');
+
 $add = (isset($_GET['add']) ? $_GET['add'] : 0); ;
 if($add == 1){
-	imprimir($_POST);
-
-    $nombre=(isset($_POST['nombre']) ? $_POST['nombre'] : '');
-    $cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : '');
-    $departamento=(isset($_POST['departamento']) ?  : '');
-    $celular=(isset($_POST['celular']) ? $_POST['celular'] : '');
-    $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : '');
-    $tipo=(isset($_POST['tipo']) ? $_POST['tipo'] : '');
-    $partido=(isset($_POST['partido']) ? $_POST['partido'] : '');
-    $departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : '');
-    $usuario=(isset($_POST['usuario']) ? $_POST['usuario'] : '');
-    $password=(isset($_POST['password']) ? $_POST['password'] : '');
-    $apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : '');
-    $direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : '');
-    $municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : '');
-    $email=(isset($_POST['email']) ? $_POST['email'] : '');
-    $numero=(isset($_POST['numero']) ? $_POST['numero'] : '');
-    $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : '');
-    $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : '');
-
-	exit;
+	
+    $nombre=(isset($_POST['nombre']) ? $_POST['nombre'] : 'NULL');
+    $cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : 'NULL');
+    $departamento=(isset($_POST['departamento']) ?  : 'NULL');
+    $celular=(isset($_POST['celular']) ? $_POST['celular'] : 'NULL');
+    $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : 'NULL');
+    $tipo=(isset($_POST['tipo']) ? $_POST['tipo'] : 'NULL');
+    $partido=(isset($_POST['partido']) ? $_POST['partido'] : 'NULL');
+    $departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : 'NULL');
+	$puestos=(isset($_POST['puestos']) ? $_POST['puestos'] : 'NULL');
+    $usuario=(isset($_POST['usuario']) ? $_POST['usuario'] : 'NULL');
+    $password=(isset($_POST['password']) ? $_POST['password'] : 'NULL');
+    $apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : 'NULL');
+    $direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : 'NULL');
+    $municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : 'NULL');
+    $email=(isset($_POST['email']) ? $_POST['email'] : 'NULL');
+    $numero=(isset($_POST['numero']) && $_POST['numero']!="" ? $_POST['numero'] : 'NULL');
+    $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
+    $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
+	
+	$sql="INSERT INTO CANDIDATO (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, TIPOCANDIDATO, NTARJETON, PARTIDO, IDUSUARIO, IDPUESTOSVOTACION) VALUES ('".$nombre."','".$apellido."',".$cedula.",'".$direccion."',".$municipio.",".$celular.",'".$email."','".$fecha."',".$tipo.",".$numero.",".$partido.",'".$usuario."',".$puestos.")";	
+	$DBGestion->Consulta($sql);
+	
+	 ?>
+       	 <script language="javascript">
+	       	 alert("Se ingreso el Candidato exitosamente"); 
+	       	 window.location="reporte_candidatos.php";
+       	 </script>
+	   <?php	
+	
 }
 ?>
 <style>
@@ -36,7 +49,7 @@ if($add == 1){
 		new JsDatePick({
 			useMode:2,
 			target:"inputField",
-			dateFormat:"%d-%M-%Y"
+			dateFormat:"%d/%m/%Y"
 			/*selectedDate:{				This is an example of what the full configuration offers.
 				day:5,						For full documentation about these settings please see the full version of the code.
 				month:9,
@@ -295,7 +308,7 @@ function mesa(){
 						<span class="textRequired"> * </span>
 						Email
 					</label>
-						<input id="email" type="text" name="email" class="validate[required,custom[url]]">
+						<input id="email" type="text" name="email" class="validate[required,custom[email]]">
 				</li>
 				<li>
 					<label for="edad" style="width: 100px;">
@@ -309,14 +322,14 @@ function mesa(){
 						<span class="textRequired">  </span>
 							N&deg; Tarjeton
 					</label>
-					<input id="numero" type="text" value="" name="numero" class="validate[required,custom[integer]] ">
+					<input id="numero" type="text" value="" name="numero" >
 							</li>
-				<li>
+				 <li>
 					<label for="foto" style="width: 100px;">
 						<span class="textRequired">  </span>
-							Foto
+							
 					</label>
-						<input name="foto" type="file" size="30" >						
+						<!-- <input name="foto" type="file" size="30" >	-->					
 				</li>
 				<li>&nbsp;</li>	
 				<br/>	<br/>

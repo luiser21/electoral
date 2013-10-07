@@ -14,7 +14,7 @@ $(document).ready(function() {
 	<li><a href="#" >Conformaci&oacute;n Senado</a>
 		
 		<ul>
-			<li ><a href="#" >Senado Actual</a></li>
+			
 			<li ><a href="#" >Proyectos de Ley Tramitados</a></li>
 			<li ><a href="#" >Sillas Vacias</a></li>
 			<li ><a href="#" >Ausencias</a></li>
@@ -130,8 +130,8 @@ $(document).ready(function() {
 				<ul>
 					<li ><a href="#">Asesores</a></li>
 					<li ><a href="#">Coordinador</a></li>
-					<li ><a href="#">Lideres</a></li>
-					<li ><a href="#">Simpatizantes</a></li>
+					<li ><a href="lideres.php">Lideres</a></li>
+					<li ><a href="miembros.php">Simpatizantes</a></li>
 				</ul>
 			</li>
 			<li ><a href="#">Finanzas</a></li>
@@ -143,5 +143,6 @@ $(document).ready(function() {
 		</ul>
 		
 	</li>
+	<li><a  class='iframe' href="Informes.php"  >Informes</a></li>
 	<li><a  class='iframe' href="consulta.php"  >Consulte lugar Votaci&oacute;n</a></li>
 </ul>

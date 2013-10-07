@@ -109,10 +109,10 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 					<nav >
 					<div id="menu">
 						<?php    
-						if($permiso=='1'){
-							include_once "menuadmin.php";
-						}else{
+						if($permiso!='1'){
 							include_once "menu.php"; 
+						}else{
+							include_once "menuadmin.php";
 						} ?>					 
 					</div>						
 					</nav>			

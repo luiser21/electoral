@@ -20,17 +20,25 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 				$password=Hash::calcSHA($password);
 			
 			
-				$sql="SELECT * FROM USUARIO WHERE USUARIO = '$usuario' and CONTRASENA ='$password' and ACTIVO = 'Y'";
+				$sql="SELECT candidato.ID AS IDCANDIDATO,
+						usuario.USUARIO,
+						usuario.PERMISO,
+						CONCAT(candidato.NOMBRES,' ',candidato.APELLIDOS) as NOMBRE
+						FROM USUARIO
+				      INNER JOIN candidato ON candidato.IDUSUARIO = usuario.IDUSUARIO
+					  WHERE USUARIO = '$usuario' and CONTRASENA ='$password' and ACTIVO = 'Y'";
 				$DBGestion->ConsultaArray($sql);
 				$usuarios=$DBGestion->datos;
 				
 				foreach (@$usuarios as $datos){
+					 @$id = $datos['IDCANDIDATO'];
 				     @$usu = $datos['USUARIO'];
 					 @$per = $datos['PERMISO'];
 					 @$nombre = $datos['NOMBRE'];						 
 				}
 				
 				if(@$usu != "" ){
+					$_SESSION["idcandidato"] = $id;
 				    $_SESSION["username"] = $usu;
 					$_SESSION["active"] = 2;
 					$_SESSION["permiso"] = $per;
@@ -56,7 +64,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 		// toma las variables de sesion y de edicion de contenidos
 		@$usuario = $_SESSION["username"];
 		@$per = $_SESSION["permiso"];	
-		 @$nombre = $_SESSION['nombre'];		
+		 @$nombre = $_SESSION['nombre'];	
+		  @$id = $_SESSION["idcandidato"];	
 		if(!empty($usuario)){
 			if(@$usuario != ""){
 				header('Location: adetom.php');	    
