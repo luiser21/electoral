@@ -23,7 +23,8 @@ if($add == 1){
 	 $idlider=(isset($_POST['lider']) ? $_POST['lider'] : 'NULL');
 	 $ocupacion=(isset($_POST['ocupacion']) ? $_POST['ocupacion'] : 'NULL');
 	
-	$sql="INSERT INTO MIEMBROS (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION, IDLIDER,OCUPACION) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",'".$idlider."'.'".$ocupacion."')";	
+	$sql="INSERT INTO MIEMBROS (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",'".$idlider."','".$ocupacion."')";	
+	
 	$DBGestion->Consulta($sql);
 	
 	$rs = mysql_query("SELECT @@identity AS id");
@@ -142,7 +143,7 @@ function mesa(){
 						<span class="textRequired"> * </span>
 							Cedula
 					</label>
-						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] ">
+						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="consulta.php" ><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
 				</li>
 				<li>
 					<label for="departamento">

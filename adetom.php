@@ -10,27 +10,28 @@
 				<div id="slider">
 					<ul class="items">
 						<li>
-							<img src="images/puzzle.png" alt="">
+							<img src="images/<?php echo $_SESSION["username"]?>.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Bienvenido</span><span class="color1">Modulo</span><span>Candidato</span></span>
-								<p>Administre y realice configuraciones de la informaci&oacute;n que posee</p>
+								<span class="title"><span class="color2"><?php echo $_SESSION["nombre"]?></span><span class="color1" style="color: #E60000"> al <?php echo ucwords(strtolower($_SESSION["tipocandidato"]))?> de</span><span><?php if($_SESSION["tipocandidato"]!='SENADO'){ echo ucwords(strtolower($_SESSION['municipio'])); }else{ echo ucwords(strtolower($_SESSION['departamento'])); }?></span></span>
+								<h2 style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></h2>
 								
 							</div>
 						</li>
+						
 						<li>
-							<img src="images/usuario.png" alt="" >
-							<div class="banner">
-								<span class="title"><span class="color2">Controle los</span><span class="color1">Accesos de</span><span>Usuarios</span></span>
-								<p>Administre la red,los usuarios que acceden al sistemas y realice cargues masivos.</p>
-							
-							</div>
-						</li>
-						<li>
-							<img src="images/img32.jpg" alt="">
+							<img src="images/lideres.png" alt="">
 								<div class="banner">
-								<span class="title"><span class="color2">Conviertase </span><span class="color1">en el Lider </span><span>que desea ser</span></span>
+								<span class="title"><span class="color2">Gestione</span><span class="color1">Lideres de</span><span>Campa&ntilde;a</span></span>
 								<p>Aumente su capacidad de Comunicaci&oacute;n generando credibilidad y confianza.</p>
 								
+							</div>
+						</li>
+						<li>
+							<img src="images/miembros.png" alt="" >
+							<div class="banner">
+								<span class="title"><span class="color2">Gestione</span><span class="color1">Simpatizantes</span><span>que lo apoyan</span></span>
+								<p>Administre los ciudanos, descargue informes con sus puestos de votaci&oacute;n.</p>
+							
 							</div>
 						</li>
 					</ul>

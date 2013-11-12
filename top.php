@@ -71,7 +71,7 @@
 	</div> <!-- / top -->	
 </div> <!--panel -->		
 				<div class="wrapper">
-					<h1><a href="index.html" id="logo2"></a><a href="index.html" id="logo">SOPAC </a> </h1>
+					<h1><a href="#" id="logo2"></a><a href="#" id="logo">SOPAC </a> </h1>
 					
 						<fieldset>
 							<div class="bg">      </div>

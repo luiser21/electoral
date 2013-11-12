@@ -21,7 +21,14 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
+<style>
+#logo3 {  position:absolute; float: left; margin-left: 771px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
+</style>
+<?php if($usuario=='edgarcarreno'){?>
+<link href="Scripts/jtable/themes/lightcolor/red/jtable.css" rel="stylesheet" type="text/css" />
+<?php }else{ ?>
+<link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
+<?php } ?>
 <title>SOPAC</title>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="images/favicon(2).ico">
@@ -35,6 +42,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
 <link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />	
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
+
 <script type='text/javascript' src='js/jquery.min.js'></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
@@ -100,7 +108,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		</div> <!-- / top -->		
 	</div> <!--panel -->			
 					<div class="wrapper">
-							<h1><a href="index.html" id="logo2"></a><a href="index.html" id="logo">SOPAC </a> </h1>
+							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SOPAC </a><a href="#" id="logo3"></a> </h1>
 						
 							<fieldset>
 								<div class="bg">      </div>

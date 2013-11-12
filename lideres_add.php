@@ -3,7 +3,7 @@
 //include_once "../includes/GestionBD.new.class.php";
 
 //$DBGestion = new GestionBD('AGENDAMIENTO');
-
+imprimir($_SESSION['idcandidato']);
 $add = (isset($_GET['add']) ? $_GET['add'] : 0); ;
 if($add == 1){
 	
@@ -24,7 +24,7 @@ if($add == 1){
     $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
     $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
 	
-	$sql="INSERT INTO LIDERES (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.")";	
+	$sql="INSERT INTO LIDERES (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION,IDCANDIDATO) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",".$_SESSION['idcandidato'].")";	
 	$DBGestion->Consulta($sql);
 	
 	$rs = mysql_query("SELECT @@identity AS id");
@@ -143,7 +143,7 @@ function mesa(){
 						<span class="textRequired"> * </span>
 							Cedula
 					</label>
-						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] ">
+						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="consulta.php" ><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
 				</li>
 				<li>
 					<label for="departamento">

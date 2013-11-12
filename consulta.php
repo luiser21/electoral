@@ -1,37 +1,43 @@
 <html>
 <head>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type'text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-5065678-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
 <script>
-function gup( name ){
-	var regexS = "[\\?&]"+name+"=([^&#]*)";
-	var regex = new RegExp ( regexS );
-	var tmpURL = window.location.href;
-	var results = regex.exec( tmpURL );
-	if( results == null )
-		return"";
-	else
-		return results[1];
+function esVacio(valor){
+	if(valor==null){return true;}
+	for(var i=0;i<valor.length;i++) {
+		if ((valor.charAt(i)!=' ')&&(valor.charAt(i)!="\t")&&(valor.charAt(i)!="\n")&&(valor.charAt(i)!="\r")){return false;}
+	}
+	return true;
 }
-var cedula = gup( 'nCedula' );
+function esNumero(val) {
+	for(var i=0;i<val.length;i++){
+		if(!esDigito(val.charAt(i))){return false;}
+		}
+	return true;
+	}
+
+function esDigito(num) {
+	if (num.length>1){return false;}
+	var string="1234567890";
+	if (string.indexOf(num)!=-1){return true;}
+	return false;
+	}
+
+var cedula = window.parent.document.getElementById('cedula').value;	
+if(esVacio(cedula)){
+	alert("Debe ingresar la cedula.\nPor favor validar");
+	parent.$.fn.colorbox.close(); 
+}
+if(!esNumero(cedula)){	
+	alert("La cedula debe ser numerica.\nPor favor validar");
+	parent.$.fn.colorbox.close(); 
+}
 document.write ("<frameset><frame name=\"intermedio\" target=\"inferior\" scrolling=\"auto\" marginwidth=\"0\" marginheight=\"0\" src=\"http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula="+cedula+"\"><noframes><body>");
-document.write ("<p>Esta página utiliza marcos, pero su explorador no los admite.</p></body></noframes></frameset>");
 </script>
 </head>
 <noscript>
 <frameset rows="*,*">
 	<frame name="intermedio" target="inferior" scrolling="auto" marginwidth="0" marginheight="0" src="http://www3.registraduria.gov.co/censo/_censoresultado.php">
 	<noframes>
-	<body>
-	<p>Esta página utiliza marcos, pero su explorador no los admite.</p>
-	</body>
 	</noframes>
 <frame src="UntitledFrame-2"></frameset>
 </noscript>

@@ -10,7 +10,11 @@
 				<div id="slider">
 					<ul class="items">
 						<li>
+						<?php if($_SESSION["username"]=='edgarcarreno'){?>
 							<img src="images/puzzle.png" alt="">
+								<?php }else{?>
+									<img src="images/puzzle.png" alt="">
+									<?php } ?>
 							<div class="banner">
 								<span class="title"><span class="color2">Bienvenido</span><span class="color1">Modulo</span><span>Candidato</span></span>
 								<p>Administre y realice configuraciones de la informaci&oacute;n que posee</p>

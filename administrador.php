@@ -20,21 +20,41 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 				$password=Hash::calcSHA($password);
 			
 			
-				$sql="SELECT candidato.ID AS IDCANDIDATO,
+				$sql="SELECT
+						candidato.ID AS IDCANDIDATO,
 						usuario.USUARIO,
 						usuario.PERMISO,
-						CONCAT(candidato.NOMBRES,' ',candidato.APELLIDOS) as NOMBRE
-						FROM USUARIO
-				      INNER JOIN candidato ON candidato.IDUSUARIO = usuario.IDUSUARIO
-					  WHERE USUARIO = '$usuario' and CONTRASENA ='$password' and ACTIVO = 'Y'";
+						CONCAT(candidato.NOMBRES,' ',candidato.APELLIDOS) AS NOMBRE,
+						partidos_politicos.NOMBRECORTO AS PARTIDO,
+						partidos_politicos.LOGO2 AS LOGO2,
+						tipo_eleccion.NOMBRE AS TIPOCANDIDATO,
+						candidato.FOTO,
+						candidato.NTARJETON,
+						municipios.NOMBRE AS MUNICIPIO,
+						departamentos.NOMBRE AS DEPARTAMENTO
+						FROM
+						usuario
+						LEFT JOIN candidato ON candidato.IDUSUARIO = usuario.IDUSUARIO
+						LEFT JOIN partidos_politicos ON partidos_politicos.IDPARTIDO = candidato.PARTIDO
+						LEFT JOIN tipo_eleccion ON tipo_eleccion.IDTIPO = candidato.TIPOCANDIDATO
+						LEFT JOIN municipios ON municipios.ID = candidato.MUNICIPIO
+						LEFT JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					  WHERE USUARIO = '".$usuario."' and CONTRASENA ='".$password."' and ACTIVO = 'Y'";
 				$DBGestion->ConsultaArray($sql);
 				$usuarios=$DBGestion->datos;
 				
 				foreach (@$usuarios as $datos){
-					 @$id = $datos['IDCANDIDATO'];
-				     @$usu = $datos['USUARIO'];
-					 @$per = $datos['PERMISO'];
-					 @$nombre = $datos['NOMBRE'];						 
+					@$id = $datos['IDCANDIDATO'];
+					@$usu = $datos['USUARIO'];
+					@$per = $datos['PERMISO'];
+					@$nombre = $datos['NOMBRE'];	
+					@$partido = $datos['PARTIDO'];	
+					@$municipio = $datos['MUNICIPIO'];	
+					@$departamento = $datos['DEPARTAMENTO'];	
+					@$tipocandidato = $datos['TIPOCANDIDATO'];
+					@$foto = $datos['FOTO'];	
+					@$ntarjeton = $datos['NTARJETON'];	
+					@$logo2 = $datos['LOGO2'];						 
 				}
 				
 				if(@$usu != "" ){
@@ -42,7 +62,14 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 				    $_SESSION["username"] = $usu;
 					$_SESSION["active"] = 2;
 					$_SESSION["permiso"] = $per;
-					$_SESSION["nombre"] = $nombre;						
+					$_SESSION["nombre"] = $nombre;		
+					$_SESSION["partido"] = $partido;		
+					$_SESSION["municipio"] = $municipio;		
+					$_SESSION["departamento"] = $departamento;		
+					$_SESSION["foto"] = $foto;		
+					$_SESSION["ntarjeton"] = $ntarjeton;
+					$_SESSION["tipocandidato"] = $tipocandidato;	
+					$_SESSION["logo2"] = $logo2;							
 					header("location:adetom.php");    
 				}
                 
@@ -66,6 +93,13 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 		@$per = $_SESSION["permiso"];	
 		 @$nombre = $_SESSION['nombre'];	
 		  @$id = $_SESSION["idcandidato"];	
+		   @$municipio = $_SESSION["municipio"];	
+		    @$departamento = $_SESSION["departamento"];	
+			 @$partido = $_SESSION["partido"];	
+			  @$foto = $_SESSION["foto"];	
+			   @$ntarjeton = $_SESSION["ntarjeton"];	
+			    @$tipocandidato = $_SESSION["tipocandidato"];	
+				 @$logo2 = $_SESSION["logo2"];
 		if(!empty($usuario)){
 			if(@$usuario != ""){
 				header('Location: adetom.php');	    

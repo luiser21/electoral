@@ -3,8 +3,8 @@
 $(document).ready(function() {				
 				$(".iframe").colorbox({
 					iframe:true, 
-					width:"900px", 
-					height:"530px"
+					width:"750px", 
+					height:"340px"
 				});		
 			} );
 </script>
@@ -15,7 +15,7 @@ $(document).ready(function() {
 		
 		<ul>
 			
-			<li ><a href="#" >Proyectos de Ley Tramitados</a></li>
+			<li ><a href="proyectosley.php" >Proyectos de Ley Tramitados</a></li>
 			<li ><a href="#" >Sillas Vacias</a></li>
 			<li ><a href="#" >Ausencias</a></li>
 					
@@ -62,19 +62,19 @@ $(document).ready(function() {
 	<li class="top"><a href="#">Marco Legal</a>
 		
 		<ul >
-			<li ><a href="#">Constituci&oacute;n</a></li>
-			<li ><a href="#">Ley de Vancadas</a></li>
-			<li ><a href="#">Codigo Disciplinario</a></li>
-			<li ><a href="#">Causales por Perdida de Investidura</a></li>
+			<li ><a href="causales.php?ac=1">Constituci&oacute;n</a></li>
+			<li ><a href="causales.php?ac=3">R&eacute;gimen de Bancadas</a></li>
+			<li ><a href="causales.php?ac=2">Codigo Disciplinario</a></li>
+			<li ><a href="causales.php?ac=4">Causales por Perdida de Investidura</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	</li>
 	<li ><a href="#" >Elecciones 2010</a>
 		
 		<ul >
-			<li ><a href="#">Candidatos al Senado</a></li>
-			<li ><a href="#">Votos por Partido al Senado</a></li>
-			<li ><a href="#">Votos por Partido a la Camara</a></li>
+			<!-- <li ><a href="#">Candidatos al Senado</a></li> -->
+			<li ><a href="elecciones2010.php">Votos por Partido al Senado</a></li>
+			<li ><a href="elecciones_camara_2010.php">Votos por Partido a la Camara</a></li>
 			<li ><a href="#">Puesto de Votacion Pareto Candidato</a></li>
 			<!-- <li ><a href="#" class="fly">Sales</a>
 				
@@ -136,13 +136,18 @@ $(document).ready(function() {
 			</li>
 			<li ><a href="#">Finanzas</a></li>
 			<li ><a href="#">Mercadeo</a></li>
-			<li ><a href="#">Proyecci&oacute; Estadistica</a></li>
+			<li ><a href="#">Proyecci&oacute;n Estadistica</a></li>
 			
 		
 			
 		</ul>
 		
 	</li>
-	<li><a  class='iframe' href="Informes.php"  >Informes</a></li>
-	<li><a  class='iframe' href="consulta.php"  >Consulte lugar Votaci&oacute;n</a></li>
+	<li><a href="#"  >Informes</a>
+		<ul>
+			<li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>
+			<li ><a href="Informes.php">Seguimiento por Puesto de Votaci&oacute;n</a></li>
+		</ul>
+	</li>
+	 <li><a  class='iframe' href="consulta.php"  >Consulte lugar Votaci&oacute;n</a></li> 
 </ul>
