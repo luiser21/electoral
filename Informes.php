@@ -222,8 +222,22 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},
-					VOTOS : {
-						title: 'VOTOS',
+					VOTOSPREV : {
+						title: 'VOTO_PRE',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					VOTOSREALES: {
+						title: 'VOTO_REAL',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					VARIACION: {
+						title: 'VARIACION',
 						width: '5%',
 						//type: 'date',
 						create: false,

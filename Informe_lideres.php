@@ -97,6 +97,22 @@ button, input[type="button"], input[type="submit"] {
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='lideres_exportar.php'" value="Exportar" name="cmdexport">
 
     </form>
+	
+	<?php 
+		$sql="select SUM(MIEMBROS) AS MIEMBROS from (select (SELECT count(*)AS miembros FROM miembros_2010 m WHERE lider.codigo  = m.lider) as MIEMBROS 
+			  FROM lider_2010 lider
+			  INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
+		 	  INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+			  where usuario_2010.usuario='".$_SESSION["username"]."') as CANTIDADMIEMBROS  ";
+			 $DBGestion->ConsultaArray($sql);				
+			$totales=$DBGestion->datos;
+			$row=array();		
+			for($i=0; $i<count($totales);$i++){
+				$row[$i]['MIEMBROS']=$totales[$i]['MIEMBROS'];
+			}	
+			$miembros=$row[0]['MIEMBROS'];
+			// $DBGestion->close();
+	?>
 </div>	<br/>	
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
@@ -105,7 +121,7 @@ button, input[type="button"], input[type="submit"] {
 
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
-				title: 'Tabla de Lideres',
+				title: 'Tabla de Lideres   <?php echo ' - Total de Simpatizantes: '.$miembros.' Miembros'?>',
 				paging: true,
 				pageSize: 20,
 				sorting: true,
@@ -115,7 +131,7 @@ button, input[type="button"], input[type="submit"] {
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
-				},
+				},				
 				fields: {
 					ID: {
 						key: true,
