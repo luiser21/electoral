@@ -93,7 +93,6 @@ button, input[type="button"], input[type="submit"] {
             <option value="15">Volos</option>
         </select>-->
         <button type="submit" id="LoadRecordsButton">Buscar</button>
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='lideres_add.php'" value="Aderir +" name="cmdexport">
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='lideres_exportar.php'" value="Exportar" name="cmdexport">
 
     </form>
@@ -223,15 +222,15 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},
-					NOMBRE_PUESTO: {
-						title: 'NOMBRE_PUESTO',
+					PUESTO: {
+						title: '# PUESTOS VOTACION',
 						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					MESA: {
-						title: 'MESA',
+					MESAS: {
+						title: 'MESAS',
 						width: '30%',
 						//type: 'date',
 						create: false,

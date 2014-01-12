@@ -81,48 +81,58 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}else{
-		 $sql="select lider.codigo AS ID,
-			 CONCAT(lider.nombre,' ',lider.apellido) AS NOMBRE,
-			  lider.identificacion AS CEDULA,
-			  puesto_2010.nombre as NOMBRE_PUESTO,
-			  mesas_2010.mesas AS MESA,
-			  (SELECT count(*)AS miembros FROM miembros_2010 m WHERE lider.codigo  = m.lider) as MIEMBROS 
-			  FROM lider_2010 lider
-			  LEFT JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.lider = lider.codigo
-			  LEFT JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas 
-			  LEFT JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto 
-			  INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
-		 	  INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-			  where usuario_2010.usuario='".$_SESSION["username"]."' ";
+		 $sql="select  CODIGO AS ID,NOMBRE, CEDULA,COUNT(PUESTO) AS PUESTO, SUM(MESAS) AS MESAS, sum(miembros) as MIEMBROS FROM (SELECT
+				puesto_2010.nombre as puesto,
+				count(DISTINCT  mesas_2010.mesas) as mesas,
+				lider_2010.codigo,
+				CONCAT(lider_2010.nombre,' ',lider_2010.apellido) AS NOMBRE,
+				lider_2010.identificacion AS CEDULA,
+				count(miembros_2010.nombre) as miembros
+				from puesto_2010
+				INNER JOIN mesas_2010 ON mesas_2010.puesto = puesto_2010.codigo
+				INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.mesas = mesas_2010.codigo
+				INNER  JOIN miembros_2010 ON miembros_2010.codigo = mesa_puesto_miembro_2010.miembro
+				RIGHT  JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
+				INNER  JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+				INNER  JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+				where usuario_2010.usuario='".$_SESSION["username"]."'
+				GROUP BY lider_2010.codigo, puesto_2010.codigo
+				ORDER BY lider_2010.nombre, puesto_2010.nombre) mesas_lider
+				WHERE 1=1";
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(lider.nombre) like upper('%".$_POST["name"]."%') ";
+				$sql.=" and upper(NOMBRE) like upper('%".$_POST["name"]."%') ";
 			}
-	
+			$sql.=" GROUP BY codigo ORDER BY NOMBRE ";
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		//	imprimir($partidos);
 			$recordCount=count($partidos);
 			
 			//Get records from database
-		 $sql="select lider.codigo AS ID,
-			 CONCAT(lider.nombre,' ',lider.apellido) AS NOMBRE,
-			  lider.identificacion AS CEDULA,
-			  puesto_2010.nombre as NOMBRE_PUESTO,
-			  mesas_2010.mesas AS MESA,
-			  (SELECT count(*)AS miembros FROM miembros_2010 m WHERE lider.codigo  = m.lider) as MIEMBROS 
-			  FROM lider_2010 lider
-			  LEFT JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.lider = lider.codigo
-			  LEFT JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas 
-			  LEFT JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto 
-			  INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
-		 	  INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-			  where usuario_2010.usuario='".$_SESSION["username"]."' ";
+		 $sql="select  CODIGO AS ID,NOMBRE, CEDULA,COUNT(PUESTO) AS PUESTO, SUM(MESAS) AS MESAS, sum(miembros) as MIEMBROS FROM (SELECT
+				puesto_2010.nombre as puesto,
+				count(DISTINCT  mesas_2010.mesas) as mesas,
+				lider_2010.codigo,
+				CONCAT(lider_2010.nombre,' ',lider_2010.apellido) AS NOMBRE,
+				lider_2010.identificacion AS CEDULA,
+				count(miembros_2010.nombre) as miembros
+				from puesto_2010
+				INNER JOIN mesas_2010 ON mesas_2010.puesto = puesto_2010.codigo
+				INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.mesas = mesas_2010.codigo
+				INNER  JOIN miembros_2010 ON miembros_2010.codigo = mesa_puesto_miembro_2010.miembro
+				RIGHT  JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
+				INNER  JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+				INNER  JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+				where usuario_2010.usuario='".$_SESSION["username"]."'
+				GROUP BY lider_2010.codigo, puesto_2010.codigo
+				ORDER BY lider_2010.nombre, puesto_2010.nombre) mesas_lider
+				WHERE 1=1";
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(lider.nombre) like upper('%".$_POST["name"]."%') ";
+				$sql.=" and upper(NOMBRE) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" ORDER BY NOMBRE ";
+			$sql.=" GROUP BY codigo ORDER BY NOMBRE ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -134,8 +144,8 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['NOMBRE']=$partidos[$i]['NOMBRE'];
 				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
 				$row[$i]['MIEMBROS']=$partidos[$i]['MIEMBROS'];
-				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
-				$row[$i]['MESA']=$partidos[$i]['MESA'];
+				$row[$i]['PUESTO']=$partidos[$i]['PUESTO'];
+				$row[$i]['MESAS']=$partidos[$i]['MESAS'];
 			}	
 
 			//Return result to jTable

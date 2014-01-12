@@ -136,7 +136,7 @@ $(document).ready(function() {
 			</li>
 			<li ><a href="#">Finanzas</a></li>
 			<li ><a href="#">Mercadeo</a></li>
-			<li ><a href="#">Proyecci&oacute;n Estadistica</a></li>
+			<li ><a href="Informes_municipios.php">Proyecci&oacute;n Estadistica</a></li>
 			
 		
 			
