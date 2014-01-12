@@ -29,7 +29,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <?php }else{ ?>
 <link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
 <?php } ?>
-<title>SOPAC</title>
+<title>SIGE</title>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="images/favicon(2).ico">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
