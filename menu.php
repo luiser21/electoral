@@ -147,6 +147,7 @@ $(document).ready(function() {
 		<ul>
 			<li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>
 			<li ><a href="Informes.php">Seguimiento por Puesto de Votaci&oacute;n</a></li>
+			<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>
 		</ul>
 	</li>
 	 <li><a  class='iframe' href="consulta.php"  >Consulte lugar Votaci&oacute;n</a></li> 
