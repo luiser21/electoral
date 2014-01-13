@@ -1,10 +1,22 @@
 <?php require_once('top.php'); ?>
+<script src="js/countdown.js"></script>
 <style>
 .bg1 {  
 	position: absolute;
 	top:800px;
 }
-</style>			
+</style>
+<script>
+		$(document).ready(function(){
+			$("#countdown").countdown({
+				date: "09 march 2014 12:00:00",
+				format: "on"
+			},
+			function() {
+				// callback function
+			});
+		});
+	</script>			
 		<div class="main">
 <!--header -->
 			<header>				
@@ -13,15 +25,35 @@
 						<li>
 							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Conviertase </span><span class="color1">en el Lider </span><span>que desea ser</span></span>
-								<p>Aumente su capacidad de Comunicaci&oacute;n generando credibilidad y confianza.</p>
+								<span class="title"><span class="color2">Elecciones</span><span class="color1">Parlamentarias</span><span> 2014</span></span>
+								<p>Cuenta Regresiva para el 09 de Marzo<div class="timer-area" style=" margin-right:-100px">	
+										<ul id="countdown">
+											<li>
+												<span class="days">00</span>
+												<p class="timeRefDays">days</p>
+											</li>
+											<li>
+												<span class="hours">00</span>
+												<p class="timeRefHours">hours</p>
+											</li>
+											<li>
+												<span class="minutes">00</span>
+												<p class="timeRefMinutes">minutes</p>
+											</li>
+											<li>
+												<span class="seconds">00</span>
+												<p class="timeRefSeconds">seconds</p>
+											</li>
+										</ul>
+										
+									</div> </p>
 								
 							</div>
 						</li>
 						<li>
 							<img src="images/img2.png" alt="" >
 							<div class="banner">
-								<span class="title"><span class="color2">Vendase</span><span class="color1">y Publicitese bajo</span><span style="font-size:36px">Buenas estrategias</span></span>
+								<span class="title"><span class="color2">Innovaci&oacute;n</span><span class="color1">y Desarrollo a su</span><span style="font-size:36px">Servicio</span></span>
 								<p >En donde las encuestas y estrategias sean aplicadas correctamente, obteniendo el exito de su campaña</p>
 								
 							</div>
@@ -29,8 +61,8 @@
 						<li>
 							<img src="images/img3.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Controle los</span><span class="color1">Simpatizantes y</span><span></span>Lideres</span>
-								<p>Puestos de Votaci&oacute;n asegurando votos. Obtenga informaci&oacute;n detallada para ganar sus elecciones.</p>
+								<span class="title"><span class="color2">Contacto</span><span class="color1">directo con sus Simpatizantes </span><span></span>y Lideres</span>
+								<p>Obtenga informaci&oacute;n detallada para ganar sus elecciones.</p>
 							
 							</div>
 						</li>
