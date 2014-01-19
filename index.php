@@ -9,7 +9,7 @@
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "09 march 2014 12:00:00",
+				date: "08 march 2014 23:59:59",
 				format: "on"
 			},
 			function() {
@@ -62,7 +62,7 @@
 							<img src="images/img3.png" alt="">
 							<div class="banner">
 								<span class="title"><span class="color2">Contacto</span><span class="color1">directo con sus Simpatizantes </span><span></span>y Lideres</span>
-								<p>Obtenga informaci&oacute;n detallada para ganar sus elecciones.</p>
+								<p></p>
 							
 							</div>
 						</li>

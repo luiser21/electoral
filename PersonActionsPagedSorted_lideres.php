@@ -134,7 +134,7 @@ $_GET["jtStartIndex"]=0;*/
 			}
 			$sql.=" GROUP BY codigo ORDER BY NOMBRE ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
-			
+		//	echo $sql;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		

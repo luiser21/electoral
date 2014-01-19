@@ -1,7 +1,5 @@
 <?php require_once('topadmin.php');?> 
   <link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
-	
-	
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
@@ -15,17 +13,75 @@
 	position:relative;
 	top:600px;
 }
+h4{
+
+ color: #006600;
+    font-family: 'GothamLight',arial,serif;
+    font-size: 28px;
+    font-weight: lighter;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+button, input[type="button"], input[type="submit"] {
+    background-color: #A1AAAF;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    height: 32px;
+    margin-right: 2px;
+    width: 108px;
+}
 </style>
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
-			<h4>Simpatizantes</h4>
 			
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
-						
+			
+			<table width="auto" border="0">
+  <tr>
+    <th width="227" rowspan="7" scope="row"><?php if($_SESSION['foto']!=""){?>
+						<img src="<?php echo $_SESSION['foto']?>" width="120" height="154" style="border:3px solid #CCCCCC;">
+			<?php }else{ ?>		
+				<img src="fotos/images.jpg" width="131" height="150" style="border:3px solid #CCCCCC;">
+			<?php } ?>	</th>
+    <td width="575"><h4 align="left">Consolidado por Simpatizantes Duplicados por Lider</h4></td>
+  </tr>
+  <tr>
+    <td>
+
+      <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
+  </tr>
+
+    <td><h4 align="left" style="font-size: 18px">Candidato 
+	<?php if($_SESSION["tipocandidato"]=='SENADO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td></tr><tr><td><h4 align="left" style="font-size: 18px; color: #999999"> De la República'; 
+		}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td>
+  </tr>
+    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['municipio'])); 
+		}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ echo 'A la '.$_SESSION['tipocandidato'].'</h4></td>
+  </tr>
+    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['departamento'])); }?>
+
+	
+		</h4></td></tr>
+  <tr>
+  <tr>
+    <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
+  </tr>
+  <tr>
+    <td><h4 align="left" style="font-size: 18px; color: #999999">Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
+  </tr>
+ 
+</table>
+
+						<br/>
 <div class="filtering">
     <form>
-        Nombre: <input type="text" name="name" id="name" />
+        Municipio: <input type="text" name="name" id="name" />
        <!-- City:
         <select id="cityId" name="cityId">
             <option selected="selected" value="0">All cities</option>
@@ -46,11 +102,10 @@
             <option value="15">Volos</option>
         </select>-->
         <button type="submit" id="LoadRecordsButton">Buscar</button>
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_add.php'" value="Aderir +" name="cmdexport">
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php'" value="Exportar" name="cmdexport">
 
     </form>
-</div>	<br/>	
+</div><p></p>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
@@ -64,7 +119,7 @@
 				sorting: true,
 				defaultSorting: 'Name ASC',
 				actions: {
-					listAction: 'PersonActionsPagedSorted_miembros.php?action=list',
+					listAction: 'PersonActionsPagedSorted_miembros_duplicados.php?action=list',
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
@@ -78,7 +133,7 @@
 					},
 					NOMBRE: {
 						title: 'NOMBRE',
-						width: '30%',
+						width: '25%',
 						create: false,
 						edit: false
 					},
@@ -90,14 +145,7 @@
 					},
 					MUNICIPIO: {
 						title: 'MUNICIPIO',
-						width: '20%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
-					DEPARTAMENTO: {
-						title: 'DEPARTAMENTO',
-						width: '20%',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false
@@ -118,7 +166,7 @@
 					},
 					LIDER : {
 						title: 'LIDER',
-						width: '30%',
+						width: '40%',
 						//type: 'date',
 						create: false,
 						edit: false
@@ -141,9 +189,9 @@
 		});
 
 	</script>
+							
 				
-				
-			</div></div>
+		  </div></div>
 		</header>	
 		
 	 </div>

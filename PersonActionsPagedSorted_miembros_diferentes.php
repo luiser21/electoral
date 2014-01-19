@@ -91,8 +91,8 @@ $_GET["jtStartIndex"]=0;*/
 				CONCAT(lider.nombre,' ',lider.apellido) AS LIDER,
 				mesas.mesas AS MESA,
 				puesto.nombre AS NOMBRE_PUESTO,
-				puesto.municipio as MUNICIPIO,
-				puesto.departamento AS DEPARTAMENTO
+				puesto.municipio,
+				puesto.departamento
 				FROM
 				miembros_2010 miembros
 				INNER JOIN lider_2010 lider ON lider.codigo = miembros.lider
@@ -101,7 +101,7 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN puesto_2010 puesto ON puesto.codigo = mesas.puesto
 				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
 				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')";
+				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio<>(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')";
 							
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(miembros.nombre) like upper('%".$_POST["name"]."%') ";
@@ -129,7 +129,7 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN puesto_2010 puesto ON puesto.codigo = mesas.puesto
 				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
 				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')";
+				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio<>(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(miembros.nombre) like upper('%".$_POST["name"]."%') ";

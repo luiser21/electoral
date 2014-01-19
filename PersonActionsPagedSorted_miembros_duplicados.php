@@ -56,7 +56,8 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				where usuario.usuario='".$_SESSION["username"]."'";
+				where usuario.usuario='".$_SESSION["username"]."'
+				";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(miembros.nombres) like upper('%".$_POST["name"]."%') ";
@@ -101,7 +102,18 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN puesto_2010 puesto ON puesto.codigo = mesas.puesto
 				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
 				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')";
+				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')
+				AND miembros.identificacion IN (SELECT REPETIDAS.CEDULAS FROM 
+				(SELECT
+				count(miembros.identificacion) AS REPETIDOS,
+				miembros.identificacion AS CEDULAS
+				FROM
+				miembros_2010 AS miembros
+				INNER JOIN lider_2010 AS lider ON lider.codigo = miembros.lider
+				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
+				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+				WHERE usuario_2010.usuario='".$_SESSION["username"]."'  GROUP BY miembros.identificacion HAVING REPETIDOS > 1 )
+				REPETIDAS) ";
 							
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(miembros.nombre) like upper('%".$_POST["name"]."%') ";
@@ -129,7 +141,18 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN puesto_2010 puesto ON puesto.codigo = mesas.puesto
 				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
 				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')";
+				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')
+				AND miembros.identificacion IN (SELECT REPETIDAS.CEDULAS FROM 
+				(SELECT
+				count(miembros.identificacion) AS REPETIDOS,
+				miembros.identificacion AS CEDULAS
+				FROM
+				miembros_2010 AS miembros
+				INNER JOIN lider_2010 AS lider ON lider.codigo = miembros.lider
+				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
+				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+				WHERE usuario_2010.usuario='".$_SESSION["username"]."'  GROUP BY miembros.identificacion HAVING REPETIDOS > 1 )
+				REPETIDAS) ";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(miembros.nombre) like upper('%".$_POST["name"]."%') ";

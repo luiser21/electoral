@@ -23,6 +23,9 @@ if($add == 1){
 	 $idlider=(isset($_POST['lider']) ? $_POST['lider'] : 'NULL');
 	 $ocupacion=(isset($_POST['ocupacion']) ? $_POST['ocupacion'] : 'NULL');
 	
+	//Consultar si ya existe el  simpatizante en otro lider
+	$sql="SELECT * FROM MIEMBROS WHERE CEDULA"
+	
 	$sql="INSERT INTO MIEMBROS (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",'".$idlider."','".$ocupacion."')";	
 	
 	$DBGestion->Consulta($sql);
