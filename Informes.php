@@ -186,7 +186,67 @@ button, input[type="button"], input[type="submit"] {
 													width: '40%',
 													create: false,
 													edit: false
-												}
+												},
+												Phone: {
+													title: '',
+													width: '2%',
+													sorting: false,
+													edit: false,
+													create: false,
+													display: function (studentData) {
+														//Create an image that will be used to open child table
+														var $img = $('<img src="images/note.png" title="Ver Lideres por Miembros" />');
+														//Open child table when user clicks the image
+														$img.click(function () {
+															$('#PeopleTableContainer').jtable('openChildTable',
+																	$img.closest('tr'),
+																	{
+																		title: studentData.record.MESAS,
+																		actions: {
+																			listAction: 'ver_mesas_miembros_lideres.php?idmesa=' + studentData.record.CODIGO,
+																			caption:"Export to Excel",
+																			//deleteAction: '/Demo/DeletePhone',
+																			//updateAction: '/Demo/UpdatePhone',
+																			createAction: 'ver_mesas_miembros_lideres_excel.php?idmesa=' + studentData.record.CODIGO
+																		},
+																		fields: {
+																			ID: {
+																				type: 'hidden',
+																				defaultValue: studentData.record.CODIGO
+																			},
+																			CODIGO: {
+																				key: true,
+																				create: false,
+																				edit: false,
+																				list: false
+																			},
+																			LIDER: {
+																				title: 'LIDER',
+																				width: '25%',
+																				create: false,
+																				edit: false
+																			},
+																			TELEFONO: {
+																				title: 'TELEFONO',
+																				width: '10%',
+																				create: false,
+																				edit: false
+																			},
+																			SIMPATIZANTES: {
+																				title: 'SIMPATIZANTES',
+																				width: '25%',
+																				create: false,
+																				edit: false
+																			}
+																		}
+																	}, function (data) { //opened handler
+																		data.childTable.jtable('load');
+																	});
+														});
+														//Return image to show on the person row
+														return $img;
+													}
+												},
 											}
 										}, function (data) { //opened handler
 											data.childTable.jtable('load');
