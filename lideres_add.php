@@ -3,7 +3,7 @@
 //include_once "../includes/GestionBD.new.class.php";
 
 //$DBGestion = new GestionBD('AGENDAMIENTO');
-imprimir($_SESSION['idcandidato']);
+//imprimir($_SESSION['idcandidato']);
 $add = (isset($_GET['add']) ? $_GET['add'] : 0); ;
 if($add == 1){
 	

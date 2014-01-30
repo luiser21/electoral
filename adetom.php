@@ -4,7 +4,10 @@
 	position: absolute;
 	top:800px;
 }
-</style>			
+</style>
+<?php 
+//imprimir($_SESSION);
+?>			
 <div class="main">					
 			<header>				
 				<div id="slider">
@@ -12,10 +15,21 @@
 						<li>
 							<img src="images/<?php echo $_SESSION["username"]?>.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2"><?php echo $_SESSION["nombre"]?></span><span class="color1" style="color: #E60000"> a la <?php echo ucwords(strtolower($_SESSION["tipocandidato"]))?> por</span><span>
-								<?php if($_SESSION["tipocandidato"]=='SENADO'){ echo 'De la República'; 
-									}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ echo ucwords(strtolower($_SESSION['municipio'])); 
-									}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ echo ucwords(strtolower($_SESSION['departamento'])); }?></span></span>
+								<span class="title"><span class="color2"><?php echo $_SESSION["nombre"]?></span><span class="color1" style="color: #E60000">
+								<?php if($_SESSION["tipocandidato"]=='SENADO'){ 
+										echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])). '</span><span> De la Rep&uacute;blica'; 
+									}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ 
+										if($_SESSION["tipocandidato"]=='ALCALDIA'){
+											echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span>';
+										}
+										if($_SESSION["tipocandidato"]=='CONSEJO'){
+											echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span>';
+										}
+										echo ucwords(strtolower($_SESSION['municipio'])); 
+									}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ 
+										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span>';										
+										echo ucwords(strtolower($_SESSION['departamento'])); 
+									}?></span></span>
 								<h2 style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></h2>
 								
 							</div>

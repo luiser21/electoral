@@ -3,28 +3,28 @@
 $add = (isset($_GET['add']) ? $_GET['add'] : 0); ;
 if($add == 1){
 	
-    $nombre=(isset($_POST['nombre']) ? $_POST['nombre'] : 'NULL');
-    $cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : 'NULL');
-    $departamento=(isset($_POST['departamento']) ?  : 'NULL');
-    $celular=(isset($_POST['celular']) ? $_POST['celular'] : 'NULL');
+    @$nombre=(isset($_POST['nombre']) ? $_POST['nombre'] : 'NULL');
+    @$cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : 'NULL');
+    @$departamento=(isset($_POST['departamento']) ?  : 'NULL');
+    @$celular=(isset($_POST['celular']) ? $_POST['celular'] : 'NULL');
     $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : 'NULL');
 
-    $departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : 'NULL');
-	$puestos=(isset($_POST['puestos']) ? $_POST['puestos'] : 'NULL');
+    @$departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : 'NULL');
+	@$puestos=(isset($_POST['puestos']) ? $_POST['puestos'] : 'NULL');
    
-    $apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : 'NULL');
-    $direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : 'NULL');
-    $municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : 'NULL');
-    $email=(isset($_POST['email']) ? $_POST['email'] : 'NULL');
+    @$apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : 'NULL');
+    @$direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : 'NULL');
+    @$municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : 'NULL');
+    @$email=(isset($_POST['email']) ? $_POST['email'] : 'NULL');
    
-    $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
-    $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
+    @$municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
+    @$mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
 	
-	 $idlider=(isset($_POST['lider']) ? $_POST['lider'] : 'NULL');
-	 $ocupacion=(isset($_POST['ocupacion']) ? $_POST['ocupacion'] : 'NULL');
+	 @$idlider=(isset($_POST['lider']) ? $_POST['lider'] : 'NULL');
+	 @$ocupacion=(isset($_POST['ocupacion']) ? $_POST['ocupacion'] : 'NULL');
 	
 	//Consultar si ya existe el  simpatizante en otro lider
-	$sql="SELECT * FROM MIEMBROS WHERE CEDULA"
+	$sql="SELECT * FROM MIEMBROS WHERE CEDULA";
 	
 	$sql="INSERT INTO MIEMBROS (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",'".$idlider."','".$ocupacion."')";	
 	

@@ -23,10 +23,13 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <head>
 <style>
 #logo3 {  position:absolute; float: left; margin-left: 771px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
+#logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
+			
+
 </style>
-<?php if($usuario=='edgarcarreno'){?>
+<?php if($_SESSION["partido"]=='Partido Liberal'){?>
 <link href="Scripts/jtable/themes/lightcolor/red/jtable.css" rel="stylesheet" type="text/css" />
-<?php }else{ ?>
+<?php }elseif($_SESSION["partido"]=='Partido de la U'){ ?>
 <link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
 <?php } ?>
 <title>SIGE</title>
@@ -69,6 +72,13 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 			jQuery("#form2").validationEngine();
 		});	
 </script>	
+<!-- <div id="logo4">
+					
+						<span class="textRequired"> * </span>
+							Cedula
+					
+						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="consulta.php" ><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
+	<div>	 -->
 		<?php 
 			if ($_SESSION["active"] == 1)
 			{
