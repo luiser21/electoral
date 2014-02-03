@@ -20,7 +20,9 @@ $_GET["jtStartIndex"]=0;*/
 				miembros.CEDULA,
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
 				mesas.MESA,
-				puestos_votacion.NOMBRE_PUESTO
+				puestos_votacion.NOMBRE_PUESTO,
+				municipios.NOMBRE AS MUNICIPIO,
+				departamentos.NOMBRE AS DEPARTAMENTO
 				FROM
 				miembros
 				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
@@ -29,6 +31,8 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
 				where usuario.usuario='".$_SESSION["username"]."'";
 				
 					
@@ -47,7 +51,9 @@ $_GET["jtStartIndex"]=0;*/
 				miembros.CEDULA,
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
 				mesas.MESA,
-				puestos_votacion.NOMBRE_PUESTO
+				puestos_votacion.NOMBRE_PUESTO,
+				municipios.NOMBRE AS MUNICIPIO,
+				departamentos.NOMBRE AS DEPARTAMENTO
 				FROM
 				miembros
 				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
@@ -56,17 +62,19 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				where usuario.usuario='".$_SESSION["username"]."'";
+				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+				where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(miembros.nombres) like upper('%".$_POST["name"]."%') ";
 			}
 			$sql.=" ORDER BY NOMBRE ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
-			
+		
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;
-				
+					//echo $sql;
 			$row=array();		
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
@@ -75,6 +83,8 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['LIDER']=utf8_encode($partidos[$i]['LIDER']);
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
+				$row[$i]['MUNICIPIO']=$partidos[$i]['MUNICIPIO'];
+				$row[$i]['DEPARTAMENTO']=$partidos[$i]['DEPARTAMENTO'];
 			}
 				
 			//Return result to jTable

@@ -81,11 +81,11 @@
 				<div id="menu">
 					<ul id="nav">
 						<li class="current"><a href="index.php">Inicio</a></li>
-						<li><a href="#">Quienes Somos</a></li>
+						<li><a href="quienessomos.php">Quienes Somos</a></li>
 						<li><a href="#">T&eacute;rminos Oficiales</a></li>
 						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Acerca del Programa</a></li>
-						<li><a href="#">Casos de Exito</a></li>
+						<li><a href="sige.php">Acerca del Programa</a></li>
+						<li><a href="casosexito.php">Casos de Exito</a></li>
 						<li><a href="#">Cont&aacute;ctenos</a></li>
 					</ul>
 				</div>					
