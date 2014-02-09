@@ -154,5 +154,5 @@ $(document).ready(function() {
 			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
 		</ul>
 	</li>
-	 <li><a  class='iframe' href="consulta.php"  >Consulte lugar Votaci&oacute;n</a></li> 
+	 <li><a href="tarjetones.php"  >Elecciones Congreso 2014</a></li> 
 </ul>
