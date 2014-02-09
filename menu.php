@@ -6,7 +6,13 @@ $(document).ready(function() {
 					width:"750px", 
 					height:"340px"
 				});		
+				$(".iframe2").colorbox({
+					iframe:true, 
+					width:"750px", 
+					height:"440px"
+				});		
 			} );
+
 </script>
 
 <ul id="nav">

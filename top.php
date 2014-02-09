@@ -10,8 +10,19 @@
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
 <script type="text/javascript" src="js/jquery-1.6.js" ></script>
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
+<link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
+
 <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
 <script src="js/superfish.js"></script>
+
+<script type='text/javascript' src='js/jquery.min.js'></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
+<script type="text/javascript" src="js/jquery-1.6.js" ></script> 
+<script type="text/javascript" src="js/FAjax.js"></script>
+<script type="text/javascript" src="js/jquery.colorbox.js"></script> 
 <script src="js/slide.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/cufon-yui.js"></script>
 <script type="text/javascript" src="js/cufon-replace.js"></script>  
@@ -28,8 +39,14 @@
 <script>
 		jQuery(document).ready(function(){
 			jQuery("#form2").validationEngine();
+			$(".iframe2").colorbox({
+					iframe:true, 
+					width:"750px", 
+					height:"440px"
+				});	
 		});	
 </script>		
+
 </head>
 <body id="page1">	
 <!-- Panel -->
