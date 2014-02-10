@@ -15,7 +15,7 @@ try
 				FROM
 				mesas m
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
-				where puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')	and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."'";	
+				where puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')	and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' HAVING VOTOSPREVISTOS>0";	
 			if(isset($_POST["name"])!=""){
 				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
 			}			
@@ -56,7 +56,7 @@ try
 				mesas m
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
 				where puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
-	and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."'";	
+	and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' HAVING VOTOSPREVISTOS>0";	
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
@@ -186,7 +186,7 @@ mesas m
 				mesas_2010 m
 				INNER JOIN puesto_2010 ON puesto_2010.codigo = m.puesto
 				where puesto_2010.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 
-				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')	and puesto_2010.codigo='".$_GET["idpuesto"]."' ";
+				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')	and puesto_2010.codigo='".$_GET["idpuesto"]."' HAVING VOTOSPREVISTOS>0";
 			
 			$sql.=" order by m.mesas ";
 			

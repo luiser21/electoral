@@ -45,7 +45,7 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') 
 					";						
 					
 			if(isset($_POST["name"])!=""){
