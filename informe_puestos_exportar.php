@@ -56,7 +56,7 @@ try
 					WHERE usuario.USUARIO='".$_SESSION["username"]."' and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
 					";			
 			
-			$sql.=" ORDER BY NOMBRE ";
+			$sql.=" GROUP BY p.IDPUESTO ORDER BY NOMBRE ";
 			
 			$DBGestion->ConsultaArray($sql);				
 			$puestos=$DBGestion->datos;
@@ -76,7 +76,7 @@ try
 </style><html>
 <p>&nbsp;</p>
 <blockquote>
-  <p><span class="Estilo1">	CONSOLIDADO POR PUESTO DE VOTACI&Oacute;N</span></p>
+  <p><span class="Estilo1">	CONSOLIDADO POR PUESTO DE VOTACI&Oacute;N Y MESAS </span></p>
   <p><?php echo $_SESSION['nombre']?><br/>
     Candidato al <?php echo $_SESSION['tipocandidato']?><br/>
     <?php echo ucwords(strtolower($_SESSION['municipio'])).' - '. ucwords(strtolower($_SESSION['departamento']))?><br/>
@@ -89,13 +89,14 @@ try
 					
 			 <tr>
 			 
-			   <td width="26%" bgcolor="#009999"><div align="center"><strong>PUESTO DE VOTACION</strong></div></td>
+			   <td width="25%" bgcolor="#009999"><div align="center"><strong>PUESTO DE VOTACION</strong></div></td>
 			   <td width="8%" bgcolor="#009999"><div align="center"><strong>MUNICIPIO</strong></div></td>
-	           <td width="27%" bgcolor="#009999"><div align="center"><strong>DEPARTAMENTO</strong></div></td>
-	           <td width="7%" bgcolor="#009999"><div align="center"><strong>MESAS</strong></div></td>
+	           <td width="13%" bgcolor="#009999"><div align="center"><strong>DEPARTAMENTO</strong></div></td>
+	           <td width="10%" bgcolor="#009999"><div align="center"><strong>MESAS</strong></div></td>
 			    <td width="7%" bgcolor="#009999"><div align="center"><strong>VOTO_PRE</strong></div></td>
-				 <td width="7%" bgcolor="#009999"><div align="center"><strong>VOTO_REAL</strong></div></td>
-				  <td width="7%" bgcolor="#009999"><div align="center"><strong>VARIACION</strong></div></td>
+				 <td width="8%" bgcolor="#009999"><div align="center"><strong>VOTO_REAL</strong></div></td>
+				  <td width="8%" bgcolor="#009999"><div align="center"><strong>VARIACION</strong></div></td>
+                  <td >&nbsp;</td>
           </tr>
 		  <?php 
 		
@@ -108,7 +109,132 @@ try
 			    <td align="center"><?php echo $valor['VOTOSPREV']?></td>
 				 <td align="center"><?php echo $valor['VOTOSREALES']?></td>
 				 	 <td align="center"><?php echo $valor['VOTOSREALES']-$valor['VOTOSPREV']?></td>
-          </tr><?php }?>
+                     <td align="center" bgcolor="#00CCFF"><strong>LIDERES Y SIMPATIZANTES </strong></td>
+          </tr>
+		  <?php 
+		  $sql="SELECT
+				m.ID as CODIGO,
+				m.MESA as MESAS,
+				(SELECT
+					count(*) as VOTOS
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$valor['ID']."' and mesas.ID=m.ID) as VOTOSPREVISTOS,
+				m.votoreal as VOTOREAL,
+				m.votoreal - (SELECT
+				 count(*) as miembros 
+				FROM
+				miembros
+				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$valor['ID']."' and mesas.ID=m.ID) as VARIACION
+				FROM
+				mesas m
+				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
+				where puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
+	and puestos_votacion.IDPUESTO='".$valor['ID']."' HAVING VOTOSPREVISTOS>0";	
+			
+				
+				$sql.=" order by m.mesa ";
+				$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;	
+	
+			$Idmiembros=array();
+			$row=array();		
+			for($i=0; $i<count($partidos);$i++){
+				$Idmiembros=array();
+				$row[$i]['CODIGO']=$partidos[$i]['CODIGO'];				
+				$sql="SELECT
+					 CONCAT(trim(miembros.nombres),' ',trim(miembros.apellidos)) as miembros
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.usuario='".$_SESSION["username"]."' and puestos_votacion.IDPUESTO='".$valor['ID']."' and mesas.ID='".$row[$i]['CODIGO']."'";
+				$DBGestion->ConsultaArray($sql);				
+				$miembros=$DBGestion->datos;
+				foreach ($miembros as $value) {
+					$Idmiembros[]=$value['miembros'];
+				}
+				$Idmiembros=implode(", ",$Idmiembros);
+				$row[$i]['SIMPATIZANTES']=$Idmiembros;
+				$row[$i]['VOTOSPREVISTOS']=$partidos[$i]['VOTOSPREVISTOS'];
+				$row[$i]['VOTOREAL']=$partidos[$i]['VOTOREAL'];
+				$row[$i]['MESAS']='Mesa #'.$partidos[$i]['MESAS'];
+				$row[$i]['VARIACION']=$partidos[$i]['VARIACION'];
+						
+		  ?>
+			 <tr>
+			   <td align="left">&nbsp;</td>
+			   <td align="center">&nbsp;</td>
+			   <td align="left">&nbsp;</td>
+			   <td align="center"><?php echo $row[$i]['MESAS'] ?></td>
+			   <td align="center"><?php echo $row[$i]['VOTOSPREVISTOS'] ?></td>
+			   <td align="center"><?php echo $row[$i]['VOTOREAL'] ?></td>
+			   <td align="center"><?php echo $row[$i]['VARIACION'] ?></td>
+	           <td align="left"><?php  //echo $row[$i]['SIMPATIZANTES'] ?>
+			     <?php 	$sql="SELECT
+					lideres.ID AS CODIGO,
+					CONCAT(trim(lideres.nombres),' ',trim(lideres.apellidos)) AS LIDER,
+					lideres.TELEFONO AS TELEFONO,
+					CONCAT(trim(miembros.nombres),' ',trim(miembros.apellidos)) AS SIMPATIZANTES
+
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.usuario='".$_SESSION["username"]."'
+					##and puesto_2010.codigo='".$_SESSION["username"]."' 
+					and mesas.ID='".$row[$i]['CODIGO']."' ";	
+			
+			
+			$sql.=" ORDER BY LIDER ";				
+			//$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
+					
+			//Add all records to an array
+			
+			$DBGestion->ConsultaArray($sql);				
+			$lideres=$DBGestion->datos;	
+			$idlider='';
+			$row=array();		
+			for($i=0; $i<count($lideres);$i++){	
+				
+					$row[$i]['CODIGO']=$lideres[$i]['CODIGO'];
+					 $row[$i]['LIDER']=$lideres[$i]['LIDER'];
+					$row[$i]['SIMPATIZANTES']=$lideres[$i]['SIMPATIZANTES'];
+				
+				$idlider=$lideres[$i]['CODIGO'];
+			 echo	'<strong>Lider:</strong> '.$row[$i]['LIDER'].' - <strong>Simpatizante:</strong> '.$row[$i]['SIMPATIZANTES'].'<br/>'; }?></td>
+          </tr>
+			 <tr>
+			   <td align="left">&nbsp;</td>
+			   <td align="center">&nbsp;</td>
+			   <td align="left">&nbsp;</td>
+			   <td align="center">&nbsp;</td>
+			   <td align="center">&nbsp;</td>
+			   <td align="center">&nbsp;</td>
+			   <td align="center">&nbsp;</td>
+			   <td align="left">&nbsp;</td>
+	      </tr>
+		  <?php } }?>
 		
 			</table>
 </html>
