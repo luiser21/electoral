@@ -94,7 +94,7 @@ button, input[type="button"], input[type="submit"] {
             <option value="15">Volos</option>
         </select>-->
         <button type="submit" id="LoadRecordsButton">Buscar</button>
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php'" value="Exportar" name="cmdexport">
+<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='informe_puestos_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
 
     </form>
 </div><p></p>

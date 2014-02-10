@@ -9,10 +9,22 @@ try
 		//Get record count
 		if($_SESSION["username"]!='edgarcarreno'){	
 		
-			$sql="SELECT lideres.ID, CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS NOMBRE, lideres.CEDULA, puestos_votacion.NOMBRE_PUESTO, mesas.MESA, (SELECT COUNT(ID) FROM miembros WHERE miembros.IDLIDER=lideres.ID) AS MIEMBROS FROM lideres INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = lideres.IDPUESTOSVOTACION INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO	INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID AND mesa_puesto_miembro.LIDER = lideres.ID ";	
-			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
-			}			
+			$sql="SELECT
+					lideres.ID AS CODIGO,
+					CONCAT(trim(lideres.nombres),' ',trim(lideres.apellidos)) AS LIDER,
+					lideres.TELEFONO AS TELEFONO,
+					CONCAT(trim(miembros.nombres),' ',trim(miembros.apellidos)) AS SIMPATIZANTES
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.usuario='".$_SESSION["username"]."'
+					##and puesto_2010.codigo='".$_SESSION["username"]."' 
+					and mesas.ID='".$_GET["idmesa"]."' ";	
 			//Add all records to an array
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -20,26 +32,47 @@ try
 			$recordCount=count($partidos);	
 			
 			//Get records from database
-			$sql="SELECT lideres.ID, CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS NOMBRE, lideres.CEDULA, puestos_votacion.NOMBRE_PUESTO, mesas.MESA, (SELECT COUNT(ID) FROM miembros WHERE miembros.IDLIDER=lideres.ID) AS MIEMBROS FROM lideres INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = lideres.IDPUESTOSVOTACION INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO	INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID AND mesa_puesto_miembro.LIDER = lideres.ID ";	
+			$sql="SELECT
+					lideres.ID AS CODIGO,
+					CONCAT(trim(lideres.nombres),' ',trim(lideres.apellidos)) AS LIDER,
+					lideres.TELEFONO AS TELEFONO,
+					CONCAT(trim(miembros.nombres),' ',trim(miembros.apellidos)) AS SIMPATIZANTES
+
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.usuario='".$_SESSION["username"]."'
+					##and puesto_2010.codigo='".$_SESSION["username"]."' 
+					and mesas.ID='".$_GET["idmesa"]."' ";	
 			
-			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
-			}	
-			$sql.=" ORDER BY NOMBRE ";				
-			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
+			
+			$sql.=" ORDER BY LIDER ";				
+			//$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
 					
 			//Add all records to an array
 			
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
+			$idlider='';
 			$row=array();		
-			for($i=0; $i<count($partidos);$i++){
-				$row[$i]['ID']=$partidos[$i]['ID'];
-				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
-				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
-				$row[$i]['LIDER']=utf8_encode($partidos[$i]['LIDER']);
-				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
-				$row[$i]['MESA']=$partidos[$i]['MESA'];
+			for($i=0; $i<count($partidos);$i++){	
+				if($idlider==$partidos[$i]['CODIGO']){
+					$row[$i]['CODIGO']='';
+					$row[$i]['LIDER']='';
+					$row[$i]['TELEFONO']='';
+					$row[$i]['SIMPATIZANTES']=$partidos[$i]['SIMPATIZANTES'];
+				}else{
+					$row[$i]['CODIGO']=$partidos[$i]['CODIGO'];
+					$row[$i]['LIDER']=$partidos[$i]['LIDER'];
+					$row[$i]['TELEFONO']=$partidos[$i]['TELEFONO'];
+					$row[$i]['SIMPATIZANTES']=$partidos[$i]['SIMPATIZANTES'];
+				}
+				$idlider=$partidos[$i]['CODIGO'];
 			}
 				
 			//Return result to jTable

@@ -45,7 +45,7 @@
         </select>-->
         <button type="submit" id="LoadRecordsButton">Buscar</button>
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='lideres_add.php'" value="Aderir +" name="cmdexport">
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='lideres_exportar.php'" value="Exportar" name="cmdexport">
+<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='lideres_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
 
     </form>
 </div>	<br/>	

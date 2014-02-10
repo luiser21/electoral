@@ -4,7 +4,7 @@ session_start();
 include_once "includes/GestionBD.new.class.php";
 //imprimir($_SESSION['username']);exit;
 header("Content-type: application/octet-stream");
-header("Content-Disposition: attachment; filename=simpatizanntes_".$_SESSION['username'].".xls");
+header("Content-Disposition: attachment; filename=lideres_".$_SESSION['username'].".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
@@ -20,25 +20,20 @@ try
 		
 			
 		$sql="SELECT
-				miembros.ID,
-				CONCAT(TRIM(miembros.NOMBRES),' ',TRIM(miembros.APELLIDOS)) AS NOMBRE,
-				miembros.CEDULA,
-				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
+				lideres.ID,
+				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS NOMBRE,
+				lideres.CEDULA,
 				mesas.MESA,
 				puestos_votacion.NOMBRE_PUESTO,
-				municipios.NOMBRE AS MUNICIPIO,
-				departamentos.NOMBRE AS DEPARTAMENTO
+				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS 
 				FROM
-				miembros
-				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+				lideres
 				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
+				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
-				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-				where usuario.usuario='".$_SESSION["username"]."' ";	
+			  where usuario.usuario='".$_SESSION["username"]."'  ";	
 			
 			$sql.=" ORDER BY NOMBRE ";
 			
@@ -60,7 +55,7 @@ try
 </style>
 <p>&nbsp;</p>
 <blockquote>
-  <p><span class="Estilo1">	CONSOLIDADO POR SIMPATIZANTES</span></p>
+  <p><span class="Estilo1">	CONSOLIDADO POR LIDERES</span></p>
   <p><?php echo $_SESSION['nombre']?><br/>
     Candidato al <?php echo $_SESSION['tipocandidato']?><br/>
     <?php echo ucwords(strtolower($_SESSION['municipio'])).' - '. ucwords(strtolower($_SESSION['departamento']))?><br/>
@@ -73,21 +68,15 @@ try
 					  <tr bgcolor="#408080">
 						<th scope="row"><div align="center"><strong>NOMBRE</strong></div></th>
 						<td><div align="center"><strong>CEDULA</strong></div></td>
-						<td><div align="center"><strong>MUNICIPIO</strong></div></td>
-						<td><div align="center"><strong>DEPARTAMENTO</strong></div></td>
 						<td><div align="center"><strong>NOMBRE_PUESTO</strong></div></td>
 						<td><div align="center"><strong>MESA</strong></div></td>
-						<td><div align="center"><strong>LIDER</strong></div></td>
 					  </tr>';
 			foreach($partidos as $indice=>$valor){
 				  $tabla .= ' <tr>
 					<th scope="row">'.$valor['NOMBRE'].'</th>
 					<td>'.$valor['CEDULA'].'</td>
-					<td>'.$valor['MUNICIPIO'].'</td>
-					<td>'.$valor['DEPARTAMENTO'].'</td>
 					<td>'.$valor['NOMBRE_PUESTO'].'</td>
 					<td>'.$valor['MESA'].'</td>
-					<td>'.$valor['LIDER'].'</td>
 				  </tr>';
 			}
 			$tabla .= "</table></html>";
