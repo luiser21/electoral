@@ -10,21 +10,19 @@
 			  
               <footer><table width="100%" border="0">
   <tr>
-    <th width="14%" scope="row"><div align="center"><a href="http://www.cne.gov.co/CNE/" target="_blank"><img src="images/100px-Consejo_Nacional_Electoral.png" width="70" height="61" /></a></div></th>
-    <td width="12%"><div align="center"><a href="http://www.registraduria.gov.co/" target="_blank"><img src="images/Logo-regis-trasnparente-ver.png" width="94" height="64" /></a></div></td>
+    <th width="14%" scope="row"><div align="center"><a href="http://www.cne.gov.co/CNE/" target="_blank"><img src="images/100px-Consejo_Nacional_Electoral.png" width="60" height="60" /></a></div></th>
+    <td width="12%"><div align="center"><a href="http://www.registraduria.gov.co/" target="_blank"><img src="images/Logo-regis-trasnparente-ver.png" width="90" height="70" /></a></div></td>
     <td width="19%">
 	  <div align="center">
 	    <?php if(@$_SESSION['partido']=='Partido de la U'){?>
-	    <a href="http://www.partidodelau.com/" target="_blank"><img src="images/<?php echo $_SESSION['partido']?>.png" width="65" height="58"/></a>
+	    <a href="http://www.partidodelau.com/" target="_blank"><img src="images/<?php echo $_SESSION['partido']?>.png" width="50" height="50"/></a>
           <?php }elseif(@$_SESSION['partido']=='Partido Liberal'){?>
-	    <a href="http://www.partidoliberalcolombiano.info/" target="_blank"><img src="images/<?php echo $_SESSION['partido']?>.png" width="65" height="56"/></a>
+	    <a href="http://www.partidoliberalcolombiano.info/" target="_blank"><img src="images/<?php echo $_SESSION['partido']?>.png" width="50" height="50"/></a>
           <?php }?>	
       </div></td>
-    <td width="19%"><div align="center"><a href="http://www.camara.gov.co/portal2011/" target="_blank"><img src="images/logo congreso.png" width="147" height="45" /></a></div></td>
-    <td width="18%"><div align="center"><a href="http://www.senado.gov.co/" target="_blank"><img src="images/LOGO SENADO.jpg" width="145" height="45" /></a></div></td>
-    <td width="18%"><div align="center">
-      <p><a  class='iframe2' href="consulta_2.php" ><img src="images/votos2.png" width="60" height="57" /></a></p>
-      </div></td>
+    <td width="19%"><div align="center"><a href="http://www.camara.gov.co/portal2011/" target="_blank"></a></div></td>
+    <td width="18%"><div align="center"><a href="http://www.senado.gov.co/" target="_blank"></a></div></td>
+    <td width="18%">&nbsp;</td>
   </tr>
 </table>
 

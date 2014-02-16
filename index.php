@@ -3,7 +3,19 @@
 <style>
 .bg1 {  
 	position: absolute;
-	top:800px;
+	top:850px;
+}
+button, input[type="button"], input[type="submit"] {
+   background-color: #A1AAAF;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+     height: 32px;
+    margin-right: 0px;
+   /* width: 108px;*/
 }
 </style>
 <script>
@@ -73,31 +85,27 @@
 <!--content -->
 			
 		
-		<article id="content"><div class="ic">More Website Templates @ TemplateMonster.com - November 14, 2011!</div>
+		<article id="content"><div class="ic"></div>
 				<div class="wrapper">
 					<div class="col1 marg_right1">
-						<h2>Consulting</h2>
-						<p>Superior.com is one of <a href="http://blog.templatemonster.com/free-website-templates/" target="_blank">free website templates</a> created by TemplateMonster.com. It is also XHTML & CSS valid.</p>
+						<h2 style="font-size:25px; margin-left: 30px;">¿D&oacute;nde Votar? </h2>
+						<p><img src="images/ico-registraduria.png" width="149" height="101" style="margin-left: 30px;"><a  class='iframe2' href="consulta_2.php" ><input type="button"  value="BUSQUE SU PUESTO" name="cmdexport" style=" margin-left: 30px; margin-top:33px" ></a></p>
+										</div>
+					<div class="col1 marg_right1" style="width:348px">
+						<h2 style="font-size:25px; margin-left: 50px;">Conozca a sus Candidatos </h2> 
+						<p><img src="images/ico-congreso-visible.png" width="183" height="116" style="margin-left: 90px;">
+					 <a  href="http://www.congresovisible.org/agora/post/conozca-a-los-candidatos-por-partido-politico/6200/" target="_blank" > <input type="button"  value="ENCUENTRE SU CANDIDATO" name="cmdexport" style=" margin-left: 65px; margin-top:18px"></a></p>
+					
 					</div>
-					<div class="col1 marg_right1">
-						<h2>An&aacute;lisis</h2>
-						<p>This website template has sev- eral pages: <a href="index.html">Home</a>, <a href="Company.html">Company</a>, <a href="Solutions.html">Solutions</a>, <a href="Services.html">Services</a>, <a href="Contacts.html">Contact Us</a> (contact form – doesn’t work).</p>
+					<div class="col1 marg_right1"  style="width:250px">
+							<h2 style="font-size:22px;  margin-left: 58px;">¿Quienes financian los Candidatos? </h2>
+						    <blockquote>
+						      <p><img src="images/ico-cuentas.png" width="117" height="101" style="margin-left: 90px;"><a  href="http://www5.registraduria.gov.co/CuentasClaraspublicoCon2014/consultas/consultacandidatos"  target="_blank"><input type="button"  value="VER APORTES DE LA CAMPA&Ntilde;A" name="cmdexport" style=" margin-left: 35px; margin-top:12px;"></a></p>
+				      </blockquote>
 					</div>
-					<div class="col1 marg_right1">
-							<h2>Estrategias</h2>
-						<p>This <a href="http://blog.templatemonster.com/2011/11/14/free-website-template-jquery-slider-business-project/" target="_blank" rel="nofollow">Superior Template</a> goes with two packages. PSD source files are available for the registered members.</p>
-					</div>
-					<div class="col1">
-						<h2>Servicios</h2>
-						<ul class="list1">
-							<li><a href="#">Sed ut perspiciatis unde </a></li>
-							<li><a href="#">Omnis iste natus errorsitvo</a></li>
-							<li><a href="#">Uptatem acusantium domque </a></li>
-							<li><a href="#">Laudantium totam rem</a></li>
-						</ul>
-					</div>
+					
 				</div>
-			</article>
+		  </article>
 			</div>
 		<script type="text/javascript"> Cufon.now(); </script>
 		<script>

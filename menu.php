@@ -22,7 +22,7 @@ $(document).ready(function() {
 		<ul>
 			
 			<li ><a href="proyectosley.php" >Proyectos de Ley Tramitados</a></li>
-			<li ><a href="#" >Sillas Vacias</a></li>
+		<!--	<li ><a href="#" >Congresistas que han perdido la curuL</a></li>
 			<li ><a href="#" >Ausencias</a></li>
 					
 				<!--	<ul >
@@ -80,8 +80,11 @@ $(document).ready(function() {
 		<ul >
 			<!-- <li ><a href="#">Candidatos al Senado</a></li> -->
 			<li ><a href="elecciones2010.php">Votos por Partido al Senado</a></li>
-			<li ><a href="elecciones_camara_2010.php">Votos por Partido a la Camara</a></li>
-			<li ><a href="#">Puesto de Votacion Pareto Candidato</a></li>
+			<li ><a href="causales.php?ac=10">Votos al Senado Detallado</a></li>
+			<li ><a href="causales.php?ac=8">Votos por Partido a la Camara</a></li>
+			<li ><a href="causales.php?ac=9">Votos a la Camara Detallado</a></li>
+			<li ><a href="causales.php?ac=6">PARAPOL&Iacute;TICA EN EL CONGRESO ELECTO PERIODO 2010-2014</a></li>
+			<li ><a href="causales.php?ac=7">BALANCE ELECCIONES LEGISLATIVAS 2010</a></li>
 			<!-- <li ><a href="#" class="fly">Sales</a>
 				
 				<!-- <ul>
@@ -134,14 +137,20 @@ $(document).ready(function() {
 		<ul>
 			<li ><a href="#" >Personal</a>
 				<ul>
-					<li ><a href="#">Asesores</a></li>
-					<li ><a href="#">Coordinador</a></li>
+					<!-- <li ><a href="#">Asesores</a></li>
+					<li ><a href="#">Coordinador</a></li> -->
 					<li ><a href="lideres.php">Lideres</a></li>
 					<li ><a href="miembros.php">Simpatizantes</a></li>
 				</ul>
 			</li>
-			<li ><a href="#">Finanzas</a></li>
-			<li ><a href="#">Mercadeo</a></li>
+			<li ><a href="#">Finanzas</a>
+				<ul>
+					<li ><a href="causales.php?ac=5">Instructivo Rendici&oacute;n de Cuentas</a></li>
+					<li ><a href="http://www.cnecuentasclaras.com/" target="_blank">Cuentas Claras en Elecciones</a></li>
+					<li ><a href="http://data.axmag.com/data/201401/20140121/U114778_F260038/FLASH/index.html" target="_blank">Multimedia Rendici&oacute;n de Cuentas</a></li>
+				</ul>
+			</li>
+			<!-- <li ><a href="#">Mercadeo</a></li> -->
 			<li ><a href="Informes_municipios.php">Proyecci&oacute;n Estadistica</a></li>
 			
 		
