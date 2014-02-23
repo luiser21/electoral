@@ -170,13 +170,6 @@ button, input[type="button"], input[type="submit"] {
 						//type: 'date',
 						create: false,
 						edit: false
-					},
-					LIDER : {
-						title: 'LIDER',
-						width: '25%',
-						//type: 'date',
-						create: false,
-						edit: false
 					}
 				}
 			});

@@ -15,53 +15,44 @@ $_GET["jtStartIndex"]=0;*/
 		if($_SESSION["username"]!='edgarcarreno'){	
 		
 				$sql="SELECT
-				miembros.ID,
-				CONCAT(TRIM(miembros.NOMBRES),' ',TRIM(miembros.APELLIDOS)) AS NOMBRE,
-				miembros.CEDULA,
-				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
-				mesas.MESA,
-				puestos_votacion.NOMBRE_PUESTO
-				FROM
-				miembros
-				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				where usuario.usuario='".$_SESSION["username"]."'";
+						tmp_miembros.ID,
+						tmp_miembros.CEDULA AS CEDULA,
+						tmp_miembros.NOMBRE AS NOMBRE,
+						tmp_miembros.DEPARTAMENTO,
+						tmp_miembros.MUNICIPIO,
+						tmp_miembros.LIDER AS LIDER,
+						'NO REGISTRA' AS NOMBRE_PUESTO,
+						'N/A' AS MESA
+						FROM
+						tmp_miembros	";
 				
 					
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(miembros.nombres) like upper('%".$_POST["name"]."%') ";
+				$sql.=" where upper(tmp_miembros.NOMBRE) like upper('%".$_POST["name"]."%') ";
 			}
-	
+				$sql.=" ORDER BY tmp_miembros.CEDULA ";
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		//	imprimir($partidos);
 			$recordCount=count($partidos);
 			//Get records from database
-		$sql="SELECT
-				miembros.ID,
-				CONCAT(TRIM(miembros.NOMBRES),' ',TRIM(miembros.APELLIDOS)) AS NOMBRE,
-				miembros.CEDULA,
-				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
-				mesas.MESA,
-				puestos_votacion.NOMBRE_PUESTO
-				FROM
-				miembros
-				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				where usuario.usuario='".$_SESSION["username"]."'";
+			$sql="SELECT
+						tmp_miembros.ID,
+						tmp_miembros.CEDULA AS CEDULA,
+						tmp_miembros.NOMBRE AS NOMBRE,
+						tmp_miembros.DEPARTAMENTO,
+						tmp_miembros.MUNICIPIO,
+						tmp_miembros.LIDER AS LIDER,
+						'NO REGISTRA' AS NOMBRE_PUESTO,
+						'N/A' AS MESA
+						FROM
+						tmp_miembros
+						";
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(miembros.nombres) like upper('%".$_POST["name"]."%') ";
+				$sql.=" where upper(tmp_miembros.NOMBRE) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" ORDER BY NOMBRE ";
+			$sql.=" ORDER BY tmp_miembros.CEDULA ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -71,10 +62,12 @@ $_GET["jtStartIndex"]=0;*/
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
-				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
+				$row[$i]['CEDULA']=($partidos[$i]['CEDULA']!='')? $partidos[$i]['CEDULA']:'NO REGISTRA';
 				$row[$i]['LIDER']=utf8_encode($partidos[$i]['LIDER']);
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
+				$row[$i]['MUNICIPIO']=utf8_encode($partidos[$i]['MUNICIPIO']);
+				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
 			}
 				
 			//Return result to jTable
