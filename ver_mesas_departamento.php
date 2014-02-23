@@ -91,10 +91,11 @@ try
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 					where usuario.usuario='".$_SESSION["username"]."' and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID='".$row[$i]['CODIGO']."'";
+					//echo $sql;exit;
 				$DBGestion->ConsultaArray($sql);				
 				$miembros=$DBGestion->datos;
 				foreach ($miembros as $value) {
-					$Idmiembros[]=$value['miembros'];
+					$Idmiembros[]=utf8_encode($value['miembros']);
 				}
 				$Idmiembros=implode(", ",$Idmiembros);
 				$row[$i]['SIMPATIZANTES']=$Idmiembros;

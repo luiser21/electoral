@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "includes/GestionBD.new.class.php";
+//imprimir($_GET['idmunicipio']);exit;
 try
 {
 	//Open database connection
@@ -10,18 +11,25 @@ try
 		if($_SESSION["username"]!='edgarcarreno'){	
 		
 			$sql="SELECT
-				m.ID as CODIGO,
-				m.MESA as MESAS				
-				FROM
-				mesas m
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
-				where 
-				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')	
-				##and 
-				puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' ";	
-			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
-			}			
+					p.IDPUESTO,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES,
+					COUNT(mesas.MESA) AS MESAS
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'  and municipios.ID='".$_GET["idmunicipio"]."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO ";	
+					
 			//Add all records to an array
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -30,47 +38,26 @@ try
 			
 			//Get records from database
 			$sql="SELECT
-				m.ID as CODIGO,
-				m.MESA as MESAS,
-				(SELECT
-					count(*) as VOTOS
+					p.IDPUESTO,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES,
+					COUNT(mesas.MESA) AS MESAS
 					FROM
-					miembros
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
 					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
 					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID=m.ID) as VOTOSPREVISTOS,
-				m.votoreal as VOTOREAL,
-				m.votoreal - (SELECT
-				 count(*) as miembros 
-				FROM
-				miembros
-				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID=m.ID) as VARIACION
-				FROM
-				mesas m
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
-				where 
-				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
-	##and 
-	puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' HAVING VOTOSPREVISTOS>0";	
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'  and municipios.ID='".$_GET["idmunicipio"]."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO ";	
 			
-			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
-			}	
-				
-				$sql.=" order by m.mesa ";			
-		//	$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
-					
-			//Add all records to an array
+	
 			
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
@@ -78,68 +65,14 @@ try
 			$Idmiembros=array();
 			$row=array();		
 			for($i=0; $i<count($partidos);$i++){
-				$Idmiembros=array();
-				$row[$i]['CODIGO']=$partidos[$i]['CODIGO'];				
-				$sql="SELECT
-					 CONCAT(trim(miembros.nombres)) as miembros
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.usuario='".$_SESSION["username"]."' and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID='".$row[$i]['CODIGO']."'";
-				$DBGestion->ConsultaArray($sql);				
-				$miembros=$DBGestion->datos;
-				foreach ($miembros as $value) {
-					$Idmiembros[]=$value['miembros'];
-				}
-				$Idmiembros=implode(", ",$Idmiembros);
-				$row[$i]['SIMPATIZANTES']=$Idmiembros;
-				$row[$i]['VOTOSPREVISTOS']=$partidos[$i]['VOTOSPREVISTOS'];
-				$row[$i]['VOTOREAL']=$partidos[$i]['VOTOREAL'];
-				$row[$i]['MESAS']='Mesa #'.$partidos[$i]['MESAS'];
-				$row[$i]['VARIACION']=$partidos[$i]['VARIACION'];
+				$row[$i]['IDPUESTO']=$partidos[$i]['IDPUESTO'];					
+				$row[$i]['PUESTO']=$partidos[$i]['PUESTO'];	
+				$row[$i]['MESAS']=$partidos[$i]['MESAS'];
+				$row[$i]['VOTOS']=$partidos[$i]['VOTOS'];
+				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
+				$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOS'];
 			}
-			$sql="SELECT '' as CODIGO,'' as SIMPATIZANTES, CONCAT(SUM(VOTOSPREVISTOS),'  ','Votos Previstos') as VOTOSPREVISTOS, CONCAT(SUM(votoreal),'  ','Votos Reales') as VOTOREAL, 'TOTALES' as MESAS, CONCAT(SUM(variacion),'  ','Variacion') as VARIACION FROM 
-(SELECT
-m.ID as CODIGO,
-m.MESA as MESAS,
-m.votoreal as VOTOREAL,
-(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID=m.ID) as VOTOSPREVISTOS,
-m.votoreal - (SELECT
-				 count(*) as miembros 
-				FROM
-				miembros
-				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID=m.ID) as VARIACION
-FROM
-mesas m
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
-				where 
-				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
-	##and 
-	puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."') TOTAL ";	
-			$DBGestion->ConsultaArray($sql);				
-			$totales=$DBGestion->datos;
-			$row = array_merge($row, $totales);
+		
 
 			//Return result to jTable
 			$jTableResult = array();

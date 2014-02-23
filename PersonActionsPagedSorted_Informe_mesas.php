@@ -45,7 +45,9 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')  GROUP BY p.IDPUESTO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
+					##and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')  
+					GROUP BY p.IDPUESTO
 					";						
 					
 			if(isset($_POST["name"])!=""){
@@ -80,7 +82,10 @@ $_GET["jtStartIndex"]=0;*/
 				FROM
 				puestos_votacion
 				INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
-				where puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') and puestos_votacion.IDPUESTO=p.IDPUESTO
+				where 
+				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') 
+				##and 
+				puestos_votacion.IDPUESTO=p.IDPUESTO
 				GROUP BY puestos_votacion.IDPUESTO
 				) AS VOTOSREALES,
 				'' AS VARIACION
@@ -92,7 +97,8 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') 
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
+					##and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') 
 					";	
 			
 			if(isset($_POST["name"])!=""){

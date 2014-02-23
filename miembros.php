@@ -48,7 +48,7 @@
         <button type="submit" id="LoadRecordsButton">Buscar</button>
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_add.php'" value="Aderir +" name="cmdexport">
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_masivo.php'" value="Cargue Masivo" name="cmdexport">
+<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='Excel/example_doc.php'" value="Cargue Masivo" name="cmdexport">
 
     </form>
 </div>	<br/>	

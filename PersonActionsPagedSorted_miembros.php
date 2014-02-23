@@ -16,7 +16,7 @@ $_GET["jtStartIndex"]=0;*/
 		
 				$sql="SELECT
 				miembros.ID,
-				CONCAT(TRIM(miembros.NOMBRES),' ',TRIM(miembros.APELLIDOS)) AS NOMBRE,
+				CONCAT(TRIM(miembros.NOMBRES)) AS NOMBRE,
 				miembros.CEDULA,
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
 				mesas.MESA,
@@ -47,7 +47,7 @@ $_GET["jtStartIndex"]=0;*/
 			//Get records from database
 		$sql="SELECT
 				miembros.ID,
-				CONCAT(TRIM(miembros.NOMBRES),' ',TRIM(miembros.APELLIDOS)) AS NOMBRE,
+				CONCAT(TRIM(miembros.NOMBRES)) AS NOMBRE,
 				miembros.CEDULA,
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS LIDER,
 				mesas.MESA,
@@ -67,7 +67,7 @@ $_GET["jtStartIndex"]=0;*/
 				where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(miembros.nombres) like upper('%".$_POST["name"]."%') ";
+				$sql.=" and upper(miembros.nombres) like upper('%".trim($_POST["name"])."%') ";
 			}
 			$sql.=" ORDER BY NOMBRE ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
