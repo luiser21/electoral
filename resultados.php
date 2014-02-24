@@ -47,7 +47,7 @@ ORDER BY tmp_miembros.DEPARTAMENTO
 			$row=array();		
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
-				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);			
+				$row[$i]['DEPARTAMENTO']=($partidos[$i]['DEPARTAMENTO']!='')? utf8_encode($partidos[$i]['DEPARTAMENTO']):'SIN DATOS' ;			
 				$row[$i]['DATOS']=utf8_encode($partidos[$i]['DATOS']);
 				
 				$rounded = round((($row[$i]['DATOS']*100)/65535), 3);
