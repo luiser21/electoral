@@ -106,6 +106,70 @@ button, input[type="button"], input[type="submit"] {
 
     </form>
 </div><p></p>
+
+<div id="PeopleTableContainer2" style="width: 500px;"></div>
+
+<script type="text/javascript">
+
+		$(document).ready(function () {
+
+		    //Prepare jTable
+			$('#PeopleTableContainer2').jtable({
+				title: 'Resultados Excel - TOTAL 65535 - 100%',
+				paging: true,
+				pageSize: 10,
+				sorting: true,
+				defaultSorting: 'Name ASC',
+				actions: {
+					listAction: 'resultados.php?action=list',
+					//createAction: 'PersonActionsPagedSorted.php?action=create',
+					//updateAction: 'PersonActionsPagedSorted.php?action=update',
+					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
+				},
+				fields: {
+					ID: {
+						key: true,
+						create: false,
+						edit: false,
+						list: false
+					},
+					DEPARTAMENTO: {
+						title: 'DEPARTAMENTO',
+						width: '25%',
+						create: false,
+						edit: false
+					},
+					DATOS: {
+						title: 'DATOS',
+						width: '13%',
+						create: false,
+						edit: false
+					},
+					PORCENTAJE: {
+						title: 'PORCENTAJE',
+						width: '13%',
+						create: false,
+						edit: false
+					}
+				}
+			});
+
+			//Load person list from server
+			//$('#PeopleTableContainer').jtable('load');
+			$('#LoadRecordsButton').click(function (e) {
+           		 e.preventDefault();
+				$('#PeopleTableContainer2').jtable('load', {
+					name: $('#name').val(),
+					cityId: $('#cityId').val()
+				});
+			});
+	 
+			//Load all records when page is first shown
+				$('#LoadRecordsButton').click();
+		});
+
+	</script>
+<br/><br/>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
