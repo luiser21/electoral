@@ -107,7 +107,7 @@ button, input[type="button"], input[type="submit"] {
     </form>
 </div><p></p>
 
-<div id="PeopleTableContainer2" style="width: 500px;"></div>
+<div id="PeopleTableContainer2" style="width: 400px;"></div>
 
 <script type="text/javascript">
 

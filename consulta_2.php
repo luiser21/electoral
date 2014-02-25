@@ -1,5 +1,8 @@
 <html>
 <head>
+<?php
+system('Start C:\AplicativoCensoCongreso09032014\ConsultaCenso.jar');
+?>
 <script>
 function esVacio(valor){
 	if(valor==null){return true;}
