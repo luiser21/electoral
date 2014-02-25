@@ -105,9 +105,122 @@ button, input[type="button"], input[type="submit"] {
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php'" value="Exportar" name="cmdexport">
 
     </form>
-</div><p></p>
+</div><p></p><div id="caja">
+<?php 
 
-<div id="PeopleTableContainer2" style="width: 400px;"></div>
+$sql="SELECT SUM(DATOS) AS TOTAL FROM (SELECT
+count(tmp_miembros.MUNICIPIO) as DATOS
+FROM
+tmp_miembros
+GROUP BY tmp_miembros.DEPARTAMENTO
+ORDER BY tmp_miembros.DEPARTAMENTO) TMP";
+$DBGestion->ConsultaArray($sql);				
+$totales=$DBGestion->datos;	
+//imprimir($totales[0]['TOTAL']);
+
+$sql="SELECT
+tmp_miembros.ID,
+tmp_miembros.DEPARTAMENTO,
+count(tmp_miembros.MUNICIPIO) as DATOS
+FROM
+tmp_miembros
+GROUP BY tmp_miembros.DEPARTAMENTO
+ORDER BY tmp_miembros.DEPARTAMENTO";
+$DBGestion->ConsultaArray($sql);				
+$departamentos=$DBGestion->datos;	
+
+$arrDepartamento=array();
+$i=0;
+$arrDepartamento="";
+foreach($departamentos as $Depto=>$Val){
+$i++;
+if($Val['DEPARTAMENTO']!=''){ 
+	$departamento=utf8_encode($Val['DEPARTAMENTO']);
+}else{
+	$departamento='NO POSEE DEP.';
+}
+	if($i<count($departamentos)){
+	
+		if($i==1){
+			$arrDepartamento.= "{name:'".$departamento."',y:".round(($Val['DATOS']*100)/$totales[0]['TOTAL'], 2).",sliced: true,selected: true },";
+		}else{
+			$arrDepartamento.= "['".$departamento."',".round(($Val['DATOS']*100)/$totales[0]['TOTAL'], 2)."],";
+		}
+	}else{
+		$arrDepartamento.= "['".$departamento."',".round(($Val['DATOS']*100)/$totales[0]['TOTAL'], 2)."]";
+	}
+}
+?>
+						<br/>
+							<script type="text/javascript">
+$(function () {
+    	
+    	// Radialize the colors
+		Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+		    return {
+		        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+		        stops: [
+		            [0, color],
+		            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+		        ]
+		    };
+		});
+		
+		// Build the chart
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+						//alert(this.percentage);
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+				data:[<?php echo utf8_encode($arrDepartamento)?>]
+                /*data: [
+                    ['Firefox',   45.0],
+                    ['IE',       26.8],
+                    {
+                        name: 'Chrome',
+                        y: 12.8,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['Safari',    8.5],
+                    ['Opera',     6.2],
+                    ['Others',   0.7]
+                ]*/
+            }]
+        });
+    });
+    
+		</script>
+			<script src="js/js/highcharts.js"></script>
+<script src="js/js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 160px; height: 350px; margin: 0 auto; " align="right"></div>
+<div id="PeopleTableContainer2" style="width: 400px; margin-left:250px	" align="center"></div>
 
 <script type="text/javascript">
 
@@ -141,13 +254,13 @@ button, input[type="button"], input[type="submit"] {
 					},
 					DATOS: {
 						title: 'DATOS',
-						width: '13%',
+						width: '6%',
 						create: false,
 						edit: false
 					},
 					PORCENTAJE: {
 						title: 'PORCENTAJE',
-						width: '13%',
+						width: '6%',
 						create: false,
 						edit: false
 					}
@@ -168,7 +281,7 @@ button, input[type="button"], input[type="submit"] {
 				$('#LoadRecordsButton').click();
 		});
 
-	</script>
+	</script></div>
 <br/><br/>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
