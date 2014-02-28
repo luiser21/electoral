@@ -8,25 +8,35 @@ include_once "../includes/GestionBD.new.class.php";
 $DBGestion = new GestionBD('AGENDAMIENTO');	
 // Set output Encoding.
 @$data->setOutputEncoding('CP1251');
-@$data->read('BASE DE DATOS ULTIMA.xls');
+@$data->read('Lista del Senado.xls');
 error_reporting(E_ALL ^ E_NOTICE);  
 $y=0;
 $registros=count($data->sheets[0]['cells']);
 for ($i = 2; $i <= $registros; $i++) {
-	$cedula[$y]=$data->sheets[0]['cells'][$i][1];
+	$cedula[$y]=trim($data->sheets[0]['cells'][$i][1]);
 	$nombre[$y]=$data->sheets[0]['cells'][$i][2];
-	$DEPARTAMENTO[$y]=$data->sheets[0]['cells'][$i][3];	
-	$MUNICIPIO [$y]=$data->sheets[0]['cells'][$i][4];
-	$LIDER[$y]=$data->sheets[0]['cells'][$i][5];
-	$CELULAR1[$y]=$data->sheets[0]['cells'][$i][6];
+	$apellido[$y]=$data->sheets[0]['cells'][$i][3];
+	$DEPARTAMENTO[$y]=$data->sheets[0]['cells'][$i][4];	
+	
+	$MUNICIPIO [$y]=$data->sheets[0]['cells'][$i][5];
+	$LIDER[$y]=$data->sheets[0]['cells'][$i][6];
 	$CELULAR1[$y]=$data->sheets[0]['cells'][$i][7];
-	$CORREO1[$y]=$data->sheets[0]['cells'][$i][8];
+	$CELULAR1[$y]=$data->sheets[0]['cells'][$i][8];
 	$CORREO1[$y]=$data->sheets[0]['cells'][$i][9];
-	$NICHO[$y]=$data->sheets[0]['cells'][$i][10];
-	$DTOVOTACION[$y]=$data->sheets[0]['cells'][$i][11];	
-	$MPIOVOTACION[$y]=$data->sheets[0]['cells'][$i][12];	
-	$PUESTO[$y]=$data->sheets[0]['cells'][$i][13];	
-	$MESA[$y]=$data->sheets[0]['cells'][$i][14];	
+	$CORREO1[$y]=$data->sheets[0]['cells'][$i][10];
+	$NICHO[$y]=$data->sheets[0]['cells'][$i][11];
+	$DTOVOTACION[$y]=$data->sheets[0]['cells'][$i][12];	
+	$MPIOVOTACION[$y]=$data->sheets[0]['cells'][$i][13];	
+	$PUESTO[$y]=$data->sheets[0]['cells'][$i][14];	
+	if($DEPARTAMENTO[$y]==""){
+		$DEPARTAMENTO[$y]=$DTOVOTACION[$y];
+	}
+	if($MUNICIPIO[$y]==""){
+		$MUNICIPIO[$y]=$MPIOVOTACION[$y];
+	}
+	$PUESTO[$y]=str_replace("."," ",$PUESTO[$y]);
+	//echo $PUESTO[$y];exit;
+	$MESA[$y]=$data->sheets[0]['cells'][$i][15];	
 	$y++;
 }
 //var_dump($MESA);
@@ -129,10 +139,10 @@ for($i=0; $i<$registros; $i++){
 										WHERE puestos_votacion.IDPUESTO='".$idpuesto."' AND mesas.MESA='".$MESA[$i]."'";									
 								$DBGestion->ConsultaArray($sql);
 								$mesavotacion=$DBGestion->datos;									
-								if(count($puestosvotacion)>=1){
+								if(count($mesavotacion)>=1){
 									//INSERTO EL MIEMBRO EN LA TABLA
 									$idmesa=$mesavotacion[0]['ID'];
-									$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, TELEFONO, EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre[$i]))."','".trim($cedula[$i])."','".$idmunicipios."','".trim($celular1[$i])."','".trim($correo[$i])."','".$idpuesto."','24','VOLUNTARIADO')";										
+									$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, TELEFONO, EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre[$i])).' '.strtoupper(trim($apellido[$i]))."','".trim($cedula[$i])."','".$idmunicipios."','".trim($celular1[$i])."','".trim($correo[$i])."','".$idpuesto."','25','VOLUNTARIADO')";										
 									echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 									$DBGestion->Consulta($sql);									
 									$rs = mysql_query("SELECT @@identity AS id");
@@ -142,7 +152,21 @@ for($i=0; $i<$registros; $i++){
 									$sql="INSERT INTO MESA_PUESTO_MIEMBRO (IDMESA, MIEMBRO) VALUES (".$idmesa.",".$idmiembro.")";	
 									$DBGestion->Consulta($sql);
 								}else{
-									echo "Problemas con la mesa Puesto de Votacion ".$MESA[$i]." - ".$cedula[$i]."<br/><br/>";
+									echo "Problemas con la mesa Puesto de Votacion ".$MESA[$i]." - ".$idpuesto.' - '.$cedula[$i]."<br/><br/>";
+									$sql="SELECT
+											MAX(mesas.MESA) as MESA
+											FROM
+											mesas
+											where IDPUESTO=".$idpuesto;
+									$DBGestion->ConsultaArray($sql);
+									$cantidadmesas=$DBGestion->datos;	
+									$max=$cantidadmesas[0]['MESA']+1;
+									$mesaexcel=trim($MESA[$i]);
+									for($p=$max;$p<=$mesaexcel;$p++){
+										$sql="INSERT INTO MESAS (IDPUESTO, MESA) VALUES (".$idpuesto.",".$p.")";	
+										$DBGestion->Consulta($sql);
+									}
+									//exit;
 								}								
 							}else{
 								echo "Problemas con el Puesto de Votacion ".$PUESTO[$i]." - ".$cedula[$i]."<br/><br/>";
@@ -152,7 +176,7 @@ for($i=0; $i<$registros; $i++){
 								    $puestoexiste=$DBGestion->datos;
 									//var_dump($puestoexiste);
 									if(empty($puestoexiste)){
-										$sql="INSERT INTO PUESTOS_VOTACION (NOMBRE_PUESTO, MESAS, IDMUNICIPIO) VALUES ('".strtoupper(trim($PUESTO[$i]))."','".trim($MESA[$i])."','".$dtomunicipios[0]['ID']."')";	/*echo $sql;
+										$sql="INSERT INTO PUESTOS_VOTACION (NOMBRE_PUESTO, MESAS, IDMUNICIPIO) VALUES ('".strtoupper(trim($PUESTO[$i]))."','".trim($MESA[$i])."','".$dtomunicipios[0]['ID']."')";	 /*echo $sql;
 										echo '<br/><br/>';
 										echo $PUESTO[$i].' - '.$MESA[$i].' - '.$cedula[$i].' - '.$MUNICIPIO[$i].' - '.$DTOVOTACION[$i];
 										echo '<br/><br/>';

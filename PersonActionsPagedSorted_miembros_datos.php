@@ -24,11 +24,14 @@ $_GET["jtStartIndex"]=0;*/
 						'NO REGISTRA' AS NOMBRE_PUESTO,
 						'N/A' AS MESA
 						FROM
-						tmp_miembros	";
+						tmp_miembros
+						INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
+						INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+						WHERE usuario.USUARIO='".$_SESSION['username']."'	";
 				
 					
 			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(tmp_miembros.NOMBRE) like upper('%".$_POST["name"]."%') ";
+				$sql.=" and upper(tmp_miembros.NOMBRE) like upper('%".$_POST["name"]."%') ";
 			}
 				$sql.=" ORDER BY tmp_miembros.CEDULA ";
 			$DBGestion->ConsultaArray($sql);				
@@ -47,10 +50,13 @@ $_GET["jtStartIndex"]=0;*/
 						'N/A' AS MESA
 						FROM
 						tmp_miembros
+						INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
+						INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+						WHERE usuario.USUARIO='".$_SESSION['username']."'
 						";
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(tmp_miembros.NOMBRE) like upper('%".$_POST["name"]."%') ";
+				$sql.=" and upper(tmp_miembros.NOMBRE) like upper('%".$_POST["name"]."%') ";
 			}
 			$sql.=" ORDER BY tmp_miembros.CEDULA ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";

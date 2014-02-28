@@ -98,7 +98,7 @@ SELECT SUM(VOTOS) AS TOTAL FROM (SELECT SUM(VOTOS) AS VOTOS   FROM (SELECT
 					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
 					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='duvanpineda'
+					WHERE usuario.USUARIO='".$_SESSION['username']."'
 					GROUP BY p.IDPUESTO
 					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
 					GROUP BY VOTOS

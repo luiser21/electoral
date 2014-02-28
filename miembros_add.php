@@ -7,13 +7,13 @@ if($add == 1){
     @$cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : 'NULL');
     @$departamento=(isset($_POST['departamento']) ?  : 'NULL');
     @$celular=(isset($_POST['celular']) ? $_POST['celular'] : 'NULL');
-    $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : 'NULL');
+  //  $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : 'NULL');
 
     @$departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : 'NULL');
 	@$puestos=(isset($_POST['puestos']) ? $_POST['puestos'] : 'NULL');
    
-    @$apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : 'NULL');
-    @$direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : 'NULL');
+   // @$apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : 'NULL');
+    //@$direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : 'NULL');
     @$municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : 'NULL');
     @$email=(isset($_POST['email']) ? $_POST['email'] : 'NULL');
    
@@ -26,7 +26,7 @@ if($add == 1){
 	//Consultar si ya existe el  simpatizante en otro lider
 	$sql="SELECT * FROM MIEMBROS WHERE CEDULA";
 	
-	$sql="INSERT INTO MIEMBROS (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",'".$idlider."','".$ocupacion."')";	
+	$sql="INSERT INTO MIEMBROS (NOMBRES CEDULA, MUNICIPIO, TELEFONO, EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre))."',".trim($cedula).",".$municipio.",".trim($celular).",'".trim($email)."',".$puestos.",'".$idlider."','".$ocupacion."')";	
 	
 	$DBGestion->Consulta($sql);
 	
@@ -50,7 +50,7 @@ if($add == 1){
 <style>
 .bg1 {  
 	position:relative;
-	top:750px;
+	top:650px;
 }
 </style>
 <script type="text/javascript">
@@ -126,7 +126,7 @@ function mesa(){
 	<div style=" position:absolute; top:190px"><br/>
 	<h4>Ingresar Simpatizantes</h4>
 	
-		<div id="crudFormLineal" style="width: 910px; height: 590px; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
+		<div id="crudFormLineal" style="width: 910px; height: 520px; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
 			<h2>Informaci&oacute;n de Contacto</h2><br/>
 			<div  style="width: 510px; height: 220px; background-color:#FFFFFF" >
 			<ol>
@@ -174,6 +174,17 @@ function mesa(){
 						
 				</li>
 				<li>
+					<label for="municipio" >
+						<span class="textRequired"> * </span>
+						Municipio
+					</label>
+					<span id="capa_documentos" >
+						<select name="municipio" id="municipio" class="validate[required]">
+						<option value="">Seleccione....</option>
+						</select>
+						</span>
+				</li>
+				<li>
 					<label for="celular">
 						<span class="textRequired"> * </span>
 						Telefono / Celular
@@ -182,7 +193,7 @@ function mesa(){
 				</li>
 				
 				
-				<li>
+			<!--	<li>
 					<label for="fecha">
 						<span class="textRequired"> * </span>
 						Fecha de Nacimiento
@@ -195,31 +206,8 @@ function mesa(){
 						Formulario
 					</label>
 						 <input id="formulario" type="text" name="formulario" class="validate[required]] ">
-				</li>
-				<li>
-					<label for="lider">
-						<span class="textRequired"> * </span>
-						Lider
-					</label>
-						<select name="lider" id="lider"  class="validate[required]">
-                        	<?php 
-				$sql="SELECT ID, CONCAT(NOMBRES,' ',APELLIDOS) AS NOMBRES FROM LIDERES WHERE IDCANDIDATO='".$_SESSION["idcandidato"]."'";
-				$DBGestion->ConsultaArray($sql);
-				$lideres=$DBGestion->datos;
-		
-		?>
-						<option value="">Seleccione....</option>
-                        <?php
-						foreach ($lideres as $datos){
-							 $id = $datos['ID'];
-							 $nombre = $datos['NOMBRES'];
-							 
-							  			 
-				?>
-						<option value="<?php echo $id?>"><?php echo $nombre?></option>
-						<?php } ?>
-                        </select>
-				</li>
+				</li> -->
+				
 				
 					<h2>Puesto de Votacion</h2>
 				<br/>
@@ -275,31 +263,21 @@ function mesa(){
 				 </li>
 				 <li>
 				 </li>
-				 	<li>
+				 <!--	<li>
 					<label for="apellidos" style="width: 100px;">
 						<span class="textRequired"> * </span>
 							Apellidos
 					</label>
 					<input id="apellido" type="text" value="" name="apellido" class="validate[required]">
 							</li>
-							<li >
+							<!-- <li >
 					<label for="direccion" style="width: 100px;">
 						<span class="textRequired"> * </span>
 						Direccion
 					</label>
 						<input id="direccion" type="text" name="direccion" class="validate[required]">
-				</li>
-				<li>
-					<label for="municipio" style="width: 100px;">
-						<span class="textRequired"> * </span>
-						Municipio
-					</label>
-					<span id="capa_documentos" >
-						<select name="municipio" id="municipio" class="validate[required]">
-						<option value="">Seleccione....</option>
-						</select>
-						</span>
-				</li>
+				</li>-->
+				
 				<li>
 					<label for="email" style="width: 100px;">
 						<span class="textRequired"> * </span>
@@ -307,7 +285,7 @@ function mesa(){
 					</label>
 						<input id="email" type="text" name="email" class="validate[required,custom[email]]">
 				</li>
-				<li>
+			<!--	<li>
 					<label for="edad" style="width: 100px;">
 						<span class="textRequired">  </span>
 							Edad
@@ -315,13 +293,36 @@ function mesa(){
 					<span id="capa_edad">
 						0 a&ntilde;os
 						</span>
-				</li>				
+				</li>		-->		
 				 <li>
 					<label for="email" style="width: 100px;">						
 						Ocupacion
 					</label>
 						<input id="ocupacion" type="text" name="ocupacion" >
 				</li>
+				<li>
+					<label for="lider" style="width: 100px;">
+						<span class="textRequired"> * </span>
+						Lider
+					</label>
+						<select name="lider" id="lider"  class="validate[required]">
+                        	<?php 
+				$sql="SELECT ID, CONCAT(NOMBRES,' ',APELLIDOS) AS NOMBRES FROM LIDERES WHERE IDCANDIDATO='".$_SESSION["idcandidato"]."'";
+				$DBGestion->ConsultaArray($sql);
+				$lideres=$DBGestion->datos;
+		
+		?>
+						<option value="">Seleccione....</option>
+                        <?php
+						foreach ($lideres as $datos){
+							 $id = $datos['ID'];
+							 $nombre = $datos['NOMBRES'];
+							 
+							  			 
+				?>
+						<option value="<?php echo $id?>"><?php echo $nombre?></option>
+						<?php } ?>
+                        </select>
 				</li>				
 				 <li>
 					<label for="email" style="width: 100px;">						
@@ -330,7 +331,7 @@ function mesa(){
 						
 				</li>
 				<li>&nbsp;</li>	
-				<br/>	<br/>
+				<br/>	<br/><br/>	<br/>
 					<li>
 					<label for="muncipio2" style="width: 100px;">
 							<span class="textRequired"> * </span>
@@ -355,7 +356,7 @@ function mesa(){
 				</li>
 			</ol>
 			</div><br/>
-			<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	
+			<br/>	<br/>	<br/>	<br/>	<br/>		
 				<p class="textRequired"> * Campos Requeridos</p>				
 				<div id="tableButtons">	
 				<input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">	

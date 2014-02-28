@@ -112,6 +112,9 @@ $sql="SELECT SUM(DATOS) AS TOTAL FROM (SELECT
 count(tmp_miembros.MUNICIPIO) as DATOS
 FROM
 tmp_miembros
+INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
+INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+WHERE usuario.USUARIO='".$_SESSION['username']."'
 GROUP BY tmp_miembros.DEPARTAMENTO
 ORDER BY tmp_miembros.DEPARTAMENTO) TMP";
 $DBGestion->ConsultaArray($sql);				
@@ -121,11 +124,15 @@ $totales=$DBGestion->datos;
 $sql="SELECT
 tmp_miembros.ID,
 tmp_miembros.DEPARTAMENTO,
-count(tmp_miembros.MUNICIPIO) as DATOS
+count(tmp_miembros.MUNICIPIO) AS DATOS
 FROM
 tmp_miembros
+INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
+INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+WHERE usuario.USUARIO='".$_SESSION['username']."'
 GROUP BY tmp_miembros.DEPARTAMENTO
-ORDER BY tmp_miembros.DEPARTAMENTO";
+ORDER BY tmp_miembros.DEPARTAMENTO
+";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
@@ -228,7 +235,7 @@ $(function () {
 
 		    //Prepare jTable
 			$('#PeopleTableContainer2').jtable({
-				title: 'Resultados Excel - TOTAL 65535 - 100%',
+				title: 'Resultados Excel - TOTAL <?php echo $totales[0]['TOTAL']?> - 100%',
 				paging: true,
 				pageSize: 10,
 				sorting: true,

@@ -20,6 +20,9 @@ tmp_miembros.DEPARTAMENTO,
 count(tmp_miembros.MUNICIPIO) as DATOS
 FROM
 tmp_miembros
+INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
+INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+WHERE usuario.USUARIO='".$_SESSION['username']."'	
 GROUP BY tmp_miembros.DEPARTAMENTO
 ORDER BY tmp_miembros.DEPARTAMENTO "; 
 				
@@ -36,6 +39,9 @@ tmp_miembros.DEPARTAMENTO,
 count(tmp_miembros.MUNICIPIO) as DATOS
 FROM
 tmp_miembros
+INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
+INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+WHERE usuario.USUARIO='".$_SESSION['username']."'	
 GROUP BY tmp_miembros.DEPARTAMENTO
 ORDER BY tmp_miembros.DEPARTAMENTO
 						";
