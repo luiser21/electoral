@@ -131,86 +131,82 @@ $sql="SELECT DEPARTAMENTO, SUM(VOTOS) AS VOTOS FROM (
 					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
 					GROUP BY municipios)  CONSULTA 
 GROUP BY DEPARTAMENTO
-					ORDER BY DEPARTAMENTO ";
+					ORDER BY VOTOS DESC ";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
 $arrDepartamento=array();
 $i=0;
 $arrDepartamento="";
+$arrDepartamento2="";$suma=0;
+$depar="";
 foreach($departamentos as $Depto=>$Val){
 $i++;
-	if($i<count($departamentos)){
-		if($i==5){
-			$arrDepartamento.= "{name:'".$Val['DEPARTAMENTO']."',y:".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",sliced: true,selected: true },";
-		}else{
-			$arrDepartamento.= "['".$Val['DEPARTAMENTO']."',".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."],";
-		}
+$valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
+	
+	if($i<count($departamentos) && $valores>=4.5){
+		$arrDepartamento.= "'".$Val['DEPARTAMENTO']."',";
+		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
 	}else{
-		$arrDepartamento.= "['".$Val['DEPARTAMENTO']."',".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."]";
+		
+		//$arrDepartamento.= "'".$Val['DEPARTAMENTO']."'";
+		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
 	}
+	
+	if($valores<4.5){
+		$suma=$suma+$Val['VOTOS'];
+		$depar=$depar.','.$Val['DEPARTAMENTO'];
+	}
+	
+	
 }
+//imprimir($depar);
+$arrDepartamento.= "'OTROS'";
+$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
+	//imprimir($arrDepartamento2);
 ?>
 						<br/>
 							<script type="text/javascript">
 $(function () {
-    	
-    	// Radialize the colors
-		Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
-		    return {
-		        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-		        stops: [
-		            [0, color],
-		            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-		        ]
-		    };
-		});
-		
-		// Build the chart
         $('#container').highcharts({
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
+                type: 'column'
             },
             title: {
-                text: ''
+                text: 'Grafico por Departamentos'
             },
+            subtitle: {
+                text: 'Votos por Departamento'
+            },
+            xAxis: {
+                categories: [<?php echo $arrDepartamento?>
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Votos %'
+                }
+            },
+			
             tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
             },
             plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-						//alert(this.percentage);
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
-                        }
-                    }
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
                 }
             },
             series: [{
-                type: 'pie',
-                name: 'Browser share',
-				data:[<?php echo $arrDepartamento?>]
-                /*data: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]*/
+                name: 'Departamentos',
+                data: [<?php echo $arrDepartamento2?>]
+    
             }]
         });
     });
@@ -219,7 +215,7 @@ $(function () {
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 160px; height: 250px; margin: 0 auto"></div>
+<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
 			
 						<br/>
 <div class="filtering">
