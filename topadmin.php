@@ -24,7 +24,28 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <style>
 #logo3 {  position:absolute; float: left; margin-left: 771px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
 #logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
-			
+	
+/****      ****/
+/**** MARQUESINA ****/
+#marquesina {background: url("images/marquesina.gif") no-repeat scroll transparent;height: 37px;width: 960px;margin:5px 195px 6px 195px;}
+.tickercontainer { width: 810px; height: 40px; margin: 0 0 0 10px; padding: 0;overflow: hidden; }
+.tickercontainer .mask { position: relative;left: 10px;top: 11px;width: 810px;overflow: hidden;}
+ul.newsticker { position: relative;left: 835px;list-style-type: none;margin: 0;padding: 0;}
+ul.newsticker li {float: left;margin: 0;padding: 0;}
+ul.newsticker a {font-family: verdana;text-decoration: none;font-size: 12px;white-space: nowrap;padding: 0;color: #335D89;text-decoration:none;margin: 0 150px 0 0;} 
+ul.newsticker a:hover {text-decoration: underline;} 
+#cadena {
+	visibility: hidden;
+}
+#marque {
+    float: left;
+    margin: 10px 0 0 10px;
+}
+#marque > div {
+    height: 18px;
+    overflow: hidden;
+    width: 810px;
+}		
 
 </style>
 <?php if($_SESSION["partido"]=='Partido Liberal'){?>

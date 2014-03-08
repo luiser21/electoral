@@ -168,6 +168,9 @@ $(document).ready(function() {
 			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Seguimiento por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
 			<li ><a href="Informes_miembros_duplicados.php">Seguimiento por Simpatizantes Duplicados por Lider</a></li>
 			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
+			<li ><a href="consolidado.php">Consolidado Electoral</a></li>
+			<li ><a href="reporte.php">Elecciones</a></li>
+			<li ><a href="movilizados.php">Movilizados</a></li>
 		</ul>
 	</li>
 	 <li><a href="tarjetones.php"  >Elecciones Congreso 2014</a></li> 

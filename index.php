@@ -21,7 +21,7 @@ button, input[type="button"], input[type="submit"] {
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "08 march 2014 23:59:59",
+				date: "09 march 2014 08:00:00",
 				format: "on"
 			},
 			function() {

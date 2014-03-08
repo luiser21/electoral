@@ -2,7 +2,7 @@
 <style>
 .bg1 {  
 	position: absolute;
-	top:850px;
+	top:900px;
 }
 button, input[type="button"], input[type="submit"] {
    background-color: #A1AAAF;
@@ -16,10 +16,53 @@ button, input[type="button"], input[type="submit"] {
     margin-right: 0px;
    /* width: 108px;*/
 }
+.main {
+    bottom: 197px;
+    margin: 0 auto;
+    position: relative;
+    width: 960px;
+}
+
 </style>
 <?php 
-//imprimir($_SESSION);
-?>			
+
+$sql="
+SELECT SUM(VOTOS) AS TOTAL FROM (SELECT SUM(VOTOS) AS VOTOS   FROM (SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES,
+					COUNT(MESAS) AS MESAS 
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION['username']."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
+					GROUP BY VOTOS
+ORDER BY departamento, municipios) VOTOS";
+$DBGestion->ConsultaArray($sql);				
+$totales=$DBGestion->datos;
+?>		
+<div id="marquesina">
+<div id="marque">
+<div class="first">
+<marquee>
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $totales[0]['TOTAL']?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FALTA  <span style="color:#FF0000">04 DIAS 12 HORAS</span> PARA LAS ELECCIONES AL SENADO
+</marquee>
+</div>
+</div>
+</div>	
 <div class="main">					
 			<header>				
 				<div id="slider">
