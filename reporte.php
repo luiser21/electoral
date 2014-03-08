@@ -214,7 +214,7 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'Meta',
+                name: 'Votos',
                 data: [<?php echo $arrDepartamento2?>]
     		}
 			/*, {

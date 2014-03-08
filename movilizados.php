@@ -115,4 +115,4 @@ $zona=$DBGestion->datos;
 
 	 
 	 </body>
-<?php //require_once('bottom.php'); ?>		
+<?php require_once('bottom.php'); ?>		

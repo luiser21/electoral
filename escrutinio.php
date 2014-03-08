@@ -4,7 +4,8 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 <script src="js/countdown.js"></script>
-<meta http-equiv=refresh content=20;URL=reporte.php>
+<!--
+<meta http-equiv=refresh content=20;URL=escrutinio.php>-->
 <script>
 
 function Blink()
@@ -63,17 +64,9 @@ button, input[type="button"], input[type="submit"] {
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
 			
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
-		$(document).ready(function(){
-			$("#countdown").countdown({
-				date: "8 march 2014 15:59:59",
-				format: "on"
-			},
-			function() {
-				// callback function
-			});
-		});
+		
 	</script>
-		<p style="margin-left:468px">Cuenta Regresiva para el Cierre de Mesas<div class="timer-area" style=" margin-right:-100px">	
+		<p style="margin-left:468px">Mesas Cerradas<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown" style="margin-left:58px">
 										<img src="<?php echo $_SESSION['foto']?>" width="180" height="177"><img src="images/ktEO3b-9.png" width="201" height="148"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<li>
@@ -96,16 +89,15 @@ button, input[type="button"], input[type="submit"] {
 										
 									</div> </p>	
 		
-		<table width="91%" border="0">
+		<table width="94%" border="0">
   <tr style="font-size:16px">
-    <th width="55%" rowspan="3" scope="col"><?php 
+    <th width="55%" rowspan="5" scope="col"><?php 
 
 
 $sql="SELECT
-sum(boletines.MOVILIZADOS) AS MOVILIZADOS
+sum(boletines_departamentos.MOVILIZADOS) as MOVILIZADOS
 FROM
-boletines
-where boletines.ESTADO=1";
+boletines_departamentos";
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 
@@ -121,39 +113,7 @@ GROUP BY REPORTES ";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
-$arrDepartamento=array();
-$i=0;
-$arrDepartamento="";
-$arrDepartamento2="";
-$arrDepartamento3="";
-$arrDepartamento4="";
-$suma=0;
-$suma1=0;
-$suma2=0;
-$depar="";
-//imprimir($departamentos);
-foreach($departamentos as $Depto=>$Val){
-$i++;
-	
-	if($i<count($departamentos)){
-		$arrDepartamento.= "'".$Val['REPORTES']."',";
-		$arrDepartamento2.= "".$Val['MOVILIZADOS'].",";
-		//$arrDepartamento3.= "".$Val['PREVISTO'].",";
-		//$arrDepartamento4.= "".$Val['REAL'].",";
-	}else{
-		
-		$arrDepartamento.= "'".$Val['REPORTES']."'";
-		$arrDepartamento2.= "".$Val['MOVILIZADOS']."";		
-		//$arrDepartamento3.= "".$Val['PREVISTO']."";
-		//$arrDepartamento4.= "".$Val['REAL']."";
-	}
-}
-//imprimir($depar);
-//$arrDepartamento.= "'OTROS'";
-//$arrDepartamento2.= "".$suma."";
-//$arrDepartamento3.= "".$suma1."";
-//$arrDepartamento4.= "".$suma2."";
-//imprimir($arrDepartamento); ?>
+ ?>
 	<script type="text/javascript">
 $(function () {
         $('#container').highcharts({
@@ -161,13 +121,13 @@ $(function () {
                 type: 'bar'
             },
             title: {
-                text: 'GRAFICA POR REPORTES'
+                text: 'GRAFICA POR MOVILIZADOS VS ESCRUTINIO'
             },
             subtitle: {
                 text: 'VOTOS'
             },
             xAxis: {
-                categories: [<?php echo $arrDepartamento?>],
+                categories: ['VOTOS',],
 				title: {
                     text: null
                 }
@@ -207,13 +167,13 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'Meta',
-                data: [<?php echo $arrDepartamento2?>]
-    		}
-			/*, {
-                name: 'Compromiso',
-                data: [<?php echo $arrDepartamento3?>]
-            }, {
+                name: 'Movilizados',
+                data: [<?php echo $totales[0]['MOVILIZADOS']?>]
+    		},
+			 {
+                name: 'Registraduria',
+                data: [25000]
+            }/*, {
                 name: 'Registraduria',
                 data: [<?php echo $arrDepartamento4?>]
             }*/]
@@ -224,120 +184,41 @@ $(function () {
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-			
-</th>
-    <th width="19%" scope="col">REPORTES</th> 
-	   <th width="26%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/><?php echo 
-	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
-	     <p>&nbsp;</p>
-	     <p><img src="images/votos2.png" width="119" height="131"></p>
-	   </div> </th>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
+    <th width="14%" scope="col">MOVILIZADOS</th> 
+	   <th width="31%" scope="col" style="border:3px solid #CCCCCC;"><strong style="font-size:28px; color: #000000"><?php echo 
+	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?> &nbsp;VOTOS</strong>	      </th>
   </tr>
   <tr>
-    <th scope="col"><?php $sql="SELECT boletines.REPORTES
-FROM
-boletines
-where boletines.ESTADO=1";
-//echo $sql;
-$DBGestion->ConsultaArray($sql);
-$reportes=$DBGestion->datos;
-echo @$reportes[0]['REPORTES'];	?></th>
-	 </tr>
+    <th scope="col">CURULES ASIGNADAS  </th>
+	 <th width="31%" scope="col" style="border:3px solid #CCCCCC;"><img src="images/Senado_CNS_1989.png" width="239" height="69">
+	   <strong style="color:#00CC00; font-size:32px; size:32px">25<img src="images/partidou.png" width="240" height="80"></strong></th>
+  </tr>
   <tr>
-    <th height="40" scope="col">HORA ACTUAL </th>
-    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><?php echo date(" g:i:s a") ?></th>
+    <th height="40" scope="col">% MESAS ESCRUTADAS </th>
+    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><strong style="font-size:28px">20%</strong> <img src="images/padrones-2013-donde-votar.png" width="40" height="33"></th>
+  </tr>
+  <tr>
+    <th height="40" scope="col">VOTOS U49 </th>
+    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><blink><strong style="font-size:32px; color:#FF0000">35.00 VOTOS </strong></blink></th>
+  </tr>
+  <tr>
+    <th height="40" scope="col">HORA ACTUAL</th>
+    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><span	><?php echo date(" g:i:s a") ?></span></th>
   </tr>
 </table>
 
-<?php 
 
-$sql="SELECT
-SUM(consolidado.META) AS TOTAL1,
-SUM(consolidado.PREVISOT) as TOTAL2,
-SUM(consolidado.REAL) AS TOTAL3
-FROM
-consolidado
-INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = consolidado.IDREGIONAL
-";
-$DBGestion->ConsultaArray($sql);				
-$totales=$DBGestion->datos;	
-
-//imprimir($totales[0]['TOTAL']);
-
-$sql="SELECT
-departamentos.NOMBRE as DEPARTAMENTO,
-consolidado.META AS VOTOS,
-consolidado.PREVISOT as PREVISTO,
-consolidado.REAL 
-FROM
-consolidado
-INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = consolidado.IDREGIONAL
-ORDER BY DEPARTAMENTO ";
-$DBGestion->ConsultaArray($sql);				
-$departamentos=$DBGestion->datos;	
-
-$arrDepartamento=array();
-$i=0;
-$arrDepartamento="";
-$arrDepartamento2="";
-$arrDepartamento3="";
-$arrDepartamento4="";
-$suma=0;
-$suma1=0;
-$suma2=0;
-$depar="";
-foreach($departamentos as $Depto=>$Val){
-$i++;
-$valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL1'], 2);
-	
-	if($i<count($departamentos) && $i<=8){
-		$arrDepartamento.= "'".$Val['DEPARTAMENTO']."',";
-		$arrDepartamento2.= "".$Val['VOTOS'].",";
-		$arrDepartamento3.= "".$Val['PREVISTO'].",";
-		$arrDepartamento4.= "".$Val['REAL'].",";
-	}else{
-		
-		/*$arrDepartamento.= "'".$Val['DEPARTAMENTO']."'";
-		$arrDepartamento2.= "".$Val['VOTOS']."";		
-		$arrDepartamento3.= "".$Val['PREVISTO']."";
-		$arrDepartamento4.= "".$Val['REAL']."";*/
-	}
-	
-	if($i==8){
-		$suma=$suma+$Val['VOTOS'];
-		$suma1=$suma1+$Val['VOTOS'];
-		$suma2=$suma2+$Val['VOTOS'];
-		$depar=$depar.','.$Val['DEPARTAMENTO'];
-	}
-	
-	
-}
-//imprimir($depar);
-$arrDepartamento.= "'OTROS'";
-$arrDepartamento2.= "".$suma."";
-$arrDepartamento3.= "".$suma1."";
-$arrDepartamento4.= "".$suma2."";
-//imprimir($arrDepartamento2);
-?>
 <div id="marquesina">
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000">98.350</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-FALTA  <span style="color:#FF0000">01 DIAS 12 HORAS</span> PARA LAS ELECCIONES AL SENADO
-</marquee>
-</div>
+VOTOS PREVISTOS:  <span style="color:#FF0000">98.350</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MESAS DE VOTACION CERRADAS
+</marquee></div>
 </div>
 </div>	
 						<br/>
 
-
-
-			
-					
-
-				
 				
 		  </div></div>
 		</header>	
