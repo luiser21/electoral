@@ -8,7 +8,7 @@ include_once "../includes/GestionBD.new.class.php";
 $DBGestion = new GestionBD('AGENDAMIENTO');	
 // Set output Encoding.
 @$data->setOutputEncoding('CP1251');
-@$data->read('Lista del Senado.xls');
+@$data->read('U-49.xls');
 error_reporting(E_ALL ^ E_NOTICE);  
 $y=0;
 $registros=count($data->sheets[0]['cells']);
@@ -19,27 +19,29 @@ for ($i = 2; $i <= $registros; $i++) {
 	$DEPARTAMENTO[$y]=$data->sheets[0]['cells'][$i][4];	
 	
 	$MUNICIPIO [$y]=$data->sheets[0]['cells'][$i][5];
-	$LIDER[$y]=$data->sheets[0]['cells'][$i][6];
-	$CELULAR1[$y]=$data->sheets[0]['cells'][$i][7];
-	$CELULAR1[$y]=$data->sheets[0]['cells'][$i][8];
-	$CORREO1[$y]=$data->sheets[0]['cells'][$i][9];
-	$CORREO1[$y]=$data->sheets[0]['cells'][$i][10];
-	$NICHO[$y]=$data->sheets[0]['cells'][$i][11];
-	$DTOVOTACION[$y]=$data->sheets[0]['cells'][$i][12];	
-	$MPIOVOTACION[$y]=$data->sheets[0]['cells'][$i][13];	
-	$PUESTO[$y]=$data->sheets[0]['cells'][$i][14];	
-	if($DEPARTAMENTO[$y]==""){
+	//$LIDER[$y]=$data->sheets[0]['cells'][$i][6];
+	//$CELULAR1[$y]=$data->sheets[0]['cells'][$i][7];
+	//$CELULAR1[$y]=$data->sheets[0]['cells'][$i][8];
+	//$CORREO1[$y]=$data->sheets[0]['cells'][$i][9];
+	//$CORREO1[$y]=$data->sheets[0]['cells'][$i][10];
+	//$NICHO[$y]=$data->sheets[0]['cells'][$i][11];
+	$DTOVOTACION[$y]=$data->sheets[0]['cells'][$i][6];	
+	$MPIOVOTACION[$y]=$data->sheets[0]['cells'][$i][7];	
+	$PUESTO[$y]=$data->sheets[0]['cells'][$i][8];	
+	/*if($DEPARTAMENTO[$y]==""){
 		$DEPARTAMENTO[$y]=$DTOVOTACION[$y];
 	}
 	if($MUNICIPIO[$y]==""){
 		$MUNICIPIO[$y]=$MPIOVOTACION[$y];
-	}
-	$PUESTO[$y]=str_replace("."," ",$PUESTO[$y]);
+	}*/
+	//$PUESTO[$y]=str_replace("."," ",$PUESTO[$y]);
 	//echo $PUESTO[$y];exit;
-	$MESA[$y]=$data->sheets[0]['cells'][$i][15];	
+	$MESA[$y]=$data->sheets[0]['cells'][$i][9];	
 	$y++;
 }
-//var_dump($MESA);
+//imprimir($MUNICIPIO);
+//exit;
+//exit;//var_dump($MESA);
 //exit;
 for($i=0; $i<$registros; $i++){	
 		//BUSO SI YA EXISTE EL MIEMBRO
@@ -61,6 +63,8 @@ for($i=0; $i<$registros; $i++){
 					FROM
 					departamentos
 					where UPPER(departamentos.NOMBRE) = UPPER('".trim($DEPARTAMENTO[$i])."')";
+				//	echo $sql;
+					//exit;
 			$DBGestion->ConsultaArray($sql);
 			$departamentos=$DBGestion->datos;	
 			if(count($departamentos)>=1){
@@ -142,7 +146,7 @@ for($i=0; $i<$registros; $i++){
 								if(count($mesavotacion)>=1){
 									//INSERTO EL MIEMBRO EN LA TABLA
 									$idmesa=$mesavotacion[0]['ID'];
-									$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, TELEFONO, EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre[$i])).' '.strtoupper(trim($apellido[$i]))."','".trim($cedula[$i])."','".$idmunicipios."','".trim($celular1[$i])."','".trim($correo[$i])."','".$idpuesto."','25','VOLUNTARIADO')";										
+									$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre[$i])).' '.strtoupper(trim($apellido[$i]))."','".trim($cedula[$i])."','".$idmunicipios."','".$idpuesto."','32','VOLUNTARIADO')";										
 									echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 									$DBGestion->Consulta($sql);									
 									$rs = mysql_query("SELECT @@identity AS id");

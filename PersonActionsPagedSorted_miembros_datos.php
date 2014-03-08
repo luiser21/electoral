@@ -46,8 +46,8 @@ $_GET["jtStartIndex"]=0;*/
 						tmp_miembros.DEPARTAMENTO,
 						tmp_miembros.MUNICIPIO,
 						tmp_miembros.LIDER AS LIDER,
-						'NO REGISTRA' AS NOMBRE_PUESTO,
-						'N/A' AS MESA
+						tmp_miembros.PUESTO AS NOMBRE_PUESTO,
+						'N/A' as MESA
 						FROM
 						tmp_miembros
 						INNER JOIN candidato ON candidato.ID = tmp_miembros.CANDIDATO
@@ -70,7 +70,7 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
 				$row[$i]['CEDULA']=($partidos[$i]['CEDULA']!='')? $partidos[$i]['CEDULA']:'NO REGISTRA';
 				$row[$i]['LIDER']=utf8_encode($partidos[$i]['LIDER']);
-				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
+				$row[$i]['NOMBRE_PUESTO']=($partidos[$i]['NOMBRE_PUESTO']!='')? $partidos[$i]['NOMBRE_PUESTO']:'NO REGISTRA';
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
 				$row[$i]['MUNICIPIO']=utf8_encode($partidos[$i]['MUNICIPIO']);
 				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
