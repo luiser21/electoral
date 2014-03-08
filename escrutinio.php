@@ -104,15 +104,40 @@ $totales=$DBGestion->datos;
 //imprimir($totales[0]['MOVILIZADOS']);
 
 $sql="SELECT
-CONCAT(boletines.REPORTES,' - ',boletines.HORA) as REPORTES,
-sum(boletines.MOVILIZADOS) AS MOVILIZADOS
+boletines_departamentos.IDDEPARTAMENTO,
+departamentos.NOMBRE,
+boletines_departamentos.VOTOS_REALES,
+boletines_departamentos.MOVILIZADOS
 FROM
-boletines
-where boletines.ESTADO in (1,2)
-GROUP BY REPORTES ";
+boletines_departamentos
+INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines_departamentos.IDDEPARTAMENTO
+WHERE boletines_departamentos.VOTOS_REALES<>0
+ORDER BY NOMBRE ";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
+$arrDepartamento="";
+$arrDepartamento2="";
+$arrDepartamento3="";
+$i=0;
+foreach($departamentos as $Depto=>$Val){
+$i++;
+	
+	if($i<count($departamentos)){
+		$arrDepartamento.= "'".$Val['NOMBRE']."',";
+		$arrDepartamento2.= "".$Val['MOVILIZADOS'].",";
+		$arrDepartamento3.= "".$Val['VOTOS_REALES'].",";
+		//$arrDepartamento4.= "".$Val['REAL'].",";
+	}else{
+		
+		$arrDepartamento.= "'".$Val['NOMBRE']."'";
+		$arrDepartamento2.= "".$Val['MOVILIZADOS']."";		
+		$arrDepartamento3.= "".$Val['VOTOS_REALES']."";
+		//$arrDepartamento4.= "".$Val['REAL']."";
+	}
+}
+
+//imprimir($arrDepartamento);
  ?>
 	<script type="text/javascript">
 $(function () {
@@ -121,13 +146,13 @@ $(function () {
                 type: 'bar'
             },
             title: {
-                text: 'GRAFICA POR MOVILIZADOS VS ESCRUTINIO'
+                text: 'GRAFICA POR MOVILIZADOS VS ESCRUTINIO DEPARTAMENTAL'
             },
             subtitle: {
                 text: 'VOTOS'
             },
             xAxis: {
-                categories: ['VOTOS',],
+                categories: [<?php echo $arrDepartamento?>],
 				title: {
                     text: null
                 }
@@ -168,11 +193,11 @@ $(function () {
             },
             series: [{
                 name: 'Movilizados',
-                data: [<?php echo $totales[0]['MOVILIZADOS']?>]
+                data: [<?php echo $arrDepartamento2?>]
     		},
 			 {
                 name: 'Registraduria',
-                data: [25000]
+                data: [<?php echo $arrDepartamento3?>]
             }/*, {
                 name: 'Registraduria',
                 data: [<?php echo $arrDepartamento4?>]
@@ -185,26 +210,51 @@ $(function () {
 <script src="js/js/modules/exporting.js"></script>
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
+<?php $sql="SELECT
+			escrutinio.CURULES,
+			escrutinio.MESAS_INSTALADAS,
+			escrutinio.MESAS_INFORMADAS,
+			escrutinio.VOTOS_PARTIDO,
+			escrutinio.PORCENTAJE_PARTIDO,
+			escrutinio.VOTOS_U49
+			FROM
+			escrutinio";
+	$DBGestion->ConsultaArray($sql);				
+	$escrutinio=$DBGestion->datos;	
+	//imprimir($escrutinio);
+
+?>
     <th width="14%" scope="col">MOVILIZADOS</th> 
-	   <th width="31%" scope="col" style="border:3px solid #CCCCCC;"><strong style="font-size:28px; color: #000000"><?php echo 
+	   <th width="31%" colspan="2" style="border:3px solid #CCCCCC;" scope="col"><strong style="font-size:28px; color: #000000"><?php echo 
 	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?> &nbsp;VOTOS</strong>	      </th>
   </tr>
   <tr>
     <th scope="col">CURULES ASIGNADAS  </th>
-	 <th width="31%" scope="col" style="border:3px solid #CCCCCC;"><img src="images/Senado_CNS_1989.png" width="239" height="69">
-	   <strong style="color:#00CC00; font-size:32px; size:32px">25<img src="images/partidou.png" width="240" height="80"></strong></th>
+	 <th width="31%" colspan="2" style="border:3px solid #CCCCCC;" scope="col"><img src="images/Senado_CNS_1989.png" width="239" height="69">
+	   <strong style="color:#00CC00; font-size:32px; size:32px"><?php echo $escrutinio[0]['CURULES']?><img src="images/partidou.png" width="240" height="80"></strong></th>
   </tr>
   <tr>
-    <th height="40" scope="col">% MESAS ESCRUTADAS </th>
-    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><strong style="font-size:28px">20%</strong> <img src="images/padrones-2013-donde-votar.png" width="40" height="33"></th>
+    <th height="40" scope="col">MESAS INSTALADAS </th>
+    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><?php echo  number_format($escrutinio[0]['MESAS_INSTALADAS'], 0, '', '.')?></th>
   </tr>
   <tr>
+    <th height="40" scope="col">% MESAS INFORMADAS </th>
+    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><strong style="font-size:28px"><?php echo $escrutinio[0]['MESAS_INFORMADAS']?>&nbsp;%</strong> <img src="images/padrones-2013-donde-votar.png" width="40" height="33"></th>
+  </tr>
+  <tr>
+    <th height="40" scope="col">VOTOS PARTIDO </th>
+    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><?php echo  number_format($escrutinio[0]['VOTOS_PARTIDO'], 0, '', '.')?>&nbsp;VOTOS</th>
+    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><?php echo $escrutinio[0]['PORCENTAJE_PARTIDO']?>&nbsp;%</th>
+  </tr>
+  <tr>
+    <th scope="col">&nbsp;</th>
     <th height="40" scope="col">VOTOS U49 </th>
-    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><blink><strong style="font-size:32px; color:#FF0000">35.00 VOTOS </strong></blink></th>
+    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><blink><strong style="font-size:32px; color:#FF0000"><?php echo  number_format($escrutinio[0]['VOTOS_U49'], 0, '', '.')?>&nbsp;VOTOS </strong></blink></th>
   </tr>
   <tr>
+    <th scope="col">&nbsp;</th>
     <th height="40" scope="col">HORA ACTUAL</th>
-    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><span	><?php echo date(" g:i:s a") ?></span></th>
+    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><span	><?php echo date(" g:i:s a") ?></span></th>
   </tr>
 </table>
 

@@ -69,7 +69,8 @@ $zona=$DBGestion->datos;
 		$sql="SELECT 
 			boletines_departamentos.IDDEPARTAMENTO,
 			departamentos.NOMBRE,
-			SUM(boletines_departamentos.MOVILIZADOS) AS MOVILIZADOS
+			SUM(boletines_departamentos.MOVILIZADOS) AS MOVILIZADOS,
+			boletines_departamentos.META
 			FROM
 			boletines_departamentos
 			INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines_departamentos.IDDEPARTAMENTO
@@ -81,6 +82,7 @@ $zona=$DBGestion->datos;
 		<table width="100%" border="2" cellpadding="2" cellspacing="2" style="border: solid 1px #000000;  ">
 			  <tr style="border: solid 1px #000000; background-color:#009933; color:#FFFFFF">
 				<th scope="col" style="border: solid 1px #000000;">DEPARTAMENTO</th>
+				<th scope="col" style="border: solid 1px #000000;">META</th>
 				<th scope="col" style="border: solid 1px #000000;">TOTAL</th>
 				<th scope="col" style="border: solid 1px #000000;">MOVILIZADOS</th>
 			  </tr>
@@ -90,6 +92,7 @@ $zona=$DBGestion->datos;
 			  <tr style="border: solid 1px #000000;">
 				<td align="center" style="border: solid 1px #000000;"><?php echo $departamentos[$k]['NOMBRE']?> 
 				<input type="hidden" id="departamento" name="departamento" value="<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>"/></td>
+				<td align="center" style="border: solid 1px #000000;"><?php echo $departamentos[$k]['META']?></td>
 				
 				<td style="border: solid 1px #000000;" align="right"><div id="capa_documentos_<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>">
 				 <strong><?php echo $departamentos[$k]['MOVILIZADOS']?></strong>

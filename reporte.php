@@ -65,7 +65,7 @@ button, input[type="button"], input[type="submit"] {
 			<div id="crudFormLineal" style="width: 1110px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "9 march 2014 14:59:59",
+				date: "9 march 2014 15:59:59",
 				format: "on"
 			},
 			function() {
@@ -341,7 +341,7 @@ $arrDepartamento4.= "".$suma2."";
 <div class="first">
 <marquee>
 VOTOS PREVISTOS:  <span style="color:#FF0000">98.350</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-FALTA  <span style="color:#FF0000">01 DIAS 12 HORAS</span> PARA LAS ELECCIONES AL SENADO
+DIA ELECTORAL HA COMENZADO
 </marquee>
 </div>
 </div>
