@@ -62,10 +62,10 @@ button, input[type="button"], input[type="submit"] {
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
 			
-			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
+			<div id="crudFormLineal" style="width: 1110px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "09 march 2014 15:59:59",
+				date: "9 march 2014 14:59:59",
 				format: "on"
 			},
 			function() {
@@ -73,7 +73,7 @@ button, input[type="button"], input[type="submit"] {
 			});
 		});
 	</script>
-		<p style="margin-left:468px">Cuenta Regresiva para el 09 de Marzo<div class="timer-area" style=" margin-right:-100px">	
+		<p style="margin-left:468px">Cuenta Regresiva para el Cierre de Mesas<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown" style="margin-left:58px">
 										<img src="<?php echo $_SESSION['foto']?>" width="180" height="177"><img src="images/ktEO3b-9.png" width="201" height="148"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<li>
@@ -96,9 +96,9 @@ button, input[type="button"], input[type="submit"] {
 										
 									</div> </p>	
 		
-		<table width="91%" border="0">
+		<table width="95%" border="0">
   <tr style="font-size:16px">
-    <th width="55%" rowspan="3" scope="col"><?php 
+    <th width="43%" rowspan="3" scope="col"><?php 
 
 
 $sql="SELECT
@@ -148,6 +148,13 @@ $i++;
 		//$arrDepartamento4.= "".$Val['REAL']."";
 	}
 }
+$sql="SELECT boletines.REPORTES
+FROM
+boletines
+where boletines.ESTADO=1";
+//echo $sql;
+$DBGestion->ConsultaArray($sql);
+$reportes=$DBGestion->datos;
 //imprimir($depar);
 //$arrDepartamento.= "'OTROS'";
 //$arrDepartamento2.= "".$suma."";
@@ -224,30 +231,39 @@ $(function () {
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-			
-</th>
-    <th width="19%" scope="col">REPORTES</th> 
-	   <th width="26%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/><?php echo 
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
+    <th width="15%" scope="col">REPORTES</th> 
+	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/><?php echo 
 	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
 	     <p><img src="images/votos2.png" width="119" height="131"></p>
 	   </div> </th>
+	  
+       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">DEPARTAMENTOS SIN MOVILIZACION <?php echo @$reportes[0]['REPORTES'];?><br/>
+         <br/><blink><strong style="color: #990000"><?php 
+	   $sql="SELECT 
+			departamentos.NOMBRE
+			FROM
+			boletines
+			INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines.IDDEPARTAMENTO
+			where ESTADO=1 AND MOVILIZADOS=0
+			order by NOMBRE";
+	   $DBGestion->ConsultaArray($sql);
+		$departamentos=$DBGestion->datos; 
+		for($k=0;$k<count($departamentos);$k++){
+			echo $departamentos[$k]['NOMBRE'].' - ';
+		}
+
+	   ?> </blink></strong></th>
   </tr>
   <tr>
-    <th scope="col"><?php $sql="SELECT boletines.REPORTES
-FROM
-boletines
-where boletines.ESTADO=1";
-//echo $sql;
-$DBGestion->ConsultaArray($sql);
-$reportes=$DBGestion->datos;
+    <th scope="col"><?php 
 echo @$reportes[0]['REPORTES'];	?></th>
 	 </tr>
   <tr>
     <th height="40" scope="col">HORA ACTUAL </th>
     <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><?php echo date(" g:i:s a") ?></th>
-  </tr>
+    </tr>
 </table>
 
 <?php 

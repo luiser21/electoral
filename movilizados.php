@@ -35,15 +35,15 @@ function movilizados(k){
 			FAjax (pagina2,capa2,valores,'POST',true);     	 
 	}
 }
-function guardar(k,municipio){
+function guardar(departamento){
 	var pagina= "Ajax_total.php";
-	var capa = "capa_documentos_"+k;
+	var capa = "capa_documentos_"+departamento;
 	
 	var pagina2= "Ajax_movilizar.php";
-	var capa2 = "capa_movilizar_"+k;
+	var capa2 = "capa_movilizar_"+departamento;
 	
-	var voto = document.getElementById('voto_'+k).value;	
-	var valores = 'voto='+voto+'&k='+k+'&municipio=' + municipio + '&' + Math.random();		
+	var voto = document.getElementById('voto_'+departamento).value;	
+	var valores = 'voto='+voto+'&departamento=' + departamento + '&' + Math.random();		
 	FAjax (pagina,capa,valores,'POST',true) ; 
 	FAjax (pagina2,capa2,valores,'POST',true);     	 
 	
@@ -57,29 +57,30 @@ function guardar(k,municipio){
 <div id="accordion">
 <?php 
 $sql="SELECT
-		DISTINCT boletines.zona as ZONAS,
-		boletines.ENCARGADO
+		DISTINCT boletines_departamentos.zona as ZONAS,
+		boletines_departamentos.ENCARGADO
 		FROM
-		boletines";
+		boletines_departamentos ";
 $DBGestion->ConsultaArray($sql);
 $zona=$DBGestion->datos;	
 	for($i=0; $i<count($zona); $i++){
 		
 		echo "<h3>".$zona[$i]['ZONAS']." - ".$zona[$i]['ENCARGADO']."</h3><div><p>";
-		$sql="SELECT DISTINCT
-			boletines.IDDEPARTAMENTO,
-			departamentos.NOMBRE
+		$sql="SELECT 
+			boletines_departamentos.IDDEPARTAMENTO,
+			departamentos.NOMBRE,
+			SUM(boletines_departamentos.MOVILIZADOS) AS MOVILIZADOS
 			FROM
-			boletines
-			INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines.IDDEPARTAMENTO
-			where boletines.zona='".$zona[$i]['ZONAS']."'
+			boletines_departamentos
+			INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines_departamentos.IDDEPARTAMENTO
+			where boletines_departamentos.zona='".$zona[$i]['ZONAS']."'
+			GROUP BY IDDEPARTAMENTO
 			order by NOMBRE";
 		$DBGestion->ConsultaArray($sql);
 		$departamentos=$DBGestion->datos; ?>
 		<table width="100%" border="2" cellpadding="2" cellspacing="2" style="border: solid 1px #000000;  ">
 			  <tr style="border: solid 1px #000000; background-color:#009933; color:#FFFFFF">
 				<th scope="col" style="border: solid 1px #000000;">DEPARTAMENTO</th>
-				<th scope="col" style="border: solid 1px #000000;">MUNICIPIO</th>
 				<th scope="col" style="border: solid 1px #000000;">TOTAL</th>
 				<th scope="col" style="border: solid 1px #000000;">MOVILIZADOS</th>
 			  </tr>
@@ -88,25 +89,15 @@ $zona=$DBGestion->datos;
 			
 			  <tr style="border: solid 1px #000000;">
 				<td align="center" style="border: solid 1px #000000;"><?php echo $departamentos[$k]['NOMBRE']?> 
-				<input type="hidden" id="departamento" name="departamento" value="<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>" </input></td>
-				<td style="border: solid 1px #000000;" align="center">
-						<?php 
-							echo '<select name="municipio" id="municipio" onclick="movilizados('.$k.')" >'; 							
-											
-							$sql="SELECT * FROM MUNICIPIOS WHERE IDDEPARTAMENTO='".$departamentos[$k]['IDDEPARTAMENTO']."' order by nombre";
-							$DBGestion->ConsultaArray($sql);
-							$mun=$DBGestion->datos;	
-								
-							echo '<option value="0">Seleccione....</option>'; 
-							foreach ($mun as $datos){
-								 $id = $datos['ID'];
-								 $nombre = $datos['NOMBRE'];
-								echo '<option value="'.$id.'">'.$nombre.'</option>';
-							}
-							echo '</select>';?>
-						</td>
-				<td style="border: solid 1px #000000;" align="right"><div id="capa_documentos_<?php echo $k?>"></div></td>
-				<td style="border: solid 1px #000000;" align="center"><div id="capa_movilizar_<?php echo $k?>"></div></td>
+				<input type="hidden" id="departamento" name="departamento" value="<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>"/></td>
+				
+				<td style="border: solid 1px #000000;" align="right"><div id="capa_documentos_<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>">
+				 <strong><?php echo $departamentos[$k]['MOVILIZADOS']?></strong>
+				</div></td>
+				<td style="border: solid 1px #000000;" align="center"><div id="capa_movilizar_<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>">
+				<input name="voto_<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>" type="text" id="voto_<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>" value="0"  style="width:70px" align="right">
+	<input id="btnSave" class="submit" type="button" value="OK" onClick="guardar(<?php echo $departamentos[$k]['IDDEPARTAMENTO']?>);" style="width: 50px;"/>	
+				</div></td>
 			  </tr>
 			
 

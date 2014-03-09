@@ -37,42 +37,42 @@ for($i=0; $i<$registros-1; $i++){
 			echo $departamentos[0]['NOMBRE'];
 			echo '<br/>';
 			echo '<br/>';
-			$sql2="SELECT
-						municipios.ID,
-						municipios.NOMBRE
-						FROM
-						municipios
-						where IDDEPARTAMENTO=".$iddepartamento;
-					try{	
-				$DBGestion->ConsultaArray($sql2);
-				$municipios=$DBGestion->datos;	
-				for($k=0; $k<count($municipios); $k++){
-					$idmunicipio=$municipios[$k]['ID'];
-					$zona[$i];
-					$encargado[$i];
+			
+			try{	
+		
+				$sql="INSERT INTO BOLETINES_DEPARTAMENTOS (IDDEPARTAMENTO, MOVILIZADOS, ZONA, ENCARGADO) 
+				VALUES ('".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."','".strtoupper(trim($encargado[$i]))."')";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('1er REPORTE','10am','".$iddepartamento."',0,1,0,10)";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('2do REPORTE','11am','".$iddepartamento."',0,0,0,11)";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('3er REPORTE','12pm','".$iddepartamento."',0,0,0,12)";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('4to REPORTE','1pm','".$iddepartamento."',0,0,0,13)";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('5to REPORTE','2pm','".$iddepartamento."',0,0,0,14)";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('6to REPORTE','3pm','".$iddepartamento."',0,0,0,15)";							
+				$DBGestion->Consulta($sql);	
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('7to REPORTE','4pm','".$iddepartamento."',0,0,0,16)";							
+				$DBGestion->Consulta($sql);
 					
-						$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('1er REPORTE','10am','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);	
-						$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('2do REPORTE','11am','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);	
-						$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('3er REPORTE','12pm','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);	
-						$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('4to REPORTE','1pm','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);	$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('5to REPORTE','2pm','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);	
-						$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('6to REPORTE','3pm','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);	
-						$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS, ZONA, ESTADO, IDMUNICIPIO, ENCARGADO) 
-						VALUES ('7mo REPORTE','4pm','".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."',0,'".$idmunicipio."','".strtoupper(trim($encargado[$i]))."')";							
-						$DBGestion->Consulta($sql);		
-					
-				}
+				
 			}catch(Exception $e){
 						imprimir($e);
 					}
