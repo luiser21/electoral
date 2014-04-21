@@ -22,7 +22,7 @@ if($voto>0){
 	
 	$sql="UPDATE boletines_departamentos set MOVILIZADOS=".$suma." where IDDEPARTAMENTO='".$departamento."' ";						
 	$DBGestion->Consulta($sql);	
-	
+	/*
 	$sql="SELECT boletines.HORA_REAL
 			FROM
 			boletines
@@ -45,14 +45,15 @@ if($voto>0){
 		$DBGestion->Consulta($sql);	
 		
 		$sql="UPDATE boletines set ESTADO=1 where HORA_REAL=".date('H');						
-		$DBGestion->Consulta($sql);	
+		//$DBGestion->Consulta($sql);	
 		
 		$sql="UPDATE boletines set ESTADO_DEPARTAMENTO=1 where IDDEPARTAMENTO='".$departamento."' AND ESTADO=1";						
-		$DBGestion->Consulta($sql);	
+		//$DBGestion->Consulta($sql);	
 		
 		$sql="UPDATE boletines set MOVILIZADOS=".$suma." where IDDEPARTAMENTO='".$departamento."' AND ESTADO IN (1,0)";						
-		$DBGestion->Consulta($sql);
-	}
+		//$DBGestion->Consulta($sql);
+		
+	}*/
 }
 $sql="SELECT boletines_departamentos.MOVILIZADOS
 FROM

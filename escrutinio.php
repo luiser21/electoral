@@ -4,8 +4,7 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 <script src="js/countdown.js"></script>
-<!--
-<meta http-equiv=refresh content=20;URL=escrutinio.php>-->
+<!-- <meta http-equiv=refresh content=20;URL=escrutinio.php> -->
 <script>
 
 function Blink()
@@ -66,7 +65,7 @@ button, input[type="button"], input[type="submit"] {
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		
 	</script>
-		<p style="margin-left:468px">Mesas Cerradas<div class="timer-area" style=" margin-right:-100px">	
+		<p style="margin-left:468px"><div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown" style="margin-left:58px">
 										<img src="<?php echo $_SESSION['foto']?>" width="180" height="177"><img src="images/ktEO3b-9.png" width="201" height="148"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<li>
@@ -87,7 +86,7 @@ button, input[type="button"], input[type="submit"] {
 											</li>
 										</ul>
 										
-									</div> </p>	
+									</div><br/><strong  style="font-size:20px; color: #FF0000">Cierran Mesas y arranca conteo de Votos</strong></p>	
 		
 		<table width="94%" border="0">
   <tr style="font-size:16px">
@@ -112,7 +111,8 @@ FROM
 boletines_departamentos
 INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines_departamentos.IDDEPARTAMENTO
 WHERE boletines_departamentos.VOTOS_REALES<>0
-ORDER BY NOMBRE ";
+HAVING VOTOS_REALES >20
+ORDER BY VOTOS_REALES DESC ";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
@@ -192,13 +192,13 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'Movilizados',
-                data: [<?php echo $arrDepartamento2?>]
-    		},
+                name: 'Registraduria',
+                data: [<?php echo $arrDepartamento3?>]
+    		}/*,
 			 {
                 name: 'Registraduria',
                 data: [<?php echo $arrDepartamento3?>]
-            }/*, {
+            }, {
                 name: 'Registraduria',
                 data: [<?php echo $arrDepartamento4?>]
             }*/]
@@ -216,7 +216,8 @@ $(function () {
 			escrutinio.MESAS_INFORMADAS,
 			escrutinio.VOTOS_PARTIDO,
 			escrutinio.PORCENTAJE_PARTIDO,
-			escrutinio.VOTOS_U49
+			escrutinio.VOTOS_U49,
+			escrutinio.BOLETIN
 			FROM
 			escrutinio";
 	$DBGestion->ConsultaArray($sql);				
@@ -231,7 +232,7 @@ $(function () {
   <tr>
     <th scope="col">CURULES ASIGNADAS  </th>
 	 <th width="31%" colspan="2" style="border:3px solid #CCCCCC;" scope="col"><img src="images/Senado_CNS_1989.png" width="239" height="69">
-	   <strong style="color:#00CC00; font-size:32px; size:32px"><?php echo $escrutinio[0]['CURULES']?><img src="images/partidou.png" width="240" height="80"></strong></th>
+	   <strong style="color:#00CC00; font-size:36px; size:32px"><br/><?php echo $escrutinio[0]['CURULES']?>&nbsp;CURULES<br/><img src="images/partidou.png" width="240" height="80"></strong></th>
   </tr>
   <tr>
     <th height="40" scope="col">MESAS INSTALADAS </th>
@@ -239,7 +240,8 @@ $(function () {
   </tr>
   <tr>
     <th height="40" scope="col">% MESAS INFORMADAS </th>
-    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><strong style="font-size:28px"><?php echo $escrutinio[0]['MESAS_INFORMADAS']?>&nbsp;%</strong> <img src="images/padrones-2013-donde-votar.png" width="40" height="33"></th>
+    <th style="border:3px solid #CCCCCC; font-size:20px" scope="col"><strong style="font-size:28px"><?php echo $escrutinio[0]['MESAS_INFORMADAS']?>&nbsp;</strong><img src="images/padrones-2013-donde-votar.png" width="40" height="33"></th>
+    <th style="border:3px solid #CCCCCC; font-size:20px" scope="col">89,80%</th>
   </tr>
   <tr>
     <th height="40" scope="col">VOTOS PARTIDO </th>
@@ -249,12 +251,13 @@ $(function () {
   <tr>
     <th scope="col">&nbsp;</th>
     <th height="40" scope="col">VOTOS U49 </th>
-    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><blink><strong style="font-size:32px; color:#FF0000"><?php echo  number_format($escrutinio[0]['VOTOS_U49'], 0, '', '.')?>&nbsp;VOTOS </strong></blink></th>
+    <th style="border:3px solid #CCCCCC; font-size:20px" scope="col"><blink><strong style="font-size:32px; color:#FF0000"><?php echo  number_format($escrutinio[0]['VOTOS_U49'], 0, '', '.')?>&nbsp;VOTOS </strong></blink></th>
+    <th style="border:3px solid #CCCCCC; font-size:20px" scope="col">0,08%</th>
   </tr>
   <tr>
     <th scope="col">&nbsp;</th>
-    <th height="40" scope="col">HORA ACTUAL</th>
-    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><span	><?php echo date(" g:i:s a") ?></span></th>
+    <th height="40" scope="col"># BOLETIN </th>
+    <th colspan="2" style="border:3px solid #CCCCCC; font-size:20px" scope="col"><span	><?php echo $escrutinio[0]['BOLETIN']?></span></th>
   </tr>
 </table>
 

@@ -42,35 +42,39 @@ for($i=0; $i<$registros-1; $i++){
 		
 				$sql="INSERT INTO BOLETINES_DEPARTAMENTOS (IDDEPARTAMENTO, MOVILIZADOS, ZONA, ENCARGADO) 
 				VALUES ('".$iddepartamento."',0,'".strtoupper(trim($zona[$i]))."','".strtoupper(trim($encargado[$i]))."')";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('1er REPORTE','10am','".$iddepartamento."',0,1,0,10)";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('2do REPORTE','11am','".$iddepartamento."',0,0,0,11)";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('3er REPORTE','12pm','".$iddepartamento."',0,0,0,12)";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('4to REPORTE','1pm','".$iddepartamento."',0,0,0,13)";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('5to REPORTE','2pm','".$iddepartamento."',0,0,0,14)";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('6to REPORTE','3pm','".$iddepartamento."',0,0,0,15)";							
-				$DBGestion->Consulta($sql);	
+				//$DBGestion->Consulta($sql);	
 				
 				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
 				VALUES ('7to REPORTE','4pm','".$iddepartamento."',0,0,0,16)";							
-				$DBGestion->Consulta($sql);
+				//$DBGestion->Consulta($sql);
+				
+				$sql="INSERT INTO BOLETINES (REPORTES, HORA, IDDEPARTAMENTO, MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,HORA_REAL) 
+				VALUES ('8to REPORTE','5pm','".$iddepartamento."',0,0,0,17)";							
+				//$DBGestion->Consulta($sql);
 					
 				
 			}catch(Exception $e){

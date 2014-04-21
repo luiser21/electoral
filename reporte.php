@@ -4,7 +4,11 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 <script src="js/countdown.js"></script>
+<?php if(date('H')<16){ ?>
 <meta http-equiv=refresh content=20;URL=reporte.php>
+<?php }elseif(date('H')==16){ ?>
+<meta http-equiv=refresh content=20;URL=escrutinio.php>
+<?php } ?>
 <script>
 
 function Blink()
