@@ -172,6 +172,8 @@ $(document).ready(function() {
 			<li ><a href="consolidado.php">Consolidado Electoral</a></li>
 			<li ><a href="reporte.php">Elecciones</a></li>
 			<li ><a href="movilizados.php">Movilizados</a></li>
+			<li ><a href="compromisos.php">Compromisos</a></li>
+			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
 			<?php } ?>
 		</ul>
 	</li>
