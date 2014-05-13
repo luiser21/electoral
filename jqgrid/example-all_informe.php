@@ -69,7 +69,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "COMPROMISOTELEFONICO";
 $col["name"] = "COMPROMISOTELEFONICO";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -82,7 +82,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "1er Rprt";
 $col["name"] = "1er Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -108,7 +108,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "2do Rprt";
 $col["name"] = "2do Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -133,7 +133,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "3er Rprt";
 $col["name"] = "3er Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -157,7 +157,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "4to Rprt";
 $col["name"] = "4to Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -181,7 +181,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "5to Rprt";
 $col["name"] = "5to Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -205,7 +205,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "6to Rprt";
 $col["name"] = "6to Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -229,7 +229,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "7mo Rprt";
 $col["name"] = "7mo Reporte";
-$col["width"] = "30";
+$col["width"] = "20";
 $col["editable"] = false; // this column is not editable
 $col["align"] = "right"; // this column is not editable
 $col["search"] = false; // this column is not searchable
@@ -251,6 +251,33 @@ $col["editrules"] = array("required"=>true, "edithidden"=>true, "integer"=>true)
 $col["hidden"] = false;
 
 $cols[] = $col;
+
+$col = array();
+$col["title"] = "Votos Reales";
+$col["name"] = "VOTOSREALES";
+$col["width"] = "20";
+$col["editable"] = false; // this column is not editable
+$col["align"] = "right"; // this column is not editable
+$col["search"] = false; // this column is not searchable
+$col["editoptions"] = array("size"=>30); // with default display of textbox with size 20
+$col["editrules"] = array("required"=>true, "edithidden"=>true, "integer"=>true); // and is required
+$col["hidden"] = false;
+
+$cols[] = $col;
+
+$col = array();
+$col["title"] = "Diferencia";
+$col["name"] = "DIFERENCIA";
+$col["width"] = "20";
+$col["editable"] = false; // this column is not editable
+$col["align"] = "right"; // this column is not editable
+$col["search"] = false; // this column is not searchable
+$col["editoptions"] = array("size"=>30); // with default display of textbox with size 20
+$col["editrules"] = array("required"=>true, "edithidden"=>true, "integer"=>true); // and is required
+$col["hidden"] = false;
+
+$cols[] = $col;
+
 $g = new jqgrid();
 
 $grid["rowNum"] = 35; // by default 20
@@ -309,7 +336,19 @@ where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=15 and bo
 (SELECT boletines.MOVILIZADOS FROM boletines
 where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=16 and boletines.IDDEPARTAMENTO=compromisos_candidato.DEPARTAMENTO) as '7mo Reporte',
 CONCAT(ROUND((((SELECT sum(boletines.MOVILIZADOS) as MOVILIZADOS FROM boletines
-where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=16 and boletines.IDDEPARTAMENTO=compromisos_candidato.DEPARTAMENTO)/compromisos_candidato.COMPROMISOTELEFONICO)*100),1),'%') as porcent7
+where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=16 and boletines.IDDEPARTAMENTO=compromisos_candidato.DEPARTAMENTO)/compromisos_candidato.COMPROMISOTELEFONICO)*100),1),'%') as porcent7,
+compromisos_candidato.VOTOSREALES,
+
+(compromisos_candidato.VOTOSREALES-(
+		SELECT
+			boletines.MOVILIZADOS
+		FROM
+			boletines
+		WHERE
+			boletines.CANDIDATO = '21'
+		AND HORA_REAL = 16
+		AND boletines.IDDEPARTAMENTO = compromisos_candidato.DEPARTAMENTO
+	)) AS DIFERENCIA
 FROM
 compromisos_candidato
 INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = compromisos_candidato.DEPARTAMENTO
@@ -349,7 +388,29 @@ where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=15)/(sele
 (SELECT sum(boletines.MOVILIZADOS) as MOVILIZADOS FROM boletines
 where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=16 ) as '7mo Reporte',
 CONCAT(ROUND((((SELECT sum(boletines.MOVILIZADOS) as MOVILIZADOS FROM boletines
-where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=16)/(select sum(COMPROMISOTELEFONICO) from compromisos_candidato where CANDIDATO='".$_SESSION["idcandidato"]."'))*100),1),'%') as porcent7
+where boletines.CANDIDATO='".$_SESSION["idcandidato"]."' and HORA_REAL=16)/(select sum(COMPROMISOTELEFONICO) from compromisos_candidato where CANDIDATO='".$_SESSION["idcandidato"]."'))*100),1),'%') as porcent7,
+(SELECT
+				sum(compromisos_candidato.VOTOSREALES)
+			FROM
+				compromisos_candidato
+			WHERE
+				CANDIDATO = '21'
+		)AS VOTOSREALES,
+((SELECT
+				sum(compromisos_candidato.VOTOSREALES)
+			FROM
+				compromisos_candidato
+			WHERE
+				CANDIDATO = '21'
+		)-(
+			SELECT
+				sum(boletines.MOVILIZADOS)AS MOVILIZADOS
+			FROM
+				boletines
+			WHERE
+				boletines.CANDIDATO = '21'
+			AND HORA_REAL = 16
+		)) AS DIFERENCIA
 FROM
 compromisos_candidato
 where CANDIDATO='".$_SESSION["idcandidato"]."'

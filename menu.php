@@ -174,6 +174,7 @@ $(document).ready(function() {
 			<li ><a href="movilizados.php">Movilizados</a></li>
 			<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
+			<li ><a href="informe_movilizados.php">Informe Comparativo Compromisos - Movilizados - Votos Reales</a></li>
 			<?php } ?>
 		</ul>
 	</li>
