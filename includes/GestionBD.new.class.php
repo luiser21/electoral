@@ -29,7 +29,7 @@ class GestionBD{
 		$this->usuario = "root";
 		$this->basedatos = "";
 		$this->db = "electoral";
-		$this->pass = "1234";
+		$this->pass = "";
 		$this->datos = array();
 		$this->filas = array();
 		$this->NumColumnas = 0;
@@ -55,7 +55,7 @@ class GestionBD{
 				$this->basedatos = 'MYSQL';
 				$this->servidor = 'localhost';
 				$this->usuario = 'root';
-				$this->pass = '1234';			
+				$this->pass = '';			
 			
 		}
 	protected function InicializarBD($TipoDB, $db = ""){
@@ -63,6 +63,7 @@ class GestionBD{
 		if(!@$Permisos){
 			$Permisos["IDUSUARIO"] = 'NOCOOKIE';
 		}
+		//imprimir($this);
 		set_time_limit(0);
 		$this->db = 'electoral';
 			switch ($this->basedatos)

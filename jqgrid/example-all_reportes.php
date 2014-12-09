@@ -1,7 +1,7 @@
 ﻿<?php 
 
 		
-$conn = mysql_connect("localhost", "root", "1234");
+$conn = mysql_connect("localhost", "root", "");
 mysql_select_db("electoral");
 
 mysql_query("SET NAMES 'utf8'");

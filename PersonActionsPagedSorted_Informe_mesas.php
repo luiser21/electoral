@@ -104,7 +104,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" GROUP BY p.IDPUESTO ORDER BY NOMBRE ";
+			$sql.=" GROUP BY p.IDPUESTO ORDER BY MUNICIPIO ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 		//	echo $sql;
 			$DBGestion->ConsultaArray($sql);				
