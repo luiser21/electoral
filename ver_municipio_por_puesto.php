@@ -14,12 +14,95 @@ $_GET["jtStartIndex"]=0;*/
 		//Get record count
 		if($_SESSION["username"]!='edgarcarreno'){	
 			$sql="";
-			if($_SESSION['tipocandidato']=='SENADO'){
-				$sql="";
+			if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='ALCALDIA' || $_SESSION['tipocandidato']=='CONSEJO'){
+			
+				$sql="SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.ID,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.IDPUESTO AS ID,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES,
+					COUNT(MESAS) AS MESAS 
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' and municipios.ID=".$_GET['municipio']."
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE";
+					
+				
+			
+					$DBGestion->ConsultaArray($sql);				
+					$partidos=$DBGestion->datos;	
+				//	imprimir($partidos);
+					$recordCount=count($partidos);
+					
+					//Get records from database
+				$sql="SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.ID,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.IDPUESTO AS ID,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES,
+					COUNT(MESAS) AS MESAS 
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' and municipios.ID=".$_GET['municipio']."
+					";
+					
+				if(isset($_POST["name"])!=""){
+						$sql.=" and upper(p.nombre) like upper('%".$_POST["name"]."%') ";
+					}
+					
+					$sql.=" GROUP BY p.IDPUESTO
+							ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE";
+					$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
+					
+					$DBGestion->ConsultaArray($sql);				
+					$partidos=$DBGestion->datos;
+					
+					$row=array();		
+					for($i=0; $i<count($partidos);$i++){
+						$row[$i]['ID']=$partidos[$i]['ID'];
+						$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['PUESTO']);
+						$row[$i]['MUNICIPIO']=utf8_encode($partidos[$i]['MUNICIPIOS']);
+						$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
+						$row[$i]['VOTOS']=$partidos[$i]['VOTOS'];
+						$row[$i]['MESAS']=$partidos[$i]['MESAS'];
+						$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
+						$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOS'];
+					}
+						
+					//Return result to jTable
+					$jTableResult = array();
+					$jTableResult['Result'] = "OK";
+					$jTableResult['TotalRecordCount'] =$recordCount;
+					$jTableResult['Records'] = $row;
+					//print json_encode($jTableResult);
 			
 			
-			
-			}
+			}else{
 			$sql="SELECT
 					p.codigo as ID,
 					p.nombre AS NOMBRE,
@@ -95,6 +178,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['TotalRecordCount'] =$recordCount;
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
+			}
 		}else{
 			$sql="SELECT
 					p.codigo as ID,

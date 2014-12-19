@@ -58,16 +58,40 @@ button, input[type="button"], input[type="submit"] {
   </tr>
 
     <td><h4 align="left" style="font-size: 18px">Candidato 
-	<?php if($_SESSION["tipocandidato"]=='SENADO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td></tr><tr><td><h4 align="left" style="font-size: 18px; color: #999999"> De la República'; 
-		}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td>
+	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'a la '.$_SESSION['tipocandidato'];
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo 'a la '.$_SESSION['tipocandidato'];	
+	}
+	?> </h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['municipio'])); 
-		}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ echo 'A la '.$_SESSION['tipocandidato'].'</h4></td>
-  </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['departamento'])); }?>
-
-	
-		</h4></td></tr>
+    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
+	<?php 
+	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'COLOMBIA';
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}?></h4></td></tr>
   <tr>
   <tr>
     <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
@@ -141,12 +165,15 @@ $arrDepartamento="";
 $arrDepartamento2="";$suma=0;
 $depar="";
 foreach($departamentos as $Depto=>$Val){
-$i++;
+
 $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
 	
 	if($i<count($departamentos) && $valores>=4.5){
+	
 		$arrDepartamento.= "'".$Val['DEPARTAMENTO']."',";
 		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
+		//imprimir($arrDepartamento2);
+
 	}else{
 		
 		//$arrDepartamento.= "'".$Val['DEPARTAMENTO']."'";
@@ -157,13 +184,14 @@ $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
 		$suma=$suma+$Val['VOTOS'];
 		$depar=$depar.','.$Val['DEPARTAMENTO'];
 	}
-	
+	$i++;
 	
 }
 //imprimir($depar);
 $arrDepartamento.= "'OTROS'";
 $arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
-	//imprimir($arrDepartamento2);
+//	imprimir($arrDepartamento2);
+	//exit;
 ?>
 						<br/>
 							<script type="text/javascript">
@@ -204,7 +232,7 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Departamentos',
+                name: 'Municipios',
                 data: [<?php echo $arrDepartamento2?>]
     
             }]

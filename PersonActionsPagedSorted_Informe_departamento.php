@@ -107,6 +107,99 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 			}
+			if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='ALCALDIA' || $_SESSION['tipocandidato']=='CONSEJO'){
+				$sql="";
+			
+			$sql="SELECT IDDEPARTAMENTO,DEPARTAMENTO,COUNT(MUNICIPIOS) AS MUNICIPIOS, SUM(PUESTO) AS PUESTOS, SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES FROM (
+					SELECT IDDEPARTAMENTO,DEPARTAMENTO,MUNICIPIOS,COUNT(PUESTO) AS PUESTO ,SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES  FROM (SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
+					GROUP BY municipios)  CONSULTA
+					 ";
+				
+					
+			if(isset($_POST["name"])!=""){
+				$sql.=" where upper(DEPARTAMENTO) like upper('%".$_POST["name"]."%') ";
+			}
+				$sql.=" GROUP BY DEPARTAMENTO
+					ORDER BY DEPARTAMENTO ";
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;	
+		//	imprimir($partidos);
+			$recordCount=count($partidos);
+			
+			//Get records from database
+		
+			$sql="SELECT IDDEPARTAMENTO,DEPARTAMENTO,COUNT(MUNICIPIOS) AS MUNICIPIOS, SUM(PUESTO) AS PUESTOS, SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES,COUNT(MESAS) AS MESAS  FROM (
+					SELECT IDDEPARTAMENTO,DEPARTAMENTO,MUNICIPIOS,COUNT(PUESTO) AS PUESTO ,SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES,COUNT(MESAS) AS MESAS   FROM (SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES,
+					COUNT(MESAS) AS MESAS 
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
+					GROUP BY municipios)  CONSULTA ";
+			
+			if(isset($_POST["name"])!=""){
+				$sql.=" where upper(DEPARTAMENTO) like upper('%".$_POST["name"]."%') ";
+			}
+				$sql.=" GROUP BY DEPARTAMENTO
+					ORDER BY DEPARTAMENTO ";
+			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
+			//echo $sql;
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;
+			
+			$row=array();		
+			for($i=0; $i<count($partidos);$i++){
+				$row[$i]['ID']=$partidos[$i]['IDDEPARTAMENTO'];
+				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
+				$row[$i]['MUNICIPIOS']=utf8_encode($partidos[$i]['MUNICIPIOS']);
+				$row[$i]['PUESTOS']=utf8_encode($partidos[$i]['PUESTOS']);
+				$row[$i]['MESAS']=utf8_encode($partidos[$i]['MESAS']);
+				$row[$i]['VOTOS']=$partidos[$i]['VOTOS'];
+				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
+				$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOS'];
+			}
+				
+			//Return result to jTable
+			$jTableResult = array();
+			$jTableResult['Result'] = "OK";
+			$jTableResult['TotalRecordCount'] =$recordCount;
+			$jTableResult['Records'] = $row;
+			//print json_encode($jTableResult);
+			}
 		}else{
 			//imprimir($_POST);
 			$sql="SELECT

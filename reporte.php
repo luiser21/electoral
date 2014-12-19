@@ -66,7 +66,7 @@ button, input[type="button"], input[type="submit"] {
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
 			
-			<div id="crudFormLineal" style="width: 1110px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
+			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
 				date: "9 march 2014 15:59:59",
@@ -100,7 +100,7 @@ button, input[type="button"], input[type="submit"] {
 										
 									</div> </p>	
 		
-		<table width="95%" border="0">
+		<table width="100%" border="0">
   <tr style="font-size:16px">
     <th width="43%" rowspan="3" scope="col"><?php 
 

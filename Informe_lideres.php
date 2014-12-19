@@ -57,9 +57,44 @@ button, input[type="button"], input[type="submit"] {
       <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-    <td><h4 align="left" style="font-size: 18px">Candidato al <?php echo $_SESSION['tipocandidato']?>  </h4></td>
+    <td><h4 align="left" style="font-size: 18px">Candidato 
+	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'a la '.$_SESSION['tipocandidato'];
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo 'a la '.$_SESSION['tipocandidato'];	
+	}
+	?> </h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"><?php echo ucwords(strtolower($_SESSION['municipio']))?> - <?php echo ucwords(strtolower($_SESSION['departamento']))?></h4></td></tr>
+    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
+	<?php 
+	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'COLOMBIA';
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}?></h4></td></tr>
+  <tr>
+  <tr>
+  <td><h4 align="left" style="font-size: 18px; color: #999999"><?php echo ucwords(strtolower($_SESSION['municipio']))?> - <?php echo ucwords(strtolower($_SESSION['departamento']))?></h4></td></tr>
   <tr>
   <tr>
     <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>

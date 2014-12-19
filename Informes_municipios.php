@@ -1,5 +1,5 @@
 <?php require_once('topadmin.php');?> 
-  <link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+<link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
@@ -58,16 +58,40 @@ button, input[type="button"], input[type="submit"] {
   </tr>
 
     <td><h4 align="left" style="font-size: 18px">Candidato 
-	<?php if($_SESSION["tipocandidato"]=='SENADO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td></tr><tr><td><h4 align="left" style="font-size: 18px; color: #999999"> De la República'; 
-		}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td>
+	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'a la '.$_SESSION['tipocandidato'];
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo 'a la '.$_SESSION['tipocandidato'];	
+	}
+	?> </h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['municipio'])); 
-		}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ echo 'A la '.$_SESSION['tipocandidato'].'</h4></td>
-  </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['departamento'])); }?>
-
-	
-		</h4></td></tr>
+    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
+	<?php 
+	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'COLOMBIA';
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}?></h4></td></tr>
   <tr>
   <tr>
     <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
@@ -77,7 +101,144 @@ button, input[type="button"], input[type="submit"] {
   </tr>
  
 </table>
+<?php 
 
+$sql="SELECT SUM(VOTOS) AS TOTAL FROM (SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.ID,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS ";
+$DBGestion->ConsultaArray($sql);				
+$totales=$DBGestion->datos;	
+//imprimir($totales[0]['TOTAL']);
+
+$sql="SELECT MUNICIPIOS,SUM(VOTOS) AS VOTOS FROM (SELECT
+					departamentos.IDDEPARTAMENTO,
+					departamentos.NOMBRE as DEPARTAMENTO,
+					municipios.ID,
+					municipios.NOMBRE as MUNICIPIOS,
+					p.NOMBRE_PUESTO AS PUESTO,
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
+					SUM(mesas.VOTOREAL) AS VOTOSREALES
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'
+					GROUP BY p.IDPUESTO
+					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS GROUP BY municipios";
+				
+$DBGestion->ConsultaArray($sql);				
+$departamentos=$DBGestion->datos;	
+
+$arrDepartamento=array();
+$i=0;
+$arrDepartamento="";
+$arrDepartamento2="";$suma=0;
+$depar="";
+foreach($departamentos as $Depto=>$Val){
+
+$valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
+	
+	if($i<count($departamentos) && $valores>=2.5){
+	
+		$arrDepartamento.= "'".$Val['MUNICIPIOS']."',";
+		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
+		//imprimir($arrDepartamento2);
+
+	}else{
+		
+		//$arrDepartamento.= "'".$Val['MUNICIPIOS']."'";
+		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
+	}
+	
+	if($valores<2.5){
+		$suma=$suma+$Val['VOTOS'];
+		$depar=$depar.','.$Val['MUNICIPIOS'];
+	}
+	$i++;
+	
+}
+//imprimir($depar);
+$arrDepartamento.= "'OTROS'";
+$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
+//	imprimir($arrDepartamento2);
+	//exit;
+?>
+						<br/>
+							<script type="text/javascript">
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Grafico por Departamentos'
+            },
+            subtitle: {
+                text: 'Votos por Departamento'
+            },
+            xAxis: {
+                categories: [<?php echo $arrDepartamento?>
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Votos %'
+                }
+            },
+			
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Municipios',
+                data: [<?php echo $arrDepartamento2?>]
+    
+            }]
+        });
+    });
+    
+		</script>
+			<script src="js/js/highcharts.js"></script>
+<script src="js/js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
+			
 						<br/>
 <div class="filtering">
     <form>
@@ -110,7 +271,7 @@ button, input[type="button"], input[type="submit"] {
 	<script type="text/javascript">
 
 		$(document).ready(function () {
-
+	
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
 				title: 'Tabla de Municipios',
@@ -138,7 +299,7 @@ button, input[type="button"], input[type="submit"] {
 						sorting: false,
 						edit: false,
 						create: false,
-						display: function (studentData) {
+						display: function (studentData) { 
 							//Create an image that will be used to open child table
 							var $img = $('<img src="images/note.png" title="Detallado por Puesto de Votacion" />');
 							//Open child table when user clicks the image
@@ -146,17 +307,17 @@ button, input[type="button"], input[type="submit"] {
 								$('#PeopleTableContainer').jtable('openChildTable',
 										$img.closest('tr'),
 										{
-											title: studentData.record.MUNICIPIO,
+											title: 'Municipio de '+studentData.record.MUNICIPIOS,
 											paging: true,
 											pageSize: 20,
 											sorting: true,
 											defaultSorting: 'Name ASC',
 											actions: {
-												listAction: 'ver_municipio_por_puesto.php?municipio=' + studentData.record.MUNICIPIO,
+												listAction: 'ver_municipio_por_puesto.php?municipio=' + studentData.record.ID,
 												caption:"Export to Excel",
 												//deleteAction: '/Demo/DeletePhone',
 												//updateAction: '/Demo/UpdatePhone',
-												createAction: 'ver_municipio_por_puesto_excel.php?municipio=' + studentData.record.MUNICIPIO
+												createAction: 'ver_municipio_por_puesto_excel.php?municipio=' + studentData.record.ID
 											},
 											fields: {
 												ID: {
@@ -293,8 +454,8 @@ button, input[type="button"], input[type="submit"] {
 							return $img;
 						}
 					},
-					MUNICIPIO: {
-						title: 'MUNICIPIO',
+					MUNICIPIOS: {
+						title: 'MUNICIPIOS',
 						width: '25%',
 						create: false,
 						edit: false
@@ -320,8 +481,22 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},
-					MIEMBROS : {
+					VOTOS : {
 						title: 'VOTO_PRE',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					VOTOSREALES : {
+						title: 'VOTO_REAL',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					VARIACION : {
+						title: 'VARIACION',
 						width: '5%',
 						//type: 'date',
 						create: false,

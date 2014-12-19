@@ -57,9 +57,41 @@ button, input[type="button"], input[type="submit"] {
       <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-    <td><h4 align="left" style="font-size: 18px">Candidato al <?php echo $_SESSION['tipocandidato']?>  </h4></td>
+    <td><h4 align="left" style="font-size: 18px">Candidato 
+	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'a la '.$_SESSION['tipocandidato'];
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo 'a la '.$_SESSION['tipocandidato'];	
+	}
+	?> </h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"><?php echo ucwords(strtolower($_SESSION['municipio']))?> - <?php echo ucwords(strtolower($_SESSION['departamento']))?></h4></td></tr>
+    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
+	<?php 
+	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'COLOMBIA';
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}?></h4></td></tr>
   <tr>
   <tr>
     <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
@@ -69,7 +101,145 @@ button, input[type="button"], input[type="submit"] {
   </tr>
  
 </table>
+<?php 
 
+$sql="SELECT 
+					sum((SELECT
+					count(*) as TOTAL
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO)) as TOTAL					
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'  ";
+$DBGestion->ConsultaArray($sql);				
+$totales=$DBGestion->datos;	
+//imprimir($totales[0]['TOTAL']);
+
+$sql="SELECT
+					CONCAT(p.NOMBRE_PUESTO,'-',municipios.NOMBRE) AS PUESTO,					
+					(SELECT
+					count(*) as VOTOS
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' GROUP BY p.NOMBRE_PUESTO ORDER BY VOTOS DESC ";
+				
+$DBGestion->ConsultaArray($sql);				
+$departamentos=$DBGestion->datos;	
+
+$arrDepartamento=array();
+$i=0;
+$arrDepartamento="";
+$arrDepartamento2="";$suma=0;
+$depar="";
+foreach($departamentos as $Depto=>$Val){
+
+ $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
+	
+	if($i<count($departamentos) && $valores>=0.3){
+	
+		$arrDepartamento.= "'".$Val['PUESTO']."',";
+		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
+		//imprimir($arrDepartamento2);
+
+	}else{
+		
+		//$arrDepartamento.= "'".$Val['PUESTO']."'";
+		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
+	}
+	
+	if($valores<0.3){
+		$suma=$suma+$Val['VOTOS'];
+		$depar=$depar.','.$Val['PUESTO'];
+	}
+	$i++;
+	
+}
+//imprimir($depar);
+$arrDepartamento.= "'OTROS'";
+$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
+//	imprimir($arrDepartamento2);
+	//exit;
+?>
+						<br/>
+							<script type="text/javascript">
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Grafico por Puesto de Votacion'
+            },
+            subtitle: {
+                text: 'Votos por Puesto de Votacion'
+            },
+            xAxis: {
+                categories: [<?php echo $arrDepartamento?>
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Votos %'
+                }
+            },
+			
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Puestos de VOTACION',
+                data: [<?php echo $arrDepartamento2?>]
+    
+            }]
+        });
+    });
+    
+		</script>
+			<script src="js/js/highcharts.js"></script>
+<script src="js/js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
+			
 						<br/>
 <div class="filtering">
     <form>
