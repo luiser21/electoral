@@ -39,17 +39,17 @@ button, input[type="button"], input[type="submit"] {
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
+
 			
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
-			
-			<table width="auto" border="0">
+					<table width="auto" border="0">
   <tr>
     <th width="227" rowspan="7" scope="row"><?php if($_SESSION['foto']!=""){?>
 						<img src="<?php echo $_SESSION['foto']?>" width="120" height="154" style="border:3px solid #CCCCCC;">
 			<?php }else{ ?>		
 				<img src="fotos/images.jpg" width="131" height="150" style="border:3px solid #CCCCCC;">
 			<?php } ?>	</th>
-    <td width="575"><h4 align="left">Consolidado por Puesto de Votaci&oacute;n</h4></td>
+    <td width="575"><h4 align="left">Consolidado por Lideres VS Simpatizantes</h4></td>
   </tr>
   <tr>
     <td>
@@ -102,66 +102,32 @@ button, input[type="button"], input[type="submit"] {
  
 </table>
 <?php 
-//Sacar total de votantes para colocar en a tabla
-/*$sql_votos="SELECT
-count(mesa_puesto_miembro.MIEMBRO) AS votos
+
+$sql="SELECT
+count(miembros.ID) AS TOTAL
 FROM
-mesa_puesto_miembro
-INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+miembros
 INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
 INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 where usuario.USUARIO='".$_SESSION["username"]."'";
-$DBGestion->ConsultaArray($sql);				
-$totales_=$DBGestion->datos;	*/
-
-$sql="SELECT 
-					sum((SELECT
-					count(*) as TOTAL
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO)) as TOTAL					
-					FROM
-					puestos_votacion AS p
-					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
-					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
-					left JOIN lideres ON lideres.ID = miembros.IDLIDER
-					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."'  ";
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 //imprimir($totales[0]['TOTAL']);
 
 $sql="SELECT
-					CONCAT(p.NOMBRE_PUESTO,'-',municipios.NOMBRE) AS PUESTO,					
-					(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
-					FROM
-					puestos_votacion AS p
-					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
-					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
-					left JOIN lideres ON lideres.ID = miembros.IDLIDER
-					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' GROUP BY p.NOMBRE_PUESTO ORDER BY VOTOS DESC ";
+CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) as LIDER,
+COUNT(miembros.ID) AS VOTOS
+FROM
+miembros
+INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+where usuario.USUARIO='".$_SESSION["username"]."' 
+GROUP BY lideres.ID
+ORDER BY VOTOS DESC ";
 				
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
@@ -177,19 +143,19 @@ foreach($departamentos as $Depto=>$Val){
 	
 	if($i<count($departamentos) && $valores>=0.3){
 	
-		$arrDepartamento.= "'".$Val['PUESTO']."',";
+		$arrDepartamento.= "'".$Val['LIDER']."',";
 		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
 		//imprimir($arrDepartamento2);
 
 	}else{
 		
-		//$arrDepartamento.= "'".$Val['PUESTO']."'";
+		//$arrDepartamento.= "'".$Val['LIDER']."'";
 		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
 	}
 	
 	if($valores<0.3){
 		$suma=$suma+$Val['VOTOS'];
-		$depar=$depar.','.$Val['PUESTO'];
+		$depar=$depar.','.$Val['LIDER'];
 	}
 	$i++;
 	
@@ -208,10 +174,10 @@ $(function () {
                 type: 'column'
             },
             title: {
-                text: 'Grafico por Puesto de Votacion'
+                text: 'Grafico por Lideres'
             },
             subtitle: {
-                text: 'Votos por Puesto de Votacion'
+                text: 'Votos por Simpatizantes'
             },
             xAxis: {
                 categories: [<?php echo $arrDepartamento?>
@@ -239,7 +205,7 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Puestos de VOTACION',
+                name: 'Simpatizantes',
                 data: [<?php echo $arrDepartamento2?>]
     
             }]
@@ -287,13 +253,13 @@ $(function () {
 
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
-				title: 'Tabla de Puestos de Votacion',
+				title: 'Tabla de Lideres',
 				paging: true,
 				pageSize: 20,
 				sorting: true,
 				defaultSorting: 'Name ASC',
 				actions: {
-					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=list'
+					listAction: 'PersonActionsPagedSorted_informes_lideres.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
@@ -314,7 +280,7 @@ $(function () {
 						create: false,
 						display: function (studentData) {
 							//Create an image that will be used to open child table
-							var $img = $('<img src="images/note.png" title="Ver Mesas por Miembros" />');
+							var $img = $('<img src="images/note.png" title="Ver Miembros por Lideres" />');
 							//Open child table when user clicks the image
 							$img.click(function () {
 								$('#PeopleTableContainer').jtable('openChildTable',
@@ -322,114 +288,57 @@ $(function () {
 										{
 											title: studentData.record.NOMBRE,
 											actions: {
-												listAction: 'ver_mesas_miembros.php?idpuesto=' + studentData.record.ID,
+												listAction: 'ver_mesas_miembros_informe_lideres.php?idlider=' + studentData.record.ID,
 												caption:"Export to Excel",
 												//deleteAction: '/Demo/DeletePhone',
 												//updateAction: '/Demo/UpdatePhone',
-												createAction: 'ver_mesas_miembros_excel.php?idpuesto=' + studentData.record.ID
+												createAction: 'ver_mesas_miembros_informe_lideres_excel.php?idlider=' + studentData.record.ID
 											},
 											fields: {
 												ID: {
-													type: 'hidden',
-													defaultValue: studentData.record.ID
-												},
-												CODIGO: {
 													key: true,
 													create: false,
 													edit: false,
 													list: false
 												},
-												MESAS: {
-													title: 'MESAS',
-													width: '7%',
+												NOMBRE: {
+													title: 'NOMBRE',
+													width: '40%',
 													create: false,
 													edit: false
 												},
-												VOTOSPREVISTOS: {
-													title: 'VOTOS PREVISTOS',
-													width: '12%',
+												CEDULA: {
+													title: 'CEDULA',
+													width: '10%',
 													create: false,
 													edit: false
 												},
+												NOMBRE_PUESTO: {
+													title: 'NOMBRE_PUESTO',
+													width: '40%',
+													create: false,
+													edit: false
+												},
+												MESA: {
+													title: 'MESA',
+													width: '10%',
+													create: false,
+													edit: false
+												},	
 												VOTOREAL: {
-													title: 'VOTOS REALES',
+													title: 'VOTOREAL',
 													width: '10%',
 													create: false,
 													edit: false
 												},
 												VARIACION: {
 													title: 'VARIACION',
-													width: '5%',
+													width: '10%',
 													create: false,
 													edit: false
-												},
-												SIMPATIZANTES: {
-													title: 'SIMPATIZANTES',
-													width: '40%',
-													create: false,
-													edit: false
-												},
-												Phone: {
-													title: '',
-													width: '2%',
-													sorting: false,
-													edit: false,
-													create: false,
-													display: function (studentData) {
-														//Create an image that will be used to open child table
-														var $img = $('<img src="images/note.png" title="Ver Lideres por Miembros" />');
-														//Open child table when user clicks the image
-														$img.click(function () {
-															$('#PeopleTableContainer').jtable('openChildTable',
-																	$img.closest('tr'),
-																	{
-																		title: studentData.record.MESAS,
-																		actions: {
-																			listAction: 'ver_mesas_miembros_lideres.php?idmesa=' + studentData.record.CODIGO,
-																			caption:"Export to Excel",
-																			//deleteAction: '/Demo/DeletePhone',
-																			//updateAction: '/Demo/UpdatePhone',
-																			createAction: 'ver_mesas_miembros_lideres_excel.php?idmesa=' + studentData.record.CODIGO
-																		},
-																		fields: {
-																			ID: {
-																				type: 'hidden',
-																				defaultValue: studentData.record.CODIGO
-																			},
-																			CODIGO: {
-																				key: true,
-																				create: false,
-																				edit: false,
-																				list: false
-																			},
-																			LIDER: {
-																				title: 'LIDER',
-																				width: '25%',
-																				create: false,
-																				edit: false
-																			},
-																			TELEFONO: {
-																				title: 'TELEFONO',
-																				width: '10%',
-																				create: false,
-																				edit: false
-																			},
-																			SIMPATIZANTES: {
-																				title: 'SIMPATIZANTES',
-																				width: '25%',
-																				create: false,
-																				edit: false
-																			}
-																		}
-																	}, function (data) { //opened handler
-																		data.childTable.jtable('load');
-																	});
-														});
-														//Return image to show on the person row
-														return $img;
-													}
-												},
+												}
 											}
+																	
 										}, function (data) { //opened handler
 											data.childTable.jtable('load');
 										});
@@ -439,48 +348,48 @@ $(function () {
 						}
 					},
 					NOMBRE: {
-						title: 'PUESTO DE VOTACION',
+						title: 'NOMBRE',
+						width: '40%',
+						create: false,
+						edit: false
+					},
+					CEDULA: {
+						title: 'CEDULA',
+						width: '20%',
+						create: false,
+						edit: false
+					},
+					NOMBRE_PUESTO: {
+						title: 'NOMBRE_PUESTO',
 						width: '30%',
-						create: false,
-						edit: false
-					},
-					MUNICIPIO: {
-						title: 'MUNICIPIO',
-						width: '25%',
-						create: false,
-						edit: false
-					},
-					DEPARTAMENTO: {
-						title: 'DEPARTAMENTO',
-						width: '25%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					MESAS: {
-						title: 'MESAS',
-						width: '5%',
+					MESA: {
+						title: 'MESA',
+						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					VOTOSPREV : {
-						title: 'VOTO_PRE',
-						width: '5%',
+					MIEMBROS : {
+						title: 'MIEMBROS',
+						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					VOTOSREALES: {
-						title: 'VOTO_REAL',
-						width: '5%',
+					VOTOSREALES : {
+						title: 'VOTOSREALES',
+						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					VARIACION: {
+					VARIACION : {
 						title: 'VARIACION',
-						width: '5%',
+						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
@@ -505,7 +414,7 @@ $(function () {
 	</script>
 				
 				
-		  </div></div>
+			</div></div>
 		</header>	
 		
 	 </div>

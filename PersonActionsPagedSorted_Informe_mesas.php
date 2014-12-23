@@ -13,13 +13,7 @@ $_GET["jtStartIndex"]=0;*/
 	{
 		//Get record count
 		if($_SESSION["username"]!='edgarcarreno'){	
-			$sql="";
-			if($_SESSION['tipocandidato']=='SENADO'){
-				$sql="";
-			
-			
-			
-			}
+					
 			$sql="SELECT
 					p.IDPUESTO AS ID,
 					p.NOMBRE_PUESTO AS NOMBRE,
