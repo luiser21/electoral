@@ -13,7 +13,7 @@ try
 					lideres.ID AS CODIGO,
 					CONCAT(trim(lideres.nombres),' ',trim(lideres.apellidos)) AS LIDER,
 					lideres.TELEFONO AS TELEFONO,
-					CONCAT(trim(miembros.nombres),' ',trim(miembros.apellidos)) AS SIMPATIZANTES
+					CONCAT(trim(miembros.nombres)) AS SIMPATIZANTES
 					FROM
 					miembros
 					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
@@ -36,7 +36,7 @@ try
 					lideres.ID AS CODIGO,
 					CONCAT(trim(lideres.nombres),' ',trim(lideres.apellidos)) AS LIDER,
 					lideres.TELEFONO AS TELEFONO,
-					CONCAT(trim(miembros.nombres),' ',trim(miembros.apellidos)) AS SIMPATIZANTES
+					CONCAT(trim(miembros.nombres)) AS SIMPATIZANTES
 
 					FROM
 					miembros
@@ -51,7 +51,8 @@ try
 					and mesas.ID='".$_GET["idmesa"]."' ";	
 			
 			
-			$sql.=" ORDER BY LIDER ";				
+			$sql.=" ORDER BY LIDER ";			
+			
 			//$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
 					
 			//Add all records to an array

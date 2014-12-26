@@ -115,9 +115,8 @@ where usuario.USUARIO='".$_SESSION["username"]."'";
 $DBGestion->ConsultaArray($sql);				
 $totales_=$DBGestion->datos;	*/
 
-$sql="SELECT 
-					sum((SELECT
-					count(*) as TOTAL
+$sql="SELECT SUM(VOTOS) AS TOTAL FROM (SELECT (SELECT
+					count(*) as VOTOS
 					FROM
 					miembros
 					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
@@ -126,7 +125,7 @@ $sql="SELECT
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO)) as TOTAL					
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
 					FROM
 					puestos_votacion AS p
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
@@ -135,7 +134,7 @@ $sql="SELECT
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."'  ";
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' GROUP BY p.NOMBRE_PUESTO ORDER BY VOTOS DESC) PUESTOS ";
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 //imprimir($totales[0]['TOTAL']);
@@ -175,7 +174,7 @@ foreach($departamentos as $Depto=>$Val){
 
  $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
 	
-	if($i<count($departamentos) && $valores>=0.3){
+	if($i<count($departamentos) && $valores>=1.0){
 	
 		$arrDepartamento.= "'".$Val['PUESTO']."',";
 		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
@@ -187,7 +186,7 @@ foreach($departamentos as $Depto=>$Val){
 		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
 	}
 	
-	if($valores<0.3){
+	if($valores<1.0){
 		$suma=$suma+$Val['VOTOS'];
 		$depar=$depar.','.$Val['PUESTO'];
 	}
