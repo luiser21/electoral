@@ -21,7 +21,7 @@ button, input[type="button"], input[type="submit"] {
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "09 march 2014 08:00:00",
+				date: "25 october 2015 08:00:00",
 				format: "on"
 			},
 			function() {
@@ -37,8 +37,8 @@ button, input[type="button"], input[type="submit"] {
 						<li>
 							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Elecciones</span><span class="color1">Parlamentarias</span><span> 2014</span></span>
-								<p>Cuenta Regresiva para el 09 de Marzo<div class="timer-area" style=" margin-right:-100px">	
+								<span class="title"><span class="color2">Elecciones</span><span class="color1">Regionales</span><span> 2015</span></span>
+								<p>Cuenta Regresiva para el 25 de Octubre de 2015<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown">
 											<li>
 												<span class="days">00</span>
@@ -65,7 +65,7 @@ button, input[type="button"], input[type="submit"] {
 						<li>
 							<img src="images/img2.png" alt="" >
 							<div class="banner">
-								<span class="title"><span class="color2">Innovaci&oacute;n</span><span class="color1">y Desarrollo a su</span><span style="font-size:36px">Servicio</span></span>
+								<span class="title"><span class="" style="color:#FFFFFF">Innovaci&oacute;n</span><span class="color1">y Desarrollo a su</span><span style="font-size:36px">Servicio</span></span>
 								<p >En donde las encuestas y estrategias sean aplicadas correctamente, obteniendo el exito de su campaña</p>
 								
 							</div>

@@ -12,7 +12,7 @@ $_GET["jtStartIndex"]=0;*/
 	if($_GET["action"] == "list")
 	{
 		//Get record count
-		if($_SESSION["username"]!='edgarcarreno'){	
+		if($_SESSION["username"]!='alcaldia'){	
 		
 			 $sql="SELECT
 				lideres.ID,
@@ -23,11 +23,11 @@ $_GET["jtStartIndex"]=0;*/
 				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS 
 				FROM
 				lideres
-				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
+				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 			  where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){
@@ -49,11 +49,11 @@ $_GET["jtStartIndex"]=0;*/
 				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS 
 				FROM
 				lideres
-				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
+				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 			  where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){
@@ -70,7 +70,7 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
 				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
-				$row[$i]['MIEMBROS']=utf8_encode($partidos[$i]['MIEMBROS']);
+				$row[$i]['MIEMBROS']=utf8_encode($partidos[$i]['MIEMBROS']+1);
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
 			}	
@@ -117,7 +117,7 @@ $_GET["jtStartIndex"]=0;*/
 			  LEFT JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto 
 			  INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider.candidato
 		 	  INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-			  where usuario_2010.usuario='".$_SESSION["username"]."' ";
+			  where usuario_2010.usuario='".$_SESSION["username"]."'";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(lider.nombre) like upper('%".$_POST["name"]."%') ";

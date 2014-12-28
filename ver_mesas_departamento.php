@@ -7,7 +7,7 @@ try
 	$DBGestion = new GestionBD('AGENDAMIENTO');
 
 		//Get record count
-		if($_SESSION["username"]!='edgarcarreno'){	
+		if($_SESSION["username"]!='alcaldia'){	
 		
 			$sql="SELECT
 				m.ID as CODIGO,

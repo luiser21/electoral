@@ -443,7 +443,7 @@ $arrDepartamento4.= "".$suma2."";
 <div class="first">
 <marquee>
 VOTOS PREVISTOS:  <span style="color:#FF0000"><?php 
-echo $voto=($voto_cargue*70)/100;
+echo $voto=($totales[0]['MOVILIZADOS']*70)/100;
 ?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <span style=" color:#00CC33; font-size:20px"><strong>ESLOGAN DEL CANDIDATO</strong></span>
 </marquee>

@@ -63,7 +63,7 @@ button, input[type="button"], input[type="submit"] {
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
 		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+		echo 'a la '.$_SESSION['tipocandidato'].' del ';	
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo 'al '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
@@ -82,7 +82,7 @@ button, input[type="button"], input[type="submit"] {
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
 		echo ucwords(strtolower($_SESSION['departamento']));	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+		echo 'Municipio de '. ucwords(strtolower($_SESSION['municipio'])); 
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
@@ -97,10 +97,13 @@ button, input[type="button"], input[type="submit"] {
     <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
   </tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px; color: #999999">Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
+    <td><h4 align="left" style="font-size: 18px; color: #999999"><?php 
+	if($_SESSION['tipocandidato']!='PRESIDENCIA'  && $_SESSION['tipocandidato']!='GOBERNACION' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
+		Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
+	<?php }?>
   </tr>
  
-</table>
+</table>	<?php if($_SESSION["username"]!='alcaldia'){?>	
 <?php 
 //Sacar total de votantes para colocar en a tabla
 /*$sql_votos="SELECT
@@ -194,12 +197,12 @@ foreach($departamentos as $Depto=>$Val){
 	
 }
 //imprimir($depar);
-$arrDepartamento.= "'OTROS'";
-$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
+@$arrDepartamento.= "'OTROS'";
+@$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
 //	imprimir($arrDepartamento2);
 	//exit;
 ?>
-						<br/>
+				
 							<script type="text/javascript">
 $(function () {
         $('#container').highcharts({
@@ -250,7 +253,7 @@ $(function () {
 <script src="js/js/modules/exporting.js"></script>
 
 <div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
-			
+	<?php } ?>		
 						<br/>
 <div class="filtering">
     <form>
@@ -286,7 +289,7 @@ $(function () {
 
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
-				title: 'Tabla de Puestos de Votacion',
+				title: 'Informe por Puestos de Votacion',
 				paging: true,
 				pageSize: 20,
 				sorting: true,

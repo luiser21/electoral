@@ -181,5 +181,6 @@ $(document).ready(function() {
 			<?php //} ?>
 		</ul>
 	</li>
-	 <li><a href="tarjetones.php"  >Elecciones Congreso 2014</a></li> 
+	<!-- <li><a href="tarjetones.php"  >Elecciones Congreso 2014</a></li> -->
+	<li><a href="calendario_2015.php"  >Calendario Electoral 2015</a></li> 
 </ul>

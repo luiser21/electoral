@@ -26,39 +26,24 @@ button, input[type="button"], input[type="submit"] {
 </style>
 <?php 
 
-$sql="
-SELECT SUM(VOTOS) AS TOTAL FROM (SELECT SUM(VOTOS) AS VOTOS   FROM (SELECT
-					departamentos.IDDEPARTAMENTO,
-					departamentos.NOMBRE as DEPARTAMENTO,
-					municipios.NOMBRE as MUNICIPIOS,
-					p.NOMBRE_PUESTO AS PUESTO,
-					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
-					SUM(mesas.VOTOREAL) AS VOTOSREALES,
-					COUNT(MESAS) AS MESAS 
-					FROM
-					puestos_votacion AS p
-					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
-					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
-					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION['username']."'
-					GROUP BY p.IDPUESTO
-					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
-					GROUP BY VOTOS
-ORDER BY departamento, municipios) VOTOS";
+$sql="SELECT
+sum(boletines.MOVILIZADOS) AS MOVILIZADOS
+FROM
+boletines
+INNER JOIN candidato ON candidato.ID = boletines.CANDIDATO
+INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+where usuario.USUARIO='".$_SESSION["username"]."'";
 $DBGestion->ConsultaArray($sql);				
-$totales=$DBGestion->datos;
+$totales=$DBGestion->datos;	
+ number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
+	   $voto_cargue= number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
 ?>		
 <div id="marquesina">
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $totales[0]['TOTAL']?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-FALTA  <span style="color:#FF0000">04 DIAS 12 HORAS</span> PARA LAS ELECCIONES AL SENADO
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto=number_format(($totales[0]['MOVILIZADOS']*70)/100,0,'','.');?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="color:#00CC33; font-size:20px">ESLOGAN DEL CANDIDATO</span> 
 </marquee>
 </div>
 </div>
@@ -70,19 +55,20 @@ FALTA  <span style="color:#FF0000">04 DIAS 12 HORAS</span> PARA LAS ELECCIONES A
 						<li>
 							<img src="images/<?php echo $_SESSION["username"]?>.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2"><?php echo $_SESSION["nombre"]?></span><span class="color1" style="color: #E60000">
+								<span class="title"><span class="color2" style="font-size:35px"><?php echo $_SESSION["nombre"]?></span>
+								<span class="color1" style="color: #E60000">
 								<?php if($_SESSION["tipocandidato"]=='SENADO'){ 
-										echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])). '</span><span> De la Rep&uacute;blica'; 
+										echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])). '</span><span style="font-size:35px"> De la Rep&uacute;blica'; 
 									}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ 
 										if($_SESSION["tipocandidato"]=='ALCALDIA'){
-											echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span>';
+											echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' del </span><span style="font-size:35px">';
 										}
 										if($_SESSION["tipocandidato"]=='CONSEJO'){
-											echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span>';
+											echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])).' del </span><span style="font-size:35px">';
 										}
-										echo ucwords(strtolower($_SESSION['municipio'])); 
+										echo 'Municipio '.ucwords(strtolower($_SESSION['municipio'])); 
 									}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ 
-										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span>';										
+										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span style="font-size:35px0">';										
 										echo ucwords(strtolower($_SESSION['departamento'])); 
 									}?></span></span>
 								<h2 style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></h2>
@@ -93,16 +79,16 @@ FALTA  <span style="color:#FF0000">04 DIAS 12 HORAS</span> PARA LAS ELECCIONES A
 						<li>
 							<img src="images/lideres.png" alt="">
 								<div class="banner">
-								<span class="title"><span class="color2">Gestione</span><span class="color1">Lideres de</span><span>Campa&ntilde;a</span></span>
-								<p>Aumente su capacidad de Comunicaci&oacute;n generando credibilidad y confianza.</p>
+								<span class="title"><span class="color2">Gestion con Efectividad</span><span class="color1">Hacia sus</span><span>Lideres</span></span>
+								<p>Aumente su capacidad de llegar con credibilidad y confianza.</p>
 								
 							</div>
 						</li>
 						<li>
 							<img src="images/miembros.png" alt="" >
 							<div class="banner">
-								<span class="title"><span class="color2">Gestione</span><span class="color1">Simpatizantes</span><span>que lo apoyan</span></span>
-								<p>Administre los ciudanos, descargue informes con sus puestos de votaci&oacute;n.</p>
+								<span class="title"><span class="color2">Conozca sus</span><span class="color1">Simpatizantes</span><span>y Lideres que lo respaldan</span></span>
+								<p>SIGE una Herramienta que acerca al candidato con los ciudadanos.</p>
 							
 							</div>
 						</li>

@@ -12,7 +12,7 @@ $_GET["jtStartIndex"]=0;*/
 	if($_GET["action"] == "list")
 	{
 		//Get record count
-		if($_SESSION["username"]!='edgarcarreno'){	
+		if($_SESSION["username"]!='alcaldia'){	
 					
 			$sql="SELECT
 					p.IDPUESTO AS ID,
@@ -184,7 +184,7 @@ SUM(mesas_2010.votoreal) AS VOTOSREALES
 FROM
 puesto_2010
 INNER JOIN mesas_2010 ON mesas_2010.puesto = puesto_2010.codigo
-where puesto_2010.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='edgarcarreno')  
+where puesto_2010.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')  
 and puesto_2010.codigo=p.codigo
 GROUP BY puesto_2010.codigo
 )
@@ -199,7 +199,7 @@ GROUP BY puesto_2010.codigo
 				INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.miembro = miembros_2010.codigo
 				INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
 				INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
-				where usuario_2010.usuario='edgarcarreno' and puesto_2010.codigo=p.codigo)  AS VARIACION
+				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto_2010.codigo=p.codigo)  AS VARIACION
 				FROM
 				puesto_2010 p
 				where p.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."') ";
@@ -217,8 +217,8 @@ GROUP BY puesto_2010.codigo
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
-				$row[$i]['MUNICIPIO']=utf8_encode($partidos[$i]['MUNICIPIO']);
-				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
+				$row[$i]['MUNICIPIO']='LA PROSPERIDAD';
+				$row[$i]['DEPARTAMENTO']='EL BIENESTAR';
 				$row[$i]['VOTOSPREV']=$partidos[$i]['VOTOSPREV'];
 				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
 				$row[$i]['MESAS']=$partidos[$i]['MESAS'];

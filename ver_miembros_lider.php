@@ -10,7 +10,7 @@ $_GET["jtPageSize"]=	2;
 $_GET["jtStartIndex"]=0;*/
 	//Getting records (listAction)
 			//Get record count
-		if($_SESSION["username"]!='edgarcarreno'){	
+		if($_SESSION["username"]!='alcaldia'){	
 		
 				$sql="SELECT
 				miembros.ID,
