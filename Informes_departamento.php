@@ -188,8 +188,8 @@ $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
 	
 }
 //imprimir($depar);
-$arrDepartamento.= "'OTROS'";
-$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
+@$arrDepartamento.= "'OTROS'";
+@$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
 //	imprimir($arrDepartamento2);
 	//exit;
 ?>

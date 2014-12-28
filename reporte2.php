@@ -184,16 +184,14 @@ button, input[type="button"], input[type="submit"] {
 		
 		<table width="100%" border="0">
   <tr style="font-size:16px">
-    <th width="70%" rowspan="4" scope="col"><?php 
+    <th width="43%" rowspan="3" scope="col"><?php 
 
 
 $sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-INNER JOIN candidato ON candidato.ID = boletines.CANDIDATO
-INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-where usuario.USUARIO='".$_SESSION["username"]."'";
+where boletines.ESTADO=1";
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 
@@ -204,11 +202,8 @@ CONCAT(boletines.REPORTES,' - ',boletines.HORA) as REPORTES,
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-INNER JOIN candidato ON candidato.ID = boletines.CANDIDATO
-INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-where boletines.ESTADO in (1,2) AND usuario.USUARIO='".$_SESSION["username"]."'
-GROUP BY REPORTES 
-ORDER BY boletines.ID";
+where boletines.ESTADO in (1,2)
+GROUP BY REPORTES ";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
@@ -239,13 +234,10 @@ $i++;
 		//$arrDepartamento4.= "".$Val['REAL']."";
 	}
 }
-
 $sql="SELECT boletines.REPORTES
 FROM
 boletines
-INNER JOIN candidato ON candidato.ID = boletines.CANDIDATO
-INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-where boletines.ESTADO=1  AND usuario.USUARIO='".$_SESSION["username"]."'";
+where boletines.ESTADO=1";
 //echo $sql;
 $DBGestion->ConsultaArray($sql);
 $reportes=$DBGestion->datos;
@@ -308,7 +300,7 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'Simpatizantes',
+                name: 'Votos',
                 data: [<?php echo $arrDepartamento2?>]
     		}
 			/*, {
@@ -326,15 +318,13 @@ $(function () {
 <script src="js/js/modules/exporting.js"></script>
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
-    
-	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:26px; color:#FF0000"><br/><br/><?php echo 
-	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
-	   $voto_cargue= number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
-	   ?><br/><br/></strong><strong style="font-size:14px; color:#FF0000">SIMPATIZANTES</strong></blink>
+    <th width="15%" scope="col">REPORTES</th> 
+	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/><?php echo 
+	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
 	     <p><img src="images/votos2.png" width="119" height="131"></p>
 	   </div> </th>
-	<?php  if($_SESSION['tipocandidato']=='SENADO'){ ?>
+	  
        <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">DEPARTAMENTOS SIN MOVILIZACION <?php echo @$reportes[0]['REPORTES'];?><br/>
          <br/><blink><strong style="color: #990000"><?php 
 	   $sql="SELECT 
@@ -349,20 +339,15 @@ $(function () {
 		for($k=0;$k<count($departamentos);$k++){
 			echo $departamentos[$k]['NOMBRE'].' - ';
 		}
-	}else{
-	   ?> 
-	    <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">PV REPRESENTATIVOS <?php echo @$reportes[0]['REPORTES'];?><br/>
-         <br/><blink><strong style="color: #990000"><?php 
-	}
-	   ?> 
-	   </blink></strong></th>
+
+	   ?> </blink></strong></th>
   </tr>
   <tr>
     <th scope="col"><?php 
-//echo @$reportes[0]['REPORTES'];	?></th>
+echo @$reportes[0]['REPORTES'];	?></th>
 	 </tr>
   <tr>
-    
+    <th height="40" scope="col">HORA ACTUAL </th>
 
     <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><?php echo date(" g:i:s a") ?></th>
     </tr>
@@ -442,10 +427,8 @@ $arrDepartamento4.= "".$suma2."";
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php 
-echo $voto=($voto_cargue*70)/100;
-?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <span style=" color:#00CC33; font-size:20px"><strong>ESLOGAN DEL CANDIDATO</strong></span>
+VOTOS PREVISTOS:  <span style="color:#FF0000">98.350</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DIA ELECTORAL HA COMENZADO
 </marquee>
 </div>
 </div>

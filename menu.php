@@ -172,7 +172,8 @@ $(document).ready(function() {
 			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>
 			<li ><a href="consolidado.php">Consolidado Electoral</a></li>
-			<li ><a href="reporte.php">Elecciones</a></li>
+			<li ><a href="reporte.php">Elecciones Pre Electoral</a></li>
+			<li ><a href="reporte2.php">Dia Electoral</a></li>
 			<!--<li ><a href="movilizados.php">Movilizados</a></li>
 			<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
