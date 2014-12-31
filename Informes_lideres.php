@@ -57,13 +57,13 @@ button, input[type="button"], input[type="submit"] {
       <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-    <td><h4 align="left" style="font-size: 18px">Candidato 
+     <td><h4 align="left" style="font-size: 18px">Candidato 
 	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'a la '.$_SESSION['tipocandidato'];
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
 		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+		echo 'a la '.$_SESSION['tipocandidato'].' del ';	
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo 'al '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
@@ -82,7 +82,7 @@ button, input[type="button"], input[type="submit"] {
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
 		echo ucwords(strtolower($_SESSION['departamento']));	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+		echo 'Municipio de '. ucwords(strtolower($_SESSION['municipio'])); 
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
@@ -97,24 +97,56 @@ button, input[type="button"], input[type="submit"] {
     <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
   </tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px; color: #999999">Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
-  </tr>
- 
+    <td><h4 align="left" style="font-size: 18px; color: #999999"><?php 
+	if($_SESSION['tipocandidato']!='PRESIDENCIA'  && $_SESSION['tipocandidato']!='GOBERNACION' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
+		Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
+	<?php }?>
+  </tr> 
 </table>
 <?php 
+$sql="";
+$sql2="";
+if($_SESSION["username"]!='alcaldia'){	
+		
+	$sql="SELECT
+	count(miembros.ID) AS TOTAL
+	FROM
+	miembros
+	INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+	INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+	INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+	INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+	where usuario.USUARIO='".$_SESSION["username"]."'";
+	
+}else{
+	$sql="SELECT count(miembros_2010.codigo) AS TOTAL
+		FROM
+		miembros_2010
+		INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
+		INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+		INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+		INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.miembro = miembros_2010.codigo
 
-$sql="SELECT
-count(miembros.ID) AS TOTAL
-FROM
-miembros
-INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-where usuario.USUARIO='".$_SESSION["username"]."'";
+		INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
+		INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
+		where usuario_2010.usuario='".$_SESSION["username"]."'";
+	
+	$sql2="SELECT count(lider_2010.codigo) AS TOTAL FROM lider_2010
+			  LEFT JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.lider = lider_2010.codigo
+			  LEFT JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas 
+			  LEFT JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto 
+			  INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+		 	  INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+			  where usuario_2010.usuario='".$_SESSION["username"]."'";
+}
+
 $DBGestion->ConsultaArray($sql);				
-$totales=$DBGestion->datos;	
-//imprimir($totales[0]['TOTAL']);
+	$totales=$DBGestion->datos;
+//Lideres
+$DBGestion->ConsultaArray($sql2);				
+$totales_lideres=$DBGestion->datos;
+	
+	//imprimir($totales_lideres);exit;
 
 $sql="SELECT
 CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) as LIDER,
@@ -161,12 +193,12 @@ foreach($departamentos as $Depto=>$Val){
 	
 }
 //imprimir($depar);
-$arrDepartamento.= "'OTROS'";
-$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
+@$arrDepartamento.= "'OTROS'";
+@$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
 //	imprimir($arrDepartamento2);
 	//exit;
 ?>
-						<br/>
+<!--						<br/>
 							<script type="text/javascript">
 $(function () {
         $('#container').highcharts({
@@ -180,7 +212,7 @@ $(function () {
                 text: 'Votos por Simpatizantes'
             },
             xAxis: {
-                categories: [<?php echo $arrDepartamento?>
+                categories: [<?php echo @$arrDepartamento?>
                 ]
             },
             yAxis: {
@@ -206,7 +238,7 @@ $(function () {
             },
             series: [{
                 name: 'Simpatizantes',
-                data: [<?php echo $arrDepartamento2?>]
+                data: [<?php echo @$arrDepartamento2?>]
     
             }]
         });
@@ -217,7 +249,7 @@ $(function () {
 <script src="js/js/modules/exporting.js"></script>
 
 <div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
-			
+	-->		
 						<br/>
 <div class="filtering">
     <form>
@@ -245,7 +277,19 @@ $(function () {
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='informe_puestos_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
 
     </form>
-</div><p></p>
+</div>
+<div style="position:absolute; left: 628px; top: 171px;">
+<table width="257" border="1" align="center">
+  <tr align="center">
+    <th scope="col">LIDERES </th>
+    <th scope="col">SIMPATIZANTES </th>
+  </tr>
+  <tr align="center">
+    <td style="font-size:26px"><img src="images/Ejecutivo.png" width="35" height="35" /><strong><?php echo '    '.@$totales_lideres[0]['TOTAL']?></strong></td>
+    <td style="font-size:26px"><img src="images/partners.png" width="35" height="35" /><strong><?php echo '    '.@$totales[0]['TOTAL']?></strong></td>
+  </tr>
+</table></div>
+<p></p>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
@@ -374,12 +418,12 @@ $(function () {
 						edit: false
 					},
 					MIEMBROS : {
-						title: 'MIEMBROS',
+						title: 'SIMPATIZANTES',
 						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
-					},
+					}/*,
 					VOTOSREALES : {
 						title: 'VOTOSREALES',
 						width: '30%',
@@ -393,7 +437,7 @@ $(function () {
 						//type: 'date',
 						create: false,
 						edit: false
-					}
+					}*/
 				}
 			});
 

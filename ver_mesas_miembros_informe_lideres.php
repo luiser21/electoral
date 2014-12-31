@@ -79,11 +79,12 @@ try
 			//print json_encode($jTableResult);
 		}else{
 			$sql="SELECT
-					lider_2010.codigo AS CODIGO,
-					CONCAT(trim(lider_2010.nombre),' ',trim(lider_2010.apellido)) AS LIDER,
-					lider_2010.celular AS TELEFONO,
-					CONCAT(trim(miembros_2010.nombre),' ',trim(miembros_2010.apellido)) AS MIEMBROS
-
+					miembros_2010.codigo as ID,
+					CONCAT(trim(miembros_2010.nombre),' ',trim(miembros_2010.apellido)) AS NOMBRES,
+					miembros_2010.identificacion AS CEDULA,
+					puesto_2010.nombre as NOMBRE_PUESTO,
+					mesas_2010.mesas as  MESA,
+					mesas_2010.votoreal AS VOTOREAL
 					FROM
 					miembros_2010
 					INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
@@ -94,8 +95,7 @@ try
 					INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
 					INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
 					where usuario_2010.usuario='".$_SESSION["username"]."' 
-					##and puesto_2010.codigo='".$_SESSION["username"]."' 
-					and mesas_2010.codigo='".$_GET["idmesa"]."' ";
+					and miembros_2010.lider=".$_GET["idlider"];
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		//	imprimir($partidos);
@@ -103,11 +103,12 @@ try
 			
 			//Get records from database
 		$sql="SELECT
-					lider_2010.codigo AS CODIGO,
-					CONCAT(trim(lider_2010.nombre),' ',trim(lider_2010.apellido)) AS LIDER,
-					lider_2010.celular AS TELEFONO,
-					CONCAT(trim(miembros_2010.nombre),' ',trim(miembros_2010.apellido)) AS SIMPATIZANTES
-
+					miembros_2010.codigo as ID,
+					CONCAT(trim(miembros_2010.nombre),' ',trim(miembros_2010.apellido)) AS NOMBRES,
+					miembros_2010.identificacion AS CEDULA,
+					puesto_2010.nombre as NOMBRE_PUESTO,
+					mesas_2010.mesas as  MESA,
+					mesas_2010.votoreal AS VOTOREAL
 					FROM
 					miembros_2010
 					INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
@@ -118,28 +119,22 @@ try
 					INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
 					INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
 					where usuario_2010.usuario='".$_SESSION["username"]."' 
-					##and puesto_2010.codigo='".$_SESSION["username"]."' 
-					and mesas_2010.codigo='".$_GET["idmesa"]."' ";
+					and miembros_2010.lider=".$_GET["idlider"];
 			
-			$sql.=" order by lider ";
+			$sql.=" order by NOMBRES ";
 			
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;
 			$idlider='';
 			$row=array();		
 			for($i=0; $i<count($partidos);$i++){	
-				if($idlider==$partidos[$i]['CODIGO']){
-					$row[$i]['CODIGO']='';
-					$row[$i]['LIDER']='';
-					$row[$i]['TELEFONO']='';
-					$row[$i]['SIMPATIZANTES']=$partidos[$i]['SIMPATIZANTES'];
-				}else{
-					$row[$i]['CODIGO']=$partidos[$i]['CODIGO'];
-					$row[$i]['LIDER']=$partidos[$i]['LIDER'];
-					$row[$i]['TELEFONO']=$partidos[$i]['TELEFONO'];
-					$row[$i]['SIMPATIZANTES']=$partidos[$i]['SIMPATIZANTES'];
-				}
-				$idlider=$partidos[$i]['CODIGO'];
+				$row[$i]['ID']=$partidos[$i]['ID'];
+				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRES']);
+				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
+				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
+				$row[$i]['MESA']=$partidos[$i]['MESA'];
+				$row[$i]['VOTOREAL']=$partidos[$i]['VOTOREAL'];
+				$row[$i]['VARIACION']=$partidos[$i]['VOTOREAL']-1;
 			}
 			//Return result to jTable
 			$jTableResult = array();
