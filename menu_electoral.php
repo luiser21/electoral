@@ -17,11 +17,11 @@ $(document).ready(function() {
 
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
-	<li><a href="#" >Conformaci&oacute;n Senado</a>
+	<li><a href="#" >Conformaci&oacute;n</a>
 		
 		<ul>
 			
-			<li ><a href="proyectosley.php" >Proyectos de Ley Tramitados</a></li>
+			<li ><a href="#" >Proyectos de Ley</a></li>
 		<!--	<li ><a href="#" >Congresistas que han perdido la curuL</a></li>
 			<li ><a href="#" >Ausencias</a></li>
 					
@@ -69,9 +69,9 @@ $(document).ready(function() {
 		
 		<ul >
 			<li ><a href="causales.php?ac=1">Constituci&oacute;n</a></li>
-			<li ><a href="causales.php?ac=3">R&eacute;gimen de Bancadas</a></li>
+			<!--<li ><a href="causales.php?ac=3">R&eacute;gimen de Bancadas</a></li>
 			<li ><a href="causales.php?ac=2">Codigo Disciplinario</a></li>
-			<li ><a href="causales.php?ac=4">Causales por Perdida de Investidura</a></li>
+			<li ><a href="causales.php?ac=4">Causales por Perdida de Investidura</a></li>-->
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	</li>
