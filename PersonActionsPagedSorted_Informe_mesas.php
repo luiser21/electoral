@@ -178,28 +178,7 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN mesas_2010 ON mesas_2010.puesto = puesto_2010.codigo
 				where puesto_2010.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."') and puesto_2010.codigo=p.codigo
 				GROUP BY puesto_2010.codigo
-				) AS VOTOSREALES,
-				(SELECT
-SUM(mesas_2010.votoreal) AS VOTOSREALES
-FROM
-puesto_2010
-INNER JOIN mesas_2010 ON mesas_2010.puesto = puesto_2010.codigo
-where puesto_2010.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."')  
-and puesto_2010.codigo=p.codigo
-GROUP BY puesto_2010.codigo
-)
--
-	(SELECT
-				count(miembros_2010.codigo) as VOTOS				
-				FROM
-				miembros_2010
-				INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
-				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
-				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
-				INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.miembro = miembros_2010.codigo
-				INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
-				INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
-				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto_2010.codigo=p.codigo)  AS VARIACION
+				) AS VOTOSREALES				
 				FROM
 				puesto_2010 p
 				where p.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."') ";
@@ -222,7 +201,7 @@ GROUP BY puesto_2010.codigo
 				$row[$i]['VOTOSPREV']=$partidos[$i]['VOTOSPREV'];
 				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
 				$row[$i]['MESAS']=$partidos[$i]['MESAS'];
-				$row[$i]['VARIACION']=$partidos[$i]['VARIACION'];
+				$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOSPREV'];
 			}
 					
 			//Return result to jTable

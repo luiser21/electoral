@@ -278,10 +278,99 @@ $(function () {
             <option value="15">Volos</option>
         </select>-->
         <button type="submit" id="LoadRecordsButton">Buscar</button>
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='informe_puestos_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
 
     </form>
-</div><p></p>
+</div>
+<div style="position:absolute; left: 588px; top: 201px;">
+<table width="350" border="1" align="center">
+  <tr align="center">
+    <th scope="col">PUESTOS </th>
+    <th scope="col">MESAS </th>
+	 <th scope="col">VOTOS_PRE </th>
+	  <th scope="col">VOTOS_REAL </th>
+  </tr>
+  <?php 
+  
+  $sql="";
+if($_SESSION["username"]!='alcaldia'){	
+	$sql="SELECT count(ID) as PUESTOS, SUM(MESAS) AS MESAS, SUM(VOTOSPREV) AS VOTOSPREV, SUM(VOTOSREALES) AS VOTOSREALES FROM (SELECT
+					p.IDPUESTO AS ID,
+					p.MESAS AS MESAS,
+					(SELECT
+					count(*) as VOTOS
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
+					(SELECT
+				SUM(mesas.votoreal) AS VOTOSREALES
+				FROM
+				puestos_votacion
+				INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
+				where 
+				puestos_votacion.IDPUESTO=p.IDPUESTO
+				GROUP BY puestos_votacion.IDPUESTO
+				) AS VOTOSREALES
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
+GROUP BY p.IDPUESTO) AS TABLA";
+
+}else{
+
+  $sql="SELECT
+				count(p.codigo) as PUESTOS,
+				SUM(p.mesas) AS MESAS,
+				SUM((SELECT
+				count(miembros_2010.codigo) as VOTOS
+				FROM
+				miembros_2010
+				INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
+				INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+				INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+				INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.miembro = miembros_2010.codigo
+				INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
+				INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
+				where usuario_2010.usuario='".$_SESSION["username"]."' and puesto_2010.codigo=p.codigo)) as VOTOSPREV,
+				SUM((SELECT
+				SUM(mesas_2010.votoreal) AS VOTOSREALES
+				FROM
+				puesto_2010
+				INNER JOIN mesas_2010 ON mesas_2010.puesto = puesto_2010.codigo
+				where puesto_2010.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."') and puesto_2010.codigo=p.codigo
+				GROUP BY puesto_2010.codigo
+				)) AS VOTOSREALES				
+				FROM
+				puesto_2010 p
+				where p.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope where usuario_2010.usuario='".$_SESSION["username"]."') 
+			";
+	}
+	$DBGestion->ConsultaArray($sql);				
+$datos=$DBGestion->datos;	
+
+
+  ?>
+  
+  <tr align="center">
+    <td style="font-size:22px"><img src="images/voting-box-hi.png" width="25" height="25" /><strong><?php echo '    '.@$datos[0]['PUESTOS']?></strong></td>
+    <td style="font-size:22px"><img src="images/voting-box-hi.png" width="25" height="25" /><strong><?php echo '    '.@$datos[0]['MESAS']?></strong></td>
+	 <td style="font-size:22px"><img src="images/votaciones.png" width="25" height="25" /><strong><?php echo '    '.@$datos[0]['VOTOSPREV']?></strong></td>
+ <td style="font-size:22px"><img src="images/votaciones.png" width="25" height="25" /><strong><?php echo '    '.@$datos[0]['VOTOSREALES']?></strong></td>
+
+ </tr>
+</table></div>
+<p></p>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
