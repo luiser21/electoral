@@ -1,7 +1,8 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
 
-//imprimir(puesto_votacion('1007011751'));
+//imprimir(puesto_votacion('19436718'));  /*Cedula de un Condenado*/
+//imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
 
@@ -40,10 +41,18 @@ function puesto_votacion($cedula_Excel){
 					if($posicion_coincidencia3 === false) {
 						$posicion_coincidencia4 = strpos($contenido, 'Pendiente por Solicitud en proceso');
 						if($posicion_coincidencia4 === false) {
-							$puesto_votacion=array(
-									'ERROR'=>'INDEFINIDO'			
-							);
-							return $puesto_votacion;
+							$posicion_coincidencia5 = strpos($contenido, 'Baja por Perdida o Suspension');
+							if($posicion_coincidencia5 === false) {
+								$puesto_votacion=array(
+										'ERROR'=>'INDEFINIDO'			
+								);
+								return $puesto_votacion;
+							}else{
+								$puesto_votacion=array(
+										'ERROR'=>'Baja por Perdida o Suspension de los Derechos Politicos'			
+								);
+								return $puesto_votacion;
+							}
 						}else{
 							$puesto_votacion=array(
 									'ERROR'=>'Pendiente por Solicitud en proceso'			
