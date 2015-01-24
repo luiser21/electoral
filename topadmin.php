@@ -52,6 +52,8 @@ ul.newsticker a:hover {text-decoration: underline;}
 <link href="Scripts/jtable/themes/lightcolor/red/jtable.css" rel="stylesheet" type="text/css" />
 <?php }elseif($_SESSION["partido"]=='Partido de la U'){ ?>
 <link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
+<?php }else{?>
+<link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
 <?php } ?>
 <title>SIGE</title>
 <meta charset="utf-8">
