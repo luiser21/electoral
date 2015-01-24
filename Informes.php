@@ -103,7 +103,7 @@ button, input[type="button"], input[type="submit"] {
 	<?php }?>
   </tr>
  
-</table>	<?php if($_SESSION["username"]!='alcaldia'){?>	
+</table>	<!--<?php if($_SESSION["username"]!='alcaldia'){?>	
 <?php 
 //Sacar total de votantes para colocar en a tabla
 /*$sql_votos="SELECT
@@ -252,7 +252,7 @@ $(function () {
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
+<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>-->
 	<?php } ?>		
 						<br/>
 <div class="filtering">
