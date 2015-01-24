@@ -56,7 +56,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto=number_format(($t
 							<img src="images/<?php echo $_SESSION["username"]?>.png" alt="">
 							<div class="banner">
 								<span class="title"><span class="color2" style="font-size:35px"><?php echo $_SESSION["nombre"]?></span>
-								<span class="color1" style="color: #E60000">
+								<span class="color1" style="color: #E60000; font-size:35px">
 								<?php if($_SESSION["tipocandidato"]=='SENADO'){ 
 										echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])). '</span><span style="font-size:35px"> De la Rep&uacute;blica'; 
 									}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ 
@@ -68,7 +68,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto=number_format(($t
 										}
 										echo 'Municipio '.ucwords(strtolower($_SESSION['municipio'])); 
 									}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ 
-										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span style="font-size:35px0">';										
+										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span style="font-size:35px">';										
 										echo ucwords(strtolower($_SESSION['departamento'])); 
 									}?></span></span>
 								<h2 style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></h2>
