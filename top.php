@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="css/slide.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
-<script type="text/javascript" src="js/jquery-1.6.js" ></script>
 
 <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" />
 <link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
@@ -23,9 +22,7 @@
 <script type="text/javascript" src="js/jquery-1.6.js" ></script> 
 <script type="text/javascript" src="js/FAjax.js"></script>
 <script type="text/javascript" src="js/jquery.colorbox.js"></script> 
-<script src="js/slide.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/cufon-replace.js"></script>  
+<script src="js/slide.js" type="text/javascript"></script> 
 <script type="text/javascript" src="js/Vegur_300.font.js"></script>
 <script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
 <script type="text/javascript" src="js/PT_Sans_400.font.js"></script>

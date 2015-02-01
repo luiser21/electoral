@@ -17,166 +17,85 @@ $(document).ready(function() {
 
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
-	<li><a href="#" >Conformaci&oacute;n</a>
-		
-		<ul>
-			
+	<li><a href="calendario_2015.php"  >Calendario Electoral 2015</a></li> 		
+		<ul>			
 			<li ><a href="#" >Proyectos de Ley</a></li>
-		<!--	<li ><a href="#" >Congresistas que han perdido la curuL</a></li>
-			<li ><a href="#" >Ausencias</a></li>
-					
-				<!--	<ul >
-						<li ><a href="#">Proyectos de Ley Tramitados</a></li>
-						<li ><a href="#">Sillas Vacias</a></li>
-						<li ><a href="../opacity/">Ausencias</a></li>
-					</ul>
-				
-			
-		<!--	<li  ><a href="../boxes/">Lenses<!--</a>
-					
-		<!--			<ul >
-						<li ><a href="../mozilla/">Wide Angle</a></li>
-						<li ><a href="../ie/">Standard</a></li>
-						<li ><a href="../opacity/">Telephoto</a></li>
-						<li ><a href="../menu/" class="fly">Zoom<!--</a>
-							
-			<!--				<ul>
-								<li ><a href="../mozilla/">35mm to 125mm</a></li>
-								<li ><a href="../opacity/">50mm to 250mm</a></li>
-								<li ><a href="../menu/">125mm to 500mm</a></li>
-							</ul>
-						
-			<!--			</li>
-						<li ><a href="../boxes/">Mirror</a></li>
-						<li ><a href="../opacity/" >Non standard<!--</a>
-							
-			<!--				<ul>
-								<li ><a href="../mozilla/">Bayonet mount</a></li>
-								<li ><a href="../opacity/">Screw mount</a></li>
-							</ul>
-							
-			<!--			</li>
-					</ul>
-					
-			<!--</li> 
-			<li ><a href="../mozilla/">Flash Guns</a></li>
-			<li ><a href="../ie/">Tripods</a></li>
-			<li ><a href="../opacity/">Filters</a></li>-->
 		</ul>
 		
 	</li>
-	<li class="top"><a href="#">Marco Legal</a>
-		
+	<li class="top"><a href="#">Marco Legal</a>		
 		<ul >
 			<li ><a href="causales.php?ac=1">Constituci&oacute;n</a></li>
-			<!--<li ><a href="causales.php?ac=3">R&eacute;gimen de Bancadas</a></li>
-			<li ><a href="causales.php?ac=2">Codigo Disciplinario</a></li>
-			<li ><a href="causales.php?ac=4">Causales por Perdida de Investidura</a></li>-->
+			<li ><a href="#">LEYES</a></li>
+			<li ><a href="#">DECRETOS</a></li>
+			<li ><a href="#">RESOLUCIONES</a></li>
+			<li ><a href="#">CIRCULARES</a></li>
 		</ul>
-		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	</li>
-	<li ><a href="#" >Elecciones 2010</a>
-		
+	<li ><a href="#" >Datos Historicos</a>		
 		<ul >
-			<!-- <li ><a href="#">Candidatos al Senado</a></li> -->
-			<li ><a href="elecciones2010.php">Votos por Partido al Senado</a></li>
-			<li ><a href="causales.php?ac=10">Votos al Senado Detallado</a></li>
-			<li ><a href="causales.php?ac=8">Votos por Partido a la Camara</a></li>
-			<li ><a href="causales.php?ac=9">Votos a la Camara Detallado</a></li>
-			<li ><a href="causales.php?ac=6">PARAPOL&Iacute;TICA EN EL CONGRESO ELECTO PERIODO 2010-2014</a></li>
-			<li ><a href="causales.php?ac=7">BALANCE ELECCIONES LEGISLATIVAS 2010</a></li>
-			<!-- <li ><a href="#" class="fly">Sales</a>
-				
-				<!-- <ul>
-					<li ><a href="../mozilla/">USA</a></li>
-					<!-- <li ><a href="../ie/">Canadian</a></li>
-					<li ><a href="../opacity/">South American</a></li>
-					<li ><a href="../menu/" class="fly">European<!--[if IE 7]><!--></a>
-						
-						<!-- <ul>
-							<li ><a href="../mozilla/" class="fly">British<!--</a>
-								
-							<!--	<ul>
-									<li ><a href="../ie/">London</a></li>
-									<li ><a href="../menu/">Liverpool</a></li>
-									<li ><a href="../boxes/">Glasgow</a></li>
-									<li ><a href="../opacity/" class="fly">Bristol<!--</a>
-										
-									<!--	<ul>
-											<li ><a href="../ie/">Redland</a></li>
-											<li ><a href="../opacity/">Hanham</a></li>
-											<li ><a href="../menu/">Eastville</a></li>
-										</ul>
-										<!--[if lte IE 6]></td></tr></table></a><![endif]-->
-								<!-- </li>
-									<li ><a href="../layouts/">Cardiff</a></li>
-									<li ><a href="../mozilla/">Belfast</a></li>-->
-							<!--	</ul>
-								
-						<!--	</li>
-							<li ><a href="../opacity/">French</a></li>
-							<li ><a href="../menu/">German</a></li>
-							<li ><a href="../boxes/">Spanish</a></li>
+			<li ><a href="#">Elecciones Congreso 2010</a>
+				<ul>
+					<li ><a href="#">Senado</a>
+						<ul>
+							<li ><a href="causales.php?ac=2">Votacion por Candidatos</a></li>
+							<li ><a href="causales.php?ac=3">Votacion por Partidos</a></li>
+							<li ><a href="causales.php?ac=4">Curules por Partidos</a></li>
+							<li ><a href="causales.php?ac=5">Elegidos Detallado</a></li>
 						</ul>
-						
-				<!--</li>
-					<!-- <li ><a href="../boxes/">Australian</a></li>
-					<li ><a href="../boxes/">Asian</a></li> -->
-			<!--	</ul>
-				
-		<!--	</li>
-		<!--	<li ><a href="../mozilla/">Buying</a></li>
-			<li ><a href="../ie/">Photographers</a></li>
-			<li ><a href="../opacity/">Stockist</a></li>
-			<li ><a href="../menu/">General</a></li> -->
-	</ul>
-	
+					</li>
+					<li ><a href="#">Camara</a>
+						<ul>
+							<li ><a href="causales.php?ac=6">Votacion por Partidos</a></li>
+							<li ><a href="causales.php?ac=7">Curules por Partido</a></li>
+							<li ><a href="causales.php?ac=8">Curules por Departamento</a></li>
+							<li ><a href="causales.php?ac=9">Elegidos Detallado</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+			</li>
+			<li ><a href="http://w3.registraduria.gov.co/escrutinio/resultados" target="_blank">Elecciones 2011</a></li>	
+			<li ><a href="#">Elecciones Congreso 2014</a>
+				<ul >
+					<li><a href="causales.php?ac=11">Elegidos Senado</a></li>
+					<li ><a href="causales.php?ac=12">Elegidos Camara</a></li>
+					<li ><a href="causales.php?ac=13">Curules Senado-Camara</a></li>
+					<li ><a href="http://www3.registraduria.gov.co/congreso2014/preconteo/99SE/DSE9999999_L2.htm" target="_blank">Resultados por Departamento</a></li>
+				</ul>
+			</li>
+		</ul>	
 	</li>
-	<li ><a href="#" >Administraci&oacute;n</a>
-		
+	<li ><a href="#" >Administraci&oacute;n de la Campa&a</a>		
 		<ul>
-			<li ><a href="#" >Personal</a>
-				<ul>
-					<!-- <li ><a href="#">Asesores</a></li>
-					<li ><a href="#">Coordinador</a></li> -->
-					<li ><a href="lideres.php">Lideres</a></li>
-					<li ><a href="miembros.php">Simpatizantes</a></li>
-				</ul>
-			</li>
-			<li ><a href="#">Finanzas</a>
-				<ul>
-					<li ><a href="causales.php?ac=5">Instructivo Rendici&oacute;n de Cuentas</a></li>
-					<li ><a href="http://www.cnecuentasclaras.com/" target="_blank">Cuentas Claras en Elecciones</a></li>
-					<li ><a href="http://data.axmag.com/data/201401/20140121/U114778_F260038/FLASH/index.html" target="_blank">Multimedia Rendici&oacute;n de Cuentas</a></li>
-				</ul>
-			</li>
-			<!-- <li ><a href="#">Mercadeo</a></li> -->
-			<li ><a href="Informes_municipios.php">Proyecci&oacute;n Estadistica</a></li>
-			
-		
-			
-		</ul>
-		
+			<li ><a href="#" >Estructura</a></li>
+			<li ><a href="#" >Coordinadores</a></li>
+			<li ><a href="lideres.php" >Lideres</a></li>
+			<li ><a href="#" >Finanzas</a></li>
+			<li ><a href="#" >Logistica</a></li>
+			<li ><a href="#" >Comunicaciones</a></li>
+			<li ><a href="#" >Seguimiento Estadistico</a></li>			
+		</ul>		
 	</li>
 	<li><a href="#"  >Informes</a>
 		<ul>
 			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-->
-			<li ><a href="Informes.php">Seguimiento por Puesto de Votaci&oacute;n</a></li>
+			<li ><a href="Informes.php">Por Puesto de Votaci&oacute;n</a></li>
 			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>-->
 			
 			<?php if($_SESSION['tipocandidato']!='CONSEJO' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 					<?php if($_SESSION['tipocandidato']!='GOBERNACION'){?>
-					<li ><a href="Informes_departamento.php">Seguimiento por Departamentos</a></li>
+					<li ><a href="Informes_departamento.php">Por Departamentos</a></li>
 					<?php }?>
-					<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>
+					<li ><a href="Informes_municipios.php">Por Municipios</a></li>
 			
 			<?php } ?>
 			
-			<li ><a href="Informes_lideres.php">Seguimiento por Lideres</a></li>
-			<li ><a href="Informes_diferente_puestos.php"><?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ echo "Seguimiento por Simpatizantes No Inscritos en el Municipio"; } ?>
-			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Seguimiento por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
-			<li ><a href="Informes_miembros_duplicados.php">Seguimiento por Simpatizantes Duplicados por Lider</a></li>
-			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
+			<li ><a href="Informes_lideres.php">Por Lideres</a></li>
+			<li ><a href="Informes_diferente_puestos.php"><?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ echo "Por Simpatizantes No Inscritos en el Municipio"; } ?>
+			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
+			<li ><a href="Informes_miembros_duplicados.php">Por Simpatizantes Duplicados por Lider</a></li>
+			<li ><a href="Informes_miembros_datos.php">Por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>
 			
 			<!--<li ><a href="movilizados.php">Movilizados</a></li>
@@ -186,6 +105,4 @@ $(document).ready(function() {
 			<?php //} ?>
 		</ul>
 	</li>
-	<!-- <li><a href="tarjetones.php"  >Elecciones Congreso 2014</a></li> -->
-	<li><a href="calendario_2015.php"  >Calendario Electoral 2015</a></li> 
 </ul>

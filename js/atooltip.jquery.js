@@ -96,9 +96,9 @@
         return this;
     };
 })(jQuery);
-
+/*
 $(document).ready(function(){
 // tool tip
-	$('.normaltip').aToolTip({
-    	toolTipClass: 'aToolTip'});
-})
+	//$('.normaltip').aToolTip({
+    	//toolTipClass: 'aToolTip'});
+})*/

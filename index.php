@@ -3,7 +3,7 @@
 <style>
 .bg1 {  
 	position: absolute;
-	top:850px;
+	top:900px;
 }
 button, input[type="button"], input[type="submit"] {
    background-color: #A1AAAF;
@@ -17,6 +17,38 @@ button, input[type="button"], input[type="submit"] {
     margin-right: 0px;
    /* width: 108px;*/
 }
+/****      ****/
+/**** MARQUESINA ****/
+#marquesina {background: url("images/marquesina.gif") no-repeat scroll transparent;height: 37px;width: 960px;margin:5px 195px 6px 195px;
+position: absolute;
+width: 958px;
+    margin-top: 183px;
+    margin-left: 0px;}
+.tickercontainer { width: 810px; height: 40px; margin: 0 0 0 10px; padding: 0;overflow: hidden; }
+.tickercontainer .mask { position: relative;left: 10px;top: 11px;width: 810px;overflow: hidden;}
+ul.newsticker { position: relative;left: 835px;list-style-type: none;margin: 0;padding: 0;}
+ul.newsticker li {float: left;margin: 0;padding: 0;}
+ul.newsticker a {font-family: verdana;text-decoration: none;font-size: 12px;white-space: nowrap;padding: 0;color: #335D89;text-decoration:none;margin: 0 150px 0 0;} 
+ul.newsticker a:hover {text-decoration: underline;} 
+#cadena {
+	visibility: hidden;
+}
+#marque {
+    float: left;
+    margin: 10px 0 0 10px;
+}
+#marque > div {
+    height: 18px;
+    overflow: hidden;
+    width: 810px;
+}
+#slider{
+	margin-top: 30px;
+}#content {
+    margin-top: 613px;
+    padding-bottom: 0;
+}
+
 </style>
 <script>
 		$(document).ready(function(){
@@ -31,8 +63,18 @@ button, input[type="button"], input[type="submit"] {
 	</script>			
 		<div class="main">
 <!--header -->
-			<header>				
-				<div id="slider">
+			<header>	
+			
+				
+				<div id="marquesina">
+<div id="marque">
+<div class="first">
+<marquee>
+<strong> 25 de Abril de 2015 </strong><span>Fecha Limite para ubicar mesas de votaci&oacute;n en los Corregimientos creados hasta la fecha </span><span style="color:#FF0000">(6 meses antes de la elecci&oacute;n)</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</marquee>
+</div>
+</div>
+</div>	<div id="slider">
 					<ul class="items">
 						<li>
 							<img src="images/img1.png" alt="">
@@ -126,7 +168,7 @@ button, input[type="button"], input[type="submit"] {
 					preset:'diagonalFade',
 					easing:'easeOutQuad',
 					pagination:true,
-					duration:400,
+					duration:900,
 					slideshow:8000,
 					bannerShow:function(banner){
 						banner.css({marginRight:-500}).stop().animate({marginRight:0}, 600)

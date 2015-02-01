@@ -68,21 +68,13 @@ $(document).ready(function() {
 	</li>
 	<li ><a href="#" >Administraci&oacute;n de la Campa&a</a>		
 		<ul>
-			<li ><a href="#" >Personal</a>
-				<ul>
-					<li ><a href="lideres.php">Lideres</a></li>
-					<li ><a href="miembros.php">Simpatizantes</a></li>
-				</ul>
-			</li>
-			<li ><a href="#">Finanzas</a>
-				<ul>
-					<li ><a href="causales.php?ac=5">Instructivo Rendici&oacute;n de Cuentas</a></li>
-					<li ><a href="http://www.cnecuentasclaras.com/" target="_blank">Cuentas Claras en Elecciones</a></li>
-					<li ><a href="http://data.axmag.com/data/201401/20140121/U114778_F260038/FLASH/index.html" target="_blank">Multimedia Rendici&oacute;n de Cuentas</a></li>
-				</ul>
-			</li>
-			<!-- <li ><a href="#">Mercadeo</a></li> -->
-			<li ><a href="Informes_municipios.php">Proyecci&oacute;n Estadistica</a></li>			
+			<li ><a href="#" >Estructura</a></li>
+			<li ><a href="#" >Coordinadores</a></li>
+			<li ><a href="lideres.php" >Lideres</a></li>
+			<li ><a href="#" >Finanzas</a></li>
+			<li ><a href="#" >Logistica</a></li>
+			<li ><a href="#" >Comunicaciones</a></li>
+			<li ><a href="#" >Seguimiento Estadistico</a></li>			
 		</ul>		
 	</li>
 	<li><a href="#"  >Informes</a>
@@ -98,9 +90,10 @@ $(document).ready(function() {
 			<li ><a href="Informes_miembros_duplicados.php">Seguimiento por Simpatizantes Duplicados por Lider</a></li>
 			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>-->			
-			<li ><a href="reporte.php">Elecciones Pre Electoral</a></li>
-			<li ><a href="consolidado.php">Consolidado Electoral</a></li>
+			<li ><a href="reporte.php">Fase Pre Electoral</a></li>			
 			<li ><a href="reporte2.php">Dia Electoral</a></li>
+			<li ><a href="consolidado.php">Consolidado Electoral</a></li>			
+			<li ><a href="consolidado3.php">Analisis de Resultados</a></li>
 			<!--<li ><a href="movilizados.php">Movilizados</a></li>
 			<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>

@@ -22,7 +22,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <html lang="es">
 <head>
 <style>
-#logo3 {  position:absolute; float: left; margin-left: 771px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
+#logo3 {  position:absolute; float: left; margin-left: 460px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
 #logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
 	
 /****      ****/
@@ -78,9 +78,6 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script type="text/javascript" src="js/superfish.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/slide.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/atooltip.jquery.js"></script>
-<script type="text/javascript" src="js/cufon-replace.js"></script> 
 <script type="text/javascript" src="js/Vegur_300.font.js"></script>
 <script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
 <script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
