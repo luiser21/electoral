@@ -1,4 +1,4 @@
-<?php require_once('topadmin.php'); ?>	
+<?php require_once('topadmin_slider.php'); ?>	
 <style>
 .bg1 {  
 	position: absolute;
