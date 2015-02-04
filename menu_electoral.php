@@ -79,9 +79,7 @@ $(document).ready(function() {
 	</li>
 	<li><a href="#"  >Informes</a>
 		<ul>
-			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-->
-			<li ><a href="Informes.php">Por Puesto de Votaci&oacute;n</a></li>
-			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>-->
+			
 			
 			<?php if($_SESSION['tipocandidato']!='CONSEJO' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 					<?php if($_SESSION['tipocandidato']!='GOBERNACION'){?>
@@ -90,7 +88,9 @@ $(document).ready(function() {
 					<li ><a href="Informes_municipios.php">Por Municipios</a></li>
 			
 			<?php } ?>
-			
+			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-->
+			<li ><a href="Informes.php">Por Puesto de Votaci&oacute;n</a></li>
+			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>-->
 			<li ><a href="Informes_lideres.php">Por Lideres</a></li>
 			<li ><a href="Informes_diferente_puestos.php"><?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ echo "Por Simpatizantes No Inscritos en el Municipio"; } ?>
 			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
@@ -98,8 +98,8 @@ $(document).ready(function() {
 			<li ><a href="Informes_miembros_datos.php">Por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>
 			
-			<!--<li ><a href="movilizados.php">Movilizados</a></li>
-			<li ><a href="compromisos.php">Compromisos</a></li>
+			<li ><a href="#">Otros</a></li>
+			<!--<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
 			<li ><a href="informe_movilizados.php">Informe Comparativo Compromisos - Movilizados - Votos Reales</a></li>-->
 			<?php //} ?>
