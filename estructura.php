@@ -50,34 +50,64 @@ function edad(){
 	}
 }
 
-function mesa(){
-	var pagina= "Ajax_mesa_votacion.php";
-	var capa = "capa_mesas";
-	var puesto = document.getElementById('puestos').value;
-	var valores = 'puesto=' + puesto + '&' + Math.random();
-	if(puesto!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
+function cargar(){
+	var pagina= "Ajax_cargar.php";
+	var capa = "cargar";	
+	var valores = 'usuario=1' + Math.random();	
+	FAjax (pagina,capa,valores,'POST',true)     	 
+	
 }
+function upload(formulario, archivo) {
+   extensiones_permitidas = new Array(".xls");
+   mierror = "";
+   if (!archivo) {
+      //Si no tengo archivo, es que no se ha seleccionado un archivo en el formulario
+       mierror = "No has seleccionado ningún archivo";
+   }else{
+      //recupero la extensión de este nombre de archivo
+      extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
+      //alert (extension);
+      //compruebo si la extensión está entre las permitidas
+      permitida = false;
+      for (var i = 0; i < extensiones_permitidas.length; i++) {
+         if (extensiones_permitidas[i] == extension) {
+         permitida = true;
+         break;
+         }
+      }
+      if (!permitida) {
+         mierror = "Comprueba la extensión de los archivos a subir. \nSólo se pueden subir archivos con extensiones: " + extensiones_permitidas.join();
+       }else{
+          //submito!
+         alert ("Todo correcto. Voy a submitir el formulario.");
+         formulario.submit();
+         return 1;
+       }
+   }
+   //si estoy aqui es que no se ha podido submitir
+   alert (mierror);
+   return 0;
+} 
 </script>
 <div class="main">
 	<header>
 	<div style=" position:absolute; top:190px"><br/>
 	<h4>Ingresar Simpatizantes Masivo</h4>
 	
-		<div id="crudFormLineal" style="width: 910px; height: 510px; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
+		<div id="crudFormLineal" style="width: 910px; height: auto; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
 			<h2>Archivos Cargados</h2><br/>
 			<br/>
 <div class="filtering">
-    <form>
+    
         Nombre: <input type="text" name="name" id="name" />
      
         <button type="submit" id="LoadRecordsButton">Buscar</button>
-		<button type="submit" id="LoadRecordsButton">Cargar Excel</button>
+		<button type="button" onclick="cargar()">Cargar_Excel</button>
 		
-    </form>
+ 
 	<p></p>
 </div>
+	<div id="cargar" style="width: auto;"></div>	
 	<div id="PeopleTableContainer" style="width: auto;"></div>						
 	<script type="text/javascript">
 

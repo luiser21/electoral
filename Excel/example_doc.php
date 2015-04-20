@@ -10,6 +10,7 @@ include_once "../consultar_puesto_votacion_registraduria.php";
 //$DBGestion = new GestionBD('AGENDAMIENTO');	
 // Set output Encoding.
 @$data->setOutputEncoding('CP1251');
+var_dump($_POST);exit;
 @$data->read('BASE DE DATOS ULTIMA.xls');
 //error_reporting(E_ALL ^ E_NOTICE);  
 $y=0;
