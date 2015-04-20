@@ -5,29 +5,34 @@ session_start();
 // ExcelFile($filename, $encoding);
 $data = new Spreadsheet_Excel_Reader();
 include_once "../includes/GestionBD.new.class.php";
-$DBGestion = new GestionBD('AGENDAMIENTO');	
+
+include_once "../consultar_puesto_votacion_registraduria.php";
+//$DBGestion = new GestionBD('AGENDAMIENTO');	
 // Set output Encoding.
 @$data->setOutputEncoding('CP1251');
-@$data->read('U-49.xls');
-error_reporting(E_ALL ^ E_NOTICE);  
+@$data->read('BASE DE DATOS ULTIMA.xls');
+//error_reporting(E_ALL ^ E_NOTICE);  
 $y=0;
 $registros=count($data->sheets[0]['cells']);
+//imprimir($registros);
+
 for ($i = 2; $i <= $registros; $i++) {
 	$cedula[$y]=trim($data->sheets[0]['cells'][$i][1]);
-	$nombre[$y]=$data->sheets[0]['cells'][$i][2];
-	$apellido[$y]=$data->sheets[0]['cells'][$i][3];
-	$DEPARTAMENTO[$y]=$data->sheets[0]['cells'][$i][4];	
+	//exit;
+	//$nombre[$y]=$data->sheets[0]['cells'][$i][2];
+	//$apellido[$y]=$data->sheets[0]['cells'][$i][3];
+	//$DEPARTAMENTO[$y]=$data->sheets[0]['cells'][$i][4];	
 	
-	$MUNICIPIO [$y]=$data->sheets[0]['cells'][$i][5];
+	//$MUNICIPIO [$y]=$data->sheets[0]['cells'][$i][5];
 	//$LIDER[$y]=$data->sheets[0]['cells'][$i][6];
 	//$CELULAR1[$y]=$data->sheets[0]['cells'][$i][7];
 	//$CELULAR1[$y]=$data->sheets[0]['cells'][$i][8];
 	//$CORREO1[$y]=$data->sheets[0]['cells'][$i][9];
 	//$CORREO1[$y]=$data->sheets[0]['cells'][$i][10];
 	//$NICHO[$y]=$data->sheets[0]['cells'][$i][11];
-	$DTOVOTACION[$y]=$data->sheets[0]['cells'][$i][6];	
-	$MPIOVOTACION[$y]=$data->sheets[0]['cells'][$i][7];	
-	$PUESTO[$y]=$data->sheets[0]['cells'][$i][8];	
+	//$DTOVOTACION[$y]=$data->sheets[0]['cells'][$i][6];	
+	//$MPIOVOTACION[$y]=$data->sheets[0]['cells'][$i][7];	
+	//$PUESTO[$y]=$data->sheets[0]['cells'][$i][8];	
 	/*if($DEPARTAMENTO[$y]==""){
 		$DEPARTAMENTO[$y]=$DTOVOTACION[$y];
 	}
@@ -36,14 +41,26 @@ for ($i = 2; $i <= $registros; $i++) {
 	}*/
 	//$PUESTO[$y]=str_replace("."," ",$PUESTO[$y]);
 	//echo $PUESTO[$y];exit;
-	$MESA[$y]=$data->sheets[0]['cells'][$i][9];	
+	//$MESA[$y]=$data->sheets[0]['cells'][$i][9];	
 	$y++;
 }
-//imprimir($MUNICIPIO);
-//exit;
-//exit;//var_dump($MESA);
-//exit;
-for($i=0; $i<$registros; $i++){	
+
+$puestoreg=array();
+for($i=0; $i<$registros-1; $i++){	
+	echo $cedula[$i];
+	$puestoreg=puesto_votacion($cedula[$i]);
+	if(!empty($puestoreg['ERROR'])){
+		echo $puestoreg['ERROR'];
+	}else{
+		imprimir($puestoreg);
+		$DEPARTAMENTO=trim($puestoreg['DEPARTAMENTO']);
+		$MUNICIPIO=trim($puestoreg['MUNICIPIO']);
+		$PUESTO=trim($puestoreg['PUESTO']);
+		$DIRECCION=trim($puestoreg['DIRECCION']);
+		$MESA=trim($puestoreg['MESA']);
+		$FECHA_INSCRIP=trim($puestoreg['FECHA_INSCRIP']);
+	}
+	/*
 		//BUSO SI YA EXISTE EL MIEMBRO
 		$sql="SELECT
 				count(1) as MIEMBROS
@@ -88,14 +105,10 @@ for($i=0; $i<$registros; $i++){
 					FROM
 					departamentos
 					where UPPER(departamentos.NOMBRE) = UPPER('".trim($DTOVOTACION[$i])."')";
-					//echo '<br/>';
-					//echo $sql;
-					//echo '<br/>';
+					
 					$DBGestion->ConsultaArray($sql);
 					$dtodepartamentos=$DBGestion->datos;	
 					if(count($dtodepartamentos)>=1){
-					//echo $MPIOVOTACION[$i];
-					//echo '<br/><br/>';
 						//BUSCO EL ID DEL MUNICIPIO DEL PUESTO
 						$sql="SELECT
 						municipios.ID,
@@ -104,8 +117,6 @@ for($i=0; $i<$registros; $i++){
 						FROM
 						municipios
 						where upper(municipios.NOMBRE) like UPPER('%".trim($MPIOVOTACION[$i])."%') AND IDDEPARTAMENTO='".$dtodepartamentos[0]['IDDEPARTAMENTO']."'";
-					//	echo $sql;
-						//echo '<br/><br/>';
 						$DBGestion->ConsultaArray($sql);
 						$dtomunicipios=$DBGestion->datos;	
 						if(count($dtomunicipios)>=1){
@@ -128,7 +139,6 @@ for($i=0; $i<$registros; $i++){
 								$sql .= " AND UPPER(puestos_votacion.NOMBRE_PUESTO) like UPPER('%".trim($jef)."%') ";
 								$y++;
 							}
-						//	echo $sql;
 							$DBGestion->ConsultaArray($sql);
 							$puestosvotacion=$DBGestion->datos;	
 							if(count($puestosvotacion)>=1){
@@ -195,7 +205,7 @@ for($i=0; $i<$registros; $i++){
 										$sql="INSERT INTO MESAS (IDPUESTO, MESA) VALUES (".$idpuesto.",".$k.")";	
 										$DBGestion->Consulta($sql);
 									}*/
-								  }	
+								/*  }	
 								
 								}
 							}
@@ -214,6 +224,6 @@ for($i=0; $i<$registros; $i++){
 		}else{
 				
 				//echo "cedula ya existe ".$cedula[$i]."<br/><br/>";
-		}	
+		}	*/
 }
 ?>
