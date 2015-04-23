@@ -1,22 +1,24 @@
 <?php
+ini_set('default_socket_timeout', 5);
 //require_once('topadmin.php');
 require_once 'Excel/reader.php';
 session_start();
 // ExcelFile($filename, $encoding);
 $data = new Spreadsheet_Excel_Reader();
 include_once "../includes/GestionBD.new.class.php";
-
 include_once "../consultar_puesto_votacion_registraduria.php";
+
 //$DBGestion = new GestionBD('AGENDAMIENTO');	
 // Set output Encoding.
 @$data->setOutputEncoding('CP1251');
-var_dump($_POST);exit;
-@$data->read('BASE DE DATOS ULTIMA.xls');
+//var_dump($_FILES);
+move_uploaded_file($_FILES["archivoupload"]["tmp_name"], "cargas/".$_FILES["archivoupload"]["name"]); 
+@$data->read($_FILES["archivoupload"]["name"]);
 //error_reporting(E_ALL ^ E_NOTICE);  
 $y=0;
 $registros=count($data->sheets[0]['cells']);
 //imprimir($registros);
-
+//exit;
 for ($i = 2; $i <= $registros; $i++) {
 	$cedula[$y]=trim($data->sheets[0]['cells'][$i][1]);
 	//exit;
@@ -47,20 +49,25 @@ for ($i = 2; $i <= $registros; $i++) {
 }
 
 $puestoreg=array();
+$old_error_handler = set_error_handler("myErrorHandler");
+
 for($i=0; $i<$registros-1; $i++){	
-	echo $cedula[$i];
-	$puestoreg=puesto_votacion($cedula[$i]);
-	if(!empty($puestoreg['ERROR'])){
-		echo $puestoreg['ERROR'];
-	}else{
-		imprimir($puestoreg);
-		$DEPARTAMENTO=trim($puestoreg['DEPARTAMENTO']);
-		$MUNICIPIO=trim($puestoreg['MUNICIPIO']);
-		$PUESTO=trim($puestoreg['PUESTO']);
-		$DIRECCION=trim($puestoreg['DIRECCION']);
-		$MESA=trim($puestoreg['MESA']);
-		$FECHA_INSCRIP=trim($puestoreg['FECHA_INSCRIP']);
-	}
+	
+	try{
+		
+		$puestoreg=puesto_votacion($cedula[$i]);	
+		echo '<br/><br/>'.$cedula[$i];
+		if(!empty($puestoreg['ERROR'])){
+			echo ' - PUESTO '.$puestoreg['ERROR'].'<br/>';
+		}else{
+			//imprimir($puestoreg);
+			$DEPARTAMENTO=trim($puestoreg['DEPARTAMENTO']);
+			$MUNICIPIO=trim($puestoreg['MUNICIPIO']);
+			$PUESTO=trim($puestoreg['PUESTO']);
+			$DIRECCION=trim($puestoreg['DIRECCION']);
+			$MESA=trim($puestoreg['MESA']);
+			$FECHA_INSCRIP=trim($puestoreg['FECHA_INSCRIP']);
+		}
 	/*
 		//BUSO SI YA EXISTE EL MIEMBRO
 		$sql="SELECT
@@ -226,5 +233,10 @@ for($i=0; $i<$registros-1; $i++){
 				
 				//echo "cedula ya existe ".$cedula[$i]."<br/><br/>";
 		}	*/
+	}catch(Exception $e){
+		$msg = $ex->getMessage() . $ex->getTraceAsString();
+        error_log('ELASTICSEARCH ERROR: ' . $msg);
+	}
 }
+
 ?>

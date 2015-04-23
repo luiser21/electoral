@@ -57,7 +57,7 @@ function cargar(){
 	FAjax (pagina,capa,valores,'POST',true)     	 
 	
 }
-function upload(formulario, archivo) {
+function comprueba_extension(formulario, archivo) {
    extensiones_permitidas = new Array(".xls");
    mierror = "";
    if (!archivo) {
@@ -87,7 +87,8 @@ function upload(formulario, archivo) {
    //si estoy aqui es que no se ha podido submitir
    alert (mierror);
    return 0;
-} 
+}
+
 </script>
 <div class="main">
 	<header>

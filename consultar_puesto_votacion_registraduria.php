@@ -1,30 +1,29 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-
 //imprimir(puesto_votacion('19436718'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
+	try{
+		$opciones = array(
+		  'http'=>array(
+			'method'=>"GET",
+			'header'=>"Accept-language: en\r\n" .
+					  "Cookie: foo=bar\r\n"
+		  )
+		);
+		$contexto = stream_context_create($opciones);
+		$contenido = file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
+		$contenido = trim(strip_tags($contenido));
+		$buscar=array(chr(13).chr(10), "\r\n", "\n", "\r",); 
+		$reemplazar=array("", "", "", ""); 
+		$contenido=str_ireplace($buscar,$reemplazar,$contenido);
+		$contenido=str_replace("\r",". ",$contenido);
+		$contenido=str_replace("\n"," ",$contenido);
 
-	$opciones = array(
-	  'http'=>array(
-		'method'=>"GET",
-		'header'=>"Accept-language: en\r\n" .
-				  "Cookie: foo=bar\r\n"
-	  )
-	);
-	$contexto = stream_context_create($opciones);
-	$contenido = file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
-	$contenido = trim(strip_tags($contenido));
-	$buscar=array(chr(13).chr(10), "\r\n", "\n", "\r",); 
-	$reemplazar=array("", "", "", ""); 
-	$contenido=str_ireplace($buscar,$reemplazar,$contenido);
-	$contenido=str_replace("\r",". ",$contenido);
-	$contenido=str_replace("\n"," ",$contenido);
-
-	$posicion_coincidencia = strpos($contenido, 'Departamento');
+		$posicion_coincidencia = strpos($contenido, 'Departamento');
 	 
-	//se puede hacer la comparacion con 'false' o 'true' y los comparadores '===' o '!=='
+		//se puede hacer la comparacion con 'false' o 'true' y los comparadores '===' o '!=='
 		if ($posicion_coincidencia === false) {
 				//echo "NO se ha encontrado la palabra deseada!!!!";
 				$puesto_votacion=array(
@@ -113,6 +112,10 @@ function puesto_votacion($cedula_Excel){
 						);
 			 return $puesto_votacion;
 		}
+	}catch(Exception $e){
+		$observacion2 = $e->getMessage();
+		throw new Exception($observacion2);		
+	}
 }
 function limpiar_metas($string,$corte = null)
 	    {
@@ -144,4 +147,66 @@ function limpiar_metas($string,$corte = null)
 	                 
 	        return $s;
 	    }
+function myErrorHandler($errno, $errstr, $errfile, $errline)
+{
+    if (!(error_reporting() & $errno)) {
+        // This error code is not included in error_reporting
+        return;
+    }
+
+    switch ($errno) {
+    case E_USER_ERROR:
+        echo "<b>My ERROR</b> [$errno] $errstr<br />\n";
+        echo "  Fatal error on line $errline in file $errfile";
+        echo ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n";
+        echo "Aborting...<br />\n";
+        exit(1);
+        break;
+
+    case E_USER_WARNING:
+        echo "<b>My WARNING</b> [$errno] $errstr<br />\n";
+        break;
+
+    case E_USER_NOTICE:
+        echo "<b>My NOTICE</b> [$errno] $errstr<br />\n";
+        break;
+
+    default:
+		$puesto=explode( ':', $errstr );
+		if(!empty($puesto[2]) && !empty($puesto[3]) && trim($puesto[2])=='failed to open stream'){
+			echo $puesto[3].'<br/>http://www3.registraduria.gov.co';
+		}else{
+			echo "Unknown error type: [$errno] $errstr<br />\n";
+        }
+		break;
+    }
+
+    /* Don't execute PHP internal error handler */
+    return true;
+}
+
+// function to test the error handling
+function scale_by_log($vect, $scale)
+{
+    if (!is_numeric($scale) || $scale <= 0) {
+        trigger_error("log(x) for x <= 0 is undefined, you used: scale = $scale", E_USER_ERROR);
+    }
+
+    if (!is_array($vect)) {
+        trigger_error("Incorrect input vector, array of values expected", E_USER_WARNING);
+        return null;
+    }
+
+    $temp = array();
+    foreach($vect as $pos => $value) {
+        if (!is_numeric($value)) {
+            trigger_error("Value at position $pos is not a number, using 0 (zero)", E_USER_NOTICE);
+            $value = 0;
+        }
+        $temp[$pos] = log($scale) * $value;
+    }
+
+    return $temp;
+}
+
 ?>
