@@ -22,7 +22,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <html lang="es">
 <head>
 <style>
-#logo3 {  position:absolute; float: left; margin-left: 771px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
+#logo3 {  position:absolute; float: left; margin-left: 400px; top:48px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
 #logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
 	
 /****      ****/
@@ -48,13 +48,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 }		
 
 </style>
-<?php if($_SESSION["partido"]=='Partido Liberal'){?>
-<link href="Scripts/jtable/themes/lightcolor/red/jtable.css" rel="stylesheet" type="text/css" />
-<?php }elseif($_SESSION["partido"]=='Partido de la U'){ ?>
-<link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
-<?php }else{?>
-<link href="Scripts/jtable/themes/lightcolor/green/jtable.css" rel="stylesheet" type="text/css" />
-<?php } ?>
+<link href="Scripts/jtable/themes/metro/lightgray/jtable.css" rel="stylesheet" type="text/css" />
 <title>SIGE</title>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="images/favicon(2).ico">

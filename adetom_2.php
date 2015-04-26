@@ -3,6 +3,8 @@
 .bg1 {  
 	position: absolute;
 	top:800px;
+	width: 100%;
+	right: 0px;
 }
 </style>			
 <div class="main">					

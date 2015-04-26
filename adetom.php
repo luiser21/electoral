@@ -3,6 +3,8 @@
 .bg1 {  
 	position: absolute;
 	top:900px;
+	width: 100%;
+	right: 0px;
 }
 button, input[type="button"], input[type="submit"] {
    background-color: #A1AAAF;

@@ -9,15 +9,12 @@
 #crudFormLineal label {
 	width: 350px;
 }
-.bg1 {  
-	position:relative;
-	top:600px;
-}
+
 h4{
 
  color: #006600;
     font-family: 'GothamLight',arial,serif;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: lighter;
     margin-bottom: 1px;
     margin-left: 1px;
@@ -48,38 +45,40 @@ button, input[type="button"], input[type="submit"] {
 			
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
 			
-			<table width="auto" border="0">
+			<table width="auto" border="0" style="line-height:2px;">
   <tr>
     <th width="227" rowspan="7" scope="row"><?php if($_SESSION['foto']!=""){?>
-						<img src="<?php echo $_SESSION['foto']?>" width="120" height="154" style="border:3px solid #CCCCCC;">
+						<img src="<?php echo $_SESSION['foto']?>" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php }else{ ?>		
-				<img src="fotos/images.jpg" width="131" height="150" style="border:3px solid #CCCCCC;">
+				<img src="fotos/images.jpg" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php } ?>	</th>
-    <td width="575"><h4 align="left">Consolidado por Departamentos</h4></td>
+    <td width="575"><h4 align="left">&nbsp;</h4>
+      <h4 align="left">&nbsp;</h4>
+      <h4 align="left">Consolidado por Departamentos</h4></td>
   </tr>
   <tr>
     <td>
 
-      <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
+      <h4 align="left" style="font-size: 14px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-    <td><h4 align="left" style="font-size: 18px">Candidato 
-	<?php if($_SESSION["tipocandidato"]=='SENADO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td></tr><tr><td><h4 align="left" style="font-size: 18px; color: #999999"> De la República'; 
+    <td><h4 align="left" style="font-size: 14px">Candidato 
+	<?php if($_SESSION["tipocandidato"]=='SENADO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td></tr><tr><td><h4 align="left" style="font-size: 14px; color: #999999"> De la República'; 
 		}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ echo 'Al '.$_SESSION['tipocandidato'].'</h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['municipio'])); 
+    <tr><td><h4 align="left" style="font-size: 14px; color: #999999"> Por '.ucwords(strtolower($_SESSION['municipio'])); 
 		}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ echo 'A la '.$_SESSION['tipocandidato'].'</h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999"> Por '.ucwords(strtolower($_SESSION['departamento'])); }?>
+    <tr><td><h4 align="left" style="font-size: 14px; color: #999999"> Por '.ucwords(strtolower($_SESSION['departamento'])); }?>
 
 	
 		</h4></td></tr>
   <tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
+    <td><h4 align="left" style="font-size: 14px"><?php echo $_SESSION['partido']?> </h4></td>
   </tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px; color: #999999">Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
+    <td><h4 align="left" style="font-size: 14px; color: #999999">Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
   </tr>
  
 </table>
@@ -564,9 +563,9 @@ $(function () {
 
 	</script>
 				
-				
-		  </div></div>
-		</header>	
+			
+		  </div>
 		
+<?php require_once('bottom.php'); ?>	</div>		
+		</header>
 	 </div>
-<?php //require_once('bottom.php'); ?>		

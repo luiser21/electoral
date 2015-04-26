@@ -14,7 +14,9 @@ body {background:url(../images/bg_top.gif) 0 0 repeat-x  #CCCCCC;border:0;font:1
 /* Global Structure ============================================================= */
 .main {margin:0 auto;	width:960px;position:relative; bottom: 175px;}
 .main2 {margin:0 auto;	width:960px;position:relative; bottom: 40px;}
-.bg1 {background:#090909; float: left; width: 100%;}; 
+.bg1 {background:#090909; position:relative; top: 20px;right: 199px;
+    
+    width: 141%;}; 
 /* ============================= main layout ====================== */
 a {color:#5f870e;text-decoration:none;outline:none}
 a:hover {color:#fff}
@@ -73,7 +75,7 @@ figure {padding-top:2px}
 .address span {float:left;width:88px}
 .address a {text-decoration:underline}
 /* ============================= footer ====================== */
-footer  {padding:49px 20px 0;height:98px}
+footer  {padding:49px 20px 0;position: }
 footer a {color:#808080}
 footer a:hover {color:#fff}
 #icons {width:184px;float:right}

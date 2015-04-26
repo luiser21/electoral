@@ -1,55 +1,11 @@
-
 <?php require_once('topadmin.php');?>
  <link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
-<style>
-.bg1 {  
-	position:relative;
-	top:650px;
-}
-</style>
+
 <script type="text/javascript">
 	
-function municipios(){
-	var pagina= "Ajax_municipio.php";
-	var capa = "capa_documentos";
-	var departamento = document.getElementById('departamento').value;
-	var valores = 'departamento=' + departamento + '&' + Math.random();
-	if(departamento!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
-function municipiospuestos(){
-	var pagina= "Ajax_municipio.php";
-	var capa = "capa_documentos_municipio";
-	var departamento = document.getElementById('departamento_puestos').value;
-	var valores = 'valor=1&departamento=' + departamento + '&' + Math.random();
-	if(departamento!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
-function puesto(){
-	var pagina= "Ajax_puestos_votacion.php";
-	var capa = "capa_puestos";
-	var municipio = document.getElementById('municipios_puestos').value;
-	var valores = 'municipio=' + municipio + '&' + Math.random();
-	if(municipio!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
-function edad(){
-	var pagina= "Ajax_edad.php";
-	var capa = "capa_edad";
-	var fecha = $('#inputField').val();	
-	fecha = $('#inputField').val();	
-	var valores = 'fecha=' + fecha + '&' + Math.random();
-	if(fecha!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
-
 function cargar(){
 	var pagina= "Ajax_cargar.php";
 	var capa = "cargar";	
@@ -79,7 +35,7 @@ function comprueba_extension(formulario, archivo) {
          mierror = "Comprueba la extensión de los archivos a subir. \nSólo se pueden subir archivos con extensiones: " + extensiones_permitidas.join();
        }else{
           //submito!
-         alert ("Todo correcto. Voy a submitir el formulario.");
+         //alert ("Todo correcto. Voy a submitir el formulario.");
          formulario.submit();
          return 1;
        }
@@ -96,17 +52,14 @@ function comprueba_extension(formulario, archivo) {
 	<h4>Ingresar Simpatizantes Masivo</h4>
 	
 		<div id="crudFormLineal" style="width: 910px; height: auto; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
-			<h2>Archivos Cargados</h2><br/>
-			<br/>
+			<h2>Archivos Cargados</h2>
 <div class="filtering">
     
         Nombre: <input type="text" name="name" id="name" />
      
         <button type="submit" id="LoadRecordsButton">Buscar</button>
 		<button type="button" onclick="cargar()">Cargar_Excel</button>
-		
- 
-	<p></p>
+	<br/><br/>
 </div>
 	<div id="cargar" style="width: auto;"></div>	
 	<div id="PeopleTableContainer" style="width: auto;"></div>						
@@ -199,9 +152,9 @@ function comprueba_extension(formulario, archivo) {
 				$('#LoadRecordsButton').click();
 		});
 		</script>				
-	</div></div>
-</header>
-</div>
-<div>
-<?php require_once('bottom.php'); ?>	
-</div>
+			
+		  </div>
+		
+<?php require_once('bottom.php'); ?>	</div>		
+		</header>
+	 </div>

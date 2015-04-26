@@ -9,10 +9,7 @@
 #crudFormLineal label {
 	width: 350px;
 }
-.bg1 {  
-	position:relative;
-	top:600px;
-}
+
 </style>
 <div class="main">	
 <header>
@@ -127,8 +124,9 @@
 	</script>
 				
 				
-			</div></div>
-		</header>	
+				
+		  </div>
 		
+<?php require_once('bottom.php'); ?>	</div>		
+		</header>
 	 </div>
-<?php //require_once('bottom.php'); ?>		

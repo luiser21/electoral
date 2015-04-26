@@ -6,7 +6,7 @@
      CEDULA_LIDER<br/>NOMBRES_APELLIDO_LIDER<br/>CEDULA<br/>NOMBRES_APELLIDOS<br/>OCUPACION<br/>CELULAR
 	 <br/>EMAIL<br/>DIRECCION<p>MUNICIPIO<br/>DEPARTAMENTO<br/>CANDIDATO</th>
     <td width="358">
-   <form method=post action="Excel/example_doc.php" enctype="multipart/form-data">
+   <form method=post action="example_doc.php" enctype="multipart/form-data" id="formuploadajax">
 <input type=file name="archivoupload">
 <input type=button name="Submit" value="Enviar" onclick="comprueba_extension(this.form, this.form.archivoupload.value)">
 </form> <br />

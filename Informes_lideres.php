@@ -9,15 +9,12 @@
 #crudFormLineal label {
 	width: 350px;
 }
-.bg1 {  
-	position:relative;
-	top:600px;
-}
+
 h4{
 
  color: #006600;
     font-family: 'GothamLight',arial,serif;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: lighter;
     margin-bottom: 1px;
     margin-left: 1px;
@@ -39,25 +36,27 @@ button, input[type="button"], input[type="submit"] {
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
-
 			
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
-					<table width="auto" border="0">
+			
+			<table width="auto" border="0" style="line-height:2px;">
   <tr>
     <th width="227" rowspan="7" scope="row"><?php if($_SESSION['foto']!=""){?>
-						<img src="<?php echo $_SESSION['foto']?>" width="120" height="154" style="border:3px solid #CCCCCC;">
+						<img src="<?php echo $_SESSION['foto']?>" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php }else{ ?>		
-				<img src="fotos/images.jpg" width="131" height="150" style="border:3px solid #CCCCCC;">
+				<img src="fotos/images.jpg" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php } ?>	</th>
-    <td width="575"><h4 align="left">Consolidado por Lideres VS Simpatizantes</h4></td>
+    <td width="575"><h4 align="left">&nbsp;</h4>
+      <h4 align="left">&nbsp;</h4>
+      <h4 align="left"><h4 align="left">Consolidado por Lideres VS Simpatizantes</h4></td>
   </tr>
   <tr>
     <td>
 
-      <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
+      <h4 align="left" style="font-size: 14px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-     <td><h4 align="left" style="font-size: 18px">Candidato 
+     <td><h4 align="left" style="font-size: 14px">Candidato 
 	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'a la '.$_SESSION['tipocandidato'];
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
@@ -75,7 +74,7 @@ button, input[type="button"], input[type="submit"] {
 	}
 	?> </h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
+    <tr><td><h4 align="left" style="font-size: 14px; color: #999999">
 	<?php 
 	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'COLOMBIA';
@@ -94,10 +93,10 @@ button, input[type="button"], input[type="submit"] {
 	}?></h4></td></tr>
   <tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
+    <td><h4 align="left" style="font-size: 14px"><?php echo $_SESSION['partido']?> </h4></td>
   </tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px; color: #999999"><?php 
+    <td><h4 align="left" style="font-size: 14px; color: #999999"><?php 
 	if($_SESSION['tipocandidato']!='PRESIDENCIA'  && $_SESSION['tipocandidato']!='GOBERNACION' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 		Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
 	<?php }?>
@@ -145,111 +144,7 @@ $DBGestion->ConsultaArray($sql);
 //Lideres
 $DBGestion->ConsultaArray($sql2);				
 $totales_lideres=$DBGestion->datos;
-	
-	//imprimir($totales_lideres);exit;
-
-$sql="SELECT
-CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) as LIDER,
-COUNT(miembros.ID) AS VOTOS
-FROM
-miembros
-INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-where usuario.USUARIO='".$_SESSION["username"]."' 
-GROUP BY lideres.ID
-ORDER BY VOTOS DESC ";
-				
-$DBGestion->ConsultaArray($sql);				
-$departamentos=$DBGestion->datos;	
-
-$arrDepartamento=array();
-$i=0;
-$arrDepartamento="";
-$arrDepartamento2="";$suma=0;
-$depar="";
-foreach($departamentos as $Depto=>$Val){
-
- $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
-	
-	if($i<count($departamentos) && $valores>=0.3){
-	
-		$arrDepartamento.= "'".$Val['LIDER']."',";
-		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
-		//imprimir($arrDepartamento2);
-
-	}else{
-		
-		//$arrDepartamento.= "'".$Val['LIDER']."'";
-		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
-	}
-	
-	if($valores<0.3){
-		$suma=$suma+$Val['VOTOS'];
-		$depar=$depar.','.$Val['LIDER'];
-	}
-	$i++;
-	
-}
-//imprimir($depar);
-@$arrDepartamento.= "'OTROS'";
-@$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
-//	imprimir($arrDepartamento2);
-	//exit;
 ?>
-<!--						<br/>
-							<script type="text/javascript">
-$(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Grafico por Lideres'
-            },
-            subtitle: {
-                text: 'Votos por Simpatizantes'
-            },
-            xAxis: {
-                categories: [<?php echo @$arrDepartamento?>
-                ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Votos %'
-                }
-            },
-			
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Simpatizantes',
-                data: [<?php echo @$arrDepartamento2?>]
-    
-            }]
-        });
-    });
-    
-		</script>
-			<script src="js/js/highcharts.js"></script>
-<script src="js/js/modules/exporting.js"></script>
-
-<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
-	-->		
 						<br/>
 <div class="filtering">
     <form>
@@ -457,9 +352,9 @@ $(function () {
 
 	</script>
 				
-				
-			</div></div>
-		</header>	
+					
+		  </div>
 		
-	 </div>
-<?php //require_once('bottom.php'); ?>		
+<?php require_once('bottom.php'); ?>	</div>		
+		</header>
+	 </div>	

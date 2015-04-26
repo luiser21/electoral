@@ -9,15 +9,12 @@
 #crudFormLineal label {
 	width: 350px;
 }
-.bg1 {  
-	position:relative;
-	top:600px;
-}
+
 h4{
 
  color: #006600;
     font-family: 'GothamLight',arial,serif;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: lighter;
     margin-bottom: 1px;
     margin-left: 1px;
@@ -42,22 +39,24 @@ button, input[type="button"], input[type="submit"] {
 			
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
 			
-			<table width="auto" border="0">
+			<table width="auto" border="0" style="line-height:2px;">
   <tr>
     <th width="227" rowspan="7" scope="row"><?php if($_SESSION['foto']!=""){?>
-						<img src="<?php echo $_SESSION['foto']?>" width="120" height="154" style="border:3px solid #CCCCCC;">
+						<img src="<?php echo $_SESSION['foto']?>" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php }else{ ?>		
-				<img src="fotos/images.jpg" width="131" height="150" style="border:3px solid #CCCCCC;">
+				<img src="fotos/images.jpg" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php } ?>	</th>
-    <td width="575"><h4 align="left">Consolidado por Puesto de Votaci&oacute;n</h4></td>
+    <td width="575"><h4 align="left">&nbsp;</h4>
+      <h4 align="left">&nbsp;</h4>
+      <h4 align="left">Consolidado por Puesto de Votaci&oacute;n</h4></td>
   </tr>
   <tr>
     <td>
 
-      <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
+      <h4 align="left" style="font-size: 14px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-    <td><h4 align="left" style="font-size: 18px">Candidato 
+    <td><h4 align="left" style="font-size: 14px">Candidato 
 	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'a la '.$_SESSION['tipocandidato'];
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
@@ -75,7 +74,7 @@ button, input[type="button"], input[type="submit"] {
 	}
 	?> </h4></td>
   </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
+    <tr><td><h4 align="left" style="font-size: 14px; color: #999999">
 	<?php 
 	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'COLOMBIA';
@@ -94,166 +93,17 @@ button, input[type="button"], input[type="submit"] {
 	}?></h4></td></tr>
   <tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
+    <td><h4 align="left" style="font-size: 14px"><?php echo $_SESSION['partido']?> </h4></td>
   </tr>
   <tr>
-    <td><h4 align="left" style="font-size: 18px; color: #999999"><?php 
+    <td><h4 align="left" style="font-size: 14px; color: #999999"><?php 
 	if($_SESSION['tipocandidato']!='PRESIDENCIA'  && $_SESSION['tipocandidato']!='GOBERNACION' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 		Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
 	<?php }?>
   </tr>
  
-</table>	<!--<?php if($_SESSION["username"]!='alcaldia'){?>	
-<?php 
-//Sacar total de votantes para colocar en a tabla
-/*$sql_votos="SELECT
-count(mesa_puesto_miembro.MIEMBRO) AS votos
-FROM
-mesa_puesto_miembro
-INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
-INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-where usuario.USUARIO='".$_SESSION["username"]."'";
-$DBGestion->ConsultaArray($sql);				
-$totales_=$DBGestion->datos;	*/
+</table>	
 
-$sql="SELECT SUM(VOTOS) AS TOTAL FROM (SELECT (SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
-					FROM
-					puestos_votacion AS p
-					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
-					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
-					left JOIN lideres ON lideres.ID = miembros.IDLIDER
-					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' GROUP BY p.NOMBRE_PUESTO ORDER BY VOTOS DESC) PUESTOS ";
-$DBGestion->ConsultaArray($sql);				
-$totales=$DBGestion->datos;	
-//imprimir($totales[0]['TOTAL']);
-
-$sql="SELECT
-					CONCAT(p.NOMBRE_PUESTO,'-',municipios.NOMBRE) AS PUESTO,					
-					(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
-					FROM
-					puestos_votacion AS p
-					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
-					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
-					left JOIN lideres ON lideres.ID = miembros.IDLIDER
-					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' GROUP BY p.NOMBRE_PUESTO ORDER BY VOTOS DESC ";
-				
-$DBGestion->ConsultaArray($sql);				
-$departamentos=$DBGestion->datos;	
-
-$arrDepartamento=array();
-$i=0;
-$arrDepartamento="";
-$arrDepartamento2="";$suma=0;
-$depar="";
-foreach($departamentos as $Depto=>$Val){
-
- $valores=round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2);
-	
-	if($i<count($departamentos) && $valores>=1.0){
-	
-		$arrDepartamento.= "'".$Val['PUESTO']."',";
-		$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2).",";
-		//imprimir($arrDepartamento2);
-
-	}else{
-		
-		//$arrDepartamento.= "'".$Val['PUESTO']."'";
-		//$arrDepartamento2.= "".round(($Val['VOTOS']*100)/$totales[0]['TOTAL'], 2)."";
-	}
-	
-	if($valores<1.0){
-		$suma=$suma+$Val['VOTOS'];
-		$depar=$depar.','.$Val['PUESTO'];
-	}
-	$i++;
-	
-}
-//imprimir($depar);
-@$arrDepartamento.= "'OTROS'";
-@$arrDepartamento2.= "".round(($suma*100)/$totales[0]['TOTAL'], 2)."";
-//	imprimir($arrDepartamento2);
-	//exit;
-?>
-				
-							<script type="text/javascript">
-$(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Grafico por Puesto de Votacion'
-            },
-            subtitle: {
-                text: 'Votos por Puesto de Votacion'
-            },
-            xAxis: {
-                categories: [<?php echo $arrDepartamento?>
-                ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Votos %'
-                }
-            },
-			
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Puestos de VOTACION',
-                data: [<?php echo $arrDepartamento2?>]
-    
-            }]
-        });
-    });
-    
-		</script>
-			<script src="js/js/highcharts.js"></script>
-<script src="js/js/modules/exporting.js"></script>
-
-<div id="container" style="min-width: 310px; height: 450px; margin: 0 auto"></div>-->
-	<?php } ?>		
 						<br/>
 <div class="filtering">
     <form>
@@ -281,7 +131,7 @@ $(function () {
 
     </form>
 </div>
-<div style="position:absolute; left: 588px; top: 201px;">
+<div style="position:absolute; left: 588px; top: 150px;">
 <table width="350" border="1" align="center">
   <tr align="center">
     <th scope="col">PUESTOS </th>
@@ -596,8 +446,8 @@ $datos=$DBGestion->datos;
 	</script>
 				
 				
-		  </div></div>
-		</header>	
+		  </div>
 		
+<?php require_once('bottom.php'); ?>	</div>		
+		</header>
 	 </div>
-<?php //require_once('bottom.php'); ?>		
