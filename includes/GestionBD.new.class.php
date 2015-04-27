@@ -123,6 +123,8 @@ class GestionBD{
 
 		switch ($this->basedatos){
 			case 'MYSQL':
+				$this->IdConexion = 0;
+				//echo $this->IdConexion;
 				mysql_close($this->IdConexion);
 			break;
 
@@ -285,6 +287,7 @@ class GestionBD{
 
 	public function Consulta($p_sql){
 		$this->Ultima_Consulta = $p_sql;
+		
 		switch ($this->basedatos){
 			case 'MYSQL':
 				$this->resultado = mysql_query($p_sql,$this->IdConexion) or die (mysql_error());
@@ -358,7 +361,7 @@ class GestionBD{
 		$this->Ultima_Consulta = $p_sql;
 		$this->datos = array();
 		$row = array();
-
+			
 		switch ($this->basedatos){
 			case 'MYSQL':
 			
@@ -661,7 +664,9 @@ class GestionBD{
 		{
 			switch ($this->basedatos){
 				case 'MYSQL':
-					mysql_close($this->IdConexion);
+					$this->IdConexion = 0;
+					//echo $this->IdConexion;
+					//mysql_close($this->IdConexion);
 				break;
 
 				case 'ORACLE':
