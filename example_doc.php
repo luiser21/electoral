@@ -52,9 +52,9 @@ for($i=0; $i<$registros-1; $i++){
 	try{		
 		
 		$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
-		echo '<br/><br/>[CEDULA] = <strong>'.$cedula_simpatizante[$i].'</strong>';
+		echo '[CEDULA] = <strong>'.$cedula_simpatizante[$i].'</strong>';
 		if(!empty($puestoreg['ERROR'])){
-			echo ' - Puesto '.$puestoreg['ERROR'].'<br/>';
+			echo ' - '.$puestoreg['ERROR'].'<br/>';
 			$aptosnovotar++;
 		}else{
 			//imprimir($puestoreg);

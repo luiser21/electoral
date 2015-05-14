@@ -1,4 +1,4 @@
-
+<!--
 <script type="text/javascript" >
 $(document).ready(function() {				
 				$(".iframe").colorbox({
@@ -14,7 +14,7 @@ $(document).ready(function() {
 			} );
 
 </script>
-
+-->
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
 	<li><a href="calendario_2015.php"  >Calendario Electoral 2015</a></li> 		

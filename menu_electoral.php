@@ -1,20 +1,4 @@
 
-<script type="text/javascript" >
-$(document).ready(function() {				
-				$(".iframe").colorbox({
-					iframe:true, 
-					width:"750px", 
-					height:"340px"
-				});		
-				$(".iframe2").colorbox({
-					iframe:true, 
-					width:"750px", 
-					height:"440px"
-				});		
-			} );
-
-</script>
-
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
 	<li><a href="calendario_2015.php"  >Calendario Electoral 2015</a></li> 		

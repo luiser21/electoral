@@ -42,10 +42,18 @@ function puesto_votacion($cedula_Excel){
 						if($posicion_coincidencia4 === false) {
 							$posicion_coincidencia5 = strpos($contenido, 'Baja por Perdida o Suspension');
 							if($posicion_coincidencia5 === false) {
-								$puesto_votacion=array(
+								$posicion_coincidencia6 = strpos($contenido, 'Por favor intente');
+								if($posicion_coincidencia6 === false) {
+									$puesto_votacion=array(
 										'ERROR'=>'INDEFINIDO'			
-								);
-								return $puesto_votacion;
+									);
+									return $puesto_votacion;
+								}else{
+									$puesto_votacion=array(
+											'ERROR'=>utf8_decode('La información se encuentra en actualización. Por favor intente más tarde.')			
+									);
+									return $puesto_votacion;
+								}
 							}else{
 								$puesto_votacion=array(
 										'ERROR'=>'Baja por Perdida o Suspension de los Derechos Politicos'			

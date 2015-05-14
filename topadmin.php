@@ -81,14 +81,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script type="text/javascript" src="js/tms-0.3.js"></script>
 <script type="text/javascript" src="js/tms_presets.js"></script>-->
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
-<script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
-<script>
-		jQuery(document).ready(function(){
-			jQuery("#form2").validationEngine();
-		});	
-</script>	
+	 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <!-- <div id="logo4">
 					
 						<span class="textRequired"> * </span>

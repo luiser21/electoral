@@ -124,7 +124,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto=number_format(($t
 				</div>
 		  </article>
 </div>		
-<script type="text/javascript"> Cufon.now(); </script>
+<!--<script type="text/javascript"> Cufon.now(); </script>-->
 		<script>
 			$(window).load(function(){
 				$('#slider')._TMS({

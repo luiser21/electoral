@@ -63,7 +63,6 @@ ul.newsticker a:hover {text-decoration: underline;}
 <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
 <link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />	
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
-
 <script type='text/javascript' src='js/jquery.min.js'></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script> 
@@ -72,29 +71,9 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script type="text/javascript" src="js/jquery.colorbox.js"></script> 
 <script type="text/javascript" src="js/superfish.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/slide.js" type="text/javascript"></script> 
-<script type="text/javascript" src="js/Vegur_300.font.js"></script>
-<script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
-<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
-<script type="text/javascript" src="js/tms-0.3.js"></script>
-<script type="text/javascript" src="js/tms_presets.js"></script>
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>
-<script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
-<script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
-<script>
-		jQuery(document).ready(function(){
-			jQuery("#form2").validationEngine();
-		});	
-</script>	
-<!-- <div id="logo4">
-					
-						<span class="textRequired"> * </span>
-							Cedula
-					
-						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="consulta.php" ><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
-	<div>	 -->
+
 		<?php 
 			if ($_SESSION["active"] == 1)
 			{

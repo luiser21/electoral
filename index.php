@@ -161,7 +161,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 				</div>
 		  </article>
 			</div>
-		<script type="text/javascript"> Cufon.now(); </script>
+		<!--<script type="text/javascript"> Cufon.now(); </script>-->
 		<script>
 			$(window).load(function(){
 				$('#slider')._TMS({

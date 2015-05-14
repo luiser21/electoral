@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="css/careers_lightbox/colorbox.css" />
 
 <link rel="stylesheet" type="text/css" href="css/menu.css"/> 
-<script src="js/superfish.js"></script>
+
 
 <script type='text/javascript' src='js/jquery.min.js'></script>
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -23,27 +23,15 @@
 <script type="text/javascript" src="js/FAjax.js"></script>
 <script type="text/javascript" src="js/jquery.colorbox.js"></script> 
 <script src="js/slide.js" type="text/javascript"></script> 
-<script type="text/javascript" src="js/Vegur_300.font.js"></script>
+<!--<script type="text/javascript" src="js/Vegur_300.font.js"></script>
 <script type="text/javascript" src="js/PT_Sans_700.font.js"></script>
-<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>
+<script type="text/javascript" src="js/PT_Sans_400.font.js"></script>-->
 <script type="text/javascript" src="js/tms-0.3.js"></script>
 <script type="text/javascript" src="js/tms_presets.js"></script>
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>		
-<script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
-
-<script>
-		jQuery(document).ready(function(){
-			jQuery("#form2").validationEngine();
-			$(".iframe2").colorbox({
-					iframe:true, 
-					width:"750px", 
-					height:"440px"
-				});	
-		});	
-</script>		
-
+<script src="js/superfish.js"></script>	
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body id="page1">	
 <!-- Panel -->

@@ -211,6 +211,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}
+		$_SESSION['graficos'] = $jTableResult;
 		print json_encode($jTableResult);		
 	}
 	//Creating a new record (createAction)
