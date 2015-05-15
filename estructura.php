@@ -49,10 +49,10 @@ function comprueba_extension(formulario, archivo) {
 <div class="main">
 	<header>
 	<div style=" position:absolute; top:190px"><br/>
-	<h4>Ingresar Simpatizantes Masivo</h4>
+	<h4>Ingresar Simpatizantes Reporte Masivo</h4>
 	
 		<div id="crudFormLineal" style="width: 910px; height: auto; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
-			<h2>Archivos Cargados</h2>
+			<h2>Reportes Cargados</h2>
 <div class="filtering">
     
         Nombre: <input type="text" name="name" id="name" />

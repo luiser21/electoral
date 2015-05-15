@@ -52,7 +52,7 @@
 	</li>
 	<li ><a href="#" >Administraci&oacute;n de la Campa&a</a>		
 		<ul>
-			<li ><a href="#" >Estructura</a></li>
+			<li ><a href="estructura.php" >Estructura</a></li>
 			<li ><a href="#" >Coordinadores</a></li>
 			<li ><a href="lideres.php" >Lideres</a></li>
 			<li ><a href="#" >Finanzas</a></li>
@@ -67,22 +67,26 @@
 			
 			<?php if($_SESSION['tipocandidato']!='CONSEJO' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 					<?php if($_SESSION['tipocandidato']!='GOBERNACION'){?>
-					<li ><a href="Informes_departamento.php">Por Departamentos</a></li>
-					<?php }?>
+					<!--<li ><a href="Informes_departamento.php">Por Departamentos</a></li>-->
 					<li ><a href="Informes_municipios.php">Por Municipios</a></li>
+					<?php }?>
+					<!--<li ><a href="Informes_municipios.php">Por Municipios</a></li>-->
 			
 			<?php } ?>
 			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-->
 			<li ><a href="Informes.php">Por Puesto de Votaci&oacute;n</a></li>
 			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>-->
 			<li ><a href="Informes_lideres.php">Por Lideres</a></li>
+			<li ><a href="Informes.php">Por Simpatizantes Aptos para Votar</a></li>
+			<li ><a href="Informes.php">Por Simpatizantes NO Aptos para Votar</a></li>
+			
 			<li ><a href="Informes_diferente_puestos.php"><?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ echo "Por Simpatizantes No Inscritos en el Municipio"; } ?>
 			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
 			<li ><a href="Informes_miembros_duplicados.php">Por Simpatizantes Duplicados por Lider</a></li>
 			<li ><a href="Informes_miembros_datos.php">Por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>
 			
-			<li ><a href="#">Otros</a></li>
+			<li ><a href="#">Consolidado Lideres - Simpatizantes</a></li>
 			<!--<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
 			<li ><a href="informe_movilizados.php">Informe Comparativo Compromisos - Movilizados - Votos Reales</a></li>-->

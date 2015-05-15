@@ -185,7 +185,44 @@ $totales_lideres=$DBGestion->datos;
   </tr>
 </table></div>
 <p></p>
-					<div id="PeopleTableContainer" style="width: auto;"></div>
+					<div id="PeopleTableContainer" style="width: auto;">
+					<?php 
+	$valores=@$_SESSION['graficos_lideres']['Records'];
+	$conta='';
+	for($i=0; $i<count($valores);$i++){
+		if($i<8 && $valores[$i]['MIEMBROS']>=10){
+			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."],";			
+		}if($i==8 && $valores[$i]['MIEMBROS']>=10){
+			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."]";			
+		}
+	}
+	//imprimir($conta);
+	//imprimir($_SESSION['graficos']['Records']);
+	?>
+	<div id="chart_div"><script>
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawBasic);
+function drawBasic() {
+      var data = google.visualization.arrayToDataTable([
+        ['Lideres', 'Simpatizantes',],
+        <?php echo $conta?>
+      ]);
+      var options = {
+        title: 'Lideres con mayor # de Simpatizantes',
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: 'Total Simpatizantes',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Lideres'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+</script>
+					</div>
 	<script type="text/javascript">
 
 		$(document).ready(function () {

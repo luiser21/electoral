@@ -67,7 +67,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(lideres.nombres) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" ORDER BY NOMBRE ";
+			$sql.=" ORDER BY MIEMBROS desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -132,7 +132,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(lider.nombre) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" ORDER BY NOMBRE ";
+			$sql.=" ORDER BY MIEMBROS desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -155,6 +155,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}
+		$_SESSION['graficos_lideres'] = $jTableResult;
 		print json_encode($jTableResult);		
 	}
 	//Creating a new record (createAction)

@@ -222,52 +222,42 @@ $datos=$DBGestion->datos;
  </tr>
 </table></div>
 <p></p>
-					<div id="PeopleTableContainer" style="width: auto;"><?php  //imprimir($_SESSION['graficos']);?>
-					  <div id="chart_div"><script>
+<div id="PeopleTableContainer" style="width: auto;"><?php 
+	@$valores=@$_SESSION['graficos']['Records'];
+	$conta='';
+	for($i=0; $i<count(@$valores);$i++){
+		if($i<8 && @$valores[$i]['VOTOSPREV']>=10){
+			$conta.="['".@$valores[$i]['NOMBRE']."', ".@$valores[$i]['VOTOSPREV']."],";			
+		}if($i==8 && @$valores[$i]['VOTOSPREV']>=10){
+			$conta.="['".@$valores[$i]['NOMBRE']."', ".@$valores[$i]['VOTOSPREV']."]";			
+		}
+	}
+	//imprimir($conta);
+	//imprimir($_SESSION['graficos']['Records']);
+	?>
+	<div id="chart_div"><script>
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawBasic);
-
 function drawBasic() {
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', 'Votos');
-      data.addColumn('number', 'Puestos Votacion');
-
-      data.addRows([
-        [{v: [8, 0, 0], f: '8 am'}, 1],
-        [{v: [9, 0, 0], f: '9 am'}, 2],
-        [{v: [10, 0, 0], f:'10 am'}, 3],
-        [{v: [11, 0, 0], f: '11 am'}, 4],
-        [{v: [12, 0, 0], f: '12 pm'}, 5],
-        [{v: [13, 0, 0], f: '1 pm'}, 6],
-        [{v: [14, 0, 0], f: '2 pm'}, 7],
-        [{v: [15, 0, 0], f: '3 pm'}, 8],
-        [{v: [16, 0, 0], f: '4 pm'}, 9],
-        [{v: [17, 0, 0], f: '5 pm'}, 10],
+      var data = google.visualization.arrayToDataTable([
+        ['Puestos de Votacion', 'Simpatizantes',],
+        <?php echo $conta?>
       ]);
-
       var options = {
-        title: 'Motivation Level Throughout the Day',
+        title: 'Puestos de Votacion con mayor # de Simpatizantes',
+        chartArea: {width: '50%'},
         hAxis: {
-          title: 'Time of Day',
-          format: 'h:mm a',
-          viewWindow: {
-            min: [7, 30, 0],
-            max: [17, 30, 0]
-          }
+          title: 'Total Simpatizantes',
+          minValue: 0
         },
         vAxis: {
-          title: 'Rating (scale of 1-10)'
+          title: 'Puestos de Votacion'
         }
       };
-
-      var chart = new google.visualization.ColumnChart(
-        document.getElementById('chart_div'));
-
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
-</script><div>
-					</div>
+</script>
 	<script type="text/javascript">
 
 		$(document).ready(function () {

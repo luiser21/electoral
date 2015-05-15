@@ -98,7 +98,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" GROUP BY p.IDPUESTO ORDER BY MUNICIPIO ";
+			$sql.=" GROUP BY p.IDPUESTO ORDER BY VOTOSPREV desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 		//	echo $sql;
 			$DBGestion->ConsultaArray($sql);				
@@ -186,7 +186,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(p.nombre) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" ORDER BY nombre ";
+			$sql.=" ORDER BY VOTOSPREV desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
 			$DBGestion->ConsultaArray($sql);				
