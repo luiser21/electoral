@@ -22,7 +22,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 <html lang="es">
 <head>
 <style>
-#logo3 {  position:absolute; float: left; margin-left: 771px; top:50px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
+#logo3 {  position:absolute; float: left; margin-left: 400px; top:48px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
 #logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
 	
 /****      ****/

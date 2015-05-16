@@ -81,7 +81,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}else{
-		 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,APTOSVOTAR,NOAPTOSVOTAR from UPLOAD_FILE WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."'";		
+		 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO from UPLOAD_FILE WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."'";		
 				//echo $sql;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
@@ -89,7 +89,7 @@ $_GET["jtStartIndex"]=0;*/
 			$recordCount=count($partidos);
 			
 			//Get records from database
-			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR from UPLOAD_FILE
+			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO from UPLOAD_FILE
 				WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."' ";	
 			
 			
@@ -102,18 +102,9 @@ $_GET["jtStartIndex"]=0;*/
 			$row=array();	
 //imprimir($partidos);			
 			for($i=0; $i<count($partidos);$i++){
-				$row[$i]['ID']=$partidos[$i]['ID'];
+				$row[$i]['ID']=$i+1;
 				$row[$i]['FILES']=utf8_encode($partidos[$i]['FILE']);
-				if($partidos[$i]['TRANSFERIR']==1){
-					$row[$i]['TRANSFER']='<img src="img/error.gif" width="14" title="Excel Transferido" height="14" border="0"/>';				
-				}else{
-					$row[$i]['TRANSFER']='<img src="img/acs_chk.gif" width="14" title="Transferir Excel" height="14" border="0" onclick="javascript:actionChange('.$partidos[$i]['ID'].')" style="cursor:pointer;" />';				
-				}
-				if($partidos[$i]['INVALIDAR']==1){
-					$row[$i]['INVALIDAR']='<img src="img/error.gif" width="14" title="Excel Invalidado" height="14" border="0"/>';				
-				}else{
-					$row[$i]['INVALIDAR']='<img src="img/acs_chk.gif" width="14" title="Invalidar Excel" height="14" border="0" onclick="javascript:actionChange2('.$partidos[$i]['ID'].')" style="cursor:pointer;" />';				
-				}
+				$row[$i]['REGISTRADO']=$partidos[$i]['CREADO'];
 				$row[$i]['VALIDOS']=$partidos[$i]['DATOSVALIDOOS'];
 				$row[$i]['INVALIDOS']=$partidos[$i]['DATOSINVALIDOS'];
 				$row[$i]['APTOS']=$partidos[$i]['APTOSVOTAR'];
@@ -127,6 +118,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}
+		$_SESSION['graficos_estructura'] = $jTableResult;
 		print json_encode($jTableResult);		
 	}
 	//Creating a new record (createAction)

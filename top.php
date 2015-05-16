@@ -32,6 +32,7 @@
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>		
 <script src="js/superfish.js"></script>	
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ 
 </head>
 <body id="page1">	
 <!-- Panel -->

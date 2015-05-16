@@ -53,7 +53,7 @@ ul#countdown li {
   display: inline-block;
   background: transparent url('../images/pieza_tiempo.png') no-repeat left top;
   width: 66px;
-  margin-bottom: 4em;
+  margin-right: -10px;
   text-align: center;
 }
 ul#countdown li span {

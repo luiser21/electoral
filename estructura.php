@@ -62,7 +62,64 @@ function comprueba_extension(formulario, archivo) {
 	<br/><br/>
 </div>
 	<div id="cargar" style="width: auto;"></div>	
-	<div id="PeopleTableContainer" style="width: auto;"></div>						
+<div id="PeopleTableContainer" style="width: 100%;">
+<table width="100%" border="0">
+  <tr>
+    <td><div id="piechart_3d" style="width: 400px; height:250px;" align="center"></div></td>
+    <td><div id="piechart_3d2" style="width: 400px; height:250px;" align="center"></div></td>
+  </tr>
+</table>
+</div>
+	<?php 
+	@$valores=@$_SESSION['graficos_estructura']['Records'];
+	$validos=0;
+	$INVALIDOS=0;
+	$APTOS=0;
+	$NOAPTOSVOTAR=0;
+	for($i=0; $i<count(@$valores);$i++){
+		$validos=$validos+$valores[$i]['VALIDOS'];
+		$INVALIDOS=$INVALIDOS+$valores[$i]['INVALIDOS'];
+		$APTOS=$APTOS+$valores[$i]['APTOS'];
+		$NOAPTOSVOTAR=$NOAPTOSVOTAR+$valores[$i]['NOAPTOS'];
+	}
+	?>
+	<script type="text/javascript">
+	  google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+	  google.setOnLoadCallback(drawChart2);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Validos',     <?php echo $validos?>],
+          ['Invalidos',    <?php echo $INVALIDOS?>]         
+        ]);
+
+        var options = {
+          title: 'Total Registros',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+	  function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Aptos Votar',  <?php echo $APTOS?>],
+          ['No Aptos Votar', <?php echo $NOAPTOSVOTAR?>]
+        ]);
+
+        var options = {
+          title: 'Total Registros',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+        chart.draw(data, options);
+      }
+    </script>
+	</script>
+						
 	<script type="text/javascript">
 
 		$(document).ready(function () {
@@ -71,7 +128,7 @@ function comprueba_extension(formulario, archivo) {
 			$('#PeopleTableContainer').jtable({
 				title: 'Informe Cargas',
 				paging: true,
-				pageSize: 20,
+				pageSize: 10,
 				sorting: true,
 				defaultSorting: 'Name ASC',
 				actions: {
@@ -85,52 +142,47 @@ function comprueba_extension(formulario, archivo) {
 						key: true,
 						create: false,
 						edit: false,
-						list: false
+						list: true,
+						width: '5%'
 					},
 						 //CHILD TABLE DEFINITION FOR "PHONE NUMBERS"
+					
 					FILES: {
 						title: 'FILES',
-						width: '40%',
+						width: '30%',
 						create: false,
 						edit: false
 					},
-					TRANSFER: {
-						title: 'TRANSFER',
-						width: '5%',
-						create: false,
-						edit: false
-					},
-					INVALIDAR: {
-						title: 'INVALIDAR',
-						width: '5%',
-						//type: 'date',
+					REGISTRADO: {
+						title: 'REGISTRADO',
+						width: '10%',
 						create: false,
 						edit: false
 					},
 					VALIDOS: {
 						title: 'VALIDOS',
-						width: '5%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					INVALIDOS : {
 						title: 'INVALIDOS',
-						width: '5%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					APTOS: {
 						title: 'APTOS',
-						width: '5%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					NOAPTOS: {
 						title: 'NOAPTOS',
-						width: '5%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false

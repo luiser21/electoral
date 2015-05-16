@@ -4,10 +4,12 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 <script src="js/countdown.js"></script>
-<?php if(date('H')<16){ ?>
-<meta http-equiv=refresh content=20;URL=reporte.php>
+<?php 
+date_default_timezone_set('America/Bogota');
+if(date('H')<16){ ?>
+<!--<meta http-equiv=refresh content=20;URL=reporte.php>-->
 <?php }elseif(date('H')==16){ ?>
-<meta http-equiv=refresh content=20;URL=escrutinio.php>
+<!--<meta http-equiv=refresh content=20;URL=escrutinio.php>-->
 <?php } ?>
 <script>
 
@@ -62,129 +64,7 @@ button, input[type="button"], input[type="submit"] {
     width: 950px;
 }
 </style>
-<div class="main">	
-<header>
-		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
-			
-			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
-		$(document).ready(function(){
-			$("#countdown").countdown({
-				date: "25 october 2015 07:59:59",
-				format: "on"
-			},
-			function() {
-				// callback function
-			});
-		});
-	</script>
-		<p style="margin-left:468px">Cuenta Regresiva para Apertura de Mesas<div class="timer-area" style=" margin-right:-100px">	
-										<ul id="countdown" style="margin-left:58px">
-										<?php if($_SESSION['foto']!=""){?>
-						<img src="<?php echo $_SESSION['foto']?>" width="180" height="177" style="border:3px solid #CCCCCC;">
-			<?php }else{ ?>		
-				<img src="fotos/images.jpg" width="180" height="177" style="border:3px solid #CCCCCC;">
-			<?php } ?>	
-										<!--<img src="<?php echo $_SESSION['foto']?>" width="180" height="177">-->
-										<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
-		echo 'a la '.$_SESSION['tipocandidato'];
-	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
-	
-	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		
-	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
-		
-	}elseif($_SESSION['tipocandidato']=='SENADO'){?>
-		<img src="images/ktEO3b-9.png" width="201" height="148"> 
-	<?php }elseif($_SESSION['tipocandidato']=='CAMARA'){
-	
-	}elseif($_SESSION['tipocandidato']=='JAL'){
-	
-	}
-	?>
-<div style="position:absolute; left: 294px; top: 90px;" >
-	<table width="auto" border="0">
-
-  <tr>
-    <td>
-
-      <h4 align="left" style="font-size: 18px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
-  </tr>
-
-    <td><h4 align="left" style="font-size: 18px">Candidato 
-	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
-		echo 'a la '.$_SESSION['tipocandidato'];
-	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
-		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
-	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' del ';	
-	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
-		echo 'al '.$_SESSION['tipocandidato'].' de ';	
-	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
-	}elseif($_SESSION['tipocandidato']=='CAMARA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
-	}elseif($_SESSION['tipocandidato']=='JAL'){
-		echo 'a la '.$_SESSION['tipocandidato'];	
-	}
-	?> </h4></td>
-  </tr>
-    <tr><td><h4 align="left" style="font-size: 18px; color: #999999">
-	<?php 
-	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
-		echo 'COLOMBIA';
-	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
-		echo ucwords(strtolower($_SESSION['departamento']));	
-	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'Municipio de '.ucwords(strtolower($_SESSION['municipio'])); 
-	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
-		echo ucwords(strtolower($_SESSION['municipio'])); 
-	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
-	}elseif($_SESSION['tipocandidato']=='CAMARA'){
-		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
-	}elseif($_SESSION['tipocandidato']=='JAL'){
-		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
-	}?></h4></td></tr>
-  <tr>
-  <tr>
-    <td><h4 align="left" style="font-size: 18px"><?php echo $_SESSION['partido']?> </h4></td>
-  </tr>
-  <tr>
-    <td><h4 align="left" style="font-size: 18px; color: #999999">
-	<?php 
-	if($_SESSION['tipocandidato']!='PRESIDENCIA'  && $_SESSION['tipocandidato']!='GOBERNACION' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
-		Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
-	<?php }?>
-	
-  </tr>
- 
-</table> </div>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<li>
-												<span class="days">00</span>
-												<p class="timeRefDays">days</p>
-											</li>
-											<li>
-												<span class="hours">00</span>
-												<p class="timeRefHours">hours</p>
-											</li>
-											<li>
-												<span class="minutes">00</span>
-												<p class="timeRefMinutes">minutes</p>
-											</li>
-											<li>
-												<span class="seconds">00</span>
-												<p class="timeRefSeconds">seconds</p>
-											</li>
-										</ul>
-										
-									</div> </p>	
-		
-		<table width="100%" border="0">
-  <tr style="font-size:16px">
-    <th width="70%" rowspan="4" scope="col"><?php 
+<?php 
 
 
 $sql="SELECT
@@ -255,6 +135,120 @@ $reportes=$DBGestion->datos;
 //$arrDepartamento3.= "".$suma1."";
 //$arrDepartamento4.= "".$suma2."";
 //imprimir($arrDepartamento); ?>
+<div class="main">	
+<header>
+		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
+			
+			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
+		$(document).ready(function(){
+			$("#countdown").countdown({
+				date: "25 october 2015 07:59:59",
+				format: "on"
+			},
+			function() {
+				// callback function
+			});
+		});
+	</script>
+		<p style="margin-left:388px">Cuenta Regresiva para Apertura de Mesas<div class="timer-area">	
+										<ul id="countdown">
+										<?php if($_SESSION['foto']!=""){?>
+						<img src="<?php echo $_SESSION['foto']?>" width="94" height="108" style="border:3px solid #CCCCCC;">
+			<?php }else{ ?>		
+				<img src="fotos/images.jpg" width="94" height="108" style="border:3px solid #CCCCCC;">
+			<?php } ?>	
+							
+<div style="position:absolute; left: 128px; top: 90px;" >
+	<table width="auto" border="0">
+  <tr>
+    <td>
+      <h4 align="left" style="font-size: 14px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
+  </tr>
+
+    <td><h4 align="left" style="font-size: 14px">Candidato 
+	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'a la '.$_SESSION['tipocandidato'];
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' del ';	
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo 'al '.$_SESSION['tipocandidato'].' de ';	
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'al '.utf8_decode($_SESSION['tipocandidato'].' de la República');	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo 'a la '.$_SESSION['tipocandidato'];	
+	}
+	?> </h4></td>
+  </tr>
+    <tr><td><h4 align="left" style="font-size: 14px; color: #999999">
+	<?php 
+	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
+		echo 'COLOMBIA';
+	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
+		echo ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
+		echo 'Municipio de '.ucwords(strtolower($_SESSION['municipio'])); 
+	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
+		echo ucwords(strtolower($_SESSION['municipio'])); 
+	}elseif($_SESSION['tipocandidato']=='SENADO'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
+	}elseif($_SESSION['tipocandidato']=='CAMARA'){
+		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
+	}elseif($_SESSION['tipocandidato']=='JAL'){
+		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+	}?></h4></td></tr>
+  <tr>
+  <tr>
+    <td><h4 align="left" style="font-size: 14px"><?php echo $_SESSION['partido']?> </h4></td>
+  </tr>
+  <tr>
+    <td><h4 align="left" style="font-size: 14px; color: #999999">
+	<?php 
+	if($_SESSION['tipocandidato']!='PRESIDENCIA'  && $_SESSION['tipocandidato']!='GOBERNACION' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
+		Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
+	<?php }?>
+	
+  </tr> 
+</table> </div>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<li>
+												<span class="days">00</span>
+												<p class="timeRefDays">days</p>
+											</li>
+											<li>
+												<span class="hours">00</span>
+												<p class="timeRefHours">hours</p>
+											</li>
+											<li>
+												<span class="minutes">00</span>
+												<p class="timeRefMinutes">minutes</p>
+											</li>
+											<li>
+												<span class="seconds">00</span>
+												<p class="timeRefSeconds">seconds</p>
+											</li>
+	<div style="position:absolute; left: 738px; top: 40px;"> 									
+	<table width="10%" border="0">
+  <tr style="font-size:16px">       
+	   <th><div ><blink><strong style="font-size:26px; color:#FF0000">
+	   <?php echo 
+	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
+	   $voto_cargue= number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
+	   ?><br/></strong><strong style="font-size:18px; color:#FF0000">SIMPATIZANTES</strong></blink>
+	     <img src="images/votos2.png" width="110" height="121">
+	   <?php echo date(" g:i:s a") ?> </div></th>	    
+  </tr>   
+</table></div>	
+</ul>								
+</div>									
+		<table width="100%" border="0">
+  <tr style="font-size:16px">
+    <th width="70%" rowspan="4" scope="col">
 	<script type="text/javascript">
 $(function () {
         $('#container').highcharts({
@@ -325,16 +319,9 @@ $(function () {
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
+<div id="container" style="min-width: 250px; height: 350px; margin: 0 auto"></div></th>
     
-	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:26px; color:#FF0000"><br/><br/><?php echo 
-	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
-	   $voto_cargue= number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
-	   ?><br/><br/></strong><strong style="font-size:14px; color:#FF0000">SIMPATIZANTES</strong></blink>
-	     <p>&nbsp;</p>
-	     <p><img src="images/votos2.png" width="119" height="131"></p>
-	   </div> </th>
-	<?php  if($_SESSION['tipocandidato']=='SENADO'){ ?>
+	<?php  if($_SESSION['tipocandidato']=='SENADO	'){ ?>
        <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">DEPARTAMENTOS SIN MOVILIZACION <?php echo @$reportes[0]['REPORTES'];?><br/>
          <br/><blink><strong style="color: #990000"><?php 
 	   $sql="SELECT 
@@ -358,14 +345,9 @@ $(function () {
 	   </blink></strong></th>
   </tr>
   <tr>
-    <th scope="col"><?php 
-//echo @$reportes[0]['REPORTES'];	?></th>
+    <th scope="col"><?php //echo @$reportes[0]['REPORTES'];	?></th>
 	 </tr>
-  <tr>
-    
 
-    <th scope="col" style="border:3px solid #CCCCCC; font-size:20px"><?php echo date(" g:i:s a") ?></th>
-    </tr>
 </table>
 
 <?php 

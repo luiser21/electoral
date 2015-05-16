@@ -326,7 +326,8 @@ for($i=0; $i<$registros-1; $i++){
 												if(!empty($idlider[0]['ID'])){									
 													//INSERTO EL MIEMBRO EN LA TABLA
 													$idmesa=$mesavotacion[0]['ID'];
-													$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",".$idmunicipios.",".$idpuesto.",".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
+													$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO,TELEFONO,EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+													VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",".$idmunicipios.",".$celular[$i].",'".$email[$i]."',".$idpuesto.",".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 													echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 													$DBGestion->Consulta($sql);									
 													$rs = mysql_query("SELECT @@identity AS id");
@@ -358,22 +359,33 @@ for($i=0; $i<$registros-1; $i++){
 							}else{
 								echo "<strong><br/>Problemas con el municipio del Puesto de Votacion ".$MUNICIPIO_R." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 								$datosinvalidos++;
+								$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,IDLIDER,NOMBRE_LIDER,CELULAR1,CORREO1,DTO VOTACION,MPIO VOTACION,PUESTO,CANDIDATO,OCUPACION) 
+								VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."',".$departamento[$i].",".$MUNICIPIO[$i].",".$idlider[0]['ID'].",'".$nombre_lider[$i]."',".$celular[$i].",'".$email[$i]."','".$DEPARTAMENTO_R."','".$MUNICIPIO_R."','x',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";										
 							}
 						}else{
 							echo "<strong><br/>Problemas con el departamento del Puesto de Votacion ".$DEPARTAMENTO_R." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 							$datosinvalidos++;
+							$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,IDLIDER,NOMBRE_LIDER,CELULAR1,CORREO1,DTO VOTACION,MPIO VOTACION,PUESTO,CANDIDATO,OCUPACION) 
+								VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."',".$departamento[$i].",".$MUNICIPIO[$i].",".$idlider[0]['ID'].",'".$nombre_lider[$i]."',".$celular[$i].",'".$email[$i]."','".$DEPARTAMENTO_R."','".$MUNICIPIO_R."','x',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";										
 						}						
 					}else{
 						echo "<strong><br/>Problemas con el municipio. ".$MUNICIPIO[$i]." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 						$datosinvalidos++;
+						$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,IDLIDER,NOMBRE_LIDER,CELULAR1,CORREO1,DTO VOTACION,MPIO VOTACION,PUESTO,CANDIDATO,OCUPACION) 
+								VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."',".$departamento[$i].",".$MUNICIPIO[$i].",".$idlider[0]['ID'].",'".$nombre_lider[$i]."',".$celular[$i].",'".$email[$i]."','".$DEPARTAMENTO_R."','".$MUNICIPIO_R."','x',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";										
 					}
 				}else{
 					echo "<strong><br/>Problemas con el departamento ".$departamento[$i]." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 					$datosinvalidos++;
+					$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,IDLIDER,NOMBRE_LIDER,CELULAR1,CORREO1,DTO VOTACION,MPIO VOTACION,PUESTO,CANDIDATO,OCUPACION) 
+								VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."',".$departamento[$i].",".$MUNICIPIO[$i].",".$idlider[0]['ID'].",'".$nombre_lider[$i]."',".$celular[$i].",'".$email[$i]."','".$DEPARTAMENTO_R."','".$MUNICIPIO_R."','x',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";										
 				}	
 			}else{
 				echo "<strong><br/>Cedula ya existe ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 				$datosinvalidos++;
+				$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,IDLIDER,NOMBRE_LIDER,CELULAR1,CORREO1,DTO VOTACION,MPIO VOTACION,PUESTO,CANDIDATO,OCUPACION) 
+					VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."',".$departamento[$i].",".$MUNICIPIO[$i].",".$idlider[0]['ID'].",'".$nombre_lider[$i]."',".$celular[$i].",'".$email[$i]."','".$DEPARTAMENTO_R."','".$MUNICIPIO_R."','x',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";										
+							
 			}	
 		}
 	$sql="UPDATE UPLOAD_FILE SET DATOSVALIDOOS=".$datosvalidos." ,DATOSINVALIDOS=".$datosinvalidos.", APTOSVOTAR=".$aptosvotar.",NOAPTOSVOTAR=".$aptosnovotar." WHERE ID=".$idfile;										
