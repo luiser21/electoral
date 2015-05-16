@@ -1,4 +1,5 @@
 <?php require_once('topadmin.php');?> 
+
   <link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
@@ -235,7 +236,7 @@ $datos=$DBGestion->datos;
 	//imprimir($conta);
 	//imprimir($_SESSION['graficos']['Records']);
 	?>
-	<div id="chart_div"><script>
+	<div id="chart_div"></div></div><script>
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawBasic);
 function drawBasic() {
@@ -484,6 +485,6 @@ function drawBasic() {
 				
 		  </div>
 		
-<?php //require_once('bottom.php'); ?>	</div>		
+<?php require_once('bottom.php'); ?>	</div>		
 		</header>
 	 </div>

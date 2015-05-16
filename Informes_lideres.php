@@ -199,7 +199,7 @@ $totales_lideres=$DBGestion->datos;
 	//imprimir($conta);
 	//imprimir($_SESSION['graficos']['Records']);
 	?>
-	<div id="chart_div"><script>
+	<div id="chart_div"></div><script>
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawBasic);
 function drawBasic() {
