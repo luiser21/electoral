@@ -65,7 +65,7 @@
 		<ul>
 			
 			
-			<li ><a href="Informes_recoleccion.php">Proceso Recoleccion Firmas</a></li>
+			<li ><a href="Informes_cedulas.php">Proceso Recoleccion Firmas</a></li>
 			<?php if($_SESSION['tipocandidato']!='CONSEJO' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 					<?php if($_SESSION['tipocandidato']!='GOBERNACION'){?>
 					<!--<li ><a href="Informes_departamento.php">Por Departamentos</a></li>-->

@@ -110,25 +110,7 @@ button, input[type="button"], input[type="submit"] {
 <div class="filtering">
     <form>
         Nombre: <input type="text" name="name" id="name" />
-       <!-- City:
-        <select id="cityId" name="cityId">
-            <option selected="selected" value="0">All cities</option>
-            <option value="1">Adana</option>
-            <option value="2">Ankara</option>
-            <option value="3">Athens</option>
-            <option value="4">Beijing</option>
-            <option value="5">Berlin</option>
-            <option value="6">Bursa</option>
-            <option value="7">Istanbul</option>
-            <option value="8">London</option>
-            <option value="9">Madrid</option>
-            <option value="10">Mekke</option>
-            <option value="11">New York</option>
-            <option value="12">Paris</option>
-            <option value="13">Samsun</option>
-            <option value="14">Trabzon</option>
-            <option value="15">Volos</option>
-        </select>-->
+     
         <button type="submit" id="LoadRecordsButton">Buscar</button>
 
     </form>
@@ -223,7 +205,8 @@ $datos=$DBGestion->datos;
  </tr>
 </table></div>
 <p></p>
-<div id="PeopleTableContainer" style="width: auto;"><?php 
+<div id="PeopleTableContainer" style="width: auto;">
+<?php 
 	@$valores=@$_SESSION['graficos']['Records'];
 	$conta='';
 	for($i=0; $i<count(@$valores);$i++){
@@ -271,7 +254,7 @@ function drawBasic() {
 				sorting: true,
 				defaultSorting: 'Name ASC',
 				actions: {
-					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=list'
+					listAction: 'PersonActionsPagedSorted_Informe_puestos_cedulas.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
@@ -418,54 +401,42 @@ function drawBasic() {
 					},
 					NOMBRE: {
 						title: 'PUESTO DE VOTACION',
-						width: '30%',
+						width: '40%',
 						create: false,
 						edit: false
 					},
-					MUNICIPIO: {
-						title: 'MUNICIPIO',
-						width: '25%',
+					CEDULAS: {
+						title: 'CEDULAS',
+						width: '15%',
 						create: false,
 						edit: false
 					},
-					DEPARTAMENTO: {
-						title: 'DEPARTAMENTO',
-						width: '25%',
+					ALCALDIA: {
+						title: 'ALCALDIA',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					MESAS: {
-						title: 'MESAS',
-						width: '5%',
+					CONCEJO: {
+						title: 'CONCEJO',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					VOTOSPREV : {
-						title: 'VOTO_PRE',
-						width: '5%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
-					VOTOSREALES: {
-						title: 'VOTO_REAL',
-						width: '5%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
-					VARIACION: {
-						title: 'VARIACION',
-						width: '5%',
+					SINFIRMAS: {
+						title: 'SINFIRMAS',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false
 					}
 				}
 			});
-
+			
+			
+			
 			//Load person list from server
 			//$('#PeopleTableContainer').jtable('load');
 			$('#LoadRecordsButton').click(function (e) {
