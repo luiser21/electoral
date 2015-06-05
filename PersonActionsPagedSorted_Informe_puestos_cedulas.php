@@ -17,7 +17,7 @@ $_GET["jtStartIndex"]=0;*/
 			$sql="SELECT
 					recoleccion_cedulas.IDPUESTO,
 					puestos_votacion.NOMBRE_PUESTO,
-					(Select count(r.cedulas) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO) as CEDULAS,
+					count(recoleccion_cedulas.cedulas) as CEDULAS,
 					(Select count(r.TIPOELECCION1) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO AND R.TIPOELECCION1=3) as ALCALDIA,
 					(Select count(r.TIPOELECCION2) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO AND R.TIPOELECCION2=4) as CONCEJO,
 					(Select count(r.cedulas) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO and   R.TIPOELECCION1=0 and R.TIPOELECCION2=0) as SINFIRMAS	
@@ -39,7 +39,7 @@ $_GET["jtStartIndex"]=0;*/
 			$sql="SELECT
 					recoleccion_cedulas.IDPUESTO AS ID,
 					puestos_votacion.NOMBRE_PUESTO,
-					(Select count(r.cedulas) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO) as CEDULAS,
+					count(recoleccion_cedulas.cedulas) as CEDULAS,
 					(Select count(r.TIPOELECCION1) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO AND R.TIPOELECCION1=3) as ALCALDIA,
 					(Select count(r.TIPOELECCION2) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO AND R.TIPOELECCION2=4) as CONCEJO,
 					(Select count(r.cedulas) from recoleccion_cedulas r where r.IDPUESTO=recoleccion_cedulas.IDPUESTO and   R.TIPOELECCION1=0 and R.TIPOELECCION2=0) as SINFIRMAS	
