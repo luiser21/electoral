@@ -6,6 +6,9 @@
 	width: 100%;
 	right: 0px;
 }
+#logo {margin-top: -49px; margin-left: 300px; height:110px}
+#logo2 {margin-top: -42px; width:250px;height:90px}
+#menu  {padding-top:106px}
 button, input[type="button"], input[type="submit"] {
    background-color: #A1AAAF;
     border: 0 none;

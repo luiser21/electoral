@@ -215,20 +215,75 @@ $_GET["jtStartIndex"]=0;*/
 		print json_encode($jTableResult);		
 	}
 	//Creating a new record (createAction)
-	else if($_GET["action"] == "create")
+	else if($_GET["action"] == "puestos")
 	{
+		if($_SESSION["username"]=='alcaldia'){	
 		//Insert record into database
-		$result = mysql_query("INSERT INTO people(Name, Age, RecordDate) VALUES('" . $_POST["Name"] . "', " . $_POST["Age"] . ",now());");
-		
-		//Get last inserted record (to return to jTable)
-		$result = mysql_query("SELECT * FROM people WHERE PersonId = LAST_INSERT_ID();");
-		$row = mysql_fetch_array($result);
-
-		//Return result to jTable
-		$jTableResult = array();
-		$jTableResult['Result'] = "OK";
-		$jTableResult['Record'] = $row;
-		print json_encode($jTableResult);
+			$sql="SELECT
+					p.codigo as ID,
+					p.nombre AS NOMBRE,
+					(SELECT count(miembros_2010.codigo) as VOTOS
+					FROM
+					miembros_2010
+					INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
+					INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+					INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+					INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.miembro = miembros_2010.codigo
+					INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
+					INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
+					where usuario_2010.usuario='".$_SESSION["username"]."' and puesto_2010.codigo=p.codigo) as VOTOS
+					FROM
+					puesto_2010 p
+					where p.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope 
+where usuario_2010.usuario='".$_SESSION["username"]."')
+ORDER BY votos desc
+	";
+			
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;	
+		//	imprimir($partidos);
+			$recordCount=count($partidos);
+			
+			//Get records from database
+		$sql="SELECT	
+					p.codigo as ID,
+					p.nombre AS NOMBRE,
+					(SELECT count(miembros_2010.codigo) as VOTOS
+					FROM
+					miembros_2010
+					INNER JOIN lider_2010 ON lider_2010.codigo = miembros_2010.lider
+					INNER JOIN candidato_2010 ON candidato_2010.cc_ope = lider_2010.candidato
+					INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope
+					INNER JOIN mesa_puesto_miembro_2010 ON mesa_puesto_miembro_2010.miembro = miembros_2010.codigo
+					INNER JOIN mesas_2010 ON mesas_2010.codigo = mesa_puesto_miembro_2010.mesas
+					INNER JOIN puesto_2010 ON puesto_2010.codigo = mesas_2010.puesto
+					where usuario_2010.usuario='".$_SESSION["username"]."' and puesto_2010.codigo=p.codigo) as VOTOS
+					FROM
+					puesto_2010 p
+					where p.municipio=(SELECT candidato_2010.municipio FROM candidato_2010 INNER JOIN usuario_2010 ON usuario_2010.cc_ope = candidato_2010.cc_ope 
+where usuario_2010.usuario='".$_SESSION["username"]."')
+ORDER BY votos desc ";
+			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;
+			
+			$row=array();		
+			for($i=0; $i<count($partidos);$i++){
+				$row[$i]['ID']=$partidos[$i]['ID'];
+				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);				
+				$row[$i]['VOTOSPREV']=$partidos[$i]['VOTOS'];
+				
+			}
+					
+			//Return result to jTable
+			$jTableResult = array();
+			$jTableResult['Result'] = "OK";
+			$jTableResult['TotalRecordCount'] = $recordCount;
+			$jTableResult['Records'] = $row;
+			//print json_encode($jTableResult);
+				
+		}
+			print json_encode($jTableResult);	
 	}
 	//Updating a record (updateAction)
 	else if($_GET["action"] == "update")

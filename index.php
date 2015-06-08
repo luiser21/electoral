@@ -72,7 +72,8 @@ ul.newsticker a:hover {text-decoration: underline;}
 <div id="marque">
 <div class="first">
 <marquee>
-<strong> 25 de Abril de 2015 </strong><span>Fecha Limite para ubicar mesas de votaci&oacute;n en los Corregimientos creados hasta la fecha </span><span style="color:#FF0000">(6 meses antes de la elecci&oacute;n)</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong> 25 de Junio de 2015 </strong><span>1.- Inicia el periodo de inscripcion de candidatos. 2.- Suspencion de incorporacion  al censo electoral
+ de cedulas por primera vez. </span><span style="color:#FF0000">(4 meses antes de la elecci&oacute;n)</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </marquee>
 </div>
 </div>

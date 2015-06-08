@@ -3,6 +3,8 @@
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
+	
+	
 <script src="js/countdown.js"></script>
 <?php 
 date_default_timezone_set('America/Bogota');
@@ -162,47 +164,47 @@ $reportes=$DBGestion->datos;
 	<table width="auto" border="0">
   <tr>
     <td>
-      <h4 align="left" style="font-size: 14px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
+      <h4 align="left" style="font-size: 14px; color: #999999"><?php echo strtoupper($_SESSION['nombre'])?></h4></td>
   </tr>
 
-    <td><h4 align="left" style="font-size: 14px">Candidato 
+    <td><h4 align="left" style="font-size: 14px"> 
 	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
-		echo 'a la '.$_SESSION['tipocandidato'];
+		echo strtoupper('a la '.$_SESSION['tipocandidato']);
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
-		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
+		echo strtoupper('a la '.$_SESSION['tipocandidato'].' de ');	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' del ';	
+		echo strtoupper('a la '.$_SESSION['tipocandidato'].' del ');	
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
-		echo 'al '.$_SESSION['tipocandidato'].' de ';	
+		echo strtoupper('al '.$_SESSION['tipocandidato'].' de ');	
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo 'al '.utf8_decode($_SESSION['tipocandidato'].' de la República');	
+		echo strtoupper('al '.utf8_decode($_SESSION['tipocandidato'].' de la República'));	
 	}elseif($_SESSION['tipocandidato']=='CAMARA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
+		echo strtoupper('a la '.$_SESSION['tipocandidato'].' de Representantes');	
 	}elseif($_SESSION['tipocandidato']=='JAL'){
-		echo 'a la '.$_SESSION['tipocandidato'];	
+		echo strtoupper('a la '.$_SESSION['tipocandidato']);	
 	}
 	?> </h4></td>
-  </tr>
+  </tr> 
     <tr><td><h4 align="left" style="font-size: 14px; color: #999999">
 	<?php 
 	if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'COLOMBIA';
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
-		echo ucwords(strtolower($_SESSION['departamento']));	
+		echo ucwords(strtoupper($_SESSION['departamento']));	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'Municipio de '.ucwords(strtolower($_SESSION['municipio'])); 
+		echo strtoupper('Municipio de '.ucwords(strtoupper($_SESSION['municipio']))); 
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
-		echo ucwords(strtolower($_SESSION['municipio'])); 
+		echo ucwords(strtoupper($_SESSION['municipio'])); 
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));	
+		echo strtoupper('Por '.ucwords(strtoupper($_SESSION['departamento'])));	
 	}elseif($_SESSION['tipocandidato']=='CAMARA'){
-		echo 'Por '.ucwords(strtolower($_SESSION['departamento']));
+		echo strtoupper('Por '.ucwords(strtoupper($_SESSION['departamento'])));
 	}elseif($_SESSION['tipocandidato']=='JAL'){
-		echo ucwords(strtolower($_SESSION['municipio'])).' - '.ucwords(strtolower($_SESSION['departamento'])); 
+		echo ucwords(strtoupper($_SESSION['municipio'])).' - '.ucwords(strtoupper($_SESSION['departamento'])); 
 	}?></h4></td></tr>
   <tr>
   <tr>
-    <td><h4 align="left" style="font-size: 14px"><?php echo $_SESSION['partido']?> </h4></td>
+    <td><h4 align="left" style="font-size: 14px"><?php echo strtoupper($_SESSION['partido'])?> </h4></td>
   </tr>
   <tr>
     <td><h4 align="left" style="font-size: 14px; color: #999999">
@@ -319,10 +321,10 @@ $(function () {
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 250px; height: 350px; margin: 0 auto"></div></th>
+<div id="container" style="min-width: 350px; height: 350px; margin: 0 auto"></div></th>
     
 	<?php  if($_SESSION['tipocandidato']=='SENADO	'){ ?>
-       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">DEPARTAMENTOS SIN MOVILIZACION <?php echo @$reportes[0]['REPORTES'];?><br/>
+       <th width="47%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">DEPARTAMENTOS SIN MOVILIZACION <?php echo @$reportes[0]['REPORTES'];?><br/>
          <br/><blink><strong style="color: #990000"><?php 
 	   $sql="SELECT 
 			departamentos.NOMBRE
@@ -338,8 +340,66 @@ $(function () {
 		}
 	}else{
 	   ?> 
-	    <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">PV REPRESENTATIVOS <?php echo @$reportes[0]['REPORTES'];?><br/>
-         <br/><blink><strong style="color: #990000"><?php 
+	    <th width="37%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">
+         <strong style="color: #990000">
+		<div class="filtering"><input type="hidden" id="LoadRecordsButton"></input>
+</div>
+		 <div id="PeopleTableContainer" style="width: auto;"></div>
+		 <script type="text/javascript">
+
+		$(document).ready(function () {
+		
+		    //Prepare jTable
+			$('#PeopleTableContainer').jtable({
+				title: 'Puestos de Votacion Representativos',
+				paging: true,
+				pageSize: 10,
+				sorting: true,
+				defaultSorting: 'Name ASC',
+				actions: {
+					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=puestos'
+					//createAction: 'PersonActionsPagedSorted.php?action=create',
+					//updateAction: 'PersonActionsPagedSorted.php?action=update',
+					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
+				},
+				fields: {
+					ID: {
+						key: true,
+						create: false,
+						edit: false,
+						list: false
+					},
+					NOMBRE: {
+						title: 'PUESTO DE VOTACION',
+						width: '30%',
+						create: false,
+						edit: false
+					},
+					VOTOSPREV : {
+						title: 'VOTO_PRE',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					}
+				}
+			});
+
+			//Load person list from server
+			//$('#PeopleTableContainer').jtable('load');
+			$('#LoadRecordsButton').click(function (e) {
+           		 e.preventDefault();
+				$('#PeopleTableContainer').jtable('load', {
+					
+				});
+			});
+	 
+			//Load all records when page is first shown
+				$('#LoadRecordsButton').click();
+		});
+
+	</script>
+		 <?php 
 	}
 	   ?> 
 	   </blink></strong></th>

@@ -64,8 +64,9 @@
 	<li><a href="#"  >Informes</a>
 		<ul>
 			
-			
+				<?php if($_SESSION["username"]=='celispabon'){?>
 			<li ><a href="Informes_cedulas.php">Proceso Recoleccion Firmas</a></li>
+			<?php } ?>
 			<?php if($_SESSION['tipocandidato']!='CONSEJO' && $_SESSION['tipocandidato']!='ALCALDIA'){?>
 					<?php if($_SESSION['tipocandidato']!='GOBERNACION'){?>
 					<!--<li ><a href="Informes_departamento.php">Por Departamentos</a></li>-->
@@ -77,9 +78,7 @@
 			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-->
 			<li ><a href="Informes.php">Por Puesto de Votaci&oacute;n</a></li>
 			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>-->
-			<li ><a href="Informes_lideres.php">Por Lideres</a></li>
-			<li ><a href="Informes.php">Por Simpatizantes Aptos para Votar</a></li>
-			<li ><a href="Informes.php">Por Simpatizantes NO Aptos para Votar</a></li>
+			<li ><a href="Informes_lideres.php">Por Lideres</a></li>			
 			<li ><a href="Informes_diferente_puestos.php"><?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ echo "Por Simpatizantes No Inscritos en el Municipio"; } ?>
 			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
 			<li ><a href="Informes_miembros_duplicados.php">Por Simpatizantes Duplicados por Lider</a></li>

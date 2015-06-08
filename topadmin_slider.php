@@ -28,8 +28,8 @@ header ("Pragma: no-cache");
 <html lang="es">
 <head>
 <style>
-#logo3 {  position:absolute; float: left; margin-left: 400px; top:48px; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
-#logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
+#logo3 {  position:absolute; float: left; margin-left: 400px; top:48px; 0px 0px no-repeat;width:500px;height:90px}
+#logo4 {  position:absolute; float: left; margin-left: 771px; top:10px;  0px 0px no-repeat;width:500px;height:90px}
 	
 /****      ****/
 /**** MARQUESINA ****/
@@ -52,6 +52,20 @@ ul.newsticker a:hover {text-decoration: underline;}
     overflow: hidden;
     width: 810px;
 }		
+#marquesina2 {
+color:#008000;
+   font: oblique bold 100% cursive; 
+    height: 37px;
+	font-size:20px;
+    margin: 5px 199px 6px;
+    width: 545px;
+}
+
+#marque2 > div {
+    height: 88px;
+    overflow: hidden;
+    width: 545px;
+}
 
 </style>
 
@@ -132,7 +146,15 @@ ul.newsticker a:hover {text-decoration: underline;}
 		</div> <!-- / top -->		
 	</div> <!--panel -->			
 					<div class="wrapper">
-							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SOPAC </a><a href="#" id="logo3"></a> </h1>
+							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SOPAC </a><a href="#" id="logo3"><div id="marquesina2">
+<div id="marque2">
+<div class="first">
+<marquee>	<img src="images/logo.png" width="60" height="40">
+Sistema Integrado de Gestion Electoral
+</marquee>
+</div>
+</div>
+</div>	</a> </h1>
 						
 							<fieldset>
 								<div class="bg">      </div>

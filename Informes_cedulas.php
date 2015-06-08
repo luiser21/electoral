@@ -7,6 +7,7 @@
 
 
 <style>
+#logo3 {  position:absolute; float: left; margin-left: 375px; top:258px;z-index: 1; background:url(<?php echo $_SESSION["logo2"]?>) 0px 0px no-repeat;width:500px;height:90px}
 
 #crudFormLineal label {
 	width: 350px;
