@@ -30,25 +30,38 @@ button, input[type="button"], input[type="submit"] {
 
 </style>
 <?php 
-
-$sql="SELECT
+$sql="";
+if($_SESSION["username"]!='celispabon'){
+	$sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
 INNER JOIN candidato ON candidato.ID = boletines.CANDIDATO
 INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
 where usuario.USUARIO='".$_SESSION["username"]."'";
+}else{
+$sql="SELECT
+	count(recoleccion_cedulas.cedulas) as MOVILIZADOS	
+	FROM
+	puestos_votacion
+	INNER JOIN recoleccion_cedulas ON recoleccion_cedulas.IDPUESTO = puestos_votacion.IDPUESTO
+	INNER JOIN candidato ON candidato.ID = recoleccion_cedulas.CANDIDATO
+	INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+	where usuario.USUARIO='".$_SESSION["username"]."'";
+}
+
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
  number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
 	   $voto_cargue= number_format($totales[0]['MOVILIZADOS'], 0, '', '.');
+	   //echo  $voto_cargue;
 ?>		
 <div id="marquesina">
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto=number_format(($totales[0]['MOVILIZADOS']*70)/100,0,'','.');?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <span style="color:#00CC33; font-size:20px">ESLOGAN DEL CANDIDATO</span> 
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue;?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="color:#00CC33; font-size:18px">Bienestar Paz y desarrollo </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#FFFF00; font-size:18px"><strong> Por un nuevo Municipio</strong></span> 
 </marquee>
 </div>
 </div>

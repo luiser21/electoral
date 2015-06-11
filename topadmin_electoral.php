@@ -28,9 +28,8 @@ header ("Pragma: no-cache");
 <html lang="es">
 <head>
 <style>
-#logo3 {  position:absolute; float: left; margin-left: 400px; top:48px; 0px 0px no-repeat;width:500px;height:90px}
+#logo3 {  position:absolute; float: left; margin-left: -47px; top:48px; 0px 0px no-repeat;width:500px;height:90px}
 #logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
-	
 /****      ****/
 /**** MARQUESINA ****/
 #marquesina {background: url("images/marquesina.gif") no-repeat scroll transparent;height: 37px;width: 960px;margin:5px 195px 6px 195px;}
@@ -66,7 +65,6 @@ color:#008000;
     overflow: hidden;
     width: 545px;
 }
-
 </style>
 
 <link href="Scripts/jtable/themes/metro/lightgray/jtable.css" rel="stylesheet" type="text/css" />

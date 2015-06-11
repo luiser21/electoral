@@ -28,7 +28,7 @@ header ("Pragma: no-cache");
 <html lang="es">
 <head>
 <style>
-#logo3 {  position:absolute; float: left; margin-left: 400px; top:48px; 0px 0px no-repeat;width:500px;height:90px}
+#logo3 {  position:absolute; float: left; margin-left: -47px; top:48px; 0px 0px no-repeat;width:500px;height:90px}
 #logo4 {  position:absolute; float: left; margin-left: 771px; top:50px;  0px 0px no-repeat;width:500px;height:90px}
 	
 /****      ****/
@@ -156,7 +156,9 @@ Sistema Integrado de Gestion Electoral
 </marquee>
 </div>
 </div>
-</div></a> </h1>
+</div></a> <a href="#" id="logo6"><div id="marquesina2">
+
+</div></a></h1>
 						
 							<fieldset>
 								<div class="bg">      </div>
