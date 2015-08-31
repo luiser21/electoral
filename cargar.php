@@ -12,7 +12,7 @@ $_GET["jtStartIndex"]=0;*/
 	if($_GET["action"] == "list")
 	{
 		//Get record count
-		if($_SESSION["username"]!='alcaldia'){	
+		if($_SESSION["username"]=='alcaldia'){	
 		
 			 $sql="SELECT
 				lideres.ID,
