@@ -24,8 +24,13 @@ try
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION
 					INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
-					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' 
-					GROUP BY miembros.id ";	
+					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' ";
+					if($_SESSION["tipocandidato"]=="ALCALDIA"){
+						$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+					}				
+					$sql.=" GROUP BY miembros.id ";	
 			//Add all records to an array
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -48,8 +53,13 @@ try
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION
 					INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
-					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' 
-					GROUP BY miembros.id ";	
+					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' ";
+					if($_SESSION["tipocandidato"]=="ALCALDIA"){
+						$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+					}
+					$sql=" GROUP BY miembros.id ";	
 			
 			
 			$sql.=" ORDER BY NOMBRES ";				

@@ -157,7 +157,7 @@ button, input[type="button"], input[type="submit"] {
 					},
 					NOMBRE: {
 						title: 'NOMBRE',
-						width: '30%',
+						width: '20%',
 						create: false,
 						edit: false
 					},
@@ -169,14 +169,14 @@ button, input[type="button"], input[type="submit"] {
 					},
 					MUNICIPIO: {
 						title: 'MUNICIPIO',
-						width: '20%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					DEPARTAMENTO: {
 						title: 'DEPARTAMENTO',
-						width: '20%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false
@@ -213,7 +213,7 @@ button, input[type="button"], input[type="submit"] {
 					name: $('#name').val(),
 					cityId: $('#cityId').val()
 				});
-			});
+			})
 	 
 			//Load all records when page is first shown
 				$('#LoadRecordsButton').click();

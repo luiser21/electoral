@@ -108,15 +108,46 @@ $sql="";
 $sql2="";
 if($_SESSION["username"]!='alcaldia'){	
 		
-	$sql="SELECT
-	count(miembros.ID) AS TOTAL
-	FROM
-	miembros
-	INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-	INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-	INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-	INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-	where usuario.USUARIO='".$_SESSION["username"]."'";
+	$sql="SELECT SUM(TOTAL) AS TOTAL FROM (SELECT
+					(SELECT
+					count(*) as VOTOS
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}	
+				$sql.=" AND puestos_votacion.IDPUESTO=p.IDPUESTO) as TOTAL
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}					
+				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
+	$sql2="SELECT
+			count(lideres.ID) as TOTAL					
+				FROM
+				lideres
+				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
+				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+			  where usuario.usuario='".$_SESSION["username"]."' ";
+	
 	
 }else{
 	$sql="SELECT count(miembros_2010.codigo) AS TOTAL

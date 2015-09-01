@@ -22,16 +22,16 @@ $_GET["jtStartIndex"]=0;*/
 				puestos_votacion.NOMBRE_PUESTO,
 				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS,
 				(SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
 				WHERE lideres.ID  = m.IDLIDER) AS VOTOREAL				
 				FROM
 				lideres
-				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
+				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 			  where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){
@@ -52,16 +52,16 @@ $_GET["jtStartIndex"]=0;*/
 				puestos_votacion.NOMBRE_PUESTO,
 				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS,
 				(SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
 				WHERE lideres.ID  = m.IDLIDER) AS VOTOREAL
 				FROM
 				lideres
-				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
-				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
-				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
+				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
+				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 			  where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){

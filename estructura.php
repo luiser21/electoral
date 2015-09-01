@@ -71,6 +71,7 @@ function comprueba_extension(formulario, archivo) {
 </table>
 </div>
 	<?php 
+	
 	@$valores=@$_SESSION['graficos_estructura']['Records'];
 	$validos=0;
 	$INVALIDOS=0;
@@ -142,11 +143,120 @@ function comprueba_extension(formulario, archivo) {
 						key: true,
 						create: false,
 						edit: false,
-						list: true,
+						list: false,
 						width: '5%'
 					},
 						 //CHILD TABLE DEFINITION FOR "PHONE NUMBERS"
-					
+					Phones: {
+						title: '',
+						width: '5%',
+						sorting: false,
+						edit: false,
+						create: false,
+						display: function (studentData) {
+							//Create an image that will be used to open child table
+							var $img = $('<img src="images/note.png" title="Ver Registros" />');
+							//Open child table when user clicks the image
+							$img.click(function () {
+								$('#PeopleTableContainer').jtable('openChildTable',
+										$img.closest('tr'),
+										{
+											title: studentData.record.NOMBRE,
+											actions: {
+												listAction: 'ver_registros_cargados.php?id=' + studentData.record.ID,
+												caption:"Export to Excel",
+												createAction: 'ver_registros_cargados.php?id=' + studentData.record.ID
+											},
+											fields: {
+												ID: {
+													key: true,
+													create: false,
+													edit: false,
+													list: false
+												},
+												Phones: {
+													title: '',
+													width: '5%',
+													sorting: false,
+													edit: false,
+													create: false,
+													display: function (studentData) {
+														//Create an image that will be used to open child table
+														var $img = $('<img src="images/note.png" title="Ver Registros" />');
+														//Open child table when user clicks the image
+														$img.click(function () {
+															$('#PeopleTableContainer').jtable('openChildTable',
+																	$img.closest('tr'),
+																	{
+																		title: studentData.record.NOMBRE,
+																		actions: {
+																			listAction: 'ver_registros_cargados.php?idtipo=' + studentData.record.ID,
+																			caption:"Export to Excel",
+																			createAction: 'ver_registros_cargados.php?idtipo=' + studentData.record.ID
+																		},
+																		fields: {
+																			ID: {
+																				key: true,
+																				create: false,
+																				edit: false,
+																				list: false
+																			},
+																			CEDULA: {
+																				title: 'CEDULA',
+																				width: '10%',
+																				create: false,
+																				edit: false
+																			},
+																			NOMBRES: {
+																				title: 'MIEMBROS',
+																				width: '30%',
+																				create: false,
+																				edit: false
+																			},
+																			TELEFONO: {
+																				title: 'TELEFONO',
+																				width: '10%',
+																				create: false,
+																				edit: false
+																			},
+																			LIDER: {
+																				title: 'LIDER',
+																				width: '30%',
+																				create: false,
+																				edit: false
+																			}
+																		}
+																								
+																	}, function (data) { //opened handler
+																		data.childTable.jtable('load');
+																	});
+														});
+														//Return image to show on the person row
+														return $img;
+													}
+												},
+												DETALLE: {
+													title: 'CATEGORIAS',
+													width: '40%',
+													create: false,
+													edit: false
+												},
+												MUERTE: {
+													title: 'REGISTROS',
+													width: '10%',
+													create: false,
+													edit: false
+												}												
+											}
+																	
+										}, function (data) { //opened handler
+											data.childTable.jtable('load');
+										});
+							});
+							//Return image to show on the person row
+							return $img;
+						}
+					},
 					FILES: {
 						title: 'FILES',
 						width: '30%',

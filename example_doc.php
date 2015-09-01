@@ -52,6 +52,7 @@ $muerte=0;
 $baja=0;
 $debeinscribirse=0;
 $pendiente=0;
+$diferentemunicipio=0;
 for($i=0; $i<$registros-1; $i++){		
 	try{		
 		
@@ -250,6 +251,18 @@ for($i=0; $i<$registros-1; $i++){
 										if(!empty($idlider[0]['ID'])){									
 											//INSERTO EL MIEMBRO EN LA TABLA
 											$idmesa=$mesavotacion[0]['ID'];
+											$sql="SELECT
+												puestos_votacion.IDMUNICIPIO							
+												FROM
+												puestos_votacion										
+												where IDPUESTO=".$idpuesto;
+											$DBGestion->ConsultaArray($sql);
+											$idmunicipiopuesto=$DBGestion->datos;
+											if($_SESSION["tipocandidato"]=="ALCALDIA"){
+												if($idmunicipiopuesto[0]['IDMUNICIPIO']!=$_SESSION["idmunicipio"]){
+													$diferentemunicipio++;
+												}
+											}
 											$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",".$idmunicipios.",".$idpuesto.",".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 											//echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 											$DBGestion->Consulta($sql);	
@@ -307,6 +320,18 @@ for($i=0; $i<$registros-1; $i++){
 											if(!empty($idlider[0]['ID'])){									
 												//INSERTO EL MIEMBRO EN LA TABLA
 												$idmesa=$mesavotacion[0]['ID'];
+												$sql="SELECT
+												puestos_votacion.IDMUNICIPIO							
+												FROM
+												puestos_votacion										
+												where IDPUESTO=".$idpuesto;
+												$DBGestion->ConsultaArray($sql);
+												$idmunicipiopuesto=$DBGestion->datos;
+												if($_SESSION["tipocandidato"]=="ALCALDIA"){
+													if($idmunicipiopuesto[0]['IDMUNICIPIO']!=$_SESSION["idmunicipio"]){
+														$diferentemunicipio++;
+													}
+												}
 												$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",".$idmunicipios.",".$idpuesto.",".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 												//echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 												$DBGestion->Consulta($sql);									
@@ -398,6 +423,18 @@ for($i=0; $i<$registros-1; $i++){
 												if(!empty($idlider[0]['ID'])){									
 													//INSERTO EL MIEMBRO EN LA TABLA
 													$idmesa=$mesavotacion[0]['ID'];
+													$sql="SELECT
+														puestos_votacion.IDMUNICIPIO							
+														FROM
+														puestos_votacion										
+														where IDPUESTO=".$idpuesto;
+													$DBGestion->ConsultaArray($sql);
+													$idmunicipiopuesto=$DBGestion->datos;
+													if($_SESSION["tipocandidato"]=="ALCALDIA"){
+														if($idmunicipiopuesto[0]['IDMUNICIPIO']!=$_SESSION["idmunicipio"]){
+															$diferentemunicipio++;
+														}
+													}
 													$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO,TELEFONO,EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 													VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",".$idmunicipios.",'".$celular[$i]."','".$email[$i]."',".$idpuesto.",".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 													echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
@@ -479,14 +516,14 @@ for($i=0; $i<$registros-1; $i++){
 				$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
 					VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
 					'Cedula ya existe',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
-				echo $sql;
+				//echo $sql;
 				$DBGestion->Consulta($sql);			
 							
 			}	
 		}
 	$sql="UPDATE UPLOAD_FILE SET DATOSVALIDOOS=".$datosvalidos." ,DATOSINVALIDOS=".$datosinvalidos.", APTOSVOTAR=".$aptosvotar.",
-		  NOAPTOSVOTAR=".$aptosnovotar.",MUERTE=".$muerte.",DEBEINSCRIBIRSE=".$debeinscribirse.", PENDIENTE=".$pendiente.",BAJA=".$baja." 
-		  WHERE ID=".$idfile;										
+		  NOAPTOSVOTAR=".$aptosnovotar.",MUERTE=".$muerte.",DEBEINSCRIBIRSE=".$debeinscribirse.", PENDIENTE=".$pendiente.",BAJA=".$baja.",
+		  DIFERENTEMUNICIPIO=".$diferentemunicipio."  WHERE ID=".$idfile;										
 	$DBGestion->Consulta($sql);	
 	}catch(Exception $e){
 		$msg = $ex->getMessage() . $ex->getTraceAsString();

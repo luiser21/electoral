@@ -102,7 +102,7 @@ $_GET["jtStartIndex"]=0;*/
 			$row=array();	
 //imprimir($partidos);			
 			for($i=0; $i<count($partidos);$i++){
-				$row[$i]['ID']=$i+1;
+				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['FILES']=utf8_encode($partidos[$i]['FILE']);
 				$row[$i]['REGISTRADO']=$partidos[$i]['CREADO'];
 				$row[$i]['VALIDOS']=$partidos[$i]['DATOSVALIDOOS'];

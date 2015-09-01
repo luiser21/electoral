@@ -21,6 +21,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 						tipo_eleccion.NOMBRE AS TIPOCANDIDATO,
 						candidato.FOTO,
 						candidato.NTARJETON,
+						candidato.MUNICIPIO AS IDMUNICIPIO,
 						municipios.NOMBRE AS MUNICIPIO,
 						departamentos.NOMBRE AS DEPARTAMENTO
 						FROM
@@ -40,6 +41,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					@$nombre = $datos['NOMBRE'];	
 					@$partido = $datos['PARTIDO'];	
 					@$municipio = $datos['MUNICIPIO'];	
+					@$idmunicipio = $datos['IDMUNICIPIO'];	
 					@$departamento = $datos['DEPARTAMENTO'];	
 					@$tipocandidato = $datos['TIPOCANDIDATO'];
 					@$foto = $datos['FOTO'];	
@@ -53,7 +55,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					$_SESSION["permiso"] = $per;
 					$_SESSION["nombre"] = $nombre;		
 					$_SESSION["partido"] = $partido;		
-					$_SESSION["municipio"] = $municipio;		
+					$_SESSION["municipio"] = $municipio;	
+					$_SESSION["idmunicipio"] = $idmunicipio;						
 					$_SESSION["departamento"] = $departamento;		
 					$_SESSION["foto"] = $foto;		
 					$_SESSION["ntarjeton"] = $ntarjeton;
@@ -82,6 +85,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 		 @$nombre = $_SESSION['nombre'];	
 		  @$id = $_SESSION["idcandidato"];	
 		   @$municipio = $_SESSION["municipio"];	
+		    @$idmunicipio = $_SESSION["idmunicipio"];	
 		    @$departamento = $_SESSION["departamento"];	
 			 @$partido = $_SESSION["partido"];	
 			  @$foto = $_SESSION["foto"];	

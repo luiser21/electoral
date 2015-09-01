@@ -143,7 +143,7 @@ button, input[type="button"], input[type="submit"] {
 	  <th scope="col">VOTOS_REAL </th>
   </tr>
   <?php 
-  
+  //imprimir($_SESSION);
   $sql="";
 if($_SESSION["username"]!='alcaldia'){	
 	$sql="SELECT count(ID) as PUESTOS, SUM(MESAS) AS MESAS, SUM(VOTOSPREV) AS VOTOSPREV, SUM(VOTOSREALES) AS VOTOSREALES FROM (SELECT
@@ -159,7 +159,11 @@ if($_SESSION["username"]!='alcaldia'){
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
+					where usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}	
+				$sql.=" AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
 					(SELECT
 				SUM(mesas.votoreal) AS VOTOSREALES
 				FROM
@@ -177,8 +181,11 @@ if($_SESSION["username"]!='alcaldia'){
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
-GROUP BY p.IDPUESTO) AS TABLA";
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}					
+				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
 
 }else{
 

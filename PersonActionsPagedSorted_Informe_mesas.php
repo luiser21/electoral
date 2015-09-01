@@ -30,7 +30,11 @@ $_GET["jtStartIndex"]=0;*/
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
+					where usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}						
+				$sql.="	AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
 					FROM
 					puestos_votacion AS p
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
@@ -39,10 +43,11 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
-					##and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')  
-					GROUP BY p.IDPUESTO
-					";						
+					WHERE usuario.USUARIO='".$_SESSION["username"]." '" ;
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}
+					$sql.=" GROUP BY p.IDPUESTO ";						
 					
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
@@ -70,15 +75,17 @@ $_GET["jtStartIndex"]=0;*/
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
+					where usuario.USUARIO='".$_SESSION["username"]." '";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}						
+				$sql.="	AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
 					(SELECT
 				SUM(mesas.votoreal) AS VOTOSREALES
 				FROM
 				puestos_votacion
 				INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
 				where 
-				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') 
-				##and 
 				puestos_votacion.IDPUESTO=p.IDPUESTO
 				GROUP BY puestos_votacion.IDPUESTO
 				) AS VOTOSREALES,
@@ -91,10 +98,11 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
-					##and p.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."') 
-					";	
-			
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}
+		//	echo $sql;
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
 			}
