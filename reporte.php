@@ -357,7 +357,7 @@ $(function () {
 				sorting: true,
 				defaultSorting: 'Name ASC',
 				actions: {
-					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=puestos'
+					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'

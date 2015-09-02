@@ -71,7 +71,6 @@ function comprueba_extension(formulario, archivo) {
 </table>
 </div>
 	<?php 
-	
 	@$valores=@$_SESSION['graficos_estructura']['Records'];
 	$validos=0;
 	$INVALIDOS=0;

@@ -16,8 +16,8 @@ try
 				mesas m
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
 				where 
-				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')	
-				##and 
+				puestos_votacion.IDMUNICIPIO=".$_SESSION["idmunicipio"]."	
+				and 
 				puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' ";	
 			if(isset($_POST["name"])!=""){
 				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
@@ -67,7 +67,8 @@ try
 				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
 			}	
 				
-				$sql.=" order by m.mesa ";			
+				$sql.=" order by m.mesa ";
+//echo $sql;				
 		//	$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
 					
 			//Add all records to an array
@@ -91,10 +92,11 @@ try
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 					where usuario.usuario='".$_SESSION["username"]."' and puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID='".$row[$i]['CODIGO']."'";
+				//echo $sql;
 				$DBGestion->ConsultaArray($sql);				
 				$miembros=$DBGestion->datos;
 				foreach ($miembros as $value) {
-					$Idmiembros[]=$value['miembros'];
+					$Idmiembros[]=utf8_encode($value['miembros']);
 				}
 				$Idmiembros=implode(", ",$Idmiembros);
 				$row[$i]['SIMPATIZANTES']=$Idmiembros;

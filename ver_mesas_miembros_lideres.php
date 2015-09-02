@@ -66,12 +66,12 @@ try
 					$row[$i]['CODIGO']='';
 					$row[$i]['LIDER']='';
 					$row[$i]['TELEFONO']='';
-					$row[$i]['SIMPATIZANTES']=$partidos[$i]['SIMPATIZANTES'];
+					$row[$i]['SIMPATIZANTES']=utf8_encode($partidos[$i]['SIMPATIZANTES']);
 				}else{
 					$row[$i]['CODIGO']=$partidos[$i]['CODIGO'];
 					$row[$i]['LIDER']=$partidos[$i]['LIDER'];
 					$row[$i]['TELEFONO']=$partidos[$i]['TELEFONO'];
-					$row[$i]['SIMPATIZANTES']=$partidos[$i]['SIMPATIZANTES'];
+					$row[$i]['SIMPATIZANTES']=utf8_encode($partidos[$i]['SIMPATIZANTES']);
 				}
 				$idlider=$partidos[$i]['CODIGO'];
 			}

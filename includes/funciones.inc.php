@@ -89,7 +89,7 @@ function Num2Mes($num){
 }
 
 function Num2MesSmall($num){
-	$MesLit = array('ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC');
+	$MesLit = array('ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE');
 	$MesNum = array('01','02','03','04','05','06','07','08','09','10','11','12');
 	if($res = str_replace($MesNum,$MesLit,$num)){	return $res;}
 	else{	return FALSE;}

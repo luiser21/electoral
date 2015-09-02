@@ -1,6 +1,6 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-//imprimir(puesto_votacion('19436718'));  /*Cedula de un Condenado*/
+imprimir(puesto_votacion('2618362'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
