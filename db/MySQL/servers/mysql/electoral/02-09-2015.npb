@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BackupProfile Ver="1.1">
+  <General ConnectionName="mysql" DatabaseName="electoral" SchemaName="" Compressed="true" LockAllTables="false" UseSpecifyFileName="false" FileName="" Comments="backup"/>
+  <Tables SelectAll="true"/>
+  <Views SelectAll="false"/>
+  <Functions SelectAll="true"/>
+  <Events SelectAll="false"/>
+  <Sequences SelectAll="false"/>
+  <Indexes SelectAll="false"/>
+  <Triggers SelectAll="false"/>
+</BackupProfile>

@@ -14,7 +14,7 @@ try
 				SELECT 2 as ID,BAJA,'Baja por Perdida o Suspension de los Derechos Politicos' AS DETALLE from UPLOAD_FILE 
 				WHERE ESTADO='A' AND id=".$_GET["id"]."		
 				UNION
-				SELECT 3 as ID,DEBEINSCRIBIRSE,'Debe inscribirse' AS DETALLE from UPLOAD_FILE 
+				SELECT 3 as ID,DEBEINSCRIBIRSE,'No se encuentra en el censo para las próximas elecciones' AS DETALLE from UPLOAD_FILE 
 				WHERE ESTADO='A' AND id=".$_GET["id"]."		
 				UNION
 				SELECT 4 as ID,PENDIENTE,'Pendiente por Solicitud en proceso' AS DETALLE from UPLOAD_FILE 
@@ -37,7 +37,7 @@ try
 				SELECT 2 as ID,BAJA,'Baja por Perdida o Suspension de los Derechos Politicos' AS DETALLE from UPLOAD_FILE 
 				WHERE ESTADO='A' AND id=".$_GET["id"]."		
 				UNION
-				SELECT 3 as ID,DEBEINSCRIBIRSE,'Debe inscribirse' AS DETALLE from UPLOAD_FILE 
+				SELECT 3 as ID,DEBEINSCRIBIRSE,'No se encuentra en el censo para las próximas elecciones' AS DETALLE from UPLOAD_FILE 
 				WHERE ESTADO='A' AND id=".$_GET["id"]."		
 				UNION
 				SELECT 4 as ID,PENDIENTE,'Pendiente por Solicitud en proceso' AS DETALLE from UPLOAD_FILE 

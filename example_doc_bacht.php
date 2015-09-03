@@ -7,14 +7,14 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='ejemplo.xls';
-$_SESSION["username"]='jhonmorera';
-$_SESSION["idmunicipio"]=556;
-$_SESSION["municipio"]='VILLETA';
+$nombre_archivo='tabio_acero.xls';
+$_SESSION["username"]='rubendario';
+$_SESSION["idmunicipio"]=598;
+$_SESSION["municipio"]='TABIO';
 $_SESSION["tipocandidato"]="ALCALDIA";
-$_SESSION["idcandidato"]=26;
+$_SESSION["idcandidato"]=27;
 //move_uploaded_file($_FILES["archivoupload"]["tmp_name"], "Excel/cargas/".$_FILES["archivoupload"]["name"]); 
-$data->read('Excel/cargas/ejemplo.xls');
+$data->read('Excel/cargas/tabio_acero.xls');
 $y=0;
 $registros=count($data->sheets[0]['cells']);
 for ($i = 2; $i <= $registros; $i++) {
@@ -122,7 +122,7 @@ for($i=0; $i<$registros-1; $i++){
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",4,".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 							$DBGestion->Consulta($sql);	
-							echo $sql;
+							//echo $sql;
 						}elseif($puestoreg['ERROR']=='INDEFINIDO'){
 							$debeinscribirse++;
 							
