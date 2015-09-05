@@ -99,16 +99,28 @@ $_GET["jtStartIndex"]=0;*/
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		
-			$row=array();	
+			$row=array();
+
+			$row2=array();			
 //imprimir($partidos);			
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['FILES']=utf8_encode($partidos[$i]['FILE']);
 				$row[$i]['REGISTRADO']=$partidos[$i]['CREADO'];
-				$row[$i]['VALIDOS']=$partidos[$i]['DATOSVALIDOOS'];
-				$row[$i]['INVALIDOS']=$partidos[$i]['DATOSINVALIDOS'];
-				$row[$i]['APTOS']=$partidos[$i]['APTOSVOTAR'];
-				$row[$i]['NOAPTOS']=$partidos[$i]['NOAPTOSVOTAR'];
+				$row[$i]['VALIDOS']=number_format($partidos[$i]['DATOSVALIDOOS'],0,",",".");
+				$row[$i]['INVALIDOS']=number_format($partidos[$i]['DATOSINVALIDOS'],0,",",".");				
+				$row[$i]['REGISTROS']=number_format($partidos[$i]['APTOSVOTAR']+$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'],0,",",".");
+				$row[$i]['APTOS']=number_format($partidos[$i]['APTOSVOTAR'],0,",",".");
+				$row[$i]['NOAPTOS']=number_format($partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'],0,",",".");
+				
+				$row2[$i]['ID']=$partidos[$i]['ID'];
+				$row2[$i]['FILES']=utf8_encode($partidos[$i]['FILE']);
+				$row2[$i]['REGISTRADO']=$partidos[$i]['CREADO'];
+				$row2[$i]['VALIDOS']=$partidos[$i]['DATOSVALIDOOS'];
+				$row2[$i]['INVALIDOS']=$partidos[$i]['DATOSINVALIDOS'];				
+				$row2[$i]['REGISTROS']=$partidos[$i]['APTOSVOTAR']+$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'];
+				$row2[$i]['APTOS']=$partidos[$i]['APTOSVOTAR'];
+				$row2[$i]['NOAPTOS']=$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'];
 			}	
 
 			//Return result to jTable
@@ -116,9 +128,15 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Result'] = "OK";
 			$jTableResult['TotalRecordCount'] = $recordCount;
 			$jTableResult['Records'] = $row;
+			
+			
+			$jTableResult2 = array();
+			$jTableResult2['Result'] = "OK";
+			$jTableResult2['TotalRecordCount'] = $recordCount;
+			$jTableResult2['Records'] = $row2;
 			//print json_encode($jTableResult);
 		}
-		$_SESSION['graficos_estructura'] = $jTableResult;
+		$_SESSION['graficos_estructura'] = $jTableResult2;
 		print json_encode($jTableResult);		
 	}
 	//Creating a new record (createAction)

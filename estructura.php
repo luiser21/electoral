@@ -79,8 +79,8 @@ function comprueba_extension(formulario, archivo) {
 	for($i=0; $i<count(@$valores);$i++){
 		$validos=$validos+$valores[$i]['VALIDOS'];
 		$INVALIDOS=$INVALIDOS+$valores[$i]['INVALIDOS'];
-		$APTOS=$APTOS+$valores[$i]['APTOS'];
-		$NOAPTOSVOTAR=$NOAPTOSVOTAR+$valores[$i]['NOAPTOS'];
+		$APTOS=round($APTOS+$valores[$i]['APTOS'],0);
+		$NOAPTOSVOTAR=round($NOAPTOSVOTAR+$valores[$i]['NOAPTOS'],0);
 	}
 	?>
 	<script type="text/javascript">
@@ -105,8 +105,8 @@ function comprueba_extension(formulario, archivo) {
 	  function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Aptos Votar',  <?php echo $APTOS?>],
-          ['No Aptos Votar', <?php echo $NOAPTOSVOTAR?>]
+          ['Aptos Votar',  <?php echo round($APTOS)?>],
+          ['No Aptos Votar', <?php echo round($NOAPTOSVOTAR)?>]
         ]);
 
         var options = {
@@ -245,7 +245,14 @@ function comprueba_extension(formulario, archivo) {
 													width: '10%',
 													create: false,
 													edit: false
-												}												
+												},
+												PORCENTAJE: {
+													title: 'PORCENTAJE',
+													width: '10%',
+													create: false,
+													edit: false
+												}													
+												
 											}
 																	
 										}, function (data) { //opened handler
@@ -268,22 +275,21 @@ function comprueba_extension(formulario, archivo) {
 						create: false,
 						edit: false
 					},
-					VALIDOS: {
-						title: 'VALIDOS',
+					REGISTROS: {
+						title: 'REGISTROS',
 						width: '10%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
-					INVALIDOS : {
-						title: 'INVALIDOS',
-						width: '10%',
-						//type: 'date',
 						create: false,
 						edit: false
 					},
 					APTOS: {
 						title: 'APTOS',
+						width: '10%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					VALIDOS: {
+						title: 'VALIDOS',
 						width: '10%',
 						//type: 'date',
 						create: false,
@@ -295,7 +301,16 @@ function comprueba_extension(formulario, archivo) {
 						//type: 'date',
 						create: false,
 						edit: false
+					},
+					INVALIDOS : {
+						title: 'INVALIDOS',
+						width: '10%',
+						//type: 'date',
+						create: false,
+						edit: false
 					}
+					
+					
 				}
 			});
 

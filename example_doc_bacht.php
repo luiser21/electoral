@@ -463,9 +463,9 @@ for($i=0; $i<$registros-1; $i++){
 													echo '<strong><br/>Simpatizante sin Lider: '.$cedula_simpatizante[$i].' - '.$nombre_simpartizante[$i].'<br/></strong>';	
 													$datosinvalidos++;
 													//insertar los simpatizantes con datos incompletos o sin lideres
-													$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+													$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 													VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-													'Simpatizante con lider',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+													'Simpatizante con lider',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 													$DBGestion->Consulta($sql);	
 													
 												}		
@@ -473,18 +473,18 @@ for($i=0; $i<$registros-1; $i++){
 												echo '<strong><br/>Imposible crear el registro<br/></strong>';
 												//mandarlo a la tabla de invalidos
 												$datosinvalidos++;		
-												$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+												$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 												VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-												'Imposible crear el registro',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+												'Imposible crear el registro',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 												$DBGestion->Consulta($sql);	
 											}
 										}else{
 											echo '<strong><br/>Imposible crear el registro<br/></strong>';
 											//mandarlo a la tabla de invalidos
 											$datosinvalidos++;		
-											$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+											$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 											VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-											'Imposible crear el registro',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+											'Imposible crear el registro',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 											$DBGestion->Consulta($sql);								
 										}
 									}
@@ -492,42 +492,42 @@ for($i=0; $i<$registros-1; $i++){
 							}else{
 								echo "<strong><br/>Problemas con el municipio del Puesto de Votacion ".$MUNICIPIO_R." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 								$datosinvalidos++;
-								$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+								$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 								VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-								'Problemas con el municipio del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+								'Problemas con el municipio del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 								//echo $sql;
 								$DBGestion->Consulta($sql);	
 							}
 						}else{
 							echo "<strong><br/>Problemas con el departamento del Puesto de Votacion ".$DEPARTAMENTO_R." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 							$datosinvalidos++;
-							$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+							$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 							VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-							'Problemas con el departamento del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+							'Problemas con el departamento del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 							$DBGestion->Consulta($sql);	
 						}						
 					}else{
 						echo "<strong><br/>Problemas con el municipio. ".$MUNICIPIO[$i]." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 						$datosinvalidos++;
-						$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+						$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 						VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-						'Problemas con el MUNICIPIO',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+						'Problemas con el MUNICIPIO',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 						$DBGestion->Consulta($sql);	
 					}
 				}else{
 					echo "<strong><br/>Problemas con el departamento ".$departamento[$i]." - ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 					$datosinvalidos++;
-					$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+					$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 					VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-					'Problemas con el departamento',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+					'Problemas con el departamento',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 					$DBGestion->Consulta($sql);		
 				}	
 			}else{
 				echo "<strong><br/>Cedula ya existe ".$cedula_simpatizante[$i]."<br/><br/></strong>";
 				$datosinvalidos++;
-				$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION) 
+				$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 					VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
-					'Cedula ya existe',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."')";	
+					'Cedula ya existe',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
 				//echo $sql;
 				$DBGestion->Consulta($sql);			
 							
