@@ -149,21 +149,7 @@ if($_SESSION["username"]!='alcaldia'){
 	$sql="SELECT count(ID) as PUESTOS, SUM(MESAS) AS MESAS, SUM(VOTOSPREV) AS VOTOSPREV, SUM(VOTOSREALES) AS VOTOSREALES FROM (SELECT
 					p.IDPUESTO AS ID,
 					p.MESAS AS MESAS,
-					(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' ";
-				if($_SESSION["tipocandidato"]=="ALCALDIA"){
-					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
-				}	
-				$sql.=" AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
+					COUNT(miembros.ID) as VOTOSPREV,
 					(SELECT
 				SUM(mesas.votoreal) AS VOTOSREALES
 				FROM

@@ -109,21 +109,7 @@ $sql2="";
 if($_SESSION["username"]!='alcaldia'){	
 		
 	$sql="SELECT SUM(TOTAL) AS TOTAL FROM (SELECT
-					(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' ";
-				if($_SESSION["tipocandidato"]=="ALCALDIA"){
-					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
-				}	
-				$sql.=" AND puestos_votacion.IDPUESTO=p.IDPUESTO) as TOTAL
+					count(miembros.ID) as TOTAL
 					FROM
 					puestos_votacion AS p
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
@@ -137,6 +123,7 @@ if($_SESSION["username"]!='alcaldia'){
 					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 				}					
 				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
+				//echo $sql;exit;
 	$sql2="SELECT
 			count(lideres.ID) as TOTAL					
 				FROM
@@ -222,9 +209,9 @@ $totales_lideres=$DBGestion->datos;
 	$valores=@$_SESSION['graficos_lideres']['Records'];
 	$conta='';
 	for($i=0; $i<count($valores);$i++){
-		if($i<8 && $valores[$i]['MIEMBROS']>=10){
+		if($i<4 && $valores[$i]['MIEMBROS']>=10){
 			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."],";			
-		}if($i==8 && $valores[$i]['MIEMBROS']>=10){
+		}if($i==4 && $valores[$i]['MIEMBROS']>=10){
 			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."]";			
 		}
 	}
@@ -295,6 +282,10 @@ function drawBasic() {
 										$img.closest('tr'),
 										{
 											title: studentData.record.NOMBRE,
+											paging: true,
+											pageSize: 20,
+											sorting: true,
+											defaultSorting: 'Name ASC',
 											actions: {
 												listAction: 'ver_mesas_miembros_informe_lideres.php?idlider=' + studentData.record.ID,
 												caption:"Export to Excel",

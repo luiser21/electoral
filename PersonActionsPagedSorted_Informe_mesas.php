@@ -20,30 +20,18 @@ $_GET["jtStartIndex"]=0;*/
 					municipios.NOMBRE AS MUNICIPIO,
 					departamentos.NOMBRE AS DEPARTAMENTO,
 					p.MESAS AS MESAS,
-					(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]."' ";
-				if($_SESSION["tipocandidato"]=="ALCALDIA"){
-					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
-				}						
-				$sql.="	AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOS
+					COUNT(miembros.id) as VOTOS
 					FROM
 					puestos_votacion AS p
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
 					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
 					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA				
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]." '" ;
+					WHERE usuario.USUARIO='".$_SESSION["username"]."'" ;
 				if($_SESSION["tipocandidato"]=="ALCALDIA"){
 					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 				}
@@ -52,7 +40,8 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
 			}
-	
+	//echo $sql;
+	//exit;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		//	imprimir($partidos);
@@ -65,21 +54,7 @@ $_GET["jtStartIndex"]=0;*/
 					municipios.NOMBRE AS MUNICIPIO,
 					departamentos.NOMBRE AS DEPARTAMENTO,
 					p.MESAS AS MESAS,
-					(SELECT
-					count(*) as VOTOS
-					FROM
-					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO='".$_SESSION["username"]." '";
-				if($_SESSION["tipocandidato"]=="ALCALDIA"){
-					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
-				}						
-				$sql.="	AND puestos_votacion.IDPUESTO=p.IDPUESTO) as VOTOSPREV,
+					count(miembros.ID) as VOTOSPREV,
 					(SELECT
 				SUM(mesas.votoreal) AS VOTOSREALES
 				FROM
@@ -108,8 +83,9 @@ $_GET["jtStartIndex"]=0;*/
 			}
 			$sql.=" GROUP BY p.IDPUESTO ORDER BY VOTOSPREV desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
-		//	echo $sql;
-			$DBGestion->ConsultaArray($sql);				
+	//		echo $sql;
+//exit;		
+		$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;
 			
 			$row=array();		

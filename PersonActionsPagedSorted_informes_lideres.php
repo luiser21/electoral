@@ -19,12 +19,7 @@ $_GET["jtStartIndex"]=0;*/
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS NOMBRE,
 				lideres.CEDULA,
 				mesas.MESA,
-				puestos_votacion.NOMBRE_PUESTO,
-				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS,
-				(SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
-				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
-				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
-				WHERE lideres.ID  = m.IDLIDER) AS VOTOREAL				
+				puestos_votacion.NOMBRE_PUESTO			
 				FROM
 				lideres
 				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
@@ -37,7 +32,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(lideres.nombres) like upper('%".$_POST["name"]."%') ";
 			}
-	
+			
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		//	imprimir($partidos);
@@ -49,12 +44,7 @@ $_GET["jtStartIndex"]=0;*/
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS NOMBRE,
 				lideres.CEDULA,
 				mesas.MESA,
-				puestos_votacion.NOMBRE_PUESTO,
-				(SELECT count(*) AS miembros FROM miembros m WHERE lideres.ID  = m.IDLIDER) as MIEMBROS,
-				(SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
-				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
-				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
-				WHERE lideres.ID  = m.IDLIDER) AS VOTOREAL
+				puestos_votacion.NOMBRE_PUESTO
 				FROM
 				lideres
 				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
@@ -67,7 +57,7 @@ $_GET["jtStartIndex"]=0;*/
 			if(isset($_POST["name"])!=""){
 				$sql.=" and upper(lideres.nombres) like upper('%".$_POST["name"]."%') ";
 			}
-			$sql.=" ORDER BY MIEMBROS desc ";
+			$sql.=" ORDER BY NOMBRE desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -78,11 +68,31 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
 				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
-				$row[$i]['MIEMBROS']=utf8_encode($partidos[$i]['MIEMBROS']);
+				$sql="SELECT SUM(TOTAL) AS MIEMBROS FROM 
+					(SELECT 
+					COUNT(miembros.id) as TOTAL 
+					FROM puestos_votacion AS p 
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO 
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO 
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO 
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER 
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO 
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO 
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' and municipios.NOMBRE='".$_SESSION["municipio"]."' AND miembros.IDLIDER=".$row[$i]['ID']." GROUP BY p.IDPUESTO) AS TABLA";
+				$DBGestion->ConsultaArray($sql);				
+				$miembros=$DBGestion->datos;	
+				
+				$row[$i]['MIEMBROS']=$miembros[0]['MIEMBROS'];
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
-				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOREAL'];
-				$row[$i]['VARIACION']=$partidos[$i]['VOTOREAL']-$partidos[$i]['MIEMBROS'];
+				$sql="SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
+					LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
+					LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
+					WHERE m.IDLIDER  =".$row[$i]['ID']." ";
+				$DBGestion->ConsultaArray($sql);				
+				$reales=$DBGestion->datos;
+				$row[$i]['VOTOSREALES']=$reales[0]['VOTOREAL'];
+				$row[$i]['VARIACION']=$reales[0]['VOTOREAL']-$miembros[0]['MIEMBROS'];
 			}	
 			//Return result to jTable
 			$jTableResult = array();
