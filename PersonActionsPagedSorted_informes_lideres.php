@@ -86,8 +86,8 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
 				$sql="SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
-					LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
-					LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
 					WHERE m.IDLIDER  =".$row[$i]['ID']." ";
 				$DBGestion->ConsultaArray($sql);				
 				$reales=$DBGestion->datos;
