@@ -60,8 +60,8 @@ $totales=$DBGestion->datos;
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue;?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <span style="color:#00CC33; font-size:18px">Bienestar Paz y desarrollo </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#FFFF00; font-size:18px"><strong> Por un nuevo Municipio</strong></span> 
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $_SESSION["votosprevistos"].' Sufragantes';?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span style="color:#00CC33; font-size:18px"><?php echo $_SESSION["eslogan"]?></span> 
 </marquee>
 </div>
 </div>

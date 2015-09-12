@@ -66,6 +66,7 @@ button, input[type="button"], input[type="submit"] {
     width: 950px;
 }
 </style>
+
 <?php 
 
 
@@ -138,7 +139,9 @@ $reportes=$DBGestion->datos;
 //$arrDepartamento4.= "".$suma2."";
 //imprimir($arrDepartamento); ?>
 <div class="main">	
+
 <header>
+
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
 			
 			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
@@ -152,7 +155,19 @@ $reportes=$DBGestion->datos;
 			});
 		});
 	</script>
-		<p style="margin-left:388px">Cuenta Regresiva para Apertura de Mesas<div class="timer-area">	
+<div id="marquesina">
+<div id="marque">
+<div class="first">
+<marquee>
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php 
+echo $_SESSION["votosprevistos"].' Sufragantes';
+?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <span style=" color:#00CC33; font-size:17px"><strong><?php echo $_SESSION["eslogan"]?></strong></span>
+</marquee>
+</div>
+</div>
+</div>
+	<p style="margin-left:388px">Cuenta Regresiva para Apertura de Mesas<div class="timer-area">	
 										<ul id="countdown">
 										<?php if($_SESSION['foto']!=""){?>
 						<img src="<?php echo $_SESSION['foto']?>" width="94" height="108" style="border:3px solid #CCCCCC;">
@@ -160,7 +175,7 @@ $reportes=$DBGestion->datos;
 				<img src="fotos/images.jpg" width="94" height="108" style="border:3px solid #CCCCCC;">
 			<?php } ?>	
 							
-<div style="position:absolute; left: 128px; top: 90px;" >
+<div style="position:absolute; left: 128px; top: 140px;" >
 	<table width="auto" border="0">
   <tr>
     <td>
@@ -234,7 +249,7 @@ $reportes=$DBGestion->datos;
 												<span class="seconds">00</span>
 												<p class="timeRefSeconds">seconds</p>
 											</li>
-	<div style="position:absolute; left: 738px; top: 40px;"> 									
+	<div style="position:absolute; left: 738px; top: 90px;"> 									
 	<table width="10%" border="0">
   <tr style="font-size:16px">       
 	   <th><div ><blink><strong style="font-size:26px; color:#FF0000">
@@ -340,7 +355,7 @@ $(function () {
 		}
 	}else{
 	   ?> 
-	    <th width="37%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">
+	    <th width="37%" rowspan="0" style="border:0px solid #CCCCCC;" scope="col">
          <strong style="color: #990000">
 		<div class="filtering"><input type="hidden" id="LoadRecordsButton"></input>
 </div>
@@ -480,27 +495,9 @@ $arrDepartamento3.= "".$suma1."";
 $arrDepartamento4.= "".$suma2."";
 //imprimir($arrDepartamento2);
 ?>
-<div id="marquesina">
-<div id="marque">
-<div class="first">
-<marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php 
-echo $voto=($totales[0]['MOVILIZADOS']*70)/100;
-?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <span style=" color:#00CC33; font-size:20px"><strong>ESLOGAN DEL CANDIDATO</strong></span>
-</marquee>
-</div>
-</div>
-</div>	
+	
 						<br/>
 
-
-
-			
-					
-
-				
-				
 		  </div></div>
 		</header>	
 		

@@ -89,10 +89,10 @@ $_GET["jtStartIndex"]=0;*/
 			$recordCount=count($partidos);
 			
 			//Get records from database
-			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO from UPLOAD_FILE
-				WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."' ";	
-			
-			
+			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO,DIFERENTEMUNICIPIO,
+BAJA,PENDIENTE,MUERTE,DEBEINSCRIBIRSE,(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO='Cedula ya existe' AND candidato=26) as DUPLICADO,
+(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO<>'Cedula ya existe' AND CANDIDATO=26) AS REPROCESAR from UPLOAD_FILE
+				WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."' ";				
 			$sql.=" ORDER BY ID DESC ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			//echo $sql;
@@ -116,11 +116,18 @@ $_GET["jtStartIndex"]=0;*/
 				$row2[$i]['ID']=$partidos[$i]['ID'];
 				$row2[$i]['FILES']=utf8_encode($partidos[$i]['FILE']);
 				$row2[$i]['REGISTRADO']=$partidos[$i]['CREADO'];
+				$row2[$i]['DIFERENTEMUNICIPIO']=$partidos[$i]['DIFERENTEMUNICIPIO'];
 				$row2[$i]['VALIDOS']=$partidos[$i]['DATOSVALIDOOS'];
-				$row2[$i]['INVALIDOS']=$partidos[$i]['DATOSINVALIDOS'];				
+				$row2[$i]['INVALIDOS']=$partidos[$i]['DATOSINVALIDOS'];	
+				$row2[$i]['BAJA']=$partidos[$i]['BAJA'];
+				$row2[$i]['MUERTE']=$partidos[$i]['MUERTE'];	
+				$row2[$i]['PENDIENTE']=$partidos[$i]['PENDIENTE'];	
+				$row2[$i]['DEBEINSCRIBIRSE']=$partidos[$i]['DEBEINSCRIBIRSE'];					
 				$row2[$i]['REGISTROS']=$partidos[$i]['APTOSVOTAR']+$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'];
 				$row2[$i]['APTOS']=$partidos[$i]['APTOSVOTAR'];
 				$row2[$i]['NOAPTOS']=$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'];
+				$row2[$i]['DUPLICADO']=$partidos[$i]['DUPLICADO'];
+				$row2[$i]['REPROCESAR']=$partidos[$i]['REPROCESAR'];
 			}	
 
 			//Return result to jTable

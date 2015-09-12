@@ -21,6 +21,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 						tipo_eleccion.NOMBRE AS TIPOCANDIDATO,
 						candidato.FOTO,
 						candidato.NTARJETON,
+						candidato.ESLOGAN,
+						candidato.VOTOSPREVISTOS,
 						candidato.MUNICIPIO AS IDMUNICIPIO,
 						municipios.NOMBRE AS MUNICIPIO,
 						departamentos.NOMBRE AS DEPARTAMENTO
@@ -46,7 +48,9 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					@$tipocandidato = $datos['TIPOCANDIDATO'];
 					@$foto = $datos['FOTO'];	
 					@$ntarjeton = $datos['NTARJETON'];	
-					@$logo2 = $datos['LOGO2'];						 
+					@$logo2 = $datos['LOGO2'];
+					@$eslogan = $datos['ESLOGAN'];	
+					@$votos = $datos['VOTOSPREVISTOS'];						
 				}				
 				if(@$usu != "" ){
 					$_SESSION["idcandidato"] = $id;
@@ -61,7 +65,9 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					$_SESSION["foto"] = $foto;		
 					$_SESSION["ntarjeton"] = $ntarjeton;
 					$_SESSION["tipocandidato"] = $tipocandidato;	
-					$_SESSION["logo2"] = $logo2;							
+					$_SESSION["logo2"] = $logo2;	
+					$_SESSION["eslogan"] = $eslogan;
+					$_SESSION["votosprevistos"] = $votos;						
 					header("location:adetom.php");    
 				}else{
 					?>
@@ -92,6 +98,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 			   @$ntarjeton = $_SESSION["ntarjeton"];	
 			    @$tipocandidato = $_SESSION["tipocandidato"];	
 				 @$logo2 = $_SESSION["logo2"];
+				  @$eslogan = $_SESSION["eslogan"];
+				   @$votos = $_SESSION["votosprevistos"];
 		if(!empty($usuario)){
 			if(@$usuario != ""){
 				header('Location: adetom.php');	    

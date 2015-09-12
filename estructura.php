@@ -65,33 +65,52 @@ function comprueba_extension(formulario, archivo) {
 <div id="PeopleTableContainer" style="width: 100%;">
 <table width="100%" border="0">
   <tr>
-    <td><div id="piechart_3d" style="width: 400px; height:250px;" align="center"></div></td>
-    <td><div id="piechart_3d2" style="width: 400px; height:250px;" align="center"></div></td>
+    <td><div id="piechart_3d" style="width: 400px; height:250px;margin-left:-20px;" align="center"></div></td>
+    <td><div id="piechart_3d2" style="width: 630px; height:250px;margin-left:-80px;" align="center"></div></td>
   </tr>
 </table>
 </div>
 	<?php 
 	@$valores=@$_SESSION['graficos_estructura']['Records'];
-	$validos=0;
+//imprimir($valores);
+	$VALIDOS=0;
 	$INVALIDOS=0;
 	$APTOS=0;
 	$NOAPTOSVOTAR=0;
+	$DIFERENTE=0;
+	$REGISTROS=0;
+	$PENDIENTE=0;
+	$MUERTE=0;
+	$BAJA=0;
+	$DEBEINSCRIBIRSE=0;
+	$DUPLICADO=0;
+	$REPROCESAR=0;
 	for($i=0; $i<count(@$valores);$i++){
-		$validos=$validos+$valores[$i]['VALIDOS'];
+		$VALIDOS=$VALIDOS+$valores[$i]['VALIDOS'];
+		$DIFERENTE=$DIFERENTE+$valores[$i]['DIFERENTEMUNICIPIO'];
 		$INVALIDOS=$INVALIDOS+$valores[$i]['INVALIDOS'];
+		$REGISTROS=$REGISTROS+$valores[$i]['REGISTROS'];
 		$APTOS=round($APTOS+$valores[$i]['APTOS'],0);
-		$NOAPTOSVOTAR=round($NOAPTOSVOTAR+$valores[$i]['NOAPTOS'],0);
+		$NOAPTOSVOTAR=$NOAPTOSVOTAR+$valores[$i]['NOAPTOS'];
+		$DEBEINSCRIBIRSE=$DEBEINSCRIBIRSE+$valores[$i]['DEBEINSCRIBIRSE'];
+		$BAJA=$BAJA+$valores[$i]['BAJA'];
+		$MUERTE=$MUERTE+$valores[$i]['MUERTE'];
+		$PENDIENTE=$PENDIENTE+$valores[$i]['PENDIENTE'];		
+		$REPROCESAR=$REPROCESAR+$valores[$i]['REPROCESAR'];
+		$DUPLICADO=$DUPLICADO+$valores[$i]['DUPLICADO'];
+				
 	}
 	?>
 	<script type="text/javascript">
 	  google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-	  google.setOnLoadCallback(drawChart2);
+      google.setOnLoadCallback(drawChart2);
+	  google.setOnLoadCallback(drawChart);
+	
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Validos',     <?php echo $validos?>],
-          ['Invalidos',    <?php echo $INVALIDOS?>]         
+          ['Votos para Candidato',     <?php echo $VALIDOS?>],
+          ['No validos para Candidato',    <?php echo ($NOAPTOSVOTAR+$DIFERENTE)?>]         
         ]);
 
         var options = {
@@ -105,8 +124,14 @@ function comprueba_extension(formulario, archivo) {
 	  function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Aptos Votar',  <?php echo round($APTOS)?>],
-          ['No Aptos Votar', <?php echo round($NOAPTOSVOTAR)?>]
+          ['Inscritos Municipo',  <?php echo round($VALIDOS)?>],
+          ['No Inscritos Municipio', <?php echo round($DIFERENTE)?>],
+          ['Pendiente por Solicitud en proceso', <?php echo round($PENDIENTE)?>],
+          ['Baja Perdida-Suspension Derechos Politicos', <?php echo round($BAJA)?>],
+          ['Cancelada por Muerte', <?php echo round($MUERTE)?>],
+          ['No encontrado Censo Electoral', <?php echo round($DEBEINSCRIBIRSE)?>],
+          ['Registros Duplicados', <?php echo round($DUPLICADO)?>],
+          ['Reprocesar Registros', <?php echo round($REPROCESAR)?>]
         ]);
 
         var options = {
