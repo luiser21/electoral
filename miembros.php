@@ -6,16 +6,7 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 
-<style>
 
-#crudFormLineal label {
-	width: 350px;
-}
-.bg1 {  
-	position:relative;
-	top:600px;
-}
-</style>
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
@@ -47,8 +38,8 @@
         </select>-->
         <button type="submit" id="LoadRecordsButton">Buscar</button>
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_add.php'" value="Aderir +" name="cmdexport">
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='Excel/example_doc.php'" value="Cargue Masivo" name="cmdexport">
+<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_excel.php'" value="Exportar" name="cmdexport">
+<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='estructura.php'" value="Cargue Masivo" name="cmdexport">
 
     </form>
 </div>	<br/>	
@@ -79,7 +70,7 @@
 					},
 					NOMBRE: {
 						title: 'NOMBRE',
-						width: '30%',
+						width: '25%',
 						create: false,
 						edit: false
 					},
@@ -91,21 +82,21 @@
 					},
 					MUNICIPIO: {
 						title: 'MUNICIPIO',
-						width: '20%',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					DEPARTAMENTO: {
 						title: 'DEPARTAMENTO',
-						width: '20%',
+						width: '10%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					NOMBRE_PUESTO: {
 						title: 'PUESTO VOTACION',
-						width: '25%',
+						width: '20%',
 						//type: 'date',
 						create: false,
 						edit: false
@@ -144,8 +135,8 @@
 	</script>
 				
 				
-			</div></div>
+			</div>
+<?php require_once('bottom.php'); ?>	</div>
 		</header>	
 		
-	 </div>
-<?php //require_once('bottom.php'); ?>		
+	 </div>	

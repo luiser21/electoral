@@ -69,6 +69,7 @@ $(document).ready(function() {
 	<li ><a href="#" >Administraci&oacute;n de la Campa&a</a>		
 		<ul>
 			<li ><a href="estructura.php" >Estructura</a></li>
+			<li ><a href="miembros.php" >Simpatizantes</a></li>
 			<li ><a href="#" >Coordinadores</a></li>
 			<li ><a href="lideres.php" >Lideres</a></li>
 			<li ><a href="#" >Finanzas</a></li>

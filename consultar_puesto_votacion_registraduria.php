@@ -1,6 +1,6 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-imprimir(puesto_votacion('2618362'));  /*Cedula de un Condenado*/
+//imprimir(puesto_votacion('2618362'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
@@ -68,7 +68,7 @@ function puesto_votacion($cedula_Excel){
 						}
 					}else{
 						$puesto_votacion=array(
-						'ERROR'=>'No inscrito'			
+						'ERROR'=>'Debe inscribirse en los períodos que establezca la Registraduría Nacional del Estado Civil en próximas oportunidades'			
 						);
 					return $puesto_votacion;
 					}

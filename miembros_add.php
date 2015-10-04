@@ -81,24 +81,17 @@ function municipios(){
 	    FAjax (pagina,capa,valores,'POST',true)     	 
 	}
 }
-function municipiospuestos(){
-	var pagina= "Ajax_municipio.php";
+function puesto_votacion(){
+	var pagina= "Ajax_puestos.php";
 	var capa = "capa_documentos_municipio";
-	var departamento = document.getElementById('departamento_puestos').value;
-	var valores = 'valor=1&departamento=' + departamento + '&' + Math.random();
-	if(departamento!=''){ 			
+	var cedula = document.getElementById('cedula').value;
+	var valores = 'cedula=' + cedula + '&' + Math.random();
+	if(cedula!=''){ 			
 	    FAjax (pagina,capa,valores,'POST',true)     	 
 	}
 }
-function puesto(){
-	var pagina= "Ajax_puestos_votacion.php";
-	var capa = "capa_puestos";
-	var municipio = document.getElementById('municipios_puestos').value;
-	var valores = 'municipio=' + municipio + '&' + Math.random();
-	if(municipio!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
+
+
 function edad(){
 	var pagina= "Ajax_edad.php";
 	var capa = "capa_edad";
@@ -110,15 +103,7 @@ function edad(){
 	}
 }
 
-function mesa(){
-	var pagina= "Ajax_mesa_votacion.php";
-	var capa = "capa_mesas";
-	var puesto = document.getElementById('puestos').value;
-	var valores = 'puesto=' + puesto + '&' + Math.random();
-	if(puesto!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
+
 </script>
 <div class="main">
 	<header>
@@ -146,106 +131,23 @@ function mesa(){
 						<span class="textRequired"> * </span>
 							Cedula
 					</label>
-						<input id="cedula" type="text" value="" name="cedula" class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="consulta.php" ><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
+						<input id="cedula" type="text" value="" name="cedula"  class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="#"  onclick="puesto_votacion()"><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
 				</li>
-				<li>
-					<label for="departamento">
-						<span class="textRequired"> * </span>
-						Departamento
-					</label>
-						<select name="departamento" id="departamento" onclick="municipios()" class="validate[required]">
-                        	<?php 
-		$sql="SELECT * FROM DEPARTAMENTOS";
-				$DBGestion->ConsultaArray($sql);
-				$partidos=$DBGestion->datos;
-		
-		?>
-						<option value="">Seleccione....</option>
-                        <?php
-						foreach ($partidos as $datos){
-							 $id = $datos['IDDEPARTAMENTO'];
-							 $nombre = $datos['NOMBRE'];
-							 
-							  			 
-				?>
-						<option value="<?php echo $id?>"><?php echo $nombre?></option>
-						<?php } ?>
-                        </select>
-						
-				</li>
-				<li>
-					<label for="municipio" >
-						<span class="textRequired"> * </span>
-						Municipio
-					</label>
-					<span id="capa_documentos" >
-						<select name="municipio" id="municipio" class="validate[required]">
-						<option value="">Seleccione....</option>
-						</select>
-						</span>
-				</li>
+				
+				
 				<li>
 					<label for="celular">
 						<span class="textRequired"> * </span>
 						Telefono / Celular
 					</label>
 						<input id="celular" type="text" name="celular" class="validate[required,custom[integer],maxSize[10]] ">
-				</li>
+				</li>	
 				
-				
-			<!--	<li>
-					<label for="fecha">
-						<span class="textRequired"> * </span>
-						Fecha de Nacimiento
-					</label>
-						  <input type="text" size="12" id="inputField"  name="fecha"  class="validate[required]"   onblur="edad()" style="width:200px" value=""/> &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/x-office-calendar.png" id="inputField"  style="cursor:pointer">
-				</li>
-				<li>
-					<label for="formulario">
-						<span class="textRequired"> * </span>
-						Formulario
-					</label>
-						 <input id="formulario" type="text" name="formulario" class="validate[required]] ">
-				</li> -->
-				
-				
+			<div id='capa_documentos_municipio'>
 					<h2>Puesto de Votacion</h2>
-				<br/>
-				<li>
-					<label for="departamento_puesto">
-						<span class="textRequired"> * </span>
-						Departamento
-					</label>
-						<select name="departamento_puestos" id="departamento_puestos" onclick="municipiospuestos()" class="validate[required]">
-                        	<?php 
-		$sql="SELECT * FROM DEPARTAMENTOS";
-				$DBGestion->ConsultaArray($sql);
-				$partidos=$DBGestion->datos;
-		
-		?>
-						<option value="">Seleccione....</option>
-                        <?php
-						foreach ($partidos as $datos){
-							 $id = $datos['IDDEPARTAMENTO'];
-							 $nombre = $datos['NOMBRE'];
-							 
-							  			 
-				?>
-						<option value="<?php echo $id?>"><?php echo $nombre?></option>
-						<?php } ?>
-                        </select>
-				</li>
-					<li>
-					<label for="puesto" >
-						<span class="textRequired"> * </span>
-						Puesto de Votacion
-					</label>
-						<span id="capa_puestos" >
-						<select name="puestos" id="puestos" >
-						<option value="">Seleccione....</option>
-						</select>
-						</span>
-				</li>		
+			
+				
+		</div>
 				
 			</ol>
 			</div>
@@ -262,21 +164,7 @@ function mesa(){
 				<li>
 				 </li>
 				 <li>
-				 </li>
-				 <!--	<li>
-					<label for="apellidos" style="width: 100px;">
-						<span class="textRequired"> * </span>
-							Apellidos
-					</label>
-					<input id="apellido" type="text" value="" name="apellido" class="validate[required]">
-							</li>
-							<!-- <li >
-					<label for="direccion" style="width: 100px;">
-						<span class="textRequired"> * </span>
-						Direccion
-					</label>
-						<input id="direccion" type="text" name="direccion" class="validate[required]">
-				</li>-->
+				 </li>				
 				
 				<li>
 					<label for="email" style="width: 100px;">
@@ -285,15 +173,7 @@ function mesa(){
 					</label>
 						<input id="email" type="text" name="email" class="validate[required,custom[email]]">
 				</li>
-			<!--	<li>
-					<label for="edad" style="width: 100px;">
-						<span class="textRequired">  </span>
-							Edad
-					</label>
-					<span id="capa_edad">
-						0 a&ntilde;os
-						</span>
-				</li>		-->		
+			
 				 <li>
 					<label for="email" style="width: 100px;">						
 						Ocupacion
@@ -330,30 +210,7 @@ function mesa(){
 					</label>
 						
 				</li>
-				<li>&nbsp;</li>	
-				<br/>	<br/><br/>	<br/>
-					<li>
-					<label for="muncipio2" style="width: 100px;">
-							<span class="textRequired"> * </span>
-							Municipio
-					</label>
-					<span id="capa_documentos_municipio" >
-						<select name="municipios_puestos" id="municipios_puestos">
-						<option value="">Seleccione....</option>
-						</select>
-						</span>
-							</li>
-							<li>
-					<label for="password" style="width: 100px;">
-						<span class="textRequired"> * </span>
-						Mesa
-					</label>
-						<span id="capa_mesas" >
-						<select name="mesas" id="mesas" >
-						<option value="">Seleccione....</option>
-						</select>
-						</span>
-				</li>
+				
 			</ol>
 			</div><br/>
 			<br/>	<br/>	<br/>	<br/>	<br/>		

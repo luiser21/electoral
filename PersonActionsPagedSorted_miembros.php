@@ -25,19 +25,19 @@ $_GET["jtStartIndex"]=0;*/
 				departamentos.NOMBRE AS DEPARTAMENTO
 				FROM
 				miembros
-				LEFT JOIN lideres ON lideres.ID = miembros.IDLIDER
-				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				LEFT JOIN municipios ON municipios.ID = miembros.MUNICIPIO
-				LEFT JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
 				where usuario.usuario='".$_SESSION["username"]."'";
 				
 					
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(miembros.nombres) like upper('%".$_POST["name"]."%') ";
+				$sql.=" and (upper(miembros.nombres) like upper('%".$_POST["name"]."%') OR (miembros.CEDULA like upper('%".$_POST["name"]."%'))) ";
 			}
 	
 			$DBGestion->ConsultaArray($sql);				
@@ -56,18 +56,18 @@ $_GET["jtStartIndex"]=0;*/
 				departamentos.NOMBRE AS DEPARTAMENTO
 				FROM
 				miembros
-				LEFT JOIN lideres ON lideres.ID = miembros.IDLIDER
-				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
-				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
-				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-				LEFT JOIN municipios ON municipios.ID = miembros.MUNICIPIO
-				LEFT JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+				INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
 				where usuario.usuario='".$_SESSION["username"]."' ";
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(miembros.nombres) like upper('%".trim($_POST["name"])."%') ";
+				$sql.=" and (upper(miembros.nombres) like upper('%".$_POST["name"]."%') OR (miembros.CEDULA like upper('%".$_POST["name"]."%'))) ";
 			}
 			$sql.=" ORDER BY NOMBRE ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";

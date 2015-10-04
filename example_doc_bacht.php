@@ -93,20 +93,17 @@ for($i=0; $i<$registros-1; $i++){
 					$municipios=$DBGestion->datos;	
 					if(count($municipios)>=1){
 						$idmunicipios=$municipios[0]['ID'];
-						//echo $puestoreg['ERROR'];
 						if($puestoreg['ERROR']=='Cancelada por Muerte'){
 							$muerte++;
 							$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",1,".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 							$DBGestion->Consulta($sql);	
-							//echo $sql;
 						}elseif($puestoreg['ERROR']=='Baja por Perdida o Suspension de los Derechos Politicos'){
 							$baja++;
 							$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",2,".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
-							//echo $sql;
 							$DBGestion->Consulta($sql);	
 						}elseif($puestoreg['ERROR']=='Pendiente por Solicitud en proceso'){
 							$pendiente++;
@@ -114,29 +111,23 @@ for($i=0; $i<$registros-1; $i++){
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",3,".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 							$DBGestion->Consulta($sql);	
-							//echo $sql;
 						}elseif($puestoreg['ERROR']=='No inscrito'){
 							$debeinscribirse++;
-							//echo $sql;
 							$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",4,".$idlider[0]['ID'].",'".$ocupacion[$i]."',".$idfile.")";										
 							$DBGestion->Consulta($sql);	
-							//echo $sql;
 						}elseif($puestoreg['ERROR']=='INDEFINIDO'){
 							$debeinscribirse++;
-							
 							$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",5,".$idlider[0]['ID'].",'INDEFINIDO',".$idfile.")";										
 							$DBGestion->Consulta($sql);	
-							//echo $sql;
 						}						
 					}
 				}
 			}
 		}else{
-			
 			//imprimir($puestoreg);
 			echo '<br/>';
 			echo '[DEPARTAMENTO] = '.$DEPARTAMENTO_R=trim($puestoreg['DEPARTAMENTO']);
@@ -495,7 +486,7 @@ for($i=0; $i<$registros-1; $i++){
 								$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 								VALUES (".trim($cedula_simpatizante[$i]).",'".strtoupper(trim($nombre_simpartizante[$i]))."','".$departamento[$i]."','".$MUNICIPIO[$i]."',".$idlider[0]['ID'].",'".$nombre_lider[$i]."','".$celular[$i]."','".$email[$i]."',
 								'Problemas con el municipio del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion[$i]."',".$idfile.")";	
-								//echo $sql;
+							//	echo $sql;
 								$DBGestion->Consulta($sql);	
 							}
 						}else{
