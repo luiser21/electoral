@@ -24,16 +24,17 @@ $(document).ready(function() {
 		
 	</li>
 	<li class="top"><a href="#">Marco Legal</a>		
-		<ul >
+		<ul > <?php if($_SESSION['consulta']=='0'){ ?>
 			<li ><a href="causales.php?ac=1">Constituci&oacute;n</a></li>
 			<li ><a href="#">LEYES</a></li>
 			<li ><a href="#">DECRETOS</a></li>
 			<li ><a href="#">RESOLUCIONES</a></li>
 			<li ><a href="#">CIRCULARES</a></li>
+			<?php } ?>
 		</ul>
 	</li>
 	<li ><a href="#" >Datos Historicos</a>		
-		<ul >
+		<ul > <?php if($_SESSION['consulta']=='0'){ ?>
 			<li ><a href="#">Elecciones Congreso 2010</a>
 				<ul>
 					<li ><a href="#">Senado</a>
@@ -64,22 +65,26 @@ $(document).ready(function() {
 					<li ><a href="http://www3.registraduria.gov.co/congreso2014/preconteo/99SE/DSE9999999_L2.htm" target="_blank">Resultados por Departamento</a></li>
 				</ul>
 			</li>
+			<?php } ?>
 		</ul>	
 	</li>
 	<li ><a href="#" >Administraci&oacute;n de la Campa&a</a>		
 		<ul>
-			<li ><a href="estructura.php" >Estructura</a></li>
+			
 			<li ><a href="miembros.php" >Simpatizantes</a></li>
-			<li ><a href="#" >Coordinadores</a></li>
 			<li ><a href="lideres.php" >Lideres</a></li>
-			<li ><a href="#" >Finanzas</a></li>
-			<li ><a href="#" >Logistica</a></li>
-			<li ><a href="#" >Comunicaciones</a></li>
-			<li ><a href="#" >Seguimiento Estadistico</a></li>			
+			<?php if($_SESSION['consulta']=='0'){ ?>
+				<li ><a href="estructura.php" >Estructura</a></li>			
+				<li ><a href="#" >Finanzas</a></li>
+				<li ><a href="#" >Logistica</a></li>
+				<li ><a href="#" >Comunicaciones</a></li>
+				<li ><a href="#" >Seguimiento Estadistico</a></li>		
+			<?php } ?>
 		</ul>		
 	</li>
 	<li><a href="#"  >Informes</a>
-		<ul>
+		<ul> 
+			<?php if($_SESSION['consulta']=='0'){ ?>
 			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-
 			<li ><a href="Informes.php">Seguimiento por Puesto de Votaci&oacute;n</a></li>
 			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>
@@ -99,7 +104,7 @@ $(document).ready(function() {
 			<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
 			<li ><a href="informe_movilizados.php">Informe Comparativo Compromisos - Movilizados - Votos Reales</a></li>-->
-			<?php //} ?>
+			<?php } ?>
 		</ul>
 	</li>	
 </ul>

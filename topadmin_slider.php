@@ -14,7 +14,11 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		// toma las variables de sesion y de edicion de contenidos		
 		$usuario = $_SESSION["username"];
 		$permiso = $_SESSION["permiso"];
+		$consulta=$_SESSION["consulta"];
 		$nombre = $_SESSION["nombre"];
+		if($consulta==1){
+			$nombre="Usuario de Consulta";
+		}
 		
 	}
 ?>

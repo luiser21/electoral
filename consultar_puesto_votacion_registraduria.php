@@ -13,14 +13,18 @@ function puesto_votacion($cedula_Excel){
 		  )
 		);
 		$contexto = stream_context_create($opciones);
-		$contenido = file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
+		try{
+			$contenido = @file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
+		}catch(Exception $e){
+		//$observacion2 = $e->getMessage();
+		throw new Exception('Sin conexion a la registraduria.');		
+		}
 		$contenido = trim(strip_tags($contenido));
 		$buscar=array(chr(13).chr(10), "\r\n", "\n", "\r",); 
 		$reemplazar=array("", "", "", ""); 
 		$contenido=str_ireplace($buscar,$reemplazar,$contenido);
 		$contenido=str_replace("\r",". ",$contenido);
-		$contenido=str_replace("\n"," ",$contenido);
-
+		$contenido=str_replace("\n"," ",$contenido);	
 		$posicion_coincidencia = strpos($contenido, 'Departamento');
 	 
 		//se puede hacer la comparacion con 'false' o 'true' y los comparadores '===' o '!=='
@@ -44,10 +48,17 @@ function puesto_votacion($cedula_Excel){
 							if($posicion_coincidencia5 === false) {
 								$posicion_coincidencia6 = strpos($contenido, 'Por favor intente');
 								if($posicion_coincidencia6 === false) {
-									$puesto_votacion=array(
-										'ERROR'=>'INDEFINIDO'			
-									);
-									return $puesto_votacion;
+									if(!empty($contenido)) {
+										$puesto_votacion=array(
+											'ERROR'=>'INDEFINIDO'			
+										);
+										return $puesto_votacion;
+									}else{
+										$puesto_votacion=array(
+												'ERROR'=>utf8_decode('Se produjo un error durante el intento de conexion a la Registraduria.')
+										);
+										return $puesto_votacion;
+									}
 								}else{
 									$puesto_votacion=array(
 											'ERROR'=>utf8_decode('La información se encuentra en actualización. Por favor intente más tarde.')			
@@ -121,8 +132,8 @@ function puesto_votacion($cedula_Excel){
 			 return $puesto_votacion;
 		}
 	}catch(Exception $e){
-		$observacion2 = $e->getMessage();
-		throw new Exception($observacion2);		
+		//$observacion2 = $e->getMessage();
+		throw new Exception('Sin conexion a la registraduria.');		
 	}
 }
 function limpiar_metas($string,$corte = null)

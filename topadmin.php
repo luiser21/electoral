@@ -14,7 +14,11 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		// toma las variables de sesion y de edicion de contenidos		
 		$usuario = $_SESSION["username"];
 		$permiso = $_SESSION["permiso"];
+		$consulta=$_SESSION["consulta"];
 		$nombre = $_SESSION["nombre"];
+		if($consulta==1){
+			$nombre="Usuario de Consulta";
+		}
 		
 	}
 ?>
@@ -102,6 +106,14 @@ color:#008000;
 <script type="text/javascript" src="js/tms_presets.js"></script>-->
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 	 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	 <script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
+	 <script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script>
+		jQuery(document).ready(function(){
+			jQuery("#form2").validationEngine();
+		});	
+</script>	
 <!-- <div id="logo4">
 					
 						<span class="textRequired"> * </span>
@@ -148,7 +160,7 @@ color:#008000;
 		</div> <!-- / top -->		
 	</div> <!--panel -->			
 					<div class="wrapper">
-							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SOPAC </a><a href="#" id="logo3"><div id="marquesina2">
+							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SIGE </a><a href="#" id="logo3"><div id="marquesina2">
 <div id="marque2">
 <div class="first">
 <marquee>	<img src="images/logo.png" width="60" height="40">

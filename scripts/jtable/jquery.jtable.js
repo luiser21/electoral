@@ -2040,11 +2040,11 @@ THE SOFTWARE.
 
             //Localization
             messages: {
-                deleteConfirmation: 'This record will be deleted. Are you sure?',
-                deleteText: 'Delete',
-                deleting: 'Deleting',
-                canNotDeletedRecords: 'Can not deleted {0} of {1} records!',
-                deleteProggress: 'Deleted {0} of {1} records, processing...'
+                deleteConfirmation: '¿Quieres borrar este registro. ¿Estas seguro?',
+                deleteText: 'Eliminar',
+                deleting: 'Eliminado',
+                canNotDeletedRecords: 'No se puede borrar {0} de {1} registros!',
+                deleteProggress: 'Eliminado {0} de {1} registros, procesando...'
             }
         },
 

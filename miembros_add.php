@@ -1,50 +1,32 @@
 <?php require_once('topadmin.php');
-
+include_once "example_doc_miembros_add.php";
 $add = (isset($_GET['add']) ? $_GET['add'] : 0); ;
 if($add == 1){
 	
     @$nombre=(isset($_POST['nombre']) ? $_POST['nombre'] : 'NULL');
     @$cedula=(isset($_POST['cedula']) ? $_POST['cedula'] : 'NULL');
-    @$departamento=(isset($_POST['departamento']) ?  : 'NULL');
     @$celular=(isset($_POST['celular']) ? $_POST['celular'] : 'NULL');
-  //  $fecha=(isset($_POST['fecha']) ? $_POST['fecha'] : 'NULL');
-
-    @$departamento_puestos=(isset($_POST['departamento_puestos']) ? $_POST['departamento_puestos'] : 'NULL');
-	@$puestos=(isset($_POST['puestos']) ? $_POST['puestos'] : 'NULL');
-   
-   // @$apellido=(isset($_POST['apellido']) ? $_POST['apellido'] : 'NULL');
-    //@$direccion=(isset($_POST['direccion']) ? $_POST['direccion'] : 'NULL');
-    @$municipio=(isset($_POST['municipio']) ? $_POST['municipio'] : 'NULL');
-    @$email=(isset($_POST['email']) ? $_POST['email'] : 'NULL');
-   
-    @$municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
-    @$mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
-	
+    @$email=(isset($_POST['email']) ? $_POST['email'] : 'NULL'); 
 	 @$idlider=(isset($_POST['lider']) ? $_POST['lider'] : 'NULL');
 	 @$ocupacion=(isset($_POST['ocupacion']) ? $_POST['ocupacion'] : 'NULL');
-	
-	//Consultar si ya existe el  simpatizante en otro lider
-	$sql="SELECT * FROM MIEMBROS WHERE CEDULA";
-	
-	$sql="INSERT INTO MIEMBROS (NOMBRES CEDULA, MUNICIPIO, TELEFONO, EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION) VALUES ('".strtoupper(trim($nombre))."',".trim($cedula).",".$municipio.",".trim($celular).",'".trim($email)."',".$puestos.",'".$idlider."','".$ocupacion."')";	
-	
-	$DBGestion->Consulta($sql);
-	
-	$rs = mysql_query("SELECT @@identity AS id");
-	if ($row = mysql_fetch_row($rs)) {
-		$idmiembro = trim($row[0]);
-	}
-	
-	$sql="INSERT INTO MESA_PUESTO_MIEMBRO (IDMESA, MIEMBRO) VALUES (".$mesas.",".$idmiembro.")";	
-	$DBGestion->Consulta($sql);
-	
+		
+	$puestoreg=ingresar_manual_miembros($cedula,$nombre,$celular,$email,$idlider,$ocupacion);	
+	//echo $puestoreg;
+	if($puestoreg=='1'){
 	 ?>
        	 <script language="javascript">
 	       	 alert("Se ingreso el Simpatizante exitosamente"); 
 	       	 window.location="miembros.php";
        	 </script>
 	   <?php	
-	
+	}else{
+		 ?>
+       	 <script language="javascript">
+	       	alert("Hubo un Problema:  <?php echo $puestoreg?> \n Se crea Registro en Historico"); 
+	       	window.location="miembros_add.php";
+       	 </script>
+	   <?php
+	}
 }
 ?>
 <style>
@@ -54,33 +36,6 @@ if($add == 1){
 }
 </style>
 <script type="text/javascript">
-	window.onload = function(){
-		new JsDatePick({
-			useMode:2,
-			target:"inputField",
-			dateFormat:"%d-%m-%Y"
-			/*selectedDate:{				This is an example of what the full configuration offers.
-				day:5,						For full documentation about these settings please see the full version of the code.
-				month:9,
-				year:2006
-			},
-			yearsRange:[1978,2020],
-			limitToToday:false,
-			cellColorScheme:"beige",
-			dateFormat:"%m-%d-%Y",
-			imgPath:"img/",
-			weekStartDay:1*/
-		});
-	};
-function municipios(){
-	var pagina= "Ajax_municipio.php";
-	var capa = "capa_documentos";
-	var departamento = document.getElementById('departamento').value;
-	var valores = 'departamento=' + departamento + '&' + Math.random();
-	if(departamento!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
 function puesto_votacion(){
 	var pagina= "Ajax_puestos.php";
 	var capa = "capa_documentos_municipio";
@@ -90,19 +45,6 @@ function puesto_votacion(){
 	    FAjax (pagina,capa,valores,'POST',true)     	 
 	}
 }
-
-
-function edad(){
-	var pagina= "Ajax_edad.php";
-	var capa = "capa_edad";
-	var fecha = $('#inputField').val();	
-	fecha = $('#inputField').val();	
-	var valores = 'fecha=' + fecha + '&' + Math.random();
-	if(fecha!=''){ 			
-	    FAjax (pagina,capa,valores,'POST',true)     	 
-	}
-}
-
 
 </script>
 <div class="main">
@@ -216,8 +158,9 @@ function edad(){
 			<br/>	<br/>	<br/>	<br/>	<br/>		
 				<p class="textRequired"> * Campos Requeridos</p>				
 				<div id="tableButtons">	
-				<input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">	
-				<input id="btnSave" class="submit" type="submit" value="Guardar" style="width: 100px;"/>			
+				<input id="cmdatras" type="button" onclick="history.go(-1);" value="Atras" name="cmdatras">				
+				<input id="btnSave" class="submit" type="submit" value="Guardar" style="width: 100px;"/>	
+			
 				
 					
 		  </div>

@@ -59,7 +59,7 @@
 					listAction: 'PersonActionsPagedSorted_miembros.php?action=list',
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
-					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
+					deleteAction: 'PersonActionsPagedSorted_miembros.php?action=delete'
 				},
 				fields: {
 					ID: {

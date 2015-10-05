@@ -8,13 +8,32 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 	{		
 			@$usuario = (!empty($_POST["log"]))?  $_POST["log"] : "";
 			@$password = (!empty($_POST["pwd"]))?  $_POST["pwd"] : "";
-            if(@$usuario != ""){			
-				//Encriptar el password para hacer match con el registro en la DB
-				$password=Hash::calcSHA($password);			
+			$consulta=0;
+            if(@$usuario != ""){
+				$password=Hash::calcSHA($password);	
+				$sql="SELECT
+						usuario.USUARIO,
+						usuario.CONSULTA,				
+						usuario.ASOSIADO,
+						usuario.CONTRASENA
+						FROM usuario WHERE USUARIO = '".$usuario."' and CONTRASENA ='".$password."' and ACTIVO = 'Y'";				
+				$DBGestion->ConsultaArray($sql);
+				$usuario_consulta=$DBGestion->datos;				
+				foreach (@$usuario_consulta as $datos2){
+					if($datos2['ASOSIADO']!=''){						
+						$usuario=$datos2['ASOSIADO'];
+						$sql="SELECT usuario.CONTRASENA FROM usuario WHERE USUARIO = '".$datos2['ASOSIADO']."' and ACTIVO = 'Y'";
+						$DBGestion->ConsultaArray($sql);
+						$usuario_consulta2=$DBGestion->datos;	
+						$password=$usuario_consulta2[0]['CONTRASENA'];
+						$consulta=$datos2['CONSULTA'];
+					}
+				}
+				//Encriptar el password para hacer match con el registro en la DB	
 				$sql="SELECT
 						candidato.ID AS IDCANDIDATO,
 						usuario.USUARIO,
-						usuario.PERMISO,
+						usuario.PERMISO,					
 						CONCAT(candidato.NOMBRES,' ',candidato.APELLIDOS) AS NOMBRE,
 						partidos_politicos.NOMBRECORTO AS PARTIDO,
 						partidos_politicos.LOGO2 AS LOGO2,
@@ -35,7 +54,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 						LEFT JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
 					  WHERE USUARIO = '".$usuario."' and CONTRASENA ='".$password."' and ACTIVO = 'Y'";
 				$DBGestion->ConsultaArray($sql);
-				$usuarios=$DBGestion->datos;				
+				$usuarios=$DBGestion->datos;	
+			
 				foreach (@$usuarios as $datos){
 					@$id = $datos['IDCANDIDATO'];
 					@$usu = $datos['USUARIO'];
@@ -50,7 +70,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					@$ntarjeton = $datos['NTARJETON'];	
 					@$logo2 = $datos['LOGO2'];
 					@$eslogan = $datos['ESLOGAN'];	
-					@$votos = $datos['VOTOSPREVISTOS'];						
+					@$votos = $datos['VOTOSPREVISTOS'];	
+						
 				}				
 				if(@$usu != "" ){
 					$_SESSION["idcandidato"] = $id;
@@ -67,7 +88,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					$_SESSION["tipocandidato"] = $tipocandidato;	
 					$_SESSION["logo2"] = $logo2;	
 					$_SESSION["eslogan"] = $eslogan;
-					$_SESSION["votosprevistos"] = $votos;						
+					$_SESSION["votosprevistos"] = $votos;	
+					$_SESSION["consulta"] = $consulta;						
 					header("location:adetom.php");    
 				}else{
 					?>
@@ -100,6 +122,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 				 @$logo2 = $_SESSION["logo2"];
 				  @$eslogan = $_SESSION["eslogan"];
 				   @$votos = $_SESSION["votosprevistos"];
+					@$consulta=$_SESSION["consulta"];	
 		if(!empty($usuario)){
 			if(@$usuario != ""){
 				header('Location: adetom.php');	    
