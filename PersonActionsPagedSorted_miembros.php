@@ -33,7 +33,7 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
 				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-				where usuario.usuario='".$_SESSION["username"]."'";
+				where usuario.usuario='".$_SESSION["username"]."' AND puestos_votacion.IDMUNICIPIO='".$_SESSION["idmunicipio"]."' ";
 				
 					
 			if(isset($_POST["name"])!=""){
@@ -64,7 +64,7 @@ $_GET["jtStartIndex"]=0;*/
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
 				INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
 				INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
-				where usuario.usuario='".$_SESSION["username"]."' ";
+				where usuario.usuario='".$_SESSION["username"]."' AND puestos_votacion.IDMUNICIPIO='".$_SESSION["idmunicipio"]."'  ";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" and (upper(miembros.nombres) like upper('%".$_POST["name"]."%') OR (miembros.CEDULA like upper('%".$_POST["name"]."%'))) ";

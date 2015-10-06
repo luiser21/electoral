@@ -73,7 +73,7 @@ function puesto_votacion(){
 						<span class="textRequired"> * </span>
 							Cedula
 					</label>
-						<input id="cedula" type="text" value="" name="cedula"  class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="#"  onclick="puesto_votacion()"><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
+						<input id="cedula" type="text" value="" name="cedula"  onKeyup="puesto_votacion()" class="validate[required,custom[integer]] " style="width: 150px;">&nbsp;&nbsp;&nbsp;<a  class='iframe' href="#"  onclick="puesto_votacion()"><span style=" font-size:11px;">Donde Votar??<img src="images/padrones-2013-donde-votar.png" id="inputField"  style="cursor:pointer" width="40px" height="31px"></span></a>
 				</li>
 				
 				
