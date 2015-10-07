@@ -1,8 +1,8 @@
 ﻿<?php 
 
 		
-$conn = mysql_connect("localhost", "root", "");
-mysql_select_db("electoral");
+$conn = mysql_connect("107.180.21.237", "user-sige", "Consuelo81");
+mysql_select_db("w3w4e4");
 
 mysql_query("SET NAMES 'utf8'");
 

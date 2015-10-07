@@ -146,7 +146,7 @@ button, input[type="button"], input[type="submit"] {
 					listAction: 'PersonActionsPagedSorted_miembros_diferentes.php?action=list',
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
-					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
+					deleteAction: 'PersonActionsPagedSorted_miembros_diferentes.php?action=delete'
 				},
 				fields: {
 					ID: {

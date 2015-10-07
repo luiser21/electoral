@@ -1,6 +1,6 @@
 <?php
 session_start();
-    $conexion = new mysqli('localhost','root','','electoral',3306);
+    $conexion = new mysqli('107.180.21.237','user-sige','Consuelo81','w3w4e4',3306);
 	if (mysqli_connect_errno()) {
     	printf("La conexión con el servidor de base de datos falló: %s\n", mysqli_connect_error());
     	exit();
