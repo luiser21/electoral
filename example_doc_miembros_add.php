@@ -76,7 +76,7 @@ $registro_bueno='';
 		$puestoreg=puesto_votacion($cedula_simpatizante);	
 		//echo '[CEDULA] = <strong>'.$cedula_simpatizante.'</strong>';
 		if(!empty($puestoreg['ERROR'])){
-			//echo ' - '.$puestoreg['ERROR'].'<br/>';
+			$registro_bueno=$puestoreg['ERROR'];
 			$aptosnovotar++;			
 			$idlider=$idlider;
 			if(!empty($idlider)){
