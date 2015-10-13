@@ -24,7 +24,7 @@ if($add == 1){
     $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
     $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
 	
-	$sql="INSERT INTO LIDERES (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION,IDCANDIDATO) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",".$_SESSION['idcandidato'].")";	
+	$sql="INSERT INTO lideres (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, IDPUESTOSVOTACION,IDCANDIDATO) VALUES ('".strtoupper(trim($nombre))."','".strtoupper(trim($apellido))."',".trim($cedula).",'".trim($direccion)."',".$municipio.",".trim($celular).",'".trim($email)."','".$fecha."',".$puestos.",".$_SESSION['idcandidato'].")";	
 	$DBGestion->Consulta($sql);
 	
 	$rs = mysql_query("SELECT @@identity AS id");
@@ -32,7 +32,7 @@ if($add == 1){
 		$idlider = trim($row[0]);
 	}
 	
-	$sql="INSERT INTO MESA_PUESTO_MIEMBRO (IDMESA, LIDER) VALUES (".$mesas.",".$idlider.")";	
+	$sql="INSERT INTO mesa_puesto_miembro (IDMESA, LIDER) VALUES (".$mesas.",".$idlider.")";	
 	$DBGestion->Consulta($sql);
 	
 	 ?>

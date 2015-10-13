@@ -81,7 +81,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}else{
-		 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO from UPLOAD_FILE WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."'";		
+		 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO from upload_file WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."'";		
 				//echo $sql;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
@@ -91,7 +91,7 @@ $_GET["jtStartIndex"]=0;*/
 			//Get records from database
 			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO,DIFERENTEMUNICIPIO,
 BAJA,PENDIENTE,MUERTE,DEBEINSCRIBIRSE,(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO='Cedula ya existe' AND candidato=26) as DUPLICADO,
-(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO<>'Cedula ya existe' AND CANDIDATO=26) AS REPROCESAR from UPLOAD_FILE
+(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO<>'Cedula ya existe' AND CANDIDATO=26) AS REPROCESAR from upload_file
 				WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."' ";				
 			$sql.=" ORDER BY ID DESC ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";

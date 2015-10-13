@@ -77,7 +77,7 @@
 					<br/>
 					
 						<?php 
-		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+		$sql="SELECT * FROM  circunscripcion_electoral WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
 				$circun=$DBGestion->datos;		
 		?>
@@ -165,7 +165,7 @@
 					<br/>
 					
 						<?php 
-		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='6' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+		$sql="SELECT * FROM circunscripcion_electoral WHERE TIPO='6' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
 				$circun=$DBGestion->datos;		
 		?>
@@ -255,7 +255,7 @@
 						<br/>
 					
 						<?php 
-		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
+		$sql="SELECT * FROM circunscripcion_electoral WHERE TIPO='5' AND INDIGENA='0' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
 				$circun=$DBGestion->datos;		
 		?>
@@ -340,7 +340,7 @@
 						<br/>
 					
 						<?php 
-		$sql="SELECT * FROM CIRCUNSCRIPCION_ELECTORAL WHERE TIPO='5' AND INDIGENA='1' AND ELECCIONES='2010' ORDER BY ID";
+		$sql="SELECT * FROM circunscripcion_electoral WHERE TIPO='5' AND INDIGENA='1' AND ELECCIONES='2010' ORDER BY ID";
 				$DBGestion->ConsultaArray($sql);
 				$circun=$DBGestion->datos;		
 		?>

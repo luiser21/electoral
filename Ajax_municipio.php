@@ -12,7 +12,7 @@ if($valor==0){
 	echo '<select name="municipios_puestos" id="municipios_puestos" onclick="puesto()" >'; 
 }
                 
-$sql="SELECT * FROM MUNICIPIOS WHERE IDDEPARTAMENTO='".$departamento."' order by nombre";
+$sql="SELECT * FROM municipios WHERE IDDEPARTAMENTO='".$departamento."' order by nombre";
 $DBGestion->ConsultaArray($sql);
 $mun=$DBGestion->datos;	
 	

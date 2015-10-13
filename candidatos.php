@@ -26,7 +26,7 @@ if($add == 1){
     $municipios_puestos=(isset($_POST['municipios_puestos']) ? $_POST['municipios_puestos'] : 'NULL');
     $mesas=(isset($_POST['mesas']) ? $_POST['mesas'] : 'NULL');
 	
-	$sql="INSERT INTO CANDIDATO (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, TIPOCANDIDATO, NTARJETON, PARTIDO, IDUSUARIO, IDPUESTOSVOTACION) VALUES ('".$nombre."','".$apellido."',".$cedula.",'".$direccion."',".$municipio.",".$celular.",'".$email."','".$fecha."',".$tipo.",".$numero.",".$partido.",'".$usuario."',".$puestos.")";	
+	$sql="INSERT INTO candidato (NOMBRES, APELLIDOS, CEDULA, DIRECCION, MUNICIPIO, TELEFONO, EMAIL, FECHANACIMIENTO, TIPOCANDIDATO, NTARJETON, PARTIDO, IDUSUARIO, IDPUESTOSVOTACION) VALUES ('".$nombre."','".$apellido."',".$cedula.",'".$direccion."',".$municipio.",".$celular.",'".$email."','".$fecha."',".$tipo.",".$numero.",".$partido.",'".$usuario."',".$puestos.")";	
 	$DBGestion->Consulta($sql);
 	
 	 ?>
@@ -135,7 +135,7 @@ function mesa(){
 					</label>
 						<select name="departamento" id="departamento" onclick="municipios()" class="validate[required]">
                         	<?php 
-		$sql="SELECT * FROM DEPARTAMENTOS";
+		$sql="SELECT * FROM departamentos";
 				$DBGestion->ConsultaArray($sql);
 				$partidos=$DBGestion->datos;
 		
@@ -196,7 +196,7 @@ function mesa(){
 						<select name="partido" id="partido" class="validate[required]">
 						<option value="">Seleccione....</option>
                         <?php 
-		$sql="SELECT * FROM PARTIDOS_POLITICOS";
+		$sql="SELECT * FROM partidos_politicos";
 				$DBGestion->ConsultaArray($sql);
 				$partidos=$DBGestion->datos;
 					foreach ($partidos as $datos){
@@ -217,7 +217,7 @@ function mesa(){
 					</label>
 						<select name="departamento_puestos" id="departamento_puestos" onclick="municipiospuestos()" class="validate[required]">
                         	<?php 
-		$sql="SELECT * FROM DEPARTAMENTOS";
+		$sql="SELECT * FROM departamentos";
 				$DBGestion->ConsultaArray($sql);
 				$partidos=$DBGestion->datos;
 		

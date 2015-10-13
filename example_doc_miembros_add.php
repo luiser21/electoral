@@ -33,13 +33,13 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 $datosvalidos=0;
 $sql="SELECT ID
 					FROM
-					UPLOAD_FILE				
+					upload_file				
 					WHERE CANDIDATO='".$_SESSION["username"]."' and FILE='Carga_Manual'";
 			$DBGestion->ConsultaArray($sql);
 			$upload=$DBGestion->datos;
 			if(empty($upload[0]['ID'])){	
 			
-				$sql="INSERT INTO UPLOAD_FILE (FILE, CREADO,CANDIDATO) VALUES ('Carga_Manual',SYSDATE(),'".$_SESSION["username"]."')";										
+				$sql="INSERT INTO upload_file (FILE, CREADO,CANDIDATO) VALUES ('Carga_Manual',SYSDATE(),'".$_SESSION["username"]."')";										
 				$DBGestion->Consulta($sql);	
 				$sql="SELECT @@identity AS id";
 				$DBGestion->ConsultaArray($sql);
@@ -49,13 +49,13 @@ $sql="SELECT ID
 				$sql="SELECT
 					COUNT(ID) AS TOTAL
 					FROM
-					BOLETINES					
+					boletines					
 					WHERE CANDIDATO=".$_SESSION["idcandidato"];			
 						$DBGestion->ConsultaArray($sql);
 						$idboletine=$DBGestion->datos;
 						$idboletine=$idboletine[0]['TOTAL'];
 					 
-				$sql="INSERT INTO BOLETINES (REPORTES,HORA,MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,CANDIDATO,MES,IDDEPARTAMENTO)  VALUES 
+				$sql="INSERT INTO boletines (REPORTES,HORA,MOVILIZADOS,ESTADO,ESTADO_DEPARTAMENTO,CANDIDATO,MES,IDDEPARTAMENTO)  VALUES 
 						('".($idboletine+1)." - CARGUE','".Num2MesSmall(date('m'))."',".$datosvalidos.",2,0,".$_SESSION["idcandidato"].",'".Num2MesSmall(date('m'))." ".date('Y')." ',1)	";			
 				$DBGestion->Consulta($sql);					
 				
@@ -85,35 +85,35 @@ $registro_bueno='';
 				if($puestoreg['ERROR']=='Cancelada por Muerte'){
 					$registro_bueno='Cedula reporta Cancelada por Muerte';
 					$muerte++;
-					$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+					$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 							VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",
 							".$idmunicipios.",1,".$idlider.",'".$ocupacion."',".$idfile.")";										
 					$DBGestion->Consulta($sql);	
 				}elseif($puestoreg['ERROR']=='Baja por Perdida o Suspension de los Derechos Politicos'){
 					$registro_bueno='Cedula reporta Baja por Perdida o Suspension de los Derechos Politicos';
 					$baja++;
-					$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+					$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 							VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",
 							".$idmunicipios.",2,".$idlider.",'".$ocupacion."',".$idfile.")";										
 					$DBGestion->Consulta($sql);	
 				}elseif($puestoreg['ERROR']=='Pendiente por Solicitud en proceso'){
 					$registro_bueno='Cedula reporta Pendiente por Solicitud en proceso';
 					$pendiente++;
-					$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+					$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 							VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",
 							".$idmunicipios.",3,".$idlider.",'".$ocupacion."',".$idfile.")";										
 					$DBGestion->Consulta($sql);	
 				}elseif($puestoreg['ERROR']=='No inscrito'){
 					$registro_bueno='Cedula reporta Debe inscribirse en los períodos que establezca la Registraduría Nacional del Estado Civil en próximas oportunidades';
 					$debeinscribirse++;
-					$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+					$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 							VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",
 							".$idmunicipios.",4,".$idlider.",'".$ocupacion."',".$idfile.")";										
 					$DBGestion->Consulta($sql);	
 				}elseif($puestoreg['ERROR']=='INDEFINIDO'){
 					$registro_bueno='INDEFINIDO';					
 					$debeinscribirse++;
-					$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+					$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 							VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",
 							".$idmunicipios.",5,".$idlider.",'INDEFINIDO',".$idfile.")";										
 					$DBGestion->Consulta($sql);	
@@ -212,7 +212,7 @@ $registro_bueno='';
 											$DBGestion->ConsultaArray($sql);
 											$idmunicipiopuesto=$DBGestion->datos;
 											
-											$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",".$idmunicipios.",".$idpuesto.",".$idlider.",'".$ocupacion."',".$idfile.")";										
+											$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",".$idmunicipios.",".$idpuesto.",".$idlider.",'".$ocupacion."',".$idfile.")";										
 											//echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 											$DBGestion->Consulta($sql);	
 											$sql="SELECT @@identity AS id";
@@ -220,7 +220,7 @@ $registro_bueno='';
 											$rs=$DBGestion->datos;
 											$idmiembro = $rs[0]['id'];
 																			
-											$sql="INSERT INTO MESA_PUESTO_MIEMBRO (IDMESA, MIEMBRO,CANDIDATO) VALUES (".$idmesa.",".$idmiembro.",'".$_SESSION["username"]."')";	
+											$sql="INSERT INTO mesa_puesto_miembro (IDMESA, MIEMBRO,CANDIDATO) VALUES (".$idmesa.",".$idmiembro.",'".$_SESSION["username"]."')";	
 											$DBGestion->Consulta($sql);		
 											if($_SESSION["tipocandidato"]=="ALCALDIA"){
 														if($idmunicipiopuesto[0]['IDMUNICIPIO']!=$_SESSION["idmunicipio"]){
@@ -248,7 +248,7 @@ $registro_bueno='';
 										$max=$cantidadmesas[0]['MESA']+1;
 										$mesaexcel=trim($MESA_R);
 										for($p=$max;$p<=$mesaexcel;$p++){
-											$sql="INSERT INTO MESAS (IDPUESTO, MESA) VALUES (".$idpuesto.",".$p.")";	
+											$sql="INSERT INTO mesas (IDPUESTO, MESA) VALUES (".$idpuesto.",".$p.")";	
 											$DBGestion->Consulta($sql);
 										}
 										//BUSCO EL ID DE LA MESA DE VOTACION lo vuelvo a buscar ya que lo insert
@@ -274,14 +274,14 @@ $registro_bueno='';
 												where IDPUESTO=".$idpuesto;
 												$DBGestion->ConsultaArray($sql);
 												$idmunicipiopuesto=$DBGestion->datos;												
-												$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",".$idmunicipios.",".$idpuesto.",".$idlider.",'".$ocupacion."',".$idfile.")";										
+												$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",".$idmunicipios.",".$idpuesto.",".$idlider.",'".$ocupacion."',".$idfile.")";										
 												//echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 												$DBGestion->Consulta($sql);									
 												$sql="SELECT @@identity AS id";
 												$DBGestion->ConsultaArray($sql);
 												$rs=$DBGestion->datos;
 												$idmiembro = $rs[0]['id'];								
-												$sql="INSERT INTO MESA_PUESTO_MIEMBRO (IDMESA, MIEMBRO,CANDIDATO) VALUES (".$idmesa.",".$idmiembro.",'".$_SESSION["username"]."')";	
+												$sql="INSERT INTO mesa_puesto_miembro (IDMESA, MIEMBRO,CANDIDATO) VALUES (".$idmesa.",".$idmiembro.",'".$_SESSION["username"]."')";	
 												$DBGestion->Consulta($sql);		
 												if($_SESSION["tipocandidato"]=="ALCALDIA"){
 														if($idmunicipiopuesto[0]['IDMUNICIPIO']!=$_SESSION["idmunicipio"]){
@@ -307,11 +307,11 @@ $registro_bueno='';
 								}else{
 									//echo "<strong><br/>Problemas con el Puesto de Votacion ".$PUESTO_R." - ".$cedula_simpatizante."<br/><br/></strong>";
 									if(count($puestosvotacion)==0){
-										$sql="select NOMBRE_PUESTO from PUESTOS_VOTACION where upper(NOMBRE_PUESTO) like upper('%".trim($PUESTO_R)."%') and idmunicipio='".$dtomunicipios[0]['ID']."' "; //echo $sql;
+										$sql="select NOMBRE_PUESTO from puestos_votacion where upper(NOMBRE_PUESTO) like upper('%".trim($PUESTO_R)."%') and idmunicipio='".$dtomunicipios[0]['ID']."' "; //echo $sql;
 										$DBGestion->Consulta($sql);
 										$puestoexiste=$DBGestion->datos;
 										if(empty($puestoexiste)){
-											$sql="INSERT INTO PUESTOS_VOTACION (NOMBRE_PUESTO, MESAS, IDMUNICIPIO) VALUES ('".strtoupper(trim($PUESTO_R))."','".trim($MESA_R)."','".$dtomunicipios[0]['ID']."')";	
+											$sql="INSERT INTO puestos_votacion (NOMBRE_PUESTO, MESAS, IDMUNICIPIO) VALUES ('".strtoupper(trim($PUESTO_R))."','".trim($MESA_R)."','".$dtomunicipios[0]['ID']."')";	
 											//echo $PUESTO_R.' - '.$MESA_R.' - '.$cedula_simpatizante.' - '.$MUNICIPIO;																	
 											//echo " SE INGRESO PUESTO DE VOTACION";
 											//echo '<br/>';	
@@ -321,7 +321,7 @@ $registro_bueno='';
 												$idpuesto = trim($row[0]);
 											}								
 											for($k=1;$k<=$MESA_R; $k++){
-												$sql="INSERT INTO MESAS (IDPUESTO, MESA) VALUES (".$idpuesto.",".$k.")";	
+												$sql="INSERT INTO mesas (IDPUESTO, MESA) VALUES (".$idpuesto.",".$k.")";	
 												$DBGestion->Consulta($sql);
 												}
 										}
@@ -373,7 +373,7 @@ $registro_bueno='';
 													$DBGestion->ConsultaArray($sql);
 													$idmunicipiopuesto=$DBGestion->datos;
 													
-													$sql="INSERT INTO MIEMBROS (NOMBRES, CEDULA, MUNICIPIO,TELEFONO,EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
+													$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO,TELEFONO,EMAIL, IDPUESTOSVOTACION, IDLIDER, OCUPACION,IDFILE) 
 													VALUES ('".strtoupper(trim($nombre_simpartizante))."',".trim($cedula_simpatizante).",".$idmunicipios.",'".$celular."','".$email."',".$idpuesto.",".$idlider.",'".$ocupacion."',".$idfile.")";										
 													//echo "Registro ".$i."<br/><br/>".$sql."<br/><br/>";
 													$DBGestion->Consulta($sql);									
@@ -381,7 +381,7 @@ $registro_bueno='';
 													if ($row = mysql_fetch_row($rs)) {
 													$idmiembro = trim($row[0]);
 													}									
-													$sql="INSERT INTO MESA_PUESTO_MIEMBRO (IDMESA, MIEMBRO,CANDIDATO) VALUES (".$idmesa.",".$idmiembro.",'".$_SESSION["username"]."')";	
+													$sql="INSERT INTO mesa_puesto_miembro (IDMESA, MIEMBRO,CANDIDATO) VALUES (".$idmesa.",".$idmiembro.",'".$_SESSION["username"]."')";	
 													$DBGestion->Consulta($sql);		
 													if($_SESSION["tipocandidato"]=="ALCALDIA"){
 														if($idmunicipiopuesto[0]['IDMUNICIPIO']!=$_SESSION["idmunicipio"]){
@@ -395,7 +395,7 @@ $registro_bueno='';
 													//echo '<strong><br/>Simpatizante sin Lider: '.$cedula_simpatizante.' - '.$nombre_simpartizante.'<br/></strong>';	
 													$datosinvalidos++;
 													//insertar los simpatizantes con datos incompletos o sin lideres
-													$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
+													$sql="INSERT INTO tmp_miembros (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 													VALUES (".trim($cedula_simpatizante).",'".strtoupper(trim($nombre_simpartizante))."','".$departamento."','".$MUNICIPIO."',".$idlider.",'".$nombre_lider."','".$celular."','".$email."',
 													'Simpatizante con lider',". $_SESSION["idcandidato"].",'".$ocupacion."',".$idfile.")";	
 													$DBGestion->Consulta($sql);	
@@ -405,7 +405,7 @@ $registro_bueno='';
 												//echo '<strong><br/>Imposible crear el registro<br/></strong>';
 												//mandarlo a la tabla de invalidos
 												$datosinvalidos++;		
-												$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
+												$sql="INSERT INTO tmp_miembros (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 												VALUES (".trim($cedula_simpatizante).",'".strtoupper(trim($nombre_simpartizante))."','".$departamento."','".$MUNICIPIO."',".$idlider.",'".$nombre_lider."','".$celular."','".$email."',
 												'Imposible crear el registro',". $_SESSION["idcandidato"].",'".$ocupacion."',".$idfile.")";	
 												$registro_bueno="Imposible crear el registro";
@@ -415,7 +415,7 @@ $registro_bueno='';
 											//echo '<strong><br/>Imposible crear el registro<br/></strong>';
 											//mandarlo a la tabla de invalidos
 											$datosinvalidos++;		
-											$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
+											$sql="INSERT INTO tmp_miembros (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 											VALUES (".trim($cedula_simpatizante).",'".strtoupper(trim($nombre_simpartizante))."','".$departamento."','".$MUNICIPIO."',".$idlider.",'".$nombre_lider."','".$celular."','".$email."',
 											'Imposible crear el registro',". $_SESSION["idcandidato"].",'".$ocupacion."',".$idfile.")";	
 											$registro_bueno="Imposible crear el registro";
@@ -426,7 +426,7 @@ $registro_bueno='';
 							}else{
 								//echo "<strong><br/>Problemas con el municipio del Puesto de Votacion ".$MUNICIPIO_R." - ".$cedula_simpatizante."<br/><br/></strong>";
 								$datosinvalidos++;
-								$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
+								$sql="INSERT INTO tmp_miembros (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 								VALUES (".trim($cedula_simpatizante).",'".strtoupper(trim($nombre_simpartizante))."','".$departamento."','".$MUNICIPIO."',".$idlider.",'".$nombre_lider."','".$celular."','".$email."',
 								'Problemas con el municipio del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion."',".$idfile.")";	
 							//	echo $sql;
@@ -435,7 +435,7 @@ $registro_bueno='';
 						}else{
 							//echo "<strong><br/>Problemas con el departamento del Puesto de Votacion ".$DEPARTAMENTO_R." - ".$cedula_simpatizante."<br/><br/></strong>";
 							$datosinvalidos++;
-							$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
+							$sql="INSERT INTO tmp_miembros (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 							VALUES (".trim($cedula_simpatizante).",'".strtoupper(trim($nombre_simpartizante))."','".$departamento."','".$MUNICIPIO."',".$idlider.",'".$nombre_lider."','".$celular."','".$email."',
 							'Problemas con el departamento del Puesto de Votacion',". $_SESSION["idcandidato"].",'".$ocupacion."',".$idfile.")";	
 							$DBGestion->Consulta($sql);	
@@ -443,7 +443,7 @@ $registro_bueno='';
 			}else{
 				//echo "<strong><br/>Cedula ya existe ".$cedula_simpatizante."<br/><br/></strong>";
 				$datosinvalidos++;
-				$sql="INSERT INTO TMP_MIEMBROS (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
+				$sql="INSERT INTO tmp_miembros (CEDULA,NOMBRE,DEPARTAMENTO, MUNICIPIO,LIDER,NOMBRE_LIDER,CELULAR1,CORREO1,PUESTO,CANDIDATO,OCUPACION,IDFILE) 
 					VALUES (".trim($cedula_simpatizante).",'".strtoupper(trim($nombre_simpartizante))."','".$departamento."','".$MUNICIPIO."',".$idlider.",'".$nombre_lider."','".$celular."','".$email."',
 					'Cedula ya existe',". $_SESSION["idcandidato"].",'".$ocupacion."',".$idfile.")";	
 				//echo $sql;
@@ -452,11 +452,11 @@ $registro_bueno='';
 							
 			}	
 		}
-	$sql="UPDATE UPLOAD_FILE SET DATOSVALIDOOS=(DATOSVALIDOOS+".$datosvalidos.") ,DATOSINVALIDOS=(DATOSINVALIDOS+".$datosinvalidos."), APTOSVOTAR=(APTOSVOTAR+".$aptosvotar."),
+	$sql="UPDATE upload_file SET DATOSVALIDOOS=(DATOSVALIDOOS+".$datosvalidos.") ,DATOSINVALIDOS=(DATOSINVALIDOS+".$datosinvalidos."), APTOSVOTAR=(APTOSVOTAR+".$aptosvotar."),
 		  NOAPTOSVOTAR=(NOAPTOSVOTAR+".$aptosnovotar."),MUERTE=(MUERTE+".$muerte."),DEBEINSCRIBIRSE=(DEBEINSCRIBIRSE+".$debeinscribirse."), PENDIENTE=(PENDIENTE+".$pendiente."),BAJA=(BAJA+".$baja."),
 		  DIFERENTEMUNICIPIO=(DIFERENTEMUNICIPIO+".$diferentemunicipio.")  WHERE ID=".$idfile;	
 	$DBGestion->Consulta($sql);	
-	$sql="UPDATE BOLETINES SET MOVILIZADOS=(MOVILIZADOS+".$datosvalidos.") WHERE CANDIDATO=".$_SESSION["idcandidato"]." AND IDDEPARTAMENTO=1";			
+	$sql="UPDATE boletines SET MOVILIZADOS=(MOVILIZADOS+".$datosvalidos.") WHERE CANDIDATO=".$_SESSION["idcandidato"]." AND IDDEPARTAMENTO=1";			
 	$DBGestion->Consulta($sql);	
 	
 	}catch(Exception $e){

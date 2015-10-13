@@ -209,7 +209,7 @@ $_GET["jtStartIndex"]=0;*/
 		$sql="delete from mesa_puesto_miembro where MIEMBRO=".$_POST['ID'];
 		$DBGestion->Consulta($sql);				
 		$partidos=$DBGestion->datos;
-		$sql="UPDATE UPLOAD_FILE SET APTOSVOTAR=(APTOSVOTAR-1), DATOSVALIDOOS=(DATOSVALIDOOS-1)			
+		$sql="UPDATE upload_file SET APTOSVOTAR=(APTOSVOTAR-1), DATOSVALIDOOS=(DATOSVALIDOOS-1)			
 					WHERE CANDIDATO='".$_SESSION["username"]."' and FILE='Carga_Manual'";
 		$DBGestion->Consulta($sql);
 		//Return result to jTable
