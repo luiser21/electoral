@@ -9,6 +9,7 @@ try
 $_GET["jtPageSize"]=	2;
 $_GET["jtStartIndex"]=0;*/
 	//Getting records (listAction)
+
 	if($_GET["action"] == "list")
 	{
 		//Get record count
@@ -290,7 +291,41 @@ ORDER BY votos desc ";
 		$jTableResult = array();
 		$jTableResult['Result'] = "OK";
 		print json_encode($jTableResult);
-	}
+	}else if($_GET["action"] == "list2"){
+		//Get record count
+		if($_SESSION["username"]!='alcaldia'){	
+					
+			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." ORDER BY MOVILIZADOS DESC " ;
+								
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;	
+
+			$recordCount=count($partidos);
+			
+			//Get records from database
+			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." ORDER BY MOVILIZADOS DESC " ;
+			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
+
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;
+		
+			$row=array();		
+			for($i=0; $i<count($partidos);$i++){
+				$row[$i]['ID']=$partidos[$i]['ID'];
+				$row[$i]['ZONA']=$partidos[$i]['ZONA'];
+				$row[$i]['MOVILIZADOS']=$partidos[$i]['MOVILIZADOS'];	
+				$row[$i]['PARTICIPACION']= number_format(($partidos[$i]['MOVILIZADOS']/$_SESSION['votosprevistos'])*100, 2, ',', ',').'%';					
+			}
+				
+			//Return result to jTable
+			$jTableResult = array();
+			$jTableResult['Result'] = "OK";
+			$jTableResult['TotalRecordCount'] =$recordCount;
+			$jTableResult['Records'] = $row;
+			print json_encode($jTableResult);
+		}
+		//print json_encode($jTableResult);	
+	}	
 
 	//Close database connection
 	//mysql_close($con);

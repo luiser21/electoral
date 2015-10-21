@@ -4,8 +4,11 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 <script src="js/countdown.js"></script>
-<?php if(date('H')<16){ ?>
-<meta http-equiv=refresh content=20;URL=reporte.php>
+<?php
+date_default_timezone_set('America/Bogota');
+
+ if(date('H')<16){ ?>
+<meta http-equiv=refresh content=20;URL=reporte2.php>
 <?php }elseif(date('H')==16){ ?>
 <meta http-equiv=refresh content=20;URL=escrutinio.php>
 <?php } ?>
@@ -185,13 +188,13 @@ button, input[type="button"], input[type="submit"] {
 		<table width="100%" border="0">
   <tr style="font-size:16px">
     <th width="43%" rowspan="3" scope="col"><?php 
-
+//imprimir($_SESSION);
 
 $sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-where boletines.ESTADO=1";
+where boletines.ESTADO=1 and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1";
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 
@@ -202,8 +205,8 @@ CONCAT(boletines.REPORTES,' - ',boletines.HORA) as REPORTES,
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-where boletines.ESTADO in (1,2)
-GROUP BY REPORTES ";
+where boletines.ESTADO in (1,2) and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1
+GROUP BY REPORTES  ";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
@@ -319,28 +322,84 @@ $(function () {
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
     <th width="15%" scope="col">REPORTES</th> 
-	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/><?php echo 
+	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/>
+	   <?php echo number_format((($totales[0]['MOVILIZADOS']/$_SESSION['votosprevistos'])*100), 2, ',', ',').'%'?><br/><br/>
+	   <?php echo 
 	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
 	     <p><img src="images/votos2.png" width="119" height="131"></p>
 	   </div> </th>
 	  
-       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">DEPARTAMENTOS SIN MOVILIZACION <?php echo @$reportes[0]['REPORTES'];?><br/>
-         <br/><blink><strong style="color: #990000"><?php 
-	   $sql="SELECT 
-			departamentos.NOMBRE
-			FROM
-			boletines
-			INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = boletines.IDDEPARTAMENTO
-			where ESTADO=1 AND MOVILIZADOS=0
-			order by NOMBRE";
-	   $DBGestion->ConsultaArray($sql);
-		$departamentos=$DBGestion->datos; 
-		for($k=0;$k<count($departamentos);$k++){
-			echo $departamentos[$k]['NOMBRE'].' - ';
-		}
+       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">MESAS CON MAYOR VOTOS<br/>
+         <strong style="color: #990000">
+		<div class="filtering"><input type="hidden" id="LoadRecordsButton"></input>
+</div>
+		 <div id="PeopleTableContainer" style="width: auto;"></div>
+		 <script type="text/javascript">
 
-	   ?> </blink></strong></th>
+		$(document).ready(function () {
+		
+		    //Prepare jTable
+			$('#PeopleTableContainer').jtable({
+				title: 'Puestos de Votacion',
+				paging: true,
+				pageSize: 12,
+				sorting: true,
+				defaultSorting: 'Name ASC',
+				actions: {
+					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=list2'
+					//createAction: 'PersonActionsPagedSorted.php?action=create',
+					//updateAction: 'PersonActionsPagedSorted.php?action=update',
+					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
+				},
+				fields: {
+					ID: {
+						key: true,
+						create: false,
+						edit: false,
+						list: false
+					},
+					ZONA: {
+						title: 'MESAS',
+						width: '10%',
+						create: false,
+						edit: false
+					},
+					MOVILIZADOS : {
+						title: 'VOTOS',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					PARTICIPACION : {
+						title: '%',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					}
+				}
+			});
+
+			//Load person list from server
+			//$('#PeopleTableContainer').jtable('load');
+			$('#LoadRecordsButton').click(function (e) {
+           		 e.preventDefault();
+				$('#PeopleTableContainer').jtable('load', {
+					
+				});
+			});
+	 
+			//Load all records when page is first shown
+				$('#LoadRecordsButton').click();
+		});
+
+	</script>
+		 <?php 
+	
+	   ?> 
+	  </strong></th>
   </tr>
   <tr>
     <th scope="col"><?php 
@@ -427,7 +486,7 @@ $arrDepartamento4.= "".$suma2."";
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000">98.350</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VOTOS PREVISTOS:  <span style="color:#FF0000">6.100</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 DIA ELECTORAL HA COMENZADO
 </marquee>
 </div>
