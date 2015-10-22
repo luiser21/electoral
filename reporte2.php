@@ -126,7 +126,7 @@ if(date('H')>=09 && date('H')<10){
  if(date('H')<16){ ?>
 <meta http-equiv=refresh content=20;URL=reporte2.php>
 <?php }elseif(date('H')>=16){ ?>
-<meta http-equiv=refresh content=20;URL=escrutinio.php>
+<!--<meta http-equiv=refresh content=20;URL=escrutinio.php>-->
 <?php } ?>
 <script>
 
