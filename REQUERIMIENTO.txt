@@ -28,9 +28,14 @@ y 2 coordinadores  como admin que le salgan las mesas y pueda editar
 -------------------------------
 que se vea historico
 
+que se ponga grafica y en la grafica se pone la imagen del tarjeton
 
 sufragente (reporte de las 9 a las 3:30) y votos previstos
 
 Simpatizantes votos de los boletines que van saliendo por el alcalde
+
+salga en rojo los votos solo del candidato
+
+salga en marquesina el porcentaje de las mesas escrutadas por testigo /42
 
 salga tarjetones de los alcaldes (lo que reportan los testigos)   en puestos de votacion Representativo  colocar los boletines de la mesaboletin registraduria vs %)
