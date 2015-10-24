@@ -98,6 +98,7 @@ $(document).ready(function() {
 			<?php //if($_SESSION['username']=='duvanpineda'){?>-->			
 			<li ><a href="reporte.php">Fase Pre Electoral</a></li>			
 			<li ><a href="reporte2.php">Dia Electoral</a></li>
+			<li ><a href="reporte3.php">Dia Post Electoral</a></li>
 			<li ><a href="consolidado.php">Consolidado Electoral</a></li>			
 			<li ><a href="consolidado3.php">Analisis de Resultados</a></li>
 			<!--<li ><a href="movilizados.php">Movilizados</a></li>
