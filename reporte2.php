@@ -310,7 +310,7 @@ $sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-where boletines.ESTADO=1 and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1";
+where boletines.ESTADO in (1,2)  and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1 and  HORA_REAL=".(date('H'));
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 
@@ -374,7 +374,7 @@ $(function () {
                 type: 'bar'
             },
             title: {
-                text: 'GRAFICA POR REPORTES'
+                text: 'TOTAL PERSONAS QUE HAN EJERCIDO EL DERECHO AL VOTO'
             },
             subtitle: {
                 text: 'VOTOS'
