@@ -19,7 +19,7 @@ if(date('H')>=09 && date('H')<10){
 		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
 	}
 	if($estados==0){
-		$sql="UPDATE boletines_departamentos set META=0
+		$sql="UPDATE boletines_departamentos set META=0,MOVILIZADOS=0
 				    WHERE candidato=".$_SESSION['idcandidato'];	
 		$DBGestion->Consulta($sql);	
 	}	
@@ -37,7 +37,7 @@ if(date('H')>=09 && date('H')<10){
 		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
 	}
 	if($estados==0){
-		$sql="UPDATE boletines_departamentos set META=0
+		$sql="UPDATE boletines_departamentos set META=0,MOVILIZADOS=0
 				    WHERE candidato=".$_SESSION['idcandidato'];	
 		$DBGestion->Consulta($sql);	
 	}	
@@ -55,7 +55,7 @@ if(date('H')>=09 && date('H')<10){
 		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
 	}
 	if($estados==0){
-		$sql="UPDATE boletines_departamentos set META=0
+		$sql="UPDATE boletines_departamentos set META=0,MOVILIZADOS=0
 				    WHERE candidato=".$_SESSION['idcandidato'];	
 		$DBGestion->Consulta($sql);	
 	}	
@@ -73,7 +73,7 @@ if(date('H')>=09 && date('H')<10){
 		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
 	}
 	if($estados==0){
-		$sql="UPDATE boletines_departamentos set META=0
+		$sql="UPDATE boletines_departamentos set META=0,MOVILIZADOS=0
 				    WHERE candidato=".$_SESSION['idcandidato'];	
 		$DBGestion->Consulta($sql);	
 	}	
@@ -91,7 +91,7 @@ if(date('H')>=09 && date('H')<10){
 		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
 	}
 	if($estados==0){
-		$sql="UPDATE boletines_departamentos set META=0
+		$sql="UPDATE boletines_departamentos set META=0,MOVILIZADOS=0
 				    WHERE candidato=".$_SESSION['idcandidato'];	
 		$DBGestion->Consulta($sql);	
 	}	
@@ -110,7 +110,7 @@ if(date('H')>=09 && date('H')<10){
 		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
 	}
 	if($estados==0){
-		$sql="UPDATE boletines_departamentos set META=0
+		$sql="UPDATE boletines_departamentos set META=0,MOVILIZADOS=0
 				    WHERE candidato=".$_SESSION['idcandidato'];	
 		$DBGestion->Consulta($sql);	
 	}	

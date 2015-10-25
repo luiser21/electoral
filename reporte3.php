@@ -3,6 +3,7 @@
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
+	
 <script src="js/countdown.js"></script>
 
 <script src="animateprogress.js"></script>	
@@ -95,8 +96,54 @@ button, input[type="button"], input[type="submit"] {
 <div class="main">	
 <header>
 		<div style=" position:absolute; top:190px; width:auto; clear:both"><br/>
-			
-			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
+		<?php 
+		$i=0;
+		if($i==1){ ?>
+			<marquee behavior="scroll" direction="down" scrollamount="3" style="border: 0px none; height: 701px; left: 284px; margin: 0px; padding: 0px; position: absolute; top: 15px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="3" style="border: 0px none; height: 141px; left: 68px; margin: 0px; padding: 0px; position: absolute; top: 99px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="3" style="border: 0px none; height: 591px; left: 846px; margin: 0px; padding: 0px; position: absolute; top: 62px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="1" style="border: 0px none; height: 421px; left: 873px; margin: 0px; padding: 0px; position: absolute; top: 29px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="5" style="border: 0px none; height: 556px; left: 291px; margin: 0px; padding: 0px; position: absolute; top: 76px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="5" style="border: 0px none; height: 351px; left: 816px; margin: 0px; padding: 0px; position: absolute; top: 6px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="3" style="border: 0px none; height: 398px; left: 604px; margin: 0px; padding: 0px; position: absolute; top: 78px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="2" style="border: 0px none; height: 600px; left: 720px; margin: 0px; padding: 0px; position: absolute; top: 115px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="6" style="border: 0px none; height: 54px; left: 237px; margin: 0px; padding: 0px; position: absolute; top: 45px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="5" style="border: 0px none; height: 651px; left: 242px; margin: 0px; padding: 0px; position: absolute; top: 107px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="4" style="border: 0px none; height: 138px; left: 841px; margin: 0px; padding: 0px; position: absolute; top: 18px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="1" style="border: 0px none; height: 624px; left: 108px; margin: 0px; padding: 0px; position: absolute; top: 10px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="5" style="border: 0px none; height: 784px; left: 638px; margin: 0px; padding: 0px; position: absolute; top: 23px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="2" style="border: 0px none; height: 305px; left: 737px; margin: 0px; padding: 0px; position: absolute; top: 73px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="" style="border: 0px none; height: 250px; left: 288px; margin: 0px; padding: 0px; position: absolute; top: 16px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="3" style="border: 0px none; height: 139px; left: 720px; margin: 0px; padding: 0px; position: absolute; top: 57px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="2" style="border: 0px none; height: 539px; left: 524px; margin: 0px; padding: 0px; position: absolute; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="5" style="border: 0px none; height: 337px; left: 637px; margin: 0px; padding: 0px; position: absolute; top: 65px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="3" style="border: 0px none; height: 281px; left: 757px; margin: 0px; padding: 0px; position: absolute; top: 104px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="2" style="border: 0px none; height: 50px; left: 829px; margin: 0px; padding: 0px; position: absolute; top: 80px; width: auto; z-index: 1;">
+			<img src="http://4.bp.blogspot.com/-yeX6Tq2fdLY/Ur-C8QS_ETI/AAAAAAABlJM/XFbSGft8cXA/s1600/polvora.gif" /></marquee>
+			<marquee behavior="scroll" direction="down" scrollamount="2" style="border: 0px none; height: 136px; left: 878px; margin: 0px; padding: 0px; position: absolute; top: 5px; width: auto; z-index: 1;">
+			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
+			<a href="·" style="-moz-background-clip: border; -moz-background-inline-policy: continuous; -moz-background-origin: padding; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px double rgb(0, 173, 239); color: navy; font-family: tahoma; font-size: 11px; padding: 1px; text-decoration: none;"></a> 
+<?php } ?>		
+´		<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
 				date: "25 october 2015 23:59:59",
