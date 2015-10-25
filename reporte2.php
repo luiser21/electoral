@@ -439,8 +439,11 @@ $(function () {
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
     <th width="15%" scope="col">REPORTES</th> 
-	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/>
-	   <?php echo number_format((($totales[0]['MOVILIZADOS']/$_SESSION['votosprevistos'])*100), 2, ',', ',').'%'?><br/><br/>
+	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink>
+	    <strong style="font-size:20px; color:#FF0000"><?php  echo 'Potencial 14.363<br/>';?></strong>
+	   <strong style="font-size:32px; color:#FF0000"><br/>
+	   <?php   
+	   echo number_format((($totales[0]['MOVILIZADOS']/14363)*100), 2, ',', ',').'%'?><br/><br/>
 	   <?php echo 
 	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
