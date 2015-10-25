@@ -1,0 +1,108 @@
+/*@ Barras de progreso HTML5 animadas con Javascript
+@ author Agustín Baraza (contacto@nosolocss.com)
+@ Copyright 2014 nosolocss.com. All rights reserved
+@ http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+@ link http://www.nosolocss.com 	 */
+
+
+
+body{
+	font-family: "Arial", Helvetica, sans-serif;
+	color:#333;
+}
+
+.center{
+	position:relative;
+	width:700px;
+	height:600px;
+	margin:100px auto;
+	padding-left:20px;
+	padding-right:20px;
+
+
+}
+
+h1{
+	font-size:20px;
+}
+
+h1 p{
+	background:#222;
+	color:#fff;
+}
+
+.clear{clear:both;}
+
+#boton{
+
+	width:120px;
+	height:30px;
+}
+
+progress[value] {
+	/* Elimino la apariencia por defecto */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	
+	/* Quito el borde que aparece en Firefox */
+	border: none;
+
+	/* Añado mis propios estilos */
+	width: 270px;
+	height: 30px;
+	
+	
+/* 	Estos estilos solo se aplicaran al fondo de la barra en mozilla */
+	overflow:hidden;
+	border:1px inset #666;
+	background-color:#D8D8D8;
+	border-radius : 20px ; 
+}
+
+.progress{
+	float:left;
+	margin-right:30px;
+	margin-bottom:20px;
+}
+
+.progress span{
+	
+	font-weight:bold;
+	
+
+}
+
+/* Compatibilidad de color en Firefox, Chrome y Safari */
+progress::-moz-progress-bar{ 
+	background: #FF8000;
+	background: rgba(255,175,75,1);
+	background: -moz-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,175,75,1)), color-stop(100%, rgba(255,146,10,1)));
+	background: -webkit-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: -o-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: -ms-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: linear-gradient(to right, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );	
+	border-radius : 20px ; 
+	} 
+progress::-webkit-progress-value { 
+	background: #FF8000;
+	background: rgba(255,175,75,1);
+	background: -moz-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,175,75,1)), color-stop(100%, rgba(255,146,10,1)));
+	background: -webkit-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: -o-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: -ms-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	background: linear-gradient(to right, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
+	border-radius : 20px ; 	
+
+}
+progress::-webkit-progress-bar { 
+	background-color:#D8D8D8;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+	border-radius : 20px ; 
+		
+	
+}

@@ -4,12 +4,14 @@
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
 <script src="js/countdown.js"></script>
+
+<script src="animateprogress.js"></script>	
 <?php
 date_default_timezone_set('America/Bogota');
 
 
- if(date('H')<16){ ?>
-<!--<meta http-equiv=refresh content=20;URL=reporte2.php>-->
+ if(date('H')>16){ ?>
+<meta http-equiv=refresh content=20;URL=reporte3.php>
 <?php }elseif(date('H')>=16){ ?>
 <!--<meta http-equiv=refresh content=20;URL=escrutinio.php>-->
 <?php } ?>
@@ -29,6 +31,30 @@ ElemsBlink[i].style.visibility = ElemsBlink[i].style.visibility
 
 
 <style>
+.progress span{
+	
+	font-weight:bold;
+	
+
+}
+.progress{
+	float:left;	
+}
+progress[value] {
+
+	
+	
+	/* Añado mis propios estilos */
+	width: 170px;
+	height: 20px;
+	
+	
+/* 	Estos estilos solo se aplicaran al fondo de la barra en mozilla */
+	
+	border:0px inset #666;
+	background-color:#D8D8D8;
+	border-radius : 1px ; 
+}
 
 #crudFormLineal label {
 	width: 350px;
@@ -84,7 +110,7 @@ button, input[type="button"], input[type="submit"] {
 		<p style="margin-left:468px">Cuenta Regresiva para Cierre de Mesas<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown" style="margin-left:58px">
 										<?php if($_SESSION['foto']!=""){?>
-						<img src="<?php echo $_SESSION['foto']?>" width="180" height="177" style="border:3px solid #CCCCCC;">
+						<img src="<?php echo $_SESSION['foto']?>" width="120" height="107" style="border:3px solid #CCCCCC;">
 			<?php }else{ ?>		
 				<img src="fotos/images.jpg" width="180" height="177" style="border:3px solid #CCCCCC;">
 			<?php } ?>	
@@ -186,160 +212,117 @@ button, input[type="button"], input[type="submit"] {
 										
 									</div> </p>	
 		
-		<table width="100%" border="0">
-  <tr style="font-size:16px">
-    <th width="43%" rowspan="3" scope="col"><?php 
-//imprimir($_SESSION);
+		<table width="100%" border="1" cellspacing="1" cellpadding="2">
+   <?php 
+	
+$votos1=0;
+$votos2=0;
+$votos3=0;
+$votos4=0;
+$votos5=0;
+$votos6=0;
 
-$sql="SELECT
-sum(boletines.MOVILIZADOS) AS MOVILIZADOS
-FROM
-boletines
-where boletines.ESTADO=1 and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1";
-$DBGestion->ConsultaArray($sql);				
-$totales=$DBGestion->datos;	
+$candi1=0;
+$candi2=0;
+$candi3=0;
+$candi4=0;
+$candi5=0;
+$candi6=0;
 
-//imprimir($totales[0]['MOVILIZADOS']);
 
+$i=1;
  $sql="SELECT
-nombres,
+	 ID,
+	 MESA,
+CANDIDATOS,
+VOTOS_CANDIDATOS,
+VOTOS_BLANCO,
+VOTOS_NULOS,
+VOTOS_NO_MARCADOS,
+SUFRAGANTES
+FROM
+mesas
+where idpuesto=5206
+order by mesa asc";
+$votosblancos=0;
+$votosnulos=0;
+$votos_no=0;
+$sufragantes=0;
+
+$DBGestion->ConsultaArray($sql);				
+$departamentos2=$DBGestion->datos;
+$array=array();
+	foreach($departamentos2 as $Depto2=>$Val2){
+		$idcandidato=explode(',',$Val2['CANDIDATOS']);
+		$votos=explode(',',$Val2['VOTOS_CANDIDATOS']);
+		$votosblancos=$votosblancos+$Val2['VOTOS_BLANCO'];
+		$votosnulos=$votosnulos+$Val2['VOTOS_NULOS'];
+		$votos_no=$votos_no+$Val2['VOTOS_NO_MARCADOS'];
+		$sufragantes=$sufragantes+$Val2['SUFRAGANTES'];
+		//var_dump($idcandidato);
+		if($idcandidato[0]!=""){
+			//candidato 1;
+			$candi1=$idcandidato[1];
+			$votos1=$votos1+$votos[0];
+			//candidato 2;
+			$candi2=$idcandidato[2];
+			$votos2=$votos2+$votos[1];
+			//candidato 3;
+			$candi3=$idcandidato[3];
+			$votos3=$votos3+$votos[2];
+			//candidato 4;
+			$candi4=$idcandidato[4];
+			$votos4=$votos4+$votos[3];
+			//candidato 5;
+			$candi5=$idcandidato[5];
+			$votos5=$votos5+$votos[4];
+			//candidato 6;
+			$candi6=$idcandidato[6];
+			$votos6=$votos6+$votos[5];
+		}
+	
+	}
+	$sql="delete from tempoarl";
+	$DBGestion->Consulta($sql);	
+	$sql="INSERT INTO tempoarl VALUES (".$candi1.",".$votos1.",'fotos/liberal.png')";
+	$DBGestion->Consulta($sql);	
+			$sql="INSERT INTO tempoarl VALUES (".$candi2.",".$votos2.",'fotos/conservador.png')";
+	$DBGestion->Consulta($sql);	
+			$sql="INSERT INTO tempoarl VALUES (".$candi3.",".$votos3.",'fotos/asi.png')";
+	$DBGestion->Consulta($sql);	
+			$sql="INSERT INTO tempoarl VALUES (".$candi4.",".$votos4.",'fotos/radical.png')";
+	$DBGestion->Consulta($sql);	
+			$sql="INSERT INTO tempoarl VALUES (".$candi5.",".$votos5.",'fotos/mais.png')";
+	$DBGestion->Consulta($sql);	
+			$sql="INSERT INTO tempoarl VALUES (".$candi6.",".$votos6.",'fotos/verde.png')";
+	$DBGestion->Consulta($sql);	
+		
+		
+ $sql="SELECT
+ candidato,
+voto,
 foto
 FROM
-candidato
-where id in (27,
-28,
-29,
-30,
-31,
-32
-)
-order by ntarjeton asc";
-
+tempoarl
+order by voto desc";
 
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
-var_dump($departamentos);exit;
-$arrDepartamento=array();
-$i=0;
-$arrDepartamento="";
-$arrDepartamento2="";
-$arrDepartamento3="";
-$arrDepartamento4="";
-$suma=0;
-$suma1=0;
-$suma2=0;
-$depar="";
-//imprimir($departamentos);
-foreach($departamentos as $Depto=>$Val){
-$i++;
 	
-	if($i<count($departamentos)){
-		$arrDepartamento.= "'".$Val['REPORTES']."',";
-		$arrDepartamento2.= "".$Val['MOVILIZADOS'].",";
-		//$arrDepartamento3.= "".$Val['PREVISTO'].",";
-		//$arrDepartamento4.= "".$Val['REAL'].",";
-	}else{
-		
-		$arrDepartamento.= "'".$Val['REPORTES']."'";
-		$arrDepartamento2.= "".$Val['MOVILIZADOS']."";		
-		//$arrDepartamento3.= "".$Val['PREVISTO']."";
-		//$arrDepartamento4.= "".$Val['REAL']."";
-	}
-}
-$sql="SELECT boletines.REPORTES
-FROM
-boletines
-where boletines.ESTADO=1";
-//echo $sql;
-$DBGestion->ConsultaArray($sql);
-$reportes=$DBGestion->datos;
-//imprimir($depar);
-//$arrDepartamento.= "'OTROS'";
-//$arrDepartamento2.= "".$suma."";
-//$arrDepartamento3.= "".$suma1."";
-//$arrDepartamento4.= "".$suma2."";
-//imprimir($arrDepartamento); ?>
-	<script type="text/javascript">
-$(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'GRAFICA POR REPORTES'
-            },
-            subtitle: {
-                text: 'VOTOS'
-            },
-            xAxis: {
-                categories: [<?php echo $arrDepartamento?>],
-				title: {
-                    text: null
-                }
-            },
-              yAxis: {
-                min: 0,
-                title: {
-                    text: 'VOTOS',
-                    align: 'high'
-                },
-                labels: {
-                    overflow: 'justify'
-                }
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: '#FFFFFF',
-                shadow: true
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'Votos',
-                data: [<?php echo $arrDepartamento2?>]
-    		}
-			/*, {
-                name: 'Compromiso',
-                data: [<?php echo $arrDepartamento3?>]
-            }, {
-                name: 'Registraduria',
-                data: [<?php echo $arrDepartamento4?>]
-            }*/]
-        });
-    });
-    
-		</script>
-			<script src="js/js/highcharts.js"></script>
-<script src="js/js/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
-    <th width="15%" scope="col">REPORTES</th> 
-	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/>
-	   <?php echo number_format((($totales[0]['MOVILIZADOS']/$_SESSION['votosprevistos'])*100), 2, ',', ',').'%'?><br/><br/>
+	?> 
+   <tr style="font-size:16px">
+   
+    <th width="45%" scope="col">REGISTROS RESULTADOS E14</th> 
+	   <th width="20%" rowspan="2" scope="col" style="border:1px solid #CCCCCC;"><div ><blink><strong style="font-size:32px; color:#FF0000"><br/><br/>
+	   <?php echo number_format((($votos2/$sufragantes)*100), 2, ',', ',').'%'?><br/><br/>
 	   <?php echo 
-	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
+	   number_format($votos2, 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
 	     <p><img src="images/votos2.png" width="119" height="131"></p>
 	   </div> </th>
 	  
-       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">MESAS CON MAYOR VOTOS<br/>
+       <th width="67%" rowspan="3" style="border:1px solid #CCCCCC;" scope="col">BOLETINES REGISTRADURIAS<br/>
          <strong style="color: #990000">
 		<div class="filtering"><input type="hidden" id="LoadRecordsButton"></input>
 </div>
@@ -411,8 +394,94 @@ $(function () {
 	  </strong></th>
   </tr>
   <tr>
-    <th scope="col"><?php 
-echo @$reportes[0]['REPORTES'];	?></th>
+    <th scope="col">
+    <table width="auto" border="1">
+  <tbody>
+  <?php
+  echo '<tr>';
+	echo '<td style="border:1px solid #CCCCCC; font-size:15px">SUFRAGANTES<br/></td>';		
+	echo '<td width="10%" style="border:1px solid #CCCCCC; font-size:15px">'.$sufragantes;	        	
+	echo '</td>';	
+	echo '</tr>';
+	 echo '<tr>';
+	echo '<td style="border:1px solid #CCCCCC; font-size:15px">CANIDATOS<br/></td>';		
+	echo '<td width="10%" style="border:1px solid #CCCCCC; font-size:15px">VOTANTES';	        	
+	echo '</td>';	
+	echo '</tr>';
+  foreach($departamentos as $Depto=>$Val){
+	
+	echo '<tr>';
+	echo '<td style="border:1px solid #CCCCCC; font-size:15px"><img src="'.$Val['foto'].'" width="150" height="47" ><br/></td>';		
+	echo '<td width="30%" style="border:1px solid #CCCCCC; font-size:15px">';	?>
+   <div class="progress">	
+<progress id="html<?php echo $Val['candidato']?>" max="100" value="<?php echo (($Val['voto']/$sufragantes)*100) ?>"></progress><span></span>		
+		</div>
+</div>
+        	<?php
+	echo '</td>';	
+	echo '</tr>';
+		
+}	
+ echo '<tr>';
+	echo '<td style="border:1px solid #CCCCCC; font-size:15px" width="50%">VOTOS BLANCOS<br/></td>';		
+	echo '<td width="10%" style="border:1px solid #CCCCCC; font-size:15px">';	
+	?>
+   <div class="progress">	
+<progress id="votosblancos" max="100" value="<?php echo (($votosblancos/$sufragantes)*100) ?>"></progress>
+			<span></span>		
+		</div>
+</div>
+        	<?php        	
+	echo '</td>';	
+	echo '</tr>';
+	echo '<tr>';
+	echo '<td style="border:1px solid #CCCCCC; font-size:15px">VOTOS NULOS<br/></td>';		
+	echo '<td width="10%" style="border:1px solid #CCCCCC; font-size:15px">';
+		?>
+   <div class="progress">	
+<progress id="votosnulos" max="100" value="<?php echo (($votosnulos/$sufragantes)*100) ?>"></progress>
+			<span></span>		
+		</div>
+</div>
+        	<?php       	        	
+	echo '</td>';	
+	echo '</tr>';
+	echo '<tr>';
+	echo '<td style="border:1px solid #CCCCCC; font-size:15px">VOTOS NO MARCADOS<br/></td>';		
+	echo '<td width="10%" style="border:1px solid #CCCCCC; font-size:15px">';	 
+		?>
+   <div class="progress">	
+<progress id="votos_no" max="100" value="<?php echo (($votos_no/$sufragantes)*100) ?>"></progress>
+			<span></span>		
+		</div>
+</div>
+        	<?php          	
+	echo '</td>';	
+	echo '</tr>';
+   ?>
+    
+  </tbody>
+</table>
+
+      <script type="text/javascript"> 
+	window.onload = function() { 
+			animateprogress("#votos_no",<?php echo (($votos_no/$sufragantes)*100); ?>);
+				animateprogress("#votosnulos",<?php echo (($votosnulos/$sufragantes)*100); ?>);
+					animateprogress("#votosblancos",<?php echo (($votosblancos/$sufragantes)*100); ?>);
+	<?php  foreach($departamentos as $Depto=>$Val){ ?>		
+		animateprogress("#html<?php echo $Val['candidato']?>",<?php echo (($Val['voto']/$sufragantes)*100); ?>);	
+		<?php } ?>	
+	} 	
+	document.querySelector ('#boton').addEventListener ('click', function() { 
+		animateprogress("#votos_no",<?php echo (($votos_no/$sufragantes)*100); ?>);
+				animateprogress("#votosnulos",<?php echo (($votosnulos/$sufragantes)*100); ?>);
+					animateprogress("#votosblancos",<?php echo (($votosblancos/$sufragantes)*100); ?>);
+		<?php  foreach($departamentos as $Depto=>$Val){ ?>		
+		animateprogress("#html<?php echo $Val['candidato']?>",<?php echo (($Val['voto']/$sufragantes)*100); ?>);  
+		 <?php } ?>	
+	});
+</script>
+    </th>
 	 </tr>
   <tr>
     <th height="40" scope="col">HORA ACTUAL </th>
