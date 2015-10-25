@@ -295,7 +295,7 @@ ORDER BY votos desc ";
 		//Get record count
 		if($_SESSION["username"]!='alcaldia'){	
 					
-			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." ORDER BY MOVILIZADOS DESC " ;
+			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." GROUP BY MOVILIZADOS ORDER BY MOVILIZADOS DESC " ;
 								
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
@@ -303,7 +303,7 @@ ORDER BY votos desc ";
 			$recordCount=count($partidos);
 			
 			//Get records from database
-			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." ORDER BY MOVILIZADOS DESC " ;
+			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." GROUP BY MOVILIZADOS ORDER BY MOVILIZADOS DESC " ;
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 
 			$DBGestion->ConsultaArray($sql);				
