@@ -7,9 +7,125 @@
 <?php
 date_default_timezone_set('America/Bogota');
 
+if(date('H')>=09 && date('H')<10){ 
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}elseif(date('H')>=10 && date('H')<11){ 
+	$sql="SELECT ESTADO_DEPARTAMENTO FROM boletines WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');
+	$DBGestion->ConsultaArray($sql);				
+	$estado=$DBGestion->datos;		
+	 foreach ($estado as $datos2){
+		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
+	}
+	if($estados==0){
+		$sql="UPDATE boletines_departamentos set META=0
+				    WHERE candidato=".$_SESSION['idcandidato'];	
+		$DBGestion->Consulta($sql);	
+	}	
+	$sql="UPDATE boletines set ESTADO=2,ESTADO_DEPARTAMENTO=2
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".(date('H')-1)."";	
+	$DBGestion->Consulta($sql);	
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}elseif(date('H')>=11 && date('H')<12){ 
+	$sql="SELECT ESTADO_DEPARTAMENTO FROM boletines WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');
+	$DBGestion->ConsultaArray($sql);				
+	$estado=$DBGestion->datos;		
+	 foreach ($estado as $datos2){
+		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
+	}
+	if($estados==0){
+		$sql="UPDATE boletines_departamentos set META=0
+				    WHERE candidato=".$_SESSION['idcandidato'];	
+		$DBGestion->Consulta($sql);	
+	}	
+	$sql="UPDATE boletines set ESTADO=2,ESTADO_DEPARTAMENTO=2
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".(date('H')-1)."";	
+	$DBGestion->Consulta($sql);	
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}elseif(date('H')>=12 && date('H')<13){ 
+	$sql="SELECT ESTADO_DEPARTAMENTO FROM boletines WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');
+	$DBGestion->ConsultaArray($sql);				
+	$estado=$DBGestion->datos;		
+	 foreach ($estado as $datos2){
+		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
+	}
+	if($estados==0){
+		$sql="UPDATE boletines_departamentos set META=0
+				    WHERE candidato=".$_SESSION['idcandidato'];	
+		$DBGestion->Consulta($sql);	
+	}	
+	$sql="UPDATE boletines set ESTADO=2,ESTADO_DEPARTAMENTO=2
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".(date('H')-1)."";	
+	$DBGestion->Consulta($sql);	
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}elseif(date('H')>=13 && date('H:i')<14){ 
+	$sql="SELECT ESTADO_DEPARTAMENTO FROM boletines WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');
+	$DBGestion->ConsultaArray($sql);				
+	$estado=$DBGestion->datos;		
+	 foreach ($estado as $datos2){
+		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
+	}
+	if($estados==0){
+		$sql="UPDATE boletines_departamentos set META=0
+				    WHERE candidato=".$_SESSION['idcandidato'];	
+		$DBGestion->Consulta($sql);	
+	}	
+	$sql="UPDATE boletines set ESTADO=2,ESTADO_DEPARTAMENTO=2
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".(date('H')-1)."";	
+	$DBGestion->Consulta($sql);	
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}elseif(date('H')>=14 && date('H')<15){ 
+	$sql="SELECT ESTADO_DEPARTAMENTO FROM boletines WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');
+	$DBGestion->ConsultaArray($sql);				
+	$estado=$DBGestion->datos;		
+	 foreach ($estado as $datos2){
+		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
+	}
+	if($estados==0){
+		$sql="UPDATE boletines_departamentos set META=0
+				    WHERE candidato=".$_SESSION['idcandidato'];	
+		$DBGestion->Consulta($sql);	
+	}	
+	$sql="UPDATE boletines set ESTADO=2,ESTADO_DEPARTAMENTO=2
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".(date('H')-1)."";	
+	$DBGestion->Consulta($sql);	
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}elseif(date('H')>=15 && date('H')<=16){ 
+	
+	$sql="SELECT ESTADO_DEPARTAMENTO FROM boletines WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');
+	$DBGestion->ConsultaArray($sql);				
+	$estado=$DBGestion->datos;		
+	 foreach ($estado as $datos2){
+		 $estados =$datos2['ESTADO_DEPARTAMENTO'];		 
+	}
+	if($estados==0){
+		$sql="UPDATE boletines_departamentos set META=0
+				    WHERE candidato=".$_SESSION['idcandidato'];	
+		$DBGestion->Consulta($sql);	
+	}	
+
+	$sql="UPDATE boletines set ESTADO=2,ESTADO_DEPARTAMENTO=2
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".(date('H')-1)."";	
+	$DBGestion->Consulta($sql);	
+	$sql="UPDATE boletines set ESTADO=1,ESTADO_DEPARTAMENTO=1
+				    WHERE candidato=".$_SESSION['idcandidato']." and hora_real=".date('H');	
+	$DBGestion->Consulta($sql);	
+}
+
  if(date('H')<16){ ?>
 <meta http-equiv=refresh content=20;URL=reporte2.php>
-<?php }elseif(date('H')==16){ ?>
+<?php }elseif(date('H')>=16){ ?>
 <meta http-equiv=refresh content=20;URL=escrutinio.php>
 <?php } ?>
 <script>
@@ -72,7 +188,7 @@ button, input[type="button"], input[type="submit"] {
 			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "25 october 2015 07:59:59",
+				date: "25 october 2015 15:59:59",
 				format: "on"
 			},
 			function() {
@@ -80,7 +196,7 @@ button, input[type="button"], input[type="submit"] {
 			});
 		});
 	</script>
-		<p style="margin-left:468px">Cuenta Regresiva para Apertura de Mesas<div class="timer-area" style=" margin-right:-100px">	
+		<p style="margin-left:468px">Cuenta Regresiva para Cierre de Mesas<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown" style="margin-left:58px">
 										<?php if($_SESSION['foto']!=""){?>
 						<img src="<?php echo $_SESSION['foto']?>" width="180" height="177" style="border:3px solid #CCCCCC;">
@@ -200,13 +316,14 @@ $totales=$DBGestion->datos;
 
 //imprimir($totales[0]['MOVILIZADOS']);
 
-$sql="SELECT
-CONCAT(boletines.REPORTES,' - ',boletines.HORA) as REPORTES,
+ $sql="SELECT
+HORA_REAL,
+CONCAT(boletines.REPORTES) as REPORTES,
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
 where boletines.ESTADO in (1,2) and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1
-GROUP BY REPORTES  ";
+GROUP BY REPORTES  order by 1 desc";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
 
