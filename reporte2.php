@@ -310,7 +310,7 @@ $sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-where boletines.ESTADO in (1,2)  and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1 and  HORA_REAL=".(date('H'));
+where boletines.ESTADO in (1,2)  and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1 and  HORA_REAL=".(date('H')-1);
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 
@@ -443,7 +443,7 @@ $(function () {
 	    <strong style="font-size:20px; color:#FF0000"><?php  echo 'Potencial 14.363<br/>';?></strong>
 	   <strong style="font-size:32px; color:#FF0000"><br/>
 	   <?php   
-	   echo number_format((($totales[0]['MOVILIZADOS']/14363)*100), 2, ',', ',').'%'?><br/><br/>
+	   echo number_format((($totales[0]['MOVILIZADOS']/14373)*100), 2, ',', ',').'%'?><br/><br/>
 	   <?php echo 
 	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
