@@ -12,9 +12,17 @@ function puesto_votacion($cedula_Excel){
 					  "Cookie: foo=bar\r\n"
 		  )
 		);
+		$arrContextOptions=array(
+		  "ssl"=>array(
+				"verify_peer"=>false,
+				"verify_peer_name"=>false,
+			),
+		); 
 		$contexto = stream_context_create($opciones);
 		try{
-			$contenido = @file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
+			//$contenido = @file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
+			$contenido = @file_get_contents("https://wsp.registraduria.gov.co/censo/_censoResultado.php?nCedula=".$cedula_Excel."&nCedulaH=&x=64&y=13",false, stream_context_create($arrContextOptions));
+		
 		}catch(Exception $e){
 		//$observacion2 = $e->getMessage();
 		throw new Exception('Sin conexion a la registraduria.');		
