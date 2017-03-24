@@ -143,7 +143,7 @@ button, input[type="button"], input[type="submit"] {
 			<img src="http://thump01.pbase.com/o4/48/408148/1/53251088.fireworks.gif" /></marquee>
 			<a href="·" style="-moz-background-clip: border; -moz-background-inline-policy: continuous; -moz-background-origin: padding; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px double rgb(0, 173, 239); color: navy; font-family: tahoma; font-size: 11px; padding: 1px; text-decoration: none;"></a> 
 <?php } ?>		
-´		<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
+		<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
 				date: "25 october 2015 23:59:59",
