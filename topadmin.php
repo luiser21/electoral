@@ -160,7 +160,7 @@ color:#008000;
 		</div> <!-- / top -->		
 	</div> <!--panel -->			
 					<div class="wrapper">
-							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SIGE </a><a href="#" id="logo3"><div id="marquesina2">
+							<h1><a href="#" id="logo2"></a><a href="#" id="logo">SIGE </a><a href="#" id="logo3"><!--<div id="marquesina2">
 <div id="marque2">
 <div class="first">
 <marquee>	<img src="images/logo.png" width="60" height="40">
@@ -170,7 +170,7 @@ Sistema Integrado de Gestion Electoral
 </div>
 </div></a> <a href="#" id="logo6"><div id="marquesina2">
 
-</div></a></h1>
+</div>--></a></h1>
 						
 							<fieldset>
 								<div class="bg">      </div>

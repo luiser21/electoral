@@ -55,7 +55,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "25 october 2015 08:00:00",
+				date: "11 march 2018 08:00:00",
 				format: "on"
 			},
 			function() {
@@ -72,8 +72,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <div id="marque">
 <div class="first">
 <marquee>
-<strong> 25 de Junio de 2015 </strong><span>1.- Inicia el periodo de inscripcion de candidatos. 2.- Suspencion de incorporacion  al censo electoral
- de cedulas por primera vez. </span><span style="color:#FF0000">(4 meses antes de la elecci&oacute;n)</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong> 11 de Marzo de 2017 </strong><span>1.- Inicia la inscripcion de ciudadanos  para votar  por cambio de lugar de domicilios  o residencia. </span><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </marquee>
 </div>
 </div>
@@ -82,8 +81,8 @@ ul.newsticker a:hover {text-decoration: underline;}
 						<li>
 							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Elecciones</span><span class="color1">Regionales</span><span> 2015</span></span>
-								<p>Cuenta Regresiva para el 25 de Octubre de 2015<div class="timer-area" style=" margin-right:-100px">	
+								<span class="title"><span class="color2">Elecciones</span><span class="color1">Congreso</span><span> 2018</span></span>
+								<p>Cuenta Regresiva para el 11 de Marzo de 2018<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown">
 											<li>
 												<span class="days">00</span>
