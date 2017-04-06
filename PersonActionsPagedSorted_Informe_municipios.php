@@ -14,7 +14,8 @@ $_GET["jtStartIndex"]=0;*/
 		//Get record count
 		if($_SESSION["username"]!='alcaldia'){	
 			$sql="";
-			if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='ALCALDIA' || $_SESSION['tipocandidato']=='CONSEJO'){
+			if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='ALCALDIA' 
+			|| $_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='SENADO'){
 				$sql="";
 			
 			$sql="SELECT ID,DEPARTAMENTO,MUNICIPIOS,COUNT(PUESTO) AS PUESTOS ,SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES  FROM (SELECT

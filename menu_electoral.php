@@ -1,7 +1,7 @@
 
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
-	<li><a href="calendario_2015.php"  >Calendario Electoral 2015</a></li> 		
+	<li><a href="calendario.php"  >Calendario Electoral 2018</a></li> 		
 		<ul>			
 			<li ><a href="#" >Proyectos de Ley</a></li>
 		</ul>
