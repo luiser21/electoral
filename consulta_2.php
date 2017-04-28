@@ -1,1 +1,1 @@
- <iframe width='900px' height='600px' src="http://wsr.registraduria.gov.co/servicios/censo.htm?nCedula=&buscar4=Buscar"></iframe> 
+ <iframe width='900px' height='600px' src="https://wsp.registraduria.gov.co/censo/_censoResultado.php?nCedula=1007011751" ></iframe> 

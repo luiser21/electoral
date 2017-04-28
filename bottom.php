@@ -10,7 +10,7 @@
 			  
               <footer><table width="100%" border="0">
   <tr>
-    <th width="14%" scope="row"><div align="center"><a href="http://www.cne.gov.co/CNE/" target="_blank"><img src="images/100px-Consejo_Nacional_Electoral.png" width="60" height="60" /></a></div></th>
+    <th width="14%" scope="row"><div align="center"><a href="http://www.cne.gov.co" target="_blank"><img src="images/100px-Consejo_Nacional_Electoral.png" width="60" height="60" /></a></div></th>
     <td width="12%"><div align="center"><a href="http://www.registraduria.gov.co/" target="_blank"><img src="images/Logo-regis-trasnparente-ver.png" width="90" height="70" /></a></div></td>
     <td width="19%">
 	  <div align="center">
