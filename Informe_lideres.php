@@ -144,6 +144,7 @@ button, input[type="button"], input[type="submit"] {
 				$row[$i]['MIEMBROS']=$totales[$i]['MIEMBROS'];
 			}	
 			$miembros=$row[0]['MIEMBROS'];
+			//imprimir($miembros);
 			// $DBGestion->close();
 	?>
 </div>	<br/>	

@@ -153,7 +153,7 @@ Sistema Integrado de Gestion Electoral
 					<div id="menu">
 						<?php    
 						if($permiso!='1'){
-							include_once "menu_electoral.php"; 
+							include_once "menu.php"; 
 						}else{
 							include_once "menuadmin.php";
 						} ?>					 

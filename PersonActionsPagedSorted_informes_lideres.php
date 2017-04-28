@@ -59,7 +59,7 @@ $_GET["jtStartIndex"]=0;*/
 			}
 			$sql.=" ORDER BY NOMBRE desc ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
-			
+			//echo $sql;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
 		
@@ -78,10 +78,12 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER 
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO 
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO 
-					WHERE usuario.USUARIO='".$_SESSION["username"]."' and municipios.NOMBRE='".$_SESSION["municipio"]."' AND miembros.IDLIDER=".$row[$i]['ID']." GROUP BY p.IDPUESTO) AS TABLA";
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' 
+					##and municipios.NOMBRE='".$_SESSION["municipio"]."' 
+					AND miembros.IDLIDER=".$row[$i]['ID']." GROUP BY p.IDPUESTO) AS TABLA";
 				$DBGestion->ConsultaArray($sql);				
 				$miembros=$DBGestion->datos;	
-				
+				//echo $sql;
 				$row[$i]['MIEMBROS']=$miembros[0]['MIEMBROS'];
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
