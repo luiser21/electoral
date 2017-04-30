@@ -14,7 +14,7 @@ $_GET["jtStartIndex"]=0;*/
 		//Get record count
 		if($_SESSION["username"]!='alcaldia'){	
 			$sql="";
-			if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='ALCALDIA' || $_SESSION['tipocandidato']=='CONSEJO'){
+			if($_SESSION['tipocandidato']=='SENADO' || $_SESSION['tipocandidato']=='ALCALDIA' || $_SESSION['tipocandidato']=='CONSEJO'){
 			
 				$sql="SELECT
 					departamentos.IDDEPARTAMENTO,
