@@ -1,6 +1,6 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-//imprimir(puesto_votacion('2618362'));  /*Cedula de un Condenado*/
+//imprimir(puesto_votacion('97080422125'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
@@ -18,11 +18,17 @@ function puesto_votacion($cedula_Excel){
 				"verify_peer_name"=>false,
 			),
 		); 
-		$contexto = stream_context_create($opciones);
+		//* VERIFICA QUE ESTE INSTALADO LA LIBRERIA OPENSSL PARA URLS HTTPS *////
+		/*$w = stream_get_wrappers();
+		echo 'openssl: ',  extension_loaded  ('openssl') ? 'yes':'no', "\n";
+		echo 'http wrapper: ', in_array('http', $w) ? 'yes':'no', "\n";
+		echo 'https wrapper: ', in_array('https', $w) ? 'yes':'no', "\n";
+		echo 'wrappers: ', var_export($w);*/
+		$contexto = stream_context_create($arrContextOptions);
 		try{
 			//$contenido = @file_get_contents("http://www3.registraduria.gov.co/censo/_censoresultado.php?nCedula=".$cedula_Excel,false, $contexto);
-			$contenido = @file_get_contents("https://wsp.registraduria.gov.co/censo/_censoResultado.php?nCedula=".$cedula_Excel."&nCedulaH=&x=64&y=13",false, stream_context_create($arrContextOptions));
-		
+			$contenido = @file_get_contents("https://wsp.registraduria.gov.co/censo/_censoResultado.php?nCedula=".$cedula_Excel,false,$contexto);
+
 		}catch(Exception $e){
 		//$observacion2 = $e->getMessage();
 		throw new Exception('Sin conexion a la registraduria.');		
@@ -56,20 +62,60 @@ function puesto_votacion($cedula_Excel){
 							if($posicion_coincidencia5 === false) {
 								$posicion_coincidencia6 = strpos($contenido, 'Por favor intente');
 								if($posicion_coincidencia6 === false) {
-									if(!empty($contenido)) {
-										$puesto_votacion=array(
-											'ERROR'=>'INDEFINIDO'			
-										);
+									$posicion_coincidencia7 = strpos($contenido, 'Baja por trashumancia');
+									if($posicion_coincidencia7 === false) {
+										$posicion_coincidencia8 = strpos($contenido, 'Baja por Inhumacion');
+										if($posicion_coincidencia8 === false) {
+											$posicion_coincidencia9 = strpos($contenido, 'Vigente');
+											if($posicion_coincidencia9 === false) {
+												$posicion_coincidencia10 = strpos($contenido, 'Cancelada por Doble Cedulacion');
+												if($posicion_coincidencia10 === false) {
+													$posicion_coincidencia11 = strpos($contenido, 'documento Incorrecto');
+													if($posicion_coincidencia11 === false) {
+														if(!empty($contenido)) {
+															$puesto_votacion=array(
+																'ERROR'=>'INDEFINIDO'			
+															);
+															return $puesto_votacion;
+														}else{
+															$puesto_votacion=array(
+																	'ERROR'=>utf8_decode('Se produjo un error durante el intento de conexion a la Registraduria')
+															);
+															return $puesto_votacion;
+														}
+													}else{
+														$puesto_votacion=array(
+															'ERROR'=>utf8_decode('Numero de documento Incorrecto')			
+														);
+													return $puesto_votacion;
+													}
+												}else{
+													$puesto_votacion=array(
+														'ERROR'=>utf8_decode('Cancelada por Doble Cedulacion')			
+													);
+												return $puesto_votacion;
+												}
+											}else{
+												$puesto_votacion=array(
+													'ERROR'=>utf8_decode('Vigente')			
+												);
+											return $puesto_votacion;
+											}
+										}else{
+											$puesto_votacion=array(
+												'ERROR'=>utf8_decode('Baja por Inhumacion o Necrodactilia Positiva')			
+											);
 										return $puesto_votacion;
+										}
 									}else{
 										$puesto_votacion=array(
-												'ERROR'=>utf8_decode('Se produjo un error durante el intento de conexion a la Registraduria.')
+												'ERROR'=>utf8_decode('Baja por trashumancia')			
 										);
-										return $puesto_votacion;
+									return $puesto_votacion;
 									}
 								}else{
 									$puesto_votacion=array(
-											'ERROR'=>utf8_decode('La información se encuentra en actualización. Por favor intente más tarde.')			
+											'ERROR'=>utf8_decode('La informacion se encuentra en actualizacion')			
 									);
 									return $puesto_votacion;
 								}
@@ -87,7 +133,7 @@ function puesto_votacion($cedula_Excel){
 						}
 					}else{
 						$puesto_votacion=array(
-						'ERROR'=>'Debe inscribirse en los períodos que establezca la Registraduría Nacional del Estado Civil en próximas oportunidades'			
+						'ERROR'=>'Debe inscribirse'			
 						);
 					return $puesto_votacion;
 					}

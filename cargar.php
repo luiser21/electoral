@@ -89,9 +89,10 @@ $_GET["jtStartIndex"]=0;*/
 			$recordCount=count($partidos);
 			
 			//Get records from database
-			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO,DIFERENTEMUNICIPIO,
-BAJA,PENDIENTE,MUERTE,DEBEINSCRIBIRSE,(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO='Cedula ya existe' AND candidato=26) as DUPLICADO,
-(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO<>'Cedula ya existe' AND CANDIDATO=26) AS REPROCESAR from upload_file
+			 $sql="SELECT ID,FILE,TRANSFERIR,INVALIDAR,DATOSVALIDOOS,DATOSINVALIDOS,APTOSVOTAR,NOAPTOSVOTAR,CREADO,DIFERENTEMUNICIPIO,TRASHUMANCIA,
+			 INHUMACION,VIGENTE,DOBLECEDULACION,INDEFINIDO,INCORRECTO,CONEXION,
+BAJA,PENDIENTE,MUERTE,DEBEINSCRIBIRSE,(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO='Cedula ya existe' AND candidato=".$_SESSION["idcandidato"].") as DUPLICADO,
+(SELECT count(CEDULA) from tmp_miembros WHERE PUESTO<>'Cedula ya existe' AND CANDIDATO=".$_SESSION["idcandidato"].") AS REPROCESAR from upload_file
 				WHERE ESTADO='A' AND CANDIDATO='".$_SESSION["username"]."' ";				
 			$sql.=" ORDER BY ID DESC ";
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
@@ -111,7 +112,7 @@ BAJA,PENDIENTE,MUERTE,DEBEINSCRIBIRSE,(SELECT count(CEDULA) from tmp_miembros WH
 				$row[$i]['INVALIDOS']=number_format($partidos[$i]['DATOSINVALIDOS'],0,",",".");				
 				$row[$i]['REGISTROS']=number_format($partidos[$i]['APTOSVOTAR']+$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'],0,",",".");
 				$row[$i]['APTOS']=number_format($partidos[$i]['APTOSVOTAR'],0,",",".");
-				$row[$i]['NOAPTOS']=number_format($partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'],0,",",".");
+				$row[$i]['NOAPTOS']=number_format($partidos[$i]['NOAPTOSVOTAR'],0,",",".");
 				
 				$row2[$i]['ID']=$partidos[$i]['ID'];
 				$row2[$i]['FILES']=utf8_encode($partidos[$i]['FILE']);
@@ -120,12 +121,19 @@ BAJA,PENDIENTE,MUERTE,DEBEINSCRIBIRSE,(SELECT count(CEDULA) from tmp_miembros WH
 				$row2[$i]['VALIDOS']=$partidos[$i]['DATOSVALIDOOS'];
 				$row2[$i]['INVALIDOS']=$partidos[$i]['DATOSINVALIDOS'];	
 				$row2[$i]['BAJA']=$partidos[$i]['BAJA'];
-				$row2[$i]['MUERTE']=$partidos[$i]['MUERTE'];	
+				$row2[$i]['MUERTE']=$partidos[$i]['MUERTE'];
+				$row2[$i]['TRASHUMANCIA']=$partidos[$i]['TRASHUMANCIA'];	
+				$row2[$i]['INHUMACION']=$partidos[$i]['INHUMACION'];	
+				$row2[$i]['VIGENTE']=$partidos[$i]['VIGENTE'];	
+				$row2[$i]['DOBLECEDULACION']=$partidos[$i]['DOBLECEDULACION'];
+				$row2[$i]['CONEXION']=$partidos[$i]['CONEXION'];
+				$row2[$i]['INDEFINIDO']=$partidos[$i]['INDEFINIDO'];
+				$row2[$i]['INCORRECTO']=$partidos[$i]['INCORRECTO'];
 				$row2[$i]['PENDIENTE']=$partidos[$i]['PENDIENTE'];	
 				$row2[$i]['DEBEINSCRIBIRSE']=$partidos[$i]['DEBEINSCRIBIRSE'];					
 				$row2[$i]['REGISTROS']=$partidos[$i]['APTOSVOTAR']+$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'];
 				$row2[$i]['APTOS']=$partidos[$i]['APTOSVOTAR'];
-				$row2[$i]['NOAPTOS']=$partidos[$i]['NOAPTOSVOTAR']+$partidos[$i]['DATOSINVALIDOS'];
+				$row2[$i]['NOAPTOS']=$partidos[$i]['NOAPTOSVOTAR'];
 				$row2[$i]['DUPLICADO']=$partidos[$i]['DUPLICADO'];
 				$row2[$i]['REPROCESAR']=$partidos[$i]['REPROCESAR'];
 			}	

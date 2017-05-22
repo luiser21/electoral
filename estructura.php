@@ -88,6 +88,13 @@ function comprueba_extension(formulario, archivo) {
 	$DEBEINSCRIBIRSE=0;
 	$DUPLICADO=0;
 	$REPROCESAR=0;
+	$TRASHUMANCIA=0;
+	$INCORRECTO=0;
+	$INDEFINIDO=0;
+	$DOBLECEDULACION=0;
+	$VIGENTE=0;
+	$INHUMACION=0;
+	$CONEXION=0;
 	for($i=0; $i<count(@$valores);$i++){
 		$VALIDOS=$VALIDOS+$valores[$i]['VALIDOS'];
 		$DIFERENTE=$DIFERENTE+$valores[$i]['DIFERENTEMUNICIPIO'];
@@ -101,6 +108,13 @@ function comprueba_extension(formulario, archivo) {
 		$PENDIENTE=$PENDIENTE+$valores[$i]['PENDIENTE'];		
 		$REPROCESAR=$REPROCESAR+$valores[$i]['REPROCESAR'];
 		$DUPLICADO=$DUPLICADO+$valores[$i]['DUPLICADO'];
+		$TRASHUMANCIA=$TRASHUMANCIA+$valores[$i]['TRASHUMANCIA'];
+		$INCORRECTO=$INCORRECTO+$valores[$i]['INCORRECTO'];
+		$INDEFINIDO=$INDEFINIDO+$valores[$i]['INDEFINIDO'];
+		$DOBLECEDULACION=$DOBLECEDULACION+$valores[$i]['DOBLECEDULACION'];
+		$VIGENTE=$VIGENTE+$valores[$i]['VIGENTE'];
+		$INHUMACION=$INHUMACION+$valores[$i]['INHUMACION'];
+		$CONEXION=$CONEXION+$valores[$i]['CONEXION'];
 				
 	}
 	?>
@@ -134,6 +148,13 @@ function comprueba_extension(formulario, archivo) {
           ['Cancelada por Muerte', <?php echo round($MUERTE)?>],
           ['No encontrado Censo Electoral', <?php echo round($DEBEINSCRIBIRSE)?>],
           ['Registros Duplicados', <?php echo round($DUPLICADO)?>],
+		  ['Baja por Trashumancia', <?php echo round($TRASHUMANCIA)?>],
+		  ['Numero de documento Incorrecto', <?php echo round($INCORRECTO)?>],
+		  ['Indefinido', <?php echo round($INDEFINIDO)?>],
+		  ['Cancelada por Doble Cedulacion', <?php echo round($DOBLECEDULACION)?>],
+		  ['Vigente', <?php echo round($VIGENTE)?>],
+		  ['Baja por Inhumacion o Necrodactilia Positiva', <?php echo round($INHUMACION)?>],
+		  ['Error de Conexion', <?php echo round($CONEXION)?>],
           ['Reprocesar Registros', <?php echo round($REPROCESAR)?>]
         ]);
 
