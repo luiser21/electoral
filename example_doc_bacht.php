@@ -7,31 +7,44 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='senado_2018.xls';
+$nombre_archivo='Base_Modelo_Senado_2018.xls';
 $_SESSION["username"]='senado';
 $_SESSION["idmunicipio"]=598;
 $_SESSION["municipio"]='TABIO';
 $_SESSION["tipocandidato"]="SENADO";
 $_SESSION["idcandidato"]=22;
-//move_uploaded_file($_FILES["archivoupload"]["tmp_name"], "Excel/cargas/".$_FILES["archivoupload"]["name"]); 
-$data->read('Excel/cargas/senado_2018.xls');
+//$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
-$registros=count($data->sheets[0]['cells']);
-for ($i = 2; $i <= $registros; $i++) {
-	$cedula_simpatizante[$y]=trim($data->sheets[0]['cells'][$i][3]);
-	//echo $cedula_simpatizante[$y].PHP_EOL;
-	$cedula_lider[$y]=trim($data->sheets[0]['cells'][$i][1]);
-	$nombre_lider[$y]=$data->sheets[0]['cells'][$i][2];
-	$nombre_simpartizante[$y]=$data->sheets[0]['cells'][$i][4];
-	$ocupacion[$y]=(!empty($data->sheets[0]['cells'][$i][5]))? $data->sheets[0]['cells'][$i][5]:'VOLUNTARIADO';	
-	$celular[$y]=(!empty($data->sheets[0]['cells'][$i][6]))? $data->sheets[0]['cells'][$i][6] : '';
-	$email [$y]=(!empty($data->sheets[0]['cells'][$i][7]))? $data->sheets[0]['cells'][$i][7] : '';
-	$direccion [$y]=(!empty($data->sheets[0]['cells'][$i][8]))? $data->sheets[0]['cells'][$i][8] : '';
-	$MUNICIPIO [$y]=(!empty($data->sheets[0]['cells'][$i][9]))? $data->sheets[0]['cells'][$i][9] : '';
-	$departamento[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : '';
-	$candidato[$y]=$data->sheets[0]['cells'][$i][11];	
-	$y++;
+$fila = 1;
+if (($gestor = fopen("Excel/cargas/Base _ModeloSenado2018.csv", "r")) !== FALSE) {
+    while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+        $numero = count($datos);       
+        $fila++;
+        for ($c=0; $c < $numero; $c++) {
+			$data->sheets[0]['cells'][]=explode(";",$datos[$c]);
+        }
+    }
+    fclose($gestor);
 }
+$registros=count($data->sheets[0]['cells']);
+for ($i = 1; $i < $registros; $i++) {
+	if(isset($data->sheets[0]['cells'][$i][1]) && isset($data->sheets[0]['cells'][$i][3])){
+	$cedula_simpatizante[$y]=trim($data->sheets[0]['cells'][$i][2]);	
+		$cedula_lider[$y]=trim($data->sheets[0]['cells'][$i][0]);
+		$nombre_lider[$y]=$data->sheets[0]['cells'][$i][1];
+		$nombre_simpartizante[$y]=$data->sheets[0]['cells'][$i][3];	
+		$ocupacion[$y]=(!empty($data->sheets[0]['cells'][$i][4]))? $data->sheets[0]['cells'][$i][4]:'VOLUNTARIADO';	
+		$celular[$y]=(!empty($data->sheets[0]['cells'][$i][5]))? $data->sheets[0]['cells'][$i][5] : '';
+		$email [$y]=(!empty($data->sheets[0]['cells'][$i][6]))? $data->sheets[0]['cells'][$i][6] : '';
+		$direccion [$y]=(!empty($data->sheets[0]['cells'][$i][7]))? $data->sheets[0]['cells'][$i][7] : '';
+		$MUNICIPIO [$y]=(!empty($data->sheets[0]['cells'][$i][8]))? $data->sheets[0]['cells'][$i][8] : '';
+		$departamento[$y]=(!empty($data->sheets[0]['cells'][$i][9]))? $data->sheets[0]['cells'][$i][9] : '';
+		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 22;	
+		echo $nombre_simpartizante[$y].PHP_EOL;
+	}
+		$y++;
+}
+//exit;
 $puestoreg=array();
 $old_error_handler = set_error_handler("myErrorHandler");
 $DBGestion = new GestionBD('AGENDAMIENTO');	
