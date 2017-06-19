@@ -1,10 +1,11 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-//imprimir(puesto_votacion('97080422125'));  /*Cedula de un Condenado*/
+//imprimir(puesto_votacion('1126418237'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
 	try{
+		
 		$opciones = array(
 		  'http'=>array(
 			'method'=>"GET",
@@ -15,7 +16,7 @@ function puesto_votacion($cedula_Excel){
 		$arrContextOptions=array(
 		  "ssl"=>array(
 				"verify_peer"=>false,
-				"verify_peer_name"=>false,
+				"verify_peer_name"=>false				
 			),
 		); 
 		//* VERIFICA QUE ESTE INSTALADO LA LIBRERIA OPENSSL PARA URLS HTTPS *////

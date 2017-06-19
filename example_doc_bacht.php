@@ -16,7 +16,7 @@ $_SESSION["idcandidato"]=22;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/Base _ModeloSenado2018.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/Base_ModeloSenado2018.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -73,12 +73,14 @@ $actualizacion=0;
 $coneccion=0;
 $indefinido=0;
 $incorrecto=0;
-for($i=0; $i<$registros-1; $i++){		
+for($i=0; $i<$registros-1; $i++){	
+	if($cedula_simpatizante[$i]!=''){
 	try{		
 		
 		$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
 		echo  PHP_EOL;
 		echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
+
 		if(!empty($puestoreg['ERROR'])){
 			echo ' - '.$puestoreg['ERROR'].PHP_EOL;
 			
@@ -638,6 +640,7 @@ for($i=0; $i<$registros-1; $i++){
 	}catch(Exception $e){
 		$msg = $ex->getMessage() . $ex->getTraceAsString();
         error_log('ELASTICSEARCH ERROR: ' . $msg);
+	}
 	}
 }
 $sql="SELECT
