@@ -1,5 +1,5 @@
 <?php require_once('topadmin.php');?> 
-  <link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+<link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
@@ -33,6 +33,7 @@ button, input[type="button"], input[type="submit"] {
     margin-right: 2px;
     width: 108px;
 }
+
 </style>
 <div class="main">	
 <header>
@@ -105,31 +106,20 @@ button, input[type="button"], input[type="submit"] {
 						<br/>
 <div class="filtering">
     <form>
-        Municipio: <input type="text" name="name" id="name" />
-       <!-- City:
-        <select id="cityId" name="cityId">
-            <option selected="selected" value="0">All cities</option>
-            <option value="1">Adana</option>
-            <option value="2">Ankara</option>
-            <option value="3">Athens</option>
-            <option value="4">Beijing</option>
-            <option value="5">Berlin</option>
-            <option value="6">Bursa</option>
-            <option value="7">Istanbul</option>
-            <option value="8">London</option>
-            <option value="9">Madrid</option>
-            <option value="10">Mekke</option>
-            <option value="11">New York</option>
-            <option value="12">Paris</option>
-            <option value="13">Samsun</option>
-            <option value="14">Trabzon</option>
-            <option value="15">Volos</option>
-        </select>-->
+        Departamento: <input type="text" name="name" id="name" />
+     
         <button type="submit" id="LoadRecordsButton">Buscar</button>
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php'" value="Exportar" name="cmdexport">
 
     </form>
-</div><p></p>
+</div>
+<style>
+#loadImg{position:absolute;z-index:999;}
+#loadImg div{display:table-cell;width:auto;height:auto;background:#fff;text-align:center;vertical-align:middle;}
+</style>
+<div id="loadImg"><div><img src="images/cargando-es.gif" width="350" height="120" /></div></div>
+<iframe border=0 name=iframe src="mapas2.php" width="850" height="420" scrolling="no" noresize frameborder="0" onload="document.getElementById('loadImg').style.display='none';" align="center"></iframe>
+<p></p>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
@@ -137,9 +127,9 @@ button, input[type="button"], input[type="submit"] {
 
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
-				title: 'Tabla de Municipios - TOTAL VOTOS: <?php echo $totales[0]['TOTAL']?>',
+				title: 'Tabla por Departamentos',
 				paging: true,
-				pageSize: 20,
+				pageSize: 50,
 				sorting: true,
 				defaultSorting: 'Name ASC',
 				actions: {
@@ -300,12 +290,6 @@ button, input[type="button"], input[type="submit"] {
 																				create: false,
 																				edit: false
 																			},
-																			MESAS: {
-																				title: 'MESAS',
-																				width: '7%',
-																				create: false,
-																				edit: false
-																			},
 																			VOTOS: {
 																				title: 'VOTOS',
 																				width: '6%',
@@ -382,35 +366,21 @@ button, input[type="button"], input[type="submit"] {
 							//Return image to show on the person row
 							return $img;
 						}
-					},
+					}, 
 					DEPARTAMENTO: {
 						title: 'DEPARTAMENTO',
 						width: '35%',
 						//type: 'date',
 						create: false,
 						edit: false
-					},
-					MUNICIPIOS: {
-						title: 'MUNICIPIOS',
-						width: '15%',
-						create: false,
-						edit: false
-					},
-					
+					},						
 					PUESTOS: {
 						title: 'PUESTOS',
 						width: '6%',
 						//type: 'date',
 						create: false,
 						edit: false
-					},
-					MESAS: {
-						title: 'MESAS',
-						width: '6%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
+					},					
 					VOTOS: {
 						title: 'VOTOS',
 						width: '6%',

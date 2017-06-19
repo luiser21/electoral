@@ -1,4 +1,67 @@
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<?php
+session_start();
+include_once "includes/GestionBD.new.class.php";
+$DBGestion = new GestionBD('AGENDAMIENTO');
+if($_SESSION['tipocandidato']=='SENADO'){
+				$sql="";
+			
+			$sql="SELECT lower(DEPARTAMENTO) as DEPARTAMENTO,
+					MAPA,
+					SUM(VOTOS) AS VOTOS
+					FROM (SELECT					
+					departamentos.NOMBRE as DEPARTAMENTO,
+					departamentos.MAPA as MAPA,	
+					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' AND departamentos.MAPA IS NOT NULL
+					GROUP BY p.IDPUESTO) DEPARTAMENTOS
+					GROUP BY DEPARTAMENTO
+					ORDER BY DEPARTAMENTO ";
+			$DBGestion->ConsultaArray($sql);				
+			$partidos=$DBGestion->datos;	
+			
+				$sql="SELECT NOMBRE AS DEPARTAMENTO,
+					MAPA,
+					0 AS VOTOS					
+					FROM
+					departamentos 		
+					where MAPA IS NOT NULL
+					ORDER BY DEPARTAMENTO ";
+			$DBGestion->ConsultaArray($sql);				
+			$departamentos=$DBGestion->datos;			
+			$i=count($partidos);
+			$y=1;
+			$valor='';			
+			foreach($departamentos as $dep1){	
+				$bol=false;
+				foreach($partidos as $value){				
+					if($dep1['MAPA']==$value['MAPA']){
+						$bol=true;
+						if($y<$i){
+							$valor=$valor."['".$value['MAPA']."',".$value['VOTOS']."],";				
+						}else{
+							$valor=$valor."['".$value['MAPA']."',".$value['VOTOS']."]";				
+						}
+						$y++;						
+					}					
+				}	
+				if(!$bol){
+					$valor=$valor."['".$dep1['MAPA']."',".$dep1['VOTOS']."],";						
+				}
+			}			
+}
+			
+?>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <script src="js/highmaps.js"></script>
 <script src="js/exporting.js"></script>
 <script src="js/co-all.js"></script>
@@ -9,40 +72,7 @@
 // Data is joined to map using value of 'hc-key' property by default.
 // See API docs for 'joinBy' for more info on linking data and map.
 var data = [
-    ['co-sa', 0],
-    ['co-ca', 1],
-    ['co-na', 2],
-    ['co-ch', 3],
-    ['co-3653', 4],
-    ['co-to', 5],
-    ['co-cq', 6],
-    ['co-hu', 7],
-    ['co-pu', 8],
-    ['co-am', 9],
-    ['co-bl', 10],
-    ['co-vc', 11],
-    ['co-su', 12],
-    ['co-at', 13],
-    ['co-ce', 14],
-    ['co-lg', 15],
-    ['co-ma', 16],
-    ['co-ar', 17],
-    ['co-ns', 18],
-    ['co-cs', 19],
-    ['co-gv', 20],
-    ['co-me', 21],
-    ['co-vp', 22],
-    ['co-vd', 23],
-    ['co-an', 24],
-    ['co-co', 25],
-    ['co-by', 26],
-    ['co-st', 27],
-    ['co-cl', 28],
-    ['co-cu', 29],
-    ['co-1136', 30],
-    ['co-ri', 31],
-    ['co-qd', 32],
-    ['co-gn', 33]
+    <?php echo $valor; ?>
 ];
 
 // Create the chart
@@ -52,11 +82,11 @@ Highcharts.mapChart('container', {
     },
 
     title: {
-        text: 'Highmaps basic demo'
+        text: ''
     },
 
     subtitle: {
-        text: 'Source map: Colombia'
+        text: 'Colombia'
     },
 
     mapNavigation: {
@@ -72,7 +102,7 @@ Highcharts.mapChart('container', {
 
     series: [{
         data: data,
-        name: 'Random data',
+        name: 'Votos Previstos',
         states: {
             hover: {
                 color: '#BADA55'

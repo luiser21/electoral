@@ -17,11 +17,12 @@ $_GET["jtStartIndex"]=0;*/
 			if($_SESSION['tipocandidato']=='SENADO'){
 				$sql="";
 			
-			$sql="SELECT IDDEPARTAMENTO,DEPARTAMENTO,COUNT(MUNICIPIOS) AS MUNICIPIOS, SUM(PUESTO) AS PUESTOS, SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES FROM (
-					SELECT IDDEPARTAMENTO,DEPARTAMENTO,MUNICIPIOS,COUNT(PUESTO) AS PUESTO ,SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES  FROM (SELECT
+			$sql="SELECT IDDEPARTAMENTO,DEPARTAMENTO,
+					COUNT(PUESTO) AS PUESTOS ,
+					SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES  
+					FROM (SELECT
 					departamentos.IDDEPARTAMENTO,
-					departamentos.NOMBRE as DEPARTAMENTO,
-					municipios.NOMBRE as MUNICIPIOS,
+					departamentos.NOMBRE as DEPARTAMENTO,					
 					p.NOMBRE_PUESTO AS PUESTO,
 					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
 					SUM(mesas.VOTOREAL) AS VOTOSREALES
@@ -38,7 +39,7 @@ $_GET["jtStartIndex"]=0;*/
 					WHERE usuario.USUARIO='".$_SESSION["username"]."'
 					GROUP BY p.IDPUESTO
 					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
-					GROUP BY municipios)  CONSULTA
+				
 					 ";
 				
 					
@@ -54,15 +55,15 @@ $_GET["jtStartIndex"]=0;*/
 			
 			//Get records from database
 		
-			$sql="SELECT IDDEPARTAMENTO,DEPARTAMENTO,COUNT(MUNICIPIOS) AS MUNICIPIOS, SUM(PUESTO) AS PUESTOS, SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES,COUNT(MESAS) AS MESAS  FROM (
-					SELECT IDDEPARTAMENTO,DEPARTAMENTO,MUNICIPIOS,COUNT(PUESTO) AS PUESTO ,SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES,COUNT(MESAS) AS MESAS   FROM (SELECT
+			$sql="SELECT IDDEPARTAMENTO,DEPARTAMENTO,
+					COUNT(PUESTO) AS PUESTOS ,
+					SUM(VOTOS) AS VOTOS,SUM(VOTOSREALES) AS VOTOSREALES  
+					FROM (SELECT
 					departamentos.IDDEPARTAMENTO,
-					departamentos.NOMBRE as DEPARTAMENTO,
-					municipios.NOMBRE as MUNICIPIOS,
+					departamentos.NOMBRE as DEPARTAMENTO,					
 					p.NOMBRE_PUESTO AS PUESTO,
 					COUNT(mesa_puesto_miembro.MIEMBRO) AS VOTOS,
-					SUM(mesas.VOTOREAL) AS VOTOSREALES,
-					COUNT(MESAS) AS MESAS 
+					SUM(mesas.VOTOREAL) AS VOTOSREALES
 					FROM
 					puestos_votacion AS p
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
@@ -76,7 +77,7 @@ $_GET["jtStartIndex"]=0;*/
 					WHERE usuario.USUARIO='".$_SESSION["username"]."'
 					GROUP BY p.IDPUESTO
 					ORDER BY p.NOMBRE_PUESTO,departamentos.NOMBRE, municipios.NOMBRE) DEPARTAMENTOS
-					GROUP BY municipios)  CONSULTA ";
+				 ";
 			
 			if(isset($_POST["name"])!=""){
 				$sql.=" where upper(DEPARTAMENTO) like upper('%".$_POST["name"]."%') ";
@@ -92,9 +93,9 @@ $_GET["jtStartIndex"]=0;*/
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['IDDEPARTAMENTO'];
 				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
-				$row[$i]['MUNICIPIOS']=utf8_encode($partidos[$i]['MUNICIPIOS']);
+				//$row[$i]['MUNICIPIOS']=utf8_encode($partidos[$i]['MUNICIPIOS']);
 				$row[$i]['PUESTOS']=utf8_encode($partidos[$i]['PUESTOS']);
-				$row[$i]['MESAS']=utf8_encode($partidos[$i]['MESAS']);
+				//$row[$i]['MESAS']=utf8_encode($partidos[$i]['MESAS']);
 				$row[$i]['VOTOS']=$partidos[$i]['VOTOS'];
 				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
 				$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOS'];
