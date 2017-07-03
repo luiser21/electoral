@@ -201,7 +201,7 @@ function comprueba_extension(formulario, archivo) {
 						sorting: false,
 						edit: false,
 						create: false,
-						display: function (studentData) {
+						display: function (studentData2) {
 							//Create an image that will be used to open child table
 							var $img = $('<img src="images/note.png" title="Ver Registros" />');
 							//Open child table when user clicks the image
@@ -209,11 +209,11 @@ function comprueba_extension(formulario, archivo) {
 								$('#PeopleTableContainer').jtable('openChildTable',
 										$img.closest('tr'),
 										{
-											title: studentData.record.NOMBRE,
+											title: 'Cargas Masivas',
 											actions: {
-												listAction: 'ver_registros_cargados.php?id=' + studentData.record.ID,
+												listAction: 'ver_registros_cargados.php?id=' + studentData2.record.ID,
 												caption:"Export to Excel",
-												createAction: 'ver_registros_cargados.php?id=' + studentData.record.ID
+												createAction: 'ver_registros_cargados.php?id=' + studentData2.record.ID
 											},
 											fields: {
 												ID: {
@@ -236,11 +236,15 @@ function comprueba_extension(formulario, archivo) {
 															$('#PeopleTableContainer').jtable('openChildTable',
 																	$img.closest('tr'),
 																	{
-																		title: studentData.record.NOMBRE,
+																		title: 'Ver Miembros',
+																		paging: true,
+																		pageSize: 10,
+																		sorting: true,
+																		defaultSorting: 'Name ASC',	
 																		actions: {
-																			listAction: 'ver_registros_cargados.php?idtipo=' + studentData.record.ID,
+																			listAction: 'ver_registros_cargados.php?idfile='+studentData2.record.ID+'&miembrosver=1&idtipo=' + studentData.record.ID,
 																			caption:"Export to Excel",
-																			createAction: 'ver_registros_cargados.php?idtipo=' + studentData.record.ID
+																			createAction: 'ver_registros_cargados.php?ver_registros_cargados.php?idfile='+studentData2.record.ID+'&miembrosver=1&idtipo=' + studentData.record.ID
 																		},
 																		fields: {
 																			ID: {
@@ -256,14 +260,8 @@ function comprueba_extension(formulario, archivo) {
 																				edit: false
 																			},
 																			NOMBRES: {
-																				title: 'MIEMBROS',
+																				title: 'NOMBRES',
 																				width: '30%',
-																				create: false,
-																				edit: false
-																			},
-																			TELEFONO: {
-																				title: 'TELEFONO',
-																				width: '10%',
 																				create: false,
 																				edit: false
 																			},

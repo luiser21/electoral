@@ -108,7 +108,7 @@ button, input[type="button"], input[type="submit"] {
     <form>
         Departamento: <input type="text" name="name" id="name" />
      
-        <button type="submit" id="LoadRecordsButton">Buscar</button>
+        <button type="submit" id="LoadRecordsButton" accesskey="1">Buscar</button>
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='miembros_exportar.php'" value="Exportar" name="cmdexport">
 
     </form>

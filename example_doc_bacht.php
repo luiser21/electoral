@@ -634,7 +634,8 @@ for($i=0; $i<$registros-1; $i++){
 			INDEFINIDO=".$indefinido.",
 			INCORRECTO=".$incorrecto.",
 			CONEXION=".$coneccion.",
-		    DIFERENTEMUNICIPIO=".$diferentemunicipio."  
+		    DIFERENTEMUNICIPIO=".$diferentemunicipio.",
+			TRANSFERIR=".$actualizacion."
 		WHERE ID=".$idfile;	
 	$DBGestion->Consulta($sql);	
 	}catch(Exception $e){
