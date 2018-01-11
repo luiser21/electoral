@@ -51,7 +51,8 @@ function puesto_votacion($cedula_Excel){
 				'PUESTO'=>'',
 				'DIRECCION'=>'',
 				'MESA'=>'',
-				'FECHA_INSCRIP'=>''				
+				'FECHA_INSCRIP'=>'',
+				'REPETIR'=>0		
 				);
 				$posicion_coincidencia2 = strpos($contenido, 'Cancelada por Muerte');
 				if ($posicion_coincidencia2 === false) {
@@ -81,6 +82,9 @@ function puesto_votacion($cedula_Excel){
 														}else{
 															$puesto_votacion=array(
 																	'ERROR'=>utf8_decode('Se produjo un error durante el intento de conexion a la Registraduria')
+															);
+															$puesto_votacion=array(
+																	'REPETIR'=>1
 															);
 															return $puesto_votacion;
 														}

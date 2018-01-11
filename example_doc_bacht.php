@@ -7,16 +7,16 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='Base_Modelo_Senado_2018.xls';
-$_SESSION["username"]='senado';
+$nombre_archivo='simulador_2018.csv';
+$_SESSION["username"]='simulador1';
 $_SESSION["idmunicipio"]=598;
 $_SESSION["municipio"]='TABIO';
 $_SESSION["tipocandidato"]="SENADO";
-$_SESSION["idcandidato"]=22;
+$_SESSION["idcandidato"]=33;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/Base_ModeloSenado2018.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/simulador_2018.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -80,7 +80,13 @@ for($i=0; $i<$registros-1; $i++){
 		$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
 		echo  PHP_EOL;
 		echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
-
+		if(!empty($puestoreg['ERROR']) && $puestoreg['REPETIR']==1){
+			sleep(10);
+			$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
+			echo  PHP_EOL;
+			echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
+		}
+		
 		if(!empty($puestoreg['ERROR'])){
 			echo ' - '.$puestoreg['ERROR'].PHP_EOL;
 			

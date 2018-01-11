@@ -1,0 +1,17 @@
+SELECT
+					miembros.CEDULA,
+					miembros.NOMBRES,
+					miembros.APELLIDOS,
+					departamentos.NOMBRE
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					INNER JOIN mesas ON mesas.IDPUESTO = p.IDPUESTO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN miembros ON miembros.ID = mesa_puesto_miembro.MIEMBRO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='senado' and departamentos.IDDEPARTAMENTO in (22,19,16,20,6,21,4,15,10,7,27,32,26,8,24,29) 
+					ORDER BY departamentos.NOMBRE, municipios.NOMBRE
