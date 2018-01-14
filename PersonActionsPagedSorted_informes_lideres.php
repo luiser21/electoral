@@ -74,8 +74,8 @@ $_GET["jtStartIndex"]=0;*/
 					FROM puestos_votacion AS p 
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO 
 					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO 
-					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO 
-					left JOIN lideres ON lideres.ID = miembros.IDLIDER 
+					INNER JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO 
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER 
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO 
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO 
 					WHERE usuario.USUARIO='".$_SESSION["username"]."' 

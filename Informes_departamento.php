@@ -387,7 +387,7 @@ button, input[type="button"], input[type="submit"] {
 						//type: 'date',
 						create: false,
 						edit: false
-					},
+					}/*,
 					VOTOSREALES : {
 						title: 'VOTOSREALES',
 						width: '6%',
@@ -401,7 +401,7 @@ button, input[type="button"], input[type="submit"] {
 						//type: 'date',
 						create: false,
 						edit: false
-					}
+					}*/
 					
 				}
 			});

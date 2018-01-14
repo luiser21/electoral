@@ -206,12 +206,14 @@ $totales_lideres=$DBGestion->datos;
 <p></p>
 					<div id="PeopleTableContainer" style="width: auto;">
 					<?php 
+					
 	$valores=@$_SESSION['graficos_lideres']['Records'];
+	//imprimir($valores);
 	$conta='';
 	for($i=0; $i<count($valores);$i++){
-		if($i<4 && $valores[$i]['MIEMBROS']>=10){
+		if($i<9 && $valores[$i]['MIEMBROS']>=10){
 			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."],";			
-		}if($i==4 && $valores[$i]['MIEMBROS']>=10){
+		}if($i==9 && $valores[$i]['MIEMBROS']>=10){
 			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."]";			
 		}
 	}

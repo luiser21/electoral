@@ -429,13 +429,6 @@ function drawBasic() {
 						create: false,
 						edit: false
 					},
-					MESAS: {
-						title: 'MESAS',
-						width: '5%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
 					VOTOSPREV : {
 						title: 'VOTO_PRE',
 						width: '5%',
@@ -443,6 +436,13 @@ function drawBasic() {
 						create: false,
 						edit: false
 					},
+					MESAS: {
+						title: 'MESAS',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},		
 					VOTOSREALES: {
 						title: 'VOTO_REAL',
 						width: '5%',

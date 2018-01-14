@@ -32,7 +32,7 @@ $_GET["jtStartIndex"]=0;*/
 					left JOIN lideres ON lideres.ID = miembros.IDLIDER
 					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='".$_SESSION["username"]."'" ;
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' " ;
 				if($_SESSION["tipocandidato"]=="ALCALDIA"){
 					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 				}
@@ -45,7 +45,7 @@ $_GET["jtStartIndex"]=0;*/
 	//exit;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
-		//	imprimir($partidos);
+			//imprimir($partidos);
 			$recordCount=count($partidos);
 			
 			//Get records from database
@@ -80,16 +80,21 @@ $_GET["jtStartIndex"]=0;*/
 				}
 		//	echo $sql;
 			if(isset($_POST["name"])!=""){
-				$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
+				//$sql.=" and upper(p.NOMBRE_PUESTO) like upper('%".$_POST["name"]."%') ";
 			}
 			$sql.=" GROUP BY p.IDPUESTO ORDER BY VOTOSPREV desc ";
-			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
-	//		echo $sql;
+			//$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
+			//echo $sql;
 //exit;		
 		$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;
+		//	imprimir($partidos);
+			$row=array();
+			$mesas=0;
+			$votosprev=0;
+			$votosreales=0;
+			$variacion=0;
 			
-			$row=array();		
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
@@ -99,7 +104,21 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
 				$row[$i]['MESAS']=$partidos[$i]['MESAS'];
 				$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOSPREV'];
+				
+				$mesas=$mesas+$partidos[$i]['MESAS'];
+				$votosprev=$votosprev+$partidos[$i]['VOTOSPREV'];
+				$votosreales=$votosreales+$partidos[$i]['VOTOSREALES'];
+				$variacion=$variacion+$row[$i]['VARIACION'];
 			}
+			$i++;
+			$row[$i]['ID']=0;
+			$row[$i]['NOMBRE']='TOTAL PUESTOS: '.$recordCount;
+			$row[$i]['MUNICIPIO']='';
+			$row[$i]['DEPARTAMENTO']='TOTAL';
+			$row[$i]['VOTOSPREV']=$votosprev;
+			$row[$i]['VOTOSREALES']=$votosreales;
+			$row[$i]['MESAS']=$mesas;
+			$row[$i]['VARIACION']=$variacion;
 				
 			//Return result to jTable
 			$jTableResult = array();
@@ -196,6 +215,7 @@ $_GET["jtStartIndex"]=0;*/
 			$jTableResult['Records'] = $row;
 			//print json_encode($jTableResult);
 		}
+		//imprimir($jTableResult);
 		$_SESSION['graficos'] = $jTableResult;
 		print json_encode($jTableResult);		
 	}

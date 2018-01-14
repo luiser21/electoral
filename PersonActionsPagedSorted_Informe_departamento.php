@@ -88,6 +88,10 @@ $_GET["jtStartIndex"]=0;*/
 			//echo $sql;
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;
+			$puestos=0;
+			$votosprev=0;
+			$votosreales=0;
+			$variacion=0;
 			
 			$row=array();		
 			for($i=0; $i<count($partidos);$i++){
@@ -99,8 +103,22 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['VOTOS']=$partidos[$i]['VOTOS'];
 				$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
 				$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOS'];
-			}
 				
+				$puestos=$puestos+$partidos[$i]['PUESTOS'];
+				$votosprev=$votosprev+$partidos[$i]['VOTOS'];
+				$votosreales=$votosreales+$partidos[$i]['VOTOSREALES'];
+				$variacion=$variacion+$row[$i]['VARIACION'];
+			}
+			
+			$row[$i]['ID']=0;
+			$row[$i]['DEPARTAMENTO']='TOTAL';
+			//$row[$i]['MUNICIPIOS']=utf8_encode($partidos[$i]['MUNICIPIOS']);
+			$row[$i]['PUESTOS']=$puestos;
+			//$row[$i]['MESAS']=utf8_encode($partidos[$i]['MESAS']);
+			$row[$i]['VOTOS']=$votosprev;
+			$row[$i]['VOTOSREALES']=$votosreales;
+			$row[$i]['VARIACION']=$variacion;
+			
 			//Return result to jTable
 			$jTableResult = array();
 			$jTableResult['Result'] = "OK";

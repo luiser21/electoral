@@ -55,7 +55,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "11 march 2018 08:00:00",
+				date: "11 march 2018 16:00:00",
 				format: "on"
 			},
 			function() {
@@ -72,7 +72,9 @@ ul.newsticker a:hover {text-decoration: underline;}
 <div id="marque">
 <div class="first">
 <marquee>
-<strong> 11 de Marzo de 2017 </strong><span>1.- Inicia la inscripcion de ciudadanos  para votar  por cambio de lugar de domicilios  o residencia. </span><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong> DESDE EL 11 DE ENERO AL 11 DE FEBRERO DE 2018 </strong><span>Sorteo y publicación de listas de jurados de votación (Durante un mes). </span><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong> 29 DE ENERO DE 2018 </strong><span>Conformación de listas Delegados del Consejo Nacional Electoral (30 días antes de la elección ). </span><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 </marquee>
 </div>
 </div>

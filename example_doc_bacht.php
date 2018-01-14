@@ -7,7 +7,7 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='simulador_2018.csv';
+$nombre_archivo='simulador_20182.csv';
 $_SESSION["username"]='simulador1';
 $_SESSION["idmunicipio"]=598;
 $_SESSION["municipio"]='TABIO';
@@ -16,7 +16,7 @@ $_SESSION["idcandidato"]=33;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/simulador_2018.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/simulador_20182.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -76,7 +76,16 @@ $incorrecto=0;
 for($i=0; $i<$registros-1; $i++){	
 	if($cedula_simpatizante[$i]!=''){
 	try{		
-		
+		//VALIDO LIDER
+		$sql="SELECT
+				lideres.ID
+				FROM
+				lideres
+				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+				WHERE usuario.USUARIO='".$_SESSION["username"]."' AND lideres.CEDULA=".$cedula_lider[$i];			
+		$DBGestion->ConsultaArray($sql);
+		$idlider=$DBGestion->datos;
 		$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
 		echo  PHP_EOL;
 		echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
