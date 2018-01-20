@@ -109,7 +109,13 @@ $_GET["jtStartIndex"]=0;*/
 				$votosreales=$votosreales+$partidos[$i]['VOTOSREALES'];
 				$variacion=$variacion+$row[$i]['VARIACION'];
 			}
+			// Obtener una lista de columnas
+			foreach ($row as $clave => $fila) {
+				$volumen[$clave] = $fila['VOTOS'];
+			}
+			array_multisort($volumen, SORT_DESC, $row);
 			
+			$i++;
 			$row[$i]['ID']=0;
 			$row[$i]['DEPARTAMENTO']='TOTAL';
 			//$row[$i]['MUNICIPIOS']=utf8_encode($partidos[$i]['MUNICIPIOS']);

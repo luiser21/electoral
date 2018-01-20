@@ -31,7 +31,7 @@ button, input[type="button"], input[type="submit"] {
 </style>
 <?php 
 $sql="";
-if($_SESSION["username"]!='celispabon'){
+/*if($_SESSION["username"]!='celispabon'){
 	$sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
@@ -40,15 +40,32 @@ INNER JOIN candidato ON candidato.ID = boletines.CANDIDATO
 INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
 where usuario.USUARIO='".$_SESSION["username"]."'";
 }else{
-$sql="SELECT
+	
+	*/
+	$sql="SELECT SUM(MOVILIZADOS) AS MOVILIZADOS FROM (SELECT
+					count(miembros.ID) as MOVILIZADOS
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}					
+				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
+/*$sql="SELECT
 	count(recoleccion_cedulas.cedulas) as MOVILIZADOS	
 	FROM
 	puestos_votacion
 	INNER JOIN recoleccion_cedulas ON recoleccion_cedulas.IDPUESTO = puestos_votacion.IDPUESTO
 	INNER JOIN candidato ON candidato.ID = recoleccion_cedulas.CANDIDATO
 	INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-	where usuario.USUARIO='".$_SESSION["username"]."'";
-}
+	where usuario.USUARIO='".$_SESSION["username"]."'";*/
+//}
 
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
@@ -60,7 +77,7 @@ $totales=$DBGestion->datos;
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $_SESSION["votosprevistos"].' Sufragantes';?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Sufragantes';?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <span style="color:#00CC33; font-size:18px"><?php echo $_SESSION["eslogan"]?></span> 
 </marquee>
 </div>

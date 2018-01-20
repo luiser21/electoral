@@ -329,6 +329,13 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},
+					VOTOS : {
+						title: 'VOTO_PRE',
+						width: '5%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
 					PUESTOS: {
 						title: 'PUESTOS',
 						width: '5%',
@@ -338,13 +345,6 @@ button, input[type="button"], input[type="submit"] {
 					},
 					MESAS: {
 						title: 'MESAS',
-						width: '5%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
-					VOTOS : {
-						title: 'VOTO_PRE',
 						width: '5%',
 						//type: 'date',
 						create: false,

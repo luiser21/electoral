@@ -93,7 +93,11 @@ $_GET["jtStartIndex"]=0;*/
 						$row[$i]['VOTOSREALES']=$partidos[$i]['VOTOSREALES'];
 						$row[$i]['VARIACION']=$partidos[$i]['VOTOSREALES']-$partidos[$i]['VOTOS'];
 					}
-						
+					// Obtener una lista de columnas
+					foreach ($row as $clave => $fila) {
+						$volumen[$clave] = $fila['VOTOS'];
+					}
+					array_multisort($volumen, SORT_DESC, $row);	
 					//Return result to jTable
 					$jTableResult = array();
 					$jTableResult['Result'] = "OK";
