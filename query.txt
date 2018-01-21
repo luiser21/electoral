@@ -2,7 +2,10 @@ SELECT
 					miembros.CEDULA,
 					miembros.NOMBRES,
 					miembros.APELLIDOS,
-					departamentos.NOMBRE
+					departamentos.NOMBRE,
+					municipios.NOMBRE,
+					p.NOMBRE_PUESTO,
+					MESAS.MESA
 					FROM
 					puestos_votacion AS p
 					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
@@ -13,5 +16,5 @@ SELECT
 					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
 					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
 					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					WHERE usuario.USUARIO='senado' and departamentos.IDDEPARTAMENTO in (22,19,16,20,6,21,4,15,10,7,27,32,26,8,24,29) 
+					WHERE usuario.USUARIO='senado' 
 					ORDER BY departamentos.NOMBRE, municipios.NOMBRE

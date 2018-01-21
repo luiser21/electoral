@@ -67,7 +67,7 @@ button, input[type="button"], input[type="submit"] {
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo 'al '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
+		echo 'al '.$_SESSION['tipocandidato'].' de la Rep&uacute;blica';	
 	}elseif($_SESSION['tipocandidato']=='CAMARA'){
 		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
 	}elseif($_SESSION['tipocandidato']=='JAL'){
@@ -257,6 +257,20 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},
+					PROFESION: {
+						title: 'PROFESION',
+						width: '30%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					MUNICIPIO: {
+						title: 'DOMICILIO',
+						width: '30%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},/*
 					NOMBRE_PUESTO: {
 						title: '# PUESTOS VOTACION',
 						width: '30%',
@@ -270,7 +284,7 @@ button, input[type="button"], input[type="submit"] {
 						//type: 'date',
 						create: false,
 						edit: false
-					},
+					},*/
 					MIEMBROS : {
 						title: 'MIEMBROS',
 						width: '30%',

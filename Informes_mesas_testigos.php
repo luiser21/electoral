@@ -51,7 +51,7 @@ button, input[type="button"], input[type="submit"] {
 			<?php } ?>	</th>
     <td width="575"><h4 align="left">&nbsp;</h4>
       <h4 align="left">&nbsp;</h4>
-      <h4 align="left">Consolidado por Puesto de Votaci&oacute;n</h4></td>
+      <h4 align="left">Mesas de Votaci&oacute;n que Requieren Coordinador</h4></td>
   </tr>
   <tr>
     <td>
@@ -171,7 +171,7 @@ if($_SESSION["username"]!='alcaldia'){
 				if($_SESSION["tipocandidato"]=="ALCALDIA"){
 					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 				}					
-				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
+				$sql.=" GROUP BY p.IDPUESTO HAVING COUNT(miembros.id)>=60) AS TABLA";
 
 }else{
 
@@ -265,7 +265,7 @@ function drawBasic() {
 				sorting: false,
 				
 				actions: {
-					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=list'
+					listAction: 'PersonActionsPagedSorted_Informe_mesas_reqcoordinador.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'

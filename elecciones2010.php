@@ -422,7 +422,7 @@ select {
     <td width="582">
 
 <table width="584"  align="center">
-<caption><h3><span >Resultados del 14 de marzo de 2010<br /></span><span >Senado de la República de Colombia</span></h3>
+<caption><h3><span >Resultados del 14 de marzo de 2010<br /></span><span >Senado de la Rep&uacute;blica de Colombia</span></h3>
 </caption>
 <tr>
 <th width="0">&nbsp;</th>
@@ -511,7 +511,7 @@ select {
 </tr>
 </table>
 
-<h3 align="center"><span>Senadores electos de la República de Colombia (2010 - 2014)</span></h3><br/>
+<h3 align="center"><span>Senadores electos de la Rep&uacute;blica de Colombia (2010 - 2014)</span></h3><br/>
 <table border="1" cellpadding="1" cellspacing="1" align="center">
 <tr >
   <th width="1" >&nbsp;</th>

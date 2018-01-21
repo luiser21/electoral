@@ -37,7 +37,7 @@ header ("Pragma: no-cache");
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>		
 <script src="js/superfish.js"></script>	
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script type="text/javascript" src="js/jsapi.js"></script>
  
 </head>
 <body id="page1">	

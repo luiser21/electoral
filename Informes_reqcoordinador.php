@@ -51,7 +51,7 @@ button, input[type="button"], input[type="submit"] {
 			<?php } ?>	</th>
     <td width="575"><h4 align="left">&nbsp;</h4>
       <h4 align="left">&nbsp;</h4>
-      <h4 align="left">Consolidado por Puesto de Votaci&oacute;n</h4></td>
+      <h4 align="left">Puesto de Votaci&oacute;n que Requieren Coordinador</h4></td>
   </tr>
   <tr>
     <td>
@@ -171,7 +171,7 @@ if($_SESSION["username"]!='alcaldia'){
 				if($_SESSION["tipocandidato"]=="ALCALDIA"){
 					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 				}					
-				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
+				$sql.=" GROUP BY p.IDPUESTO HAVING COUNT(miembros.id)>=60) AS TABLA";
 
 }else{
 
@@ -230,29 +230,7 @@ $datos=$DBGestion->datos;
 	//imprimir($conta);
 	//imprimir($_SESSION['graficos']['Records']);
 	?>
-	<div id="chart_div"></div></div><script>
-google.load('visualization', '1', {packages: ['corechart', 'bar']});
-google.setOnLoadCallback(drawBasic);
-function drawBasic() {
-      var data = google.visualization.arrayToDataTable([
-        ['Puestos de Votacion', 'Simpatizantes',],
-        <?php echo $conta?>
-      ]);
-      var options = {
-        title: 'Puestos de Votacion con mayor # de Simpatizantes',
-        chartArea: {width: '50%'},
-        hAxis: {
-          title: 'Total Simpatizantes',
-          minValue: 0
-        },
-        vAxis: {
-          title: 'Puestos de Votacion'
-        }
-      };
-      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-</script>
+	
 	<script type="text/javascript">
 
 		$(document).ready(function () {
@@ -265,7 +243,7 @@ function drawBasic() {
 				sorting: false,
 				
 				actions: {
-					listAction: 'PersonActionsPagedSorted_Informe_mesas.php?action=list'
+					listAction: 'PersonActionsPagedSorted_Informe_mesas_reqcoordinador.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'

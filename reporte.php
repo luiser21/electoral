@@ -192,7 +192,7 @@ echo $_SESSION["votosprevistos"].' Sufragantes';
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo strtoupper('al '.$_SESSION['tipocandidato'].' de ');	
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo strtoupper('al '.utf8_decode($_SESSION['tipocandidato'].' de la República'));	
+		echo strtoupper('al '.utf8_decode($_SESSION['tipocandidato'].' de la Rep&uacute;blica'));	
 	}elseif($_SESSION['tipocandidato']=='CAMARA'){
 		echo strtoupper('a la '.$_SESSION['tipocandidato'].' de Representantes');	
 	}elseif($_SESSION['tipocandidato']=='JAL'){

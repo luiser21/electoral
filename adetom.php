@@ -93,7 +93,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Sufragan
 								<span class="title"><span class="color2" style="font-size:35px"><?php echo $_SESSION["nombre"]?></span>
 								<span class="color1" style="color: #E60000; font-size:35px">
 								<?php if($_SESSION["tipocandidato"]=='SENADO'){ 
-										echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])). '</span><span style="font-size:35px"> De la Rep&uacute;blica'; 
+										echo 'Senador </span><span style="font-size:35px"> 2018-2022'; 
 									}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ 
 										if($_SESSION["tipocandidato"]=='ALCALDIA'){
 											echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' del </span><span style="font-size:35px">';
@@ -106,7 +106,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Sufragan
 										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span style="font-size:35px">';										
 										echo ucwords(strtolower($_SESSION['departamento'])); 
 									}?></span></span>
-								<h2 style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></h2>
+								<span style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></span>
 								
 							</div>
 						</li>

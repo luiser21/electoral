@@ -1,5 +1,5 @@
 <?php require_once('topadmin.php');?> 
-  <link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+<link href="themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
 	<script src="scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jtable/jquery.jtable.js" type="text/javascript"></script>
@@ -57,17 +57,17 @@ button, input[type="button"], input[type="submit"] {
       <h4 align="left" style="font-size: 14px; color: #999999"><?php echo $_SESSION['nombre']?></h4></td>
   </tr>
 
-     <td><h4 align="left" style="font-size: 14px">Candidato 
+    <td><h4 align="left" style="font-size: 14px">Candidato 
 	<?php if($_SESSION['tipocandidato']=='PRESIDENCIA'){
 		echo 'a la '.$_SESSION['tipocandidato'];
 	}elseif($_SESSION['tipocandidato']=='GOBERNACION'){
 		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='ALCALDIA'){
-		echo 'a la '.$_SESSION['tipocandidato'].' del ';	
+		echo 'a la '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		echo 'al '.$_SESSION['tipocandidato'].' de ';	
 	}elseif($_SESSION['tipocandidato']=='SENADO'){
-		echo 'al '.$_SESSION['tipocandidato'].' de la República';	
+		echo 'al '.$_SESSION['tipocandidato'].' de la Rep&uacute;blica';	
 	}elseif($_SESSION['tipocandidato']=='CAMARA'){
 		echo 'a la '.$_SESSION['tipocandidato'].' de Representantes';	
 	}elseif($_SESSION['tipocandidato']=='JAL'){
@@ -191,70 +191,19 @@ $totales_lideres=$DBGestion->datos;
 <input id="cmdexport" class="cmdexport" type="button" onclick="window.location='informe_puestos_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
 
     </form>
-</div>
-<div style="position:absolute; left: 628px; top: 171px;">
-<table width="257" border="1" align="center">
-  <tr align="center">
-    <th scope="col">LIDERES </th>
-    <th scope="col">SIMPATIZANTES </th>
-  </tr>
-  <tr align="center">
-    <td style="font-size:26px"><img src="images/Ejecutivo.png" width="35" height="35" /><strong><?php echo '    '.@$totales_lideres[0]['TOTAL']?></strong></td>
-    <td style="font-size:26px"><img src="images/partners.png" width="35" height="35" /><strong><?php echo '    '.@$totales[0]['TOTAL']?></strong></td>
-  </tr>
-</table></div>
-<p></p>
-					<div id="PeopleTableContainer" style="width: auto;">
-					<?php 
-					
-	$valores=@$_SESSION['graficos_lideres']['Records'];
-	//imprimir($valores);
-	$conta='';
-	for($i=0; $i<count($valores);$i++){
-		if($i<9 && $valores[$i]['MIEMBROS']>=10){
-			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."],";			
-		}if($i==9 && $valores[$i]['MIEMBROS']>=10){
-			$conta.="['".$valores[$i]['NOMBRE']."', ".$valores[$i]['MIEMBROS']."]";			
-		}
-	}
-	//imprimir($conta);
-	//imprimir($_SESSION['graficos']['Records']);
-	?>
-	<div id="chart_div"></div><script>
-google.load('visualization', '1', {packages: ['corechart', 'bar']});
-google.setOnLoadCallback(drawBasic);
-function drawBasic() {
-      var data = google.visualization.arrayToDataTable([
-        ['Lideres', 'Simpatizantes',],
-        <?php echo $conta?>
-      ]);
-      var options = {
-        title: 'Lideres con mayor # de Simpatizantes',
-        chartArea: {width: '50%'},
-        hAxis: {
-          title: 'Total Simpatizantes',
-          minValue: 0
-        },
-        vAxis: {
-          title: 'Lideres'
-        }
-      };
-      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-</script>
-					</div>
+</div><p></p>
+					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () {
 
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
-				title: 'Tabla de Lideres',
+				title: "Tabla de Lideres - Total Simpatizantes: <?php echo ($totales[0]['TOTAL']>0)?$totales[0]['TOTAL']:'0'?>",
 				paging: true,
 				pageSize: 20,
-				sorting: true,
-				defaultSorting: 'Name ASC',
+				sorting: false,
+				
 				actions: {
 					listAction: 'PersonActionsPagedSorted_informes_lideres.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
@@ -272,7 +221,7 @@ function drawBasic() {
 					Phones: {
 						title: '',
 						width: '5%',
-						sorting: false,
+						sorting: true,
 						edit: false,
 						create: false,
 						display: function (studentData) {
@@ -350,7 +299,7 @@ function drawBasic() {
 					},
 					NOMBRE: {
 						title: 'NOMBRE',
-						width: '40%',
+						width: '30%',
 						create: false,
 						edit: false
 					},
@@ -360,20 +309,34 @@ function drawBasic() {
 						create: false,
 						edit: false
 					},
+					PROFESION: {
+						title: 'PROFESION',
+						width: '30%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					MUNICIPIO: {
+						title: 'DOMICILIO',
+						width: '40%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},/*
 					NOMBRE_PUESTO: {
-						title: 'NOMBRE_PUESTO',
+						title: '# PUESTOS VOTACION',
 						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
 					MESA: {
-						title: 'MESA',
+						title: 'MESAS',
 						width: '30%',
 						//type: 'date',
 						create: false,
 						edit: false
-					},
+					},*/
 					MIEMBROS : {
 						title: 'SIMPATIZANTES',
 						width: '30%',

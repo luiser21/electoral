@@ -72,7 +72,7 @@ color:#008000;
 }
 
 </style>
-<link href="Scripts/jtable/themes/metro/lightgray/jtable.css" rel="stylesheet" type="text/css" />
+<link href="Scripts/jtable/themes/lightcolor/gray/jtable.css" rel="stylesheet" type="text/css" />
 <title>SIGE</title>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="images/favicon(2).ico">
@@ -105,7 +105,7 @@ color:#008000;
 <script type="text/javascript" src="js/tms-0.3.js"></script>
 <script type="text/javascript" src="js/tms_presets.js"></script>-->
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-	 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	 <script type="text/javascript" src="js/jsapi.js"></script>
 	 <script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
 	 <script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>

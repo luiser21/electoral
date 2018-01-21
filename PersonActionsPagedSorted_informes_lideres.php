@@ -43,11 +43,14 @@ $_GET["jtStartIndex"]=0;*/
 				lideres.ID,
 				CONCAT(lideres.NOMBRES,' ',lideres.APELLIDOS) AS NOMBRE,
 				lideres.CEDULA,
+				lideres.PROFESION,
+				M.NOMBRE AS MUNICIPIO,
 				mesas.MESA,
 				puestos_votacion.NOMBRE_PUESTO
 				FROM
 				lideres
 				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				LEFT JOIN MUNICIPIOS M ON M.ID=lideres.MUNICIPIO
 				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
 				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
 				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
@@ -68,7 +71,7 @@ $_GET["jtStartIndex"]=0;*/
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['ID'];
 				$row[$i]['NOMBRE']=utf8_encode($partidos[$i]['NOMBRE']);
-				$row[$i]['CEDULA']=$partidos[$i]['CEDULA'];
+				$row[$i]['CEDULA']= number_format($partidos[$i]['CEDULA'],0,",",".");
 				$sql="SELECT SUM(TOTAL) AS MIEMBROS FROM 
 					(SELECT 
 					COUNT(miembros.id) as TOTAL 
@@ -85,9 +88,11 @@ $_GET["jtStartIndex"]=0;*/
 				$DBGestion->ConsultaArray($sql);				
 				$miembros=$DBGestion->datos;	
 				//echo $sql;
-				$row[$i]['MIEMBROS']=$miembros[0]['MIEMBROS'];
+				$row[$i]['MIEMBROS']=($miembros[0]['MIEMBROS']!='')? number_format($miembros[0]['MIEMBROS'],0,",","."):'0';
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
+				$row[$i]['PROFESION']=$partidos[$i]['PROFESION'];
+				$row[$i]['MUNICIPIO']=$partidos[$i]['MUNICIPIO'];
 				$sql="SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 

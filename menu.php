@@ -115,6 +115,8 @@ $(document).ready(function() {
 					<?php } ?>
 					<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-->
 					<li ><a href="Informes.php">Por Puesto de Votaci&oacute;n</a></li>
+					<li ><a href="Informes_reqcoordinador.php">Por Puesto de Votaci&oacute;n que Requiere Coordinador</a></li>
+					<li ><a href="Informes_mesas_testigos.php">Por Mesas que Requieren Testigos Electoral</a></li>
 					<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>-->
 					<li ><a href="Informes_lideres.php">Por Lideres</a></li>			
 					<?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ ?>
