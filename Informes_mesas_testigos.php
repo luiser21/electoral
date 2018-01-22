@@ -51,7 +51,7 @@ button, input[type="button"], input[type="submit"] {
 			<?php } ?>	</th>
     <td width="575"><h4 align="left">&nbsp;</h4>
       <h4 align="left">&nbsp;</h4>
-      <h4 align="left">Mesas de Votaci&oacute;n que Requieren Coordinador</h4></td>
+      <h4 align="left">Mesas de Votaci&oacute;n que Requieren Testigos</h4></td>
   </tr>
   <tr>
     <td>
@@ -148,6 +148,7 @@ button, input[type="button"], input[type="submit"] {
 if($_SESSION["username"]!='alcaldia'){	
 	$sql="SELECT count(ID) as PUESTOS, SUM(MESAS) AS MESAS, SUM(VOTOSPREV) AS VOTOSPREV, SUM(VOTOSREALES) AS VOTOSREALES FROM (SELECT
 					p.IDPUESTO AS ID,
+					mesas
 					p.MESAS AS MESAS,
 					COUNT(miembros.ID) as VOTOSPREV,
 					(SELECT
@@ -171,7 +172,7 @@ if($_SESSION["username"]!='alcaldia'){
 				if($_SESSION["tipocandidato"]=="ALCALDIA"){
 					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 				}					
-				$sql.=" GROUP BY p.IDPUESTO HAVING COUNT(miembros.id)>=60) AS TABLA";
+				$sql.=" GROUP BY p.IDPUESTO ) AS TABLA";
 
 }else{
 
@@ -217,55 +218,20 @@ $datos=$DBGestion->datos;
  </tr>
 </table></div>
 <p></p>
-<div id="PeopleTableContainer" style="width: auto;"><?php 
-	@$valores=@$_SESSION['graficos']['Records'];
-	$conta='';
-	for($i=0; $i<count(@$valores);$i++){
-		if($i<8 && @$valores[$i]['VOTOSPREV']>=10){
-			$conta.="['".@$valores[$i]['NOMBRE']."', ".@$valores[$i]['VOTOSPREV']."],";			
-		}if($i==8 && @$valores[$i]['VOTOSPREV']>=10){
-			$conta.="['".@$valores[$i]['NOMBRE']."', ".@$valores[$i]['VOTOSPREV']."]";			
-		}
-	}
-	//imprimir($conta);
-	//imprimir($_SESSION['graficos']['Records']);
-	?>
-	<div id="chart_div"></div></div><script>
-google.load('visualization', '1', {packages: ['corechart', 'bar']});
-google.setOnLoadCallback(drawBasic);
-function drawBasic() {
-      var data = google.visualization.arrayToDataTable([
-        ['Puestos de Votacion', 'Simpatizantes',],
-        <?php echo $conta?>
-      ]);
-      var options = {
-        title: 'Puestos de Votacion con mayor # de Simpatizantes',
-        chartArea: {width: '50%'},
-        hAxis: {
-          title: 'Total Simpatizantes',
-          minValue: 0
-        },
-        vAxis: {
-          title: 'Puestos de Votacion'
-        }
-      };
-      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-</script>
+<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
 
 		$(document).ready(function () {
 		
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
-				title: 'Informe por Puestos de Votacion',
+				title: 'Informe por Mesas de Votacion',
 				paging: true,
 				pageSize: 20,
 				sorting: false,
 				
 				actions: {
-					listAction: 'PersonActionsPagedSorted_Informe_mesas_reqcoordinador.php?action=list'
+					listAction: 'PersonActionsPagedSorted_Informe_mesas_reqtestigo.php?action=list'
 					//createAction: 'PersonActionsPagedSorted.php?action=create',
 					//updateAction: 'PersonActionsPagedSorted.php?action=update',
 					//deleteAction: 'PersonActionsPagedSorted.php?action=delete'
@@ -410,49 +376,42 @@ function drawBasic() {
 							return $img;
 						}
 					},
-					NOMBRE: {
-						title: 'PUESTO DE VOTACION',
-						width: '30%',
+					RANGO: {
+						title: 'RANGO',
+						width: '20%',
 						create: false,
 						edit: false
 					},
-					MUNICIPIO: {
-						title: 'MUNICIPIO',
-						width: '25%',
-						create: false,
-						edit: false
-					},
-					DEPARTAMENTO: {
-						title: 'DEPARTAMENTO',
-						width: '25%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
-					VOTOSPREV : {
-						title: 'VOTO_PRE',
-						width: '5%',
-						//type: 'date',
+					VOTOSPREVISTOS: {
+						title: 'VOTOSPREVISTOS',
+						width: '15%',
 						create: false,
 						edit: false
 					},
 					MESAS: {
 						title: 'MESAS',
-						width: '5%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},		
-					VOTOSREALES: {
-						title: 'VOTO_REAL',
-						width: '5%',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false
 					},
-					VARIACION: {
-						title: 'VARIACION',
-						width: '5%',
+					PUESTOS : {
+						title: 'PUESTOS',
+						width: '15%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
+					MUNICIPIOS: {
+						title: 'MUNICIPIOS',
+						width: '15%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},		
+					DEPARTAMENTOS: {
+						title: 'DEPARTAMENTOS',
+						width: '15%',
 						//type: 'date',
 						create: false,
 						edit: false

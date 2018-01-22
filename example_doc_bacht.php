@@ -8,11 +8,11 @@ include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
 $nombre_archivo='simulador_20182.csv';
-$_SESSION["username"]='simulador1';
+$_SESSION["username"]='joseovidio';
 $_SESSION["idmunicipio"]=598;
 $_SESSION["municipio"]='TABIO';
 $_SESSION["tipocandidato"]="SENADO";
-$_SESSION["idcandidato"]=33;
+$_SESSION["idcandidato"]=34;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
@@ -40,7 +40,7 @@ for ($i = 1; $i < $registros; $i++) {
 		$MUNICIPIO [$y]=(!empty($data->sheets[0]['cells'][$i][8]))? $data->sheets[0]['cells'][$i][8] : '';
 		$departamento[$y]=(!empty($data->sheets[0]['cells'][$i][9]))? $data->sheets[0]['cells'][$i][9] : '';
 		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 22;	
-		echo $nombre_simpartizante[$y].PHP_EOL;
+		//echo $nombre_simpartizante[$y].PHP_EOL;
 	}
 		$y++;
 }
@@ -89,8 +89,17 @@ for($i=0; $i<$registros-1; $i++){
 		$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
 		echo  PHP_EOL;
 		echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
+		
+		if(!isset($puestoreg['DEPARTAMENTO']) or !isset($puestoreg['MESA'])){
+			sleep(5);
+			$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
+			echo  PHP_EOL;
+			echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
+		}
+		
+		
 		if(!empty($puestoreg['ERROR']) && $puestoreg['REPETIR']==1){
-			sleep(10);
+			sleep(5);
 			$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
 			echo  PHP_EOL;
 			echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
@@ -223,19 +232,14 @@ for($i=0; $i<$registros-1; $i++){
 				}
 			}
 		}else{
-			//imprimir($puestoreg);
-			echo '<br/>';
-			echo '[DEPARTAMENTO] = '.$DEPARTAMENTO_R=trim($puestoreg['DEPARTAMENTO']).PHP_EOL;
-			echo '<br/>';
-			echo '[MUNICIPIO] = '.$MUNICIPIO_R=trim($puestoreg['MUNICIPIO']).PHP_EOL;
-			echo '<br/>';
-			echo '[PUESTO] = '.$PUESTO_R=trim($puestoreg['PUESTO']).PHP_EOL;
-			echo '<br/>';
-			echo '[DIRECCION] = '.$DIRECCION_R=trim($puestoreg['DIRECCION']).PHP_EOL;
-			echo '<br/>';
-			echo '[MESA] = '.$MESA_R=trim($puestoreg['MESA']);
-			echo '<br/>';
-			echo '[FECHA_INSCRIPCION] = '.$FECHA_INSCRIP=trim($puestoreg['FECHA_INSCRIP']).PHP_EOL;
+			//imprimir($puestoreg);			
+			echo '[DEPARTAMENTO] = '.$DEPARTAMENTO_R=trim($puestoreg['DEPARTAMENTO']).PHP_EOL;			
+			echo '[MUNICIPIO] = '.$MUNICIPIO_R=trim($puestoreg['MUNICIPIO']).PHP_EOL;		
+			echo '[PUESTO] = '.$PUESTO_R=trim($puestoreg['PUESTO']).PHP_EOL;		
+			//echo '[DIRECCION] = '.$DIRECCION_R=trim($puestoreg['DIRECCION']).PHP_EOL;
+			echo '[MESA] = '.$MESA_R=trim($puestoreg['MESA']).PHP_EOL;
+			echo ' '.PHP_EOL;
+			//echo '[FECHA_INSCRIPCION] = '.$FECHA_INSCRIP=trim($puestoreg['FECHA_INSCRIP']).PHP_EOL;
 		
 			//BUSO SI YA EXISTE EL MIEMBRO
 			$sql="SELECT

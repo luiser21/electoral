@@ -217,19 +217,7 @@ $datos=$DBGestion->datos;
  </tr>
 </table></div>
 <p></p>
-<div id="PeopleTableContainer" style="width: auto;"><?php 
-	@$valores=@$_SESSION['graficos']['Records'];
-	$conta='';
-	for($i=0; $i<count(@$valores);$i++){
-		if($i<8 && @$valores[$i]['VOTOSPREV']>=10){
-			$conta.="['".@$valores[$i]['NOMBRE']."', ".@$valores[$i]['VOTOSPREV']."],";			
-		}if($i==8 && @$valores[$i]['VOTOSPREV']>=10){
-			$conta.="['".@$valores[$i]['NOMBRE']."', ".@$valores[$i]['VOTOSPREV']."]";			
-		}
-	}
-	//imprimir($conta);
-	//imprimir($_SESSION['graficos']['Records']);
-	?>
+<div id="PeopleTableContainer" style="width: auto;"></div>
 	
 	<script type="text/javascript">
 

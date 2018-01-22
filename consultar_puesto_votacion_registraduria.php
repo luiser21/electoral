@@ -49,9 +49,9 @@ function puesto_votacion($cedula_Excel){
 				'DEPARTAMENTO'=>'',
 				'MUNICIPIO'=>'',
 				'PUESTO'=>'',
-				'DIRECCION'=>'',
+				//'DIRECCION'=>'',
 				'MESA'=>'',
-				'FECHA_INSCRIP'=>'',
+				//'FECHA_INSCRIP'=>'',
 				'REPETIR'=>0		
 				);
 				$posicion_coincidencia2 = strpos($contenido, 'Cancelada por Muerte');
@@ -154,7 +154,7 @@ function puesto_votacion($cedula_Excel){
 			$resultado = substr($contenido, 1159,1702);
 
 			$puesto=explode( ':', $resultado );
-
+			//imprimir($puesto);
 			//Departamento
 			$puesto2=limpiar_metas($puesto[1],null);
 			$puesto2=explode( 'Municipio', $puesto2 );
@@ -168,8 +168,8 @@ function puesto_votacion($cedula_Excel){
 			$puesto4=explode('Direcci', $puesto4 );
 
 			//Direccion del Puesto
-			$puesto5=limpiar_metas($puesto[4],null);
-			$puesto5=explode('Fecha', $puesto5 );
+			//$puesto5=limpiar_metas($puesto[4],null);
+			//$puesto5=explode('Fecha', $puesto5 );
 
 			//Mesa de Votacion
 			$puesto6=limpiar_metas($puesto[6],null);
@@ -178,16 +178,17 @@ function puesto_votacion($cedula_Excel){
 			$puesto6=explode('Mesa', $puesto6 );
 
 			//Fecha de inscripcion 
-			$puesto7=limpiar_metas($puesto[5],null);
+			//$puesto7=limpiar_metas($puesto[5],null);
 
 			$puesto_votacion=array(
 						'DEPARTAMENTO'=>trim($puesto2[0]),
 						'MUNICIPIO'=>trim($puesto3[0]),
 						'PUESTO'=>trim($puesto4[0]),
-						'DIRECCION'=>trim($puesto5[0]),
-						'MESA'=>trim($puesto6[1]),
-						'FECHA_INSCRIP'=>trim($puesto7)
+						//'DIRECCION'=>trim($puesto5[0]),
+						'MESA'=>trim($puesto6[1])
+						//'FECHA_INSCRIP'=>trim($puesto7)
 						);
+			//imprimir($puesto_votacion);//exit;
 			 return $puesto_votacion;
 		}
 	}catch(Exception $e){
