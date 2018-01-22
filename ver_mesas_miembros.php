@@ -11,17 +11,44 @@ try
 		
 			$sql="SELECT
 				m.ID as CODIGO,
-				m.MESA as MESAS				
+				m.MESA as MESAS,
+				(SELECT
+					count(*) as VOTOS
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID=m.ID) as VOTOSPREVISTOS,
+				m.votoreal as VOTOREAL,
+				m.votoreal - (SELECT
+				 count(*) as miembros 
+				FROM
+				miembros
+				INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+					where usuario.USUARIO='".$_SESSION["username"]."' AND puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' and mesas.ID=m.ID) as VARIACION
 				FROM
 				mesas m
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
 				where 
-				puestos_votacion.IDMUNICIPIO=".$_SESSION["idmunicipio"]."	
-				and 
-				puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' ";	
+				##puestos_votacion.IDMUNICIPIO=(SELECT candidato.municipio FROM candidato INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO where usuario.usuario='".$_SESSION["username"]."')
+	##and 
+	puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' HAVING VOTOSPREVISTOS>0";	
+			
 			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
-			}			
+				$sql.="  upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
+			}	
+				
+				$sql.=" order by m.mesa ";		
+//echo $sql;			
 			//Add all records to an array
 			
 			$DBGestion->ConsultaArray($sql);				
@@ -64,7 +91,7 @@ try
 	puestos_votacion.IDPUESTO='".$_GET["idpuesto"]."' HAVING VOTOSPREVISTOS>0";	
 			
 			if(isset($_POST["name"])!=""){
-				$sql.=" where upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
+				$sql.="  upper(lideres.NOMBRES) like upper('%".$_POST["name"]."%') ";
 			}	
 				
 				$sql.=" order by m.mesa ";
