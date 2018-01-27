@@ -148,7 +148,6 @@ button, input[type="button"], input[type="submit"] {
 if($_SESSION["username"]!='alcaldia'){	
 	$sql="SELECT count(ID) as PUESTOS, SUM(MESAS) AS MESAS, SUM(VOTOSPREV) AS VOTOSPREV, SUM(VOTOSREALES) AS VOTOSREALES FROM (SELECT
 					p.IDPUESTO AS ID,
-					mesas
 					p.MESAS AS MESAS,
 					COUNT(miembros.ID) as VOTOSPREV,
 					(SELECT
