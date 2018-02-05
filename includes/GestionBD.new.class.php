@@ -26,7 +26,7 @@ class GestionBD{
 
 	public function GestionBD($TipoDB, $database = ""){
 		//$this->servidor = "107.180.21.237";
-		$this->servidor = "localhost";
+		$this->servidor = "127.0.0.1";
 		//$this->usuario = "user-sige";
 		$this->usuario = "root";
 		$this->basedatos = "";
@@ -60,7 +60,7 @@ class GestionBD{
 				/*$this->servidor = '107.180.21.237';
 				$this->usuario = 'user-sige';
 				$this->pass = 'Consuelo81';	*/	
-				$this->servidor = 'localhost';
+				$this->servidor = '127.0.0.1';
 				$this->usuario = 'root';
 				$this->pass = '';	
 			
@@ -70,6 +70,7 @@ class GestionBD{
 		if(!@$Permisos){
 			$Permisos["IDUSUARIO"] = 'NOCOOKIE';
 		}
+		$err ='';
 		//imprimir($this);
 		set_time_limit(0);
 		//$this->db = 'w3w4e4';
@@ -77,13 +78,13 @@ class GestionBD{
 			switch ($this->basedatos)
 			{
 				case "MYSQL":
-					if(!$this->IdConexion = @mysql_connect($this->servidor,$this->usuario,$this->pass)){
-						//$err = OCIError();
+					if(!$this->IdConexion = mysql_connect($this->servidor,$this->usuario,$this->pass)){
+						//$err =''//= OCIError();
 						throw new Exception('CONEXION MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.$err['message']. ' | Inicializando | '. $this->Ultima_Consulta );
 						echo $this->Ultima_Consulta;
 					}
 
-					if(!@mysql_select_db($this->db,$this->IdConexion)){
+					if(!mysql_select_db($this->db,$this->IdConexion)){
 						//$err = OCIError();
 						throw new Exception('CONEXION A LA BASE '.$this->db.' EN MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.$err['message']. ' | Inicializando | '. $this->Ultima_Consulta );
 						echo $this->Ultima_Consulta;

@@ -101,7 +101,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 				}		
 			}else{					
 					// Registra sesion activa no autenticada y recarga "administrador.php" con las credenciales
-					session_register("id");
+				//	session_register("id");
 					@$_SESSION["active"] = 1;
 				}			
 	}		
