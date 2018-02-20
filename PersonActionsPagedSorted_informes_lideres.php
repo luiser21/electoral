@@ -88,7 +88,8 @@ $_GET["jtStartIndex"]=0;*/
 				$DBGestion->ConsultaArray($sql);				
 				$miembros=$DBGestion->datos;	
 				//echo $sql;
-				$row[$i]['MIEMBROS']=($miembros[0]['MIEMBROS']!='')? number_format($miembros[0]['MIEMBROS'],0,",","."):'0';
+				$row[$i]['MIEMBROS']=($miembros[0]['MIEMBROS']!='')? $miembros[0]['MIEMBROS']:0;
+				//$row[$i]['MIEMBROS']=$miembros[0]['MIEMBROS'];
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
 				$row[$i]['PROFESION']=$partidos[$i]['PROFESION'];
@@ -107,18 +108,10 @@ $_GET["jtStartIndex"]=0;*/
 			
 			// Obtener una lista de columnas
 			foreach ($row as $clave => $fila) {
-				$volumen[$clave] = $fila['MIEMBROS'];
+				$volumen[$clave] = ($fila['MIEMBROS']=='')?0:$fila['MIEMBROS'];
 			}
 			array_multisort($volumen, SORT_DESC, $row);
-			$i++;
-			$row[$i]['ID']=0;
-			$row[$i]['NOMBRE']='TOTAL LIDERES ';
-			$row[$i]['CEDULA']='';
-			$row[$i]['MIEMBROS']=$miembros_total;
-			$row[$i]['NOMBRE_PUESTO']='';
-			$row[$i]['MESA']=0;
-			$row[$i]['VOTOSREALES']=0;
-			$row[$i]['VARIACION']=0;
+			
 			//Return result to jTable
 			$jTableResult = array();
 			$jTableResult['Result'] = "OK";

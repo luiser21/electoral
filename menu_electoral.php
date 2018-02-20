@@ -84,9 +84,9 @@
 			<li ><a href="Informes_miembros_duplicados.php">Por Simpatizantes Duplicados por Lider</a></li>
 			<li ><a href="Informes_miembros_datos.php">Por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>
-			
+			<!--
 			<li ><a href="#">Consolidado Lideres - Simpatizantes</a></li>
-			<!--<li ><a href="compromisos.php">Compromisos</a></li>
+			<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>
 			<li ><a href="informe_movilizados.php">Informe Comparativo Compromisos - Movilizados - Votos Reales</a></li>-->
 			<?php //} ?>

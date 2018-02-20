@@ -167,13 +167,6 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},
-					MUNICIPIO: {
-						title: 'MUNICIPIO',
-						width: '15%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
 					NOMBRE_PUESTO: {
 						title: 'PUESTO VOTACION',
 						width: '25%',

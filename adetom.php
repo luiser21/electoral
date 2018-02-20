@@ -90,6 +90,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Sufragan
 						<li>
 							<img src="images/<?php echo $_SESSION["username"]?>.png" alt="">
 							<div class="banner">
+							<? if($_SESSION["username"]!=52890539){?>
 								<span class="title"><span class="color2" style="font-size:35px"><?php echo $_SESSION["nombre"]?></span>
 								<span class="color1" style="color: #E60000; font-size:35px">
 								<?php if($_SESSION["tipocandidato"]=='SENADO'){ 
@@ -107,6 +108,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Sufragan
 										echo ucwords(strtolower($_SESSION['departamento'])); 
 									}?></span></span>
 								<span style="font-size:30px" class="color1"><?php echo $_SESSION["partido"]?></span>
+								<? } ?>
 								
 							</div>
 						</li>

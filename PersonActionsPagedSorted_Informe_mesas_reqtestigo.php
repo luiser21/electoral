@@ -90,9 +90,34 @@ SELECT
         INNER JOIN departamentos dep on dep.IDDEPARTAMENTO=mun.IDDEPARTAMENTO
         HAVING VOTOSPREVISTOS BETWEEN  31 AND 50 )  TABLA 
 UNION
-SELECT ' >= 51' AS RANGO, SUM(VOTOSPREVISTOS) AS VOTOSPREVISTOS,  COUNT(CODIGO) AS MESAS,  COUNT(DISTINCT IDPUESTO) AS PUESTOS,
-COUNT(DISTINCT MUNICIPIO) AS MUNICIPIOS,COUNT(DISTINCT DEPARTAMENTO) AS DEPARTAMENTOS FROM (
-SELECT
+	SELECT ' >= 51' AS RANGO, SUM(VOTOSPREVISTOS) AS VOTOSPREVISTOS,  COUNT(CODIGO) AS MESAS,  COUNT(DISTINCT IDPUESTO) AS PUESTOS,
+	COUNT(DISTINCT MUNICIPIO) AS MUNICIPIOS,COUNT(DISTINCT DEPARTAMENTO) AS DEPARTAMENTOS FROM (
+	SELECT
+					m.ID as CODIGO,
+					(SELECT
+						count(1) as VOTOS
+						FROM
+						miembros
+						INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
+						INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+						INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+						INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
+						INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+						INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
+						where usuario.USUARIO= '".$_SESSION["username"]."'   and mesas.ID=m.ID) as VOTOSPREVISTOS,
+			  puestos_votacion.IDPUESTO,
+			  mun.ID AS MUNICIPIO,
+			  dep.IDDEPARTAMENTO AS DEPARTAMENTO
+					FROM
+					mesas m
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
+			INNER JOIN municipios mun ON mun.ID=puestos_votacion.IDMUNICIPIO
+			INNER JOIN departamentos dep on dep.IDDEPARTAMENTO=mun.IDDEPARTAMENTO
+			HAVING VOTOSPREVISTOS >=51 )  TABLA 
+UNION
+	SELECT 'TOTAL' AS RANGO, SUM(VOTOSPREVISTOS) AS VOTOSPREVISTOS,  COUNT(CODIGO) AS MESAS,  COUNT(DISTINCT IDPUESTO) AS PUESTOS,
+	COUNT(DISTINCT MUNICIPIO) AS MUNICIPIOS,COUNT(DISTINCT DEPARTAMENTO) AS DEPARTAMENTOS FROM (
+		SELECT
 				m.ID as CODIGO,
 				(SELECT
 					count(1) as VOTOS
@@ -104,7 +129,7 @@ SELECT
 					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID
 					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-					where usuario.USUARIO= '".$_SESSION["username"]."'   and mesas.ID=m.ID) as VOTOSPREVISTOS,
+					where usuario.USUARIO= '".$_SESSION["username"]."'    and mesas.ID=m.ID) as VOTOSPREVISTOS,
           puestos_votacion.IDPUESTO,
           mun.ID AS MUNICIPIO,
           dep.IDDEPARTAMENTO AS DEPARTAMENTO
@@ -113,7 +138,7 @@ SELECT
 				INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = m.IDPUESTO
         INNER JOIN municipios mun ON mun.ID=puestos_votacion.IDMUNICIPIO
         INNER JOIN departamentos dep on dep.IDDEPARTAMENTO=mun.IDDEPARTAMENTO
-        HAVING VOTOSPREVISTOS >=51 )  TABLA 
+        HAVING VOTOSPREVISTOS >=1 )  TABLA 
        " ;
 				
 			$DBGestion->ConsultaArray($sql);				
@@ -137,21 +162,8 @@ SELECT
 				$row[$i]['MUNICIPIOS']=$partidos[$i]['MUNICIPIOS'];
 				$row[$i]['DEPARTAMENTOS']=$partidos[$i]['DEPARTAMENTOS'];
 				
-				$puestos=$puestos+$partidos[$i]['PUESTOS'];
-				$mesas=$mesas+$partidos[$i]['MESAS'];
-				$votosprev=$votosprev+$partidos[$i]['VOTOSPREVISTOS'];
-				$votosreales=$votosreales+$partidos[$i]['MUNICIPIOS'];
-				$variacion=$variacion+$row[$i]['DEPARTAMENTOS'];
 			}
-			$i++;
-			$row[$i]['ID']=$i;
-			$row[$i]['RANGO']='TOTALES: ';
-			$row[$i]['VOTOSPREVISTOS']=$votosprev;
-			$row[$i]['MESAS']=$mesas;
-			$row[$i]['PUESTOS']=$puestos;
-			$row[$i]['MUNICIPIOS']=$votosreales;
-			$row[$i]['DEPARTAMENTOS']=$variacion;
-				
+		
 			//Return result to jTable
 			$jTableResult = array();
 			$jTableResult['Result'] = "OK";

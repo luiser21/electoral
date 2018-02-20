@@ -7,16 +7,16 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='simulador_20182.csv';
+$nombre_archivo='simulador_20183.csv';
 $_SESSION["username"]='joseovidio';
-$_SESSION["idmunicipio"]=598;
-$_SESSION["municipio"]='TABIO';
+$_SESSION["idmunicipio"]=843;
+$_SESSION["municipio"]='CUCUTA';
 $_SESSION["tipocandidato"]="SENADO";
-$_SESSION["idcandidato"]=34;
+$_SESSION["idcandidato"]=35;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/simulador_20182.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/simulador_20183.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -39,7 +39,7 @@ for ($i = 1; $i < $registros; $i++) {
 		$direccion [$y]=(!empty($data->sheets[0]['cells'][$i][7]))? $data->sheets[0]['cells'][$i][7] : '';
 		$MUNICIPIO [$y]=(!empty($data->sheets[0]['cells'][$i][8]))? $data->sheets[0]['cells'][$i][8] : '';
 		$departamento[$y]=(!empty($data->sheets[0]['cells'][$i][9]))? $data->sheets[0]['cells'][$i][9] : '';
-		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 22;	
+		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 35;	
 		//echo $nombre_simpartizante[$y].PHP_EOL;
 	}
 		$y++;
