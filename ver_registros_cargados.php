@@ -164,7 +164,7 @@ $_GET["jtStartIndex"]=0;
 				where usuario.usuario='".$_SESSION["username"]."' and miembros.ERROR=".$_GET["idtipo"]." and miembros.IDFILE=".$_GET["idfile"];
 		$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 			
-		echo $sql;
+		//echo $sql;
 			$DBGestion->ConsultaArray($sql);				
 			$miembros=$DBGestion->datos;	
 		

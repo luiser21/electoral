@@ -8,7 +8,7 @@ include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
 $nombre_archivo='simulador_20183.csv';
-$_SESSION["username"]='joseovidio';
+$_SESSION["username"]='52890539';
 $_SESSION["idmunicipio"]=843;
 $_SESSION["municipio"]='CUCUTA';
 $_SESSION["tipocandidato"]="SENADO";
@@ -86,13 +86,13 @@ for($i=0; $i<$registros-1; $i++){
 				WHERE usuario.USUARIO='".$_SESSION["username"]."' AND lideres.CEDULA=".$cedula_lider[$i];			
 		$DBGestion->ConsultaArray($sql);
 		$idlider=$DBGestion->datos;
-		$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
+		$puestoreg=puesto_votacion_v2($cedula_simpatizante[$i]);	
 		echo  PHP_EOL;
 		echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
 		
 		if(!isset($puestoreg['DEPARTAMENTO']) or !isset($puestoreg['MESA'])){
 			sleep(5);
-			$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
+			$puestoreg=puesto_votacion_v2($cedula_simpatizante[$i]);	
 			echo  PHP_EOL;
 			echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
 		}
@@ -100,7 +100,7 @@ for($i=0; $i<$registros-1; $i++){
 		
 		if(!empty($puestoreg['ERROR']) && $puestoreg['REPETIR']==1){
 			sleep(5);
-			$puestoreg=puesto_votacion($cedula_simpatizante[$i]);	
+			$puestoreg=puesto_votacion_v2($cedula_simpatizante[$i]);	
 			echo  PHP_EOL;
 			echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
 		}
@@ -394,10 +394,10 @@ for($i=0; $i<$registros-1; $i++){
 										$cantidadmesas=$DBGestion->datos;	
 										$max=$cantidadmesas[0]['MESA']+1;
 										$mesaexcel=trim($MESA_R);
-										for($p=$max;$p<=$mesaexcel;$p++){
-											$sql="INSERT INTO mesas (IDPUESTO, MESA) VALUES (".$idpuesto.",".$p.")";	
+										
+											$sql="INSERT INTO mesas (IDPUESTO, MESA) VALUES (".$idpuesto.",".$mesaexcel.")";	
 											$DBGestion->Consulta($sql);
-										}
+										
 										//BUSCO EL ID DE LA MESA DE VOTACION lo vuelvo a buscar ya que lo insert
 										$sql="SELECT
 												mesas.ID,

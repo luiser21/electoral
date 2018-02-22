@@ -1,6 +1,6 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-//imprimir(puesto_votacion('1126418237'));  /*Cedula de un Condenado*/
+//imprimir(puesto_votacion_v2('1128432190'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
@@ -186,6 +186,189 @@ function puesto_votacion($cedula_Excel){
 						'PUESTO'=>trim($puesto4[0]),
 						//'DIRECCION'=>trim($puesto5[0]),
 						'MESA'=>trim($puesto6[1])
+						//'FECHA_INSCRIP'=>trim($puesto7)
+						);
+			//imprimir($puesto_votacion);//exit;
+			 return $puesto_votacion;
+		}
+	}catch(Exception $e){
+		//$observacion2 = $e->getMessage();
+		throw new Exception('Sin conexion a la registraduria.');		
+	}
+}
+function puesto_votacion_v2($cedula_Excel){
+	try{
+		
+		
+		try{
+			$data = array(
+					'cedula' => $cedula_Excel,
+					'medioconsulta' => 'Web',
+					'recaptcha' => '03ANcjosrM5ngDnFcoWohaJcRGlH9lEE4XzegA5Xw3NV-NLebT8KcOF-gVeB6unJlLZnbbLOdxBSox8THvnAbHufR6fKKGPZXEos0EtmYZp9V1JvH6IqkF6tesmX-b3SMvsGNIonygCNQF5RLNWOGGus8n_EmRNOM9v_tRUI5VcuX2eD-06T6yxIfJo2m5TZbXDMfVblZMXVySYW47LTCRkHc8Twp6e6agIZHEfZRyKjvI8SzzB3fMr9sc89ukzDkViWDg0-uYWNnJ1QbqMaMYhf6x4Dy3lxV5jXYqk9-aWDXR1XPwZtDbI1_JYmdB59GMSsaPpBPqINm0cPKTP2E06ZheEnaursiLGhFok6TNkmUl-OpZPfd88_1yrLwfXC6Ah8EhM_xDtdlp-FzJieSzg4TRd0Yh36Vml9QU5e2B-rOLV55YPpqbR1KFnve0TSHI76UTdHedpZvJ1yACdUXpL5QxqGTLmDOnH73YFK8C9CpWegPj5rAhcCx-uNEehmlPGeeLlzXkYYxjvFWC55N0yfKHVsi6It_XLw',
+					'versionnavegador' => '58.0',
+					'versionso' => 'windows-7',
+					'dispositivo' => 'unknown',
+					'navegador' => 'firefox',
+					'sistemaoperativo' => 'windows',
+					'agente' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+					
+				);                                                                    
+			$data_string = json_encode($data);                                                                                   
+			   //var_dump($data_string);                                                                                                               
+			$ch = curl_init('https://app.infovotantes.co/InfoVotantesWS/InfoServices/Servicios/consultarLugar');                                                                      
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);    
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);                                                                  
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array( 
+				'Host:app.infovotantes.co',
+				'User-Agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
+				'Accept:application/json, text/plain, */*',
+				'Accept-Language:es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3',
+				'Accept-Encoding:gzip, deflate, br',
+				'Referer:https://consulta.infovotantes.co/',
+				'Content-Type:application/json',
+				'Content-Length:'. strlen($data_string),
+				'Origin:https://consulta.infovotantes.co',
+				'Connection:keep-alive')                                                                       
+			);                                                                                                                   
+																																 
+			$result = curl_exec($ch);
+
+		}catch(Exception $e){
+		//$observacion2 = $e->getMessage();
+		throw new Exception('Sin conexion a la registraduria.');		
+		}
+		$puesto=json_decode($result, true);
+
+		
+		if($puesto['exito']==false){
+			//var_dump($puesto['mensaje']);
+			$contenido = trim(strip_tags($puesto['mensaje']));
+			$buscar=array(chr(13).chr(10), "\r\n", "\n", "\r",); 
+			$reemplazar=array("", "", "", ""); 
+			$contenido=str_ireplace($buscar,$reemplazar,$contenido);
+			$contenido=str_replace("\r",". ",$contenido);
+			$contenido=str_replace("\n"," ",$contenido);	
+			$posicion_coincidencia = strpos($contenido, 'Departamento');
+			//var_dump($contenido);
+		
+		//se puede hacer la comparacion con 'false' o 'true' y los comparadores '===' o '!=='
+			if ($posicion_coincidencia === false) {
+					//echo "NO se ha encontrado la palabra deseada!!!!";
+					$puesto_votacion=array(
+					'DEPARTAMENTO'=>'',
+					'MUNICIPIO'=>'',
+					'PUESTO'=>'',
+					//'DIRECCION'=>'',
+					'MESA'=>'',
+					//'FECHA_INSCRIP'=>'',
+					'REPETIR'=>0		
+					);
+					$posicion_coincidencia2 = strpos($contenido, 'Cancelada por Muerte');
+					if ($posicion_coincidencia2 === false) {
+						$posicion_coincidencia3 = strpos($contenido, 'Debe inscribirse');
+						if($posicion_coincidencia3 === false) {
+							$posicion_coincidencia4 = strpos($contenido, 'Pendiente por Solicitud en proceso');
+							if($posicion_coincidencia4 === false) {
+								$posicion_coincidencia5 = strpos($contenido, 'Baja por Perdida o Suspension');
+								if($posicion_coincidencia5 === false) {
+									$posicion_coincidencia6 = strpos($contenido, 'Por favor intente');
+									if($posicion_coincidencia6 === false) {
+										$posicion_coincidencia7 = strpos($contenido, 'Baja por trashumancia');
+										if($posicion_coincidencia7 === false) {
+											$posicion_coincidencia8 = strpos($contenido, 'Baja por Inhumacion');
+											if($posicion_coincidencia8 === false) {
+												$posicion_coincidencia9 = strpos($contenido, 'Vigente');
+												if($posicion_coincidencia9 === false) {
+													$posicion_coincidencia10 = strpos($contenido, 'Cancelada por Doble Cedulacion');
+													if($posicion_coincidencia10 === false) {
+														$posicion_coincidencia11 = strpos($contenido, 'documento Incorrecto');
+														if($posicion_coincidencia11 === false) {
+															if(!empty($contenido)) {
+																$puesto_votacion=array(
+																	'ERROR'=>'INDEFINIDO'			
+																);
+																return $puesto_votacion;
+															}else{
+																$puesto_votacion=array(
+																		'ERROR'=>utf8_decode('Se produjo un error durante el intento de conexion a la Registraduria')
+																);
+																$puesto_votacion=array(
+																		'REPETIR'=>1
+																);
+																return $puesto_votacion;
+															}
+														}else{
+															$puesto_votacion=array(
+																'ERROR'=>utf8_decode('Numero de documento Incorrecto')			
+															);
+														return $puesto_votacion;
+														}
+													}else{
+														$puesto_votacion=array(
+															'ERROR'=>utf8_decode('Cancelada por Doble Cedulacion')			
+														);
+													return $puesto_votacion;
+													}
+												}else{
+													$puesto_votacion=array(
+														'ERROR'=>utf8_decode('Vigente')			
+													);
+												return $puesto_votacion;
+												}
+											}else{
+												$puesto_votacion=array(
+													'ERROR'=>utf8_decode('Baja por Inhumacion o Necrodactilia Positiva')			
+												);
+											return $puesto_votacion;
+											}
+										}else{
+											$puesto_votacion=array(
+													'ERROR'=>utf8_decode('Baja por trashumancia')			
+											);
+										return $puesto_votacion;
+										}
+									}else{
+										$puesto_votacion=array(
+												'ERROR'=>utf8_decode('La informacion se encuentra en actualizacion')			
+										);
+										return $puesto_votacion;
+									}
+								}else{
+									$puesto_votacion=array(
+											'ERROR'=>'Baja por Perdida o Suspension de los Derechos Politicos'			
+									);
+									return $puesto_votacion;
+								}
+							}else{
+								$puesto_votacion=array(
+										'ERROR'=>'Pendiente por Solicitud en proceso'			
+								);
+								return $puesto_votacion;
+							}
+						}else{
+							$puesto_votacion=array(
+							'ERROR'=>'Debe inscribirse'			
+							);
+						return $puesto_votacion;
+						}
+					}else{
+						$puesto_votacion=array(
+							'ERROR'=>'Cancelada por Muerte'			
+							);
+						return $puesto_votacion;
+					}
+					return $puesto_votacion;
+			} 
+		}else{
+			//var_dump($puesto['data']['lugarVotacion']);
+			$puesto_votacion=array(
+						'DEPARTAMENTO'=>trim($puesto['data']['lugarVotacion']['departamento']),
+						'MUNICIPIO'=>trim($puesto['data']['lugarVotacion']['municipio']),
+						'PUESTO'=>trim($puesto['data']['lugarVotacion']['puesto']),
+						//'DIRECCION'=>trim($puesto5[0]),
+						'MESA'=>trim($puesto['data']['lugarVotacion']['mesa'])
 						//'FECHA_INSCRIP'=>trim($puesto7)
 						);
 			//imprimir($puesto_votacion);//exit;
