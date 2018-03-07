@@ -1,6 +1,6 @@
 <?php
 include_once "includes/GestionBD.new.class.php";
-//imprimir(puesto_votacion_v2('1128432190'));  /*Cedula de un Condenado*/
+//imprimir(puesto_votacion_v2('000'));  /*Cedula de un Condenado*/
 //imprimir(puesto_votacion('000'));
 
 function puesto_votacion($cedula_Excel){
@@ -204,7 +204,7 @@ function puesto_votacion_v2($cedula_Excel){
 			$data = array(
 					'cedula' => $cedula_Excel,
 					'medioconsulta' => 'Web',
-					'recaptcha' => '03ANcjosrM5ngDnFcoWohaJcRGlH9lEE4XzegA5Xw3NV-NLebT8KcOF-gVeB6unJlLZnbbLOdxBSox8THvnAbHufR6fKKGPZXEos0EtmYZp9V1JvH6IqkF6tesmX-b3SMvsGNIonygCNQF5RLNWOGGus8n_EmRNOM9v_tRUI5VcuX2eD-06T6yxIfJo2m5TZbXDMfVblZMXVySYW47LTCRkHc8Twp6e6agIZHEfZRyKjvI8SzzB3fMr9sc89ukzDkViWDg0-uYWNnJ1QbqMaMYhf6x4Dy3lxV5jXYqk9-aWDXR1XPwZtDbI1_JYmdB59GMSsaPpBPqINm0cPKTP2E06ZheEnaursiLGhFok6TNkmUl-OpZPfd88_1yrLwfXC6Ah8EhM_xDtdlp-FzJieSzg4TRd0Yh36Vml9QU5e2B-rOLV55YPpqbR1KFnve0TSHI76UTdHedpZvJ1yACdUXpL5QxqGTLmDOnH73YFK8C9CpWegPj5rAhcCx-uNEehmlPGeeLlzXkYYxjvFWC55N0yfKHVsi6It_XLw',
+					'recaptcha' => '03ANcjosqr4pwBLcRsmDgRf0TQtvhwM5ge7jDrFJth2hn_yU0ylDKfQ8QE_0fI1Pj1jfZJFKsmD-dSE1shyzGMCtBCO7yFpm1RuNeED3c6dhC3728S1zOaN4ljn2LO97t3BBxO2kEnFcQRRej7u4MxONTdBvnA6T_U6BON-m7_tPQJMGuOTqWusb6h1i8hTuP6UmzRhAdYy2mujxNsBkjHWEJfoIstrogtqZjSPSJGWpvNFfq_CwsDbQ9RWveVsdcf4e7B7S8kQhJ2KHr2NL-GA9UI9H9foJODpraISElGmhq7xQSPyWpz_UcPxAMmW4P_2ZbW0DSRHo6PIA8r2yK0jwMDsm04i-vkf0MA-JQb63ySe26InctsSZGZ0-4AbRXKARPZSFHoUDCs8AxtWHBHvFs4UwtAju8ToQ08-Mi8nzAQ9pmHAos06hU',
 					'versionnavegador' => '58.0',
 					'versionso' => 'windows-7',
 					'dispositivo' => 'unknown',
@@ -234,17 +234,17 @@ function puesto_votacion_v2($cedula_Excel){
 			);                                                                                                                   
 																																 
 			$result = curl_exec($ch);
-
+imprimir($result);//exit;
 		}catch(Exception $e){
 		//$observacion2 = $e->getMessage();
 		throw new Exception('Sin conexion a la registraduria.');		
 		}
 		$puesto=json_decode($result, true);
 
-		
-		if($puesto['exito']==false){
+		//imprimir($puesto);
+		if(!empty($puesto['data']['novedades']['nombreNovedad'])){
 			//var_dump($puesto['mensaje']);
-			$contenido = trim(strip_tags($puesto['mensaje']));
+			$contenido = trim(strip_tags($puesto['data']['novedades']['nombreNovedad']));
 			$buscar=array(chr(13).chr(10), "\r\n", "\n", "\r",); 
 			$reemplazar=array("", "", "", ""); 
 			$contenido=str_ireplace($buscar,$reemplazar,$contenido);
@@ -291,6 +291,7 @@ function puesto_votacion_v2($cedula_Excel){
 																);
 																return $puesto_votacion;
 															}else{
+																imprimir($result);
 																$puesto_votacion=array(
 																		'ERROR'=>utf8_decode('Se produjo un error durante el intento de conexion a la Registraduria')
 																);

@@ -7,7 +7,7 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='simulador_20183.csv';
+$nombre_archivo='simulador_20184_C214.csv';
 $_SESSION["username"]='52890539';
 $_SESSION["idmunicipio"]=843;
 $_SESSION["municipio"]='CUCUTA';
@@ -16,7 +16,7 @@ $_SESSION["idcandidato"]=35;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/simulador_20183.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/simulador_20184_C214.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -27,6 +27,8 @@ if (($gestor = fopen("Excel/cargas/simulador_20183.csv", "r")) !== FALSE) {
     fclose($gestor);
 }
 $registros=count($data->sheets[0]['cells']);
+//imprimir($data->sheets[0]['cells'][1]);
+//exit;
 for ($i = 1; $i < $registros; $i++) {
 	if(isset($data->sheets[0]['cells'][$i][1]) && isset($data->sheets[0]['cells'][$i][3])){
 	$cedula_simpatizante[$y]=trim($data->sheets[0]['cells'][$i][2]);	
@@ -35,8 +37,10 @@ for ($i = 1; $i < $registros; $i++) {
 		$nombre_simpartizante[$y]=$data->sheets[0]['cells'][$i][3];	
 		$ocupacion[$y]=(!empty($data->sheets[0]['cells'][$i][4]))? $data->sheets[0]['cells'][$i][4]:'VOLUNTARIADO';	
 		$celular[$y]=(!empty($data->sheets[0]['cells'][$i][5]))? $data->sheets[0]['cells'][$i][5] : '';
-		$email [$y]=(!empty($data->sheets[0]['cells'][$i][6]))? $data->sheets[0]['cells'][$i][6] : '';
-		$direccion [$y]=(!empty($data->sheets[0]['cells'][$i][7]))? $data->sheets[0]['cells'][$i][7] : '';
+		$email [$y]= '';
+		$puesto [$y]=(!empty($data->sheets[0]['cells'][$i][6]))? $data->sheets[0]['cells'][$i][6] : '';
+		$direccion [$y]= '';
+		$mesa [$y]=(!empty($data->sheets[0]['cells'][$i][7]))? $data->sheets[0]['cells'][$i][7] : '';
 		$MUNICIPIO [$y]=(!empty($data->sheets[0]['cells'][$i][8]))? $data->sheets[0]['cells'][$i][8] : '';
 		$departamento[$y]=(!empty($data->sheets[0]['cells'][$i][9]))? $data->sheets[0]['cells'][$i][9] : '';
 		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 35;	
@@ -44,8 +48,8 @@ for ($i = 1; $i < $registros; $i++) {
 	}
 		$y++;
 }
-//exit;
 $puestoreg=array();
+//exit;
 $old_error_handler = set_error_handler("myErrorHandler");
 $DBGestion = new GestionBD('AGENDAMIENTO');	
 //INSERTO ARCHIVO
@@ -75,6 +79,9 @@ $indefinido=0;
 $incorrecto=0;
 for($i=0; $i<$registros-1; $i++){	
 	if($cedula_simpatizante[$i]!=''){
+	
+	
+
 	try{		
 		//VALIDO LIDER
 		$sql="SELECT
@@ -86,7 +93,7 @@ for($i=0; $i<$registros-1; $i++){
 				WHERE usuario.USUARIO='".$_SESSION["username"]."' AND lideres.CEDULA=".$cedula_lider[$i];			
 		$DBGestion->ConsultaArray($sql);
 		$idlider=$DBGestion->datos;
-		$puestoreg=puesto_votacion_v2($cedula_simpatizante[$i]);	
+		/*$puestoreg=puesto_votacion_v2($cedula_simpatizante[$i]);	
 		echo  PHP_EOL;
 		echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
 		
@@ -104,9 +111,17 @@ for($i=0; $i<$registros-1; $i++){
 			echo  PHP_EOL;
 			echo '[CEDULA] = '.$cedula_simpatizante[$i]. PHP_EOL;
 		}
-		
-		if(!empty($puestoreg['ERROR'])){
-			echo ' - '.$puestoreg['ERROR'].PHP_EOL;
+		*/
+		if( !empty($puesto[$i])  && ( 
+								
+			trim($puesto[$i])=="NO SE ENCUENTRA EN EL CENSO PARA LAS PROXIMAS ELECCIONES" || 
+			trim($puesto[$i])=="NO HAY NUMERO DE CEDULA"  ||
+			trim($puesto[$i])=="SIN NUMERO DE CEDULA"   ||
+			trim($puesto[$i])=="CANCELADA POR MUERTE"   ||
+			trim($puesto[$i])=="VIGENTE CON PERDIDA O SUSPENSION DE LOS DERECHOS POLITICOS" ||
+			trim($puesto[$i])=="NO SE ENCUENTRA HABILITADO PARA VOTAR")
+		){
+			echo ' - '.$puesto[$i].PHP_EOL;
 			
 			//VALIDO LIDER
 			$sql="SELECT
@@ -142,28 +157,32 @@ for($i=0; $i<$registros-1; $i++){
 					$municipios=$DBGestion->datos;	
 					if(count($municipios)>=1){
 						$idmunicipios=$municipios[0]['ID'];
-						if($puestoreg['ERROR']=='Cancelada por Muerte'){
+						if(trim($puesto[$i])=='Cancelada por Muerte' || trim($puesto[$i])=='CANCELADA POR MUERTE'){
 							$muerte++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",1)";										
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Baja por Perdida o Suspension de los Derechos Politicos'){
+						}elseif(trim($puesto[$i])=='Baja por Perdida o Suspension de los Derechos Politicos' 
+								&& trim($puesto[$i])=='VIGENTE CON PERDIDA O SUSPENSION DE LOS DERECHOS POLITICOS'){
 							$baja++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",2)";										
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Pendiente por Solicitud en proceso'){
+						}elseif(trim($puesto[$i])=='Pendiente por Solicitud en proceso'){
 							$pendiente++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",3)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Debe inscribirse'){
+						}elseif(trim($puesto[$i])=='Debe inscribirse' || trim($puesto[$i])=='NO SE ENCUENTRA EN EL CENSO PARA LAS PROXIMAS ELECCIONES'
+								|| trim($puesto[$i])=='NO SE ENCUENTRA HABILITADO PARA VOTAR'
+								|| trim($puesto[$i])=='SIN NUMERO DE CEDULA'){
+									
 							echo "Debe inscribirse".PHP_EOL;
 							$debeinscribirse++;
 							$aptosnovotar++;
@@ -171,74 +190,75 @@ for($i=0; $i<$registros-1; $i++){
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",4)";										
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Baja por trashumancia'){
+						}elseif(trim($puesto[$i])=='Baja por trashumancia'){
 							$trashumancia++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",5)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Baja por Inhumacion o Necrodactilia Positiva'){
+						}elseif(trim($puesto[$i])=='Baja por Inhumacion o Necrodactilia Positiva'){
 							$inhumacion++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",6)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Vigente'){
+						}elseif(trim($puesto[$i])=='Vigente'){
 							$vigente++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",7)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Cancelada por Doble Cedulacion'){
+						}elseif(trim($puesto[$i])=='Cancelada por Doble Cedulacion'){
 							$doblecedula++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",8)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='La informacion se encuentra en actualizacion'){
+						}elseif(trim($puesto[$i])=='La informacion se encuentra en actualizacion'){
 							$actualizacion++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",10)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Se produjo un error durante el intento de conexion a la Registraduria'){
+						}elseif(trim($puesto[$i])=='Se produjo un error durante el intento de conexion a la Registraduria'){
 							$coneccion++;
 							$datosinvalidos++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",11)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='Numero de documento Incorrecto'){
+						}elseif(trim($puesto[$i])=='Numero de documento Incorrecto'){
 							$incorrecto++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",12)";									
 							$DBGestion->Consulta($sql);	
-						}elseif($puestoreg['ERROR']=='INDEFINIDO'){
+						}elseif(trim($puesto[$i])=='INDEFINIDO'){
 							$indefinido++;
 							$datosinvalidos++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",13)";									
 							$DBGestion->Consulta($sql);	
-						}						
+						}
+						
 					}
 				}
 			}
 		}else{
 			//imprimir($puestoreg);			
-			echo '[DEPARTAMENTO] = '.$DEPARTAMENTO_R=trim($puestoreg['DEPARTAMENTO']).PHP_EOL;			
-			echo '[MUNICIPIO] = '.$MUNICIPIO_R=trim($puestoreg['MUNICIPIO']).PHP_EOL;		
-			echo '[PUESTO] = '.$PUESTO_R=trim($puestoreg['PUESTO']).PHP_EOL;		
+			echo '[DEPARTAMENTO] = '.$DEPARTAMENTO_R=trim($departamento[$i]).PHP_EOL;			
+			echo '[MUNICIPIO] = '.$MUNICIPIO_R=trim($MUNICIPIO[$i]).PHP_EOL;		
+			echo '[PUESTO] = '.$PUESTO_R=trim($puesto[$i]).PHP_EOL;		
 			//echo '[DIRECCION] = '.$DIRECCION_R=trim($puestoreg['DIRECCION']).PHP_EOL;
-			echo '[MESA] = '.$MESA_R=trim($puestoreg['MESA']).PHP_EOL;
-			echo ' '.PHP_EOL;
+			echo '[MESA] = '.$MESA_R=trim($mesa[$i]).PHP_EOL;
+			echo ' '.PHP_EOL;	
 			//echo '[FECHA_INSCRIPCION] = '.$FECHA_INSCRIP=trim($puestoreg['FECHA_INSCRIP']).PHP_EOL;
 		
 			//BUSO SI YA EXISTE EL MIEMBRO
@@ -255,12 +275,12 @@ for($i=0; $i<$registros-1; $i++){
 			
 			if($miembros[0]['MIEMBROS']=='0'){
 				//BUSCO EL ID DEL DEPARTAMENTO
-				$sql="SELECT
+				 $sql="SELECT
 						departamentos.IDDEPARTAMENTO,
 						departamentos.NOMBRE
 						FROM
 						departamentos
-						where UPPER(departamentos.NOMBRE) like UPPER('%".trim($departamento[$i])."%')";
+						where UPPER(departamentos.NOMBRE) ='".trim($departamento[$i])."' ";
 				$DBGestion->ConsultaArray($sql);
 				$departamentos=$DBGestion->datos;	
 				if(count($departamentos)>=1){
@@ -283,7 +303,7 @@ for($i=0; $i<$registros-1; $i++){
 						departamentos.NOMBRE
 						FROM
 						departamentos
-						where UPPER(departamentos.NOMBRE) like UPPER('%".trim($DEPARTAMENTO_R)."%')";
+						where UPPER(departamentos.NOMBRE) ='".trim($DEPARTAMENTO_R)."'";
 						
 						$DBGestion->ConsultaArray($sql);
 						$dtodepartamentos=$DBGestion->datos;	

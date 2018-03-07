@@ -50,7 +50,7 @@ $_GET["jtStartIndex"]=0;*/
 				FROM
 				lideres
 				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				LEFT JOIN MUNICIPIOS M ON M.ID=lideres.MUNICIPIO
+				LEFT JOIN municipios M ON M.ID=lideres.MUNICIPIO
 				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
 				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
 				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
