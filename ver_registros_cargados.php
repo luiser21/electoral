@@ -95,9 +95,9 @@ SELECT 18 as ID,CONCAT(ROUND(((DATOSINVALIDOS)/(APTOSVOTAR+NOAPTOSVOTAR+DATOSINV
 UNION
 SELECT 11 as ID,CONCAT(ROUND((CONEXION/(APTOSVOTAR+NOAPTOSVOTAR+DATOSINVALIDOS))*100,2),'%') AS PORCENTAJE,CONEXION,'  - Se produjo un error durante el intento de conexion a la Registraduria' AS DETALLE from upload_file WHERE ESTADO='A' AND id=".$_GET["id"]."		
 UNION
-SELECT 19 as ID,CONCAT(ROUND((count(CEDULA)/(SELECT (APTOSVOTAR+NOAPTOSVOTAR+DATOSINVALIDOS) from upload_file  WHERE ESTADO='A' AND id=".$_GET["id"]."))*100,2),'%') AS PORCENTAJE,count(CEDULA),'  - Registros Duplicados' AS DETALLE from tmp_miembros WHERE PUESTO='Cedula ya existe'AND IDFILE=".$_GET["id"]."
+SELECT 19 as ID,CONCAT(ROUND((count(CEDULA)/(SELECT (APTOSVOTAR+NOAPTOSVOTAR+DATOSINVALIDOS) from upload_file  WHERE ESTADO='A' AND id=".$_GET["id"]."))*100,2),'%') AS PORCENTAJE,count(CEDULA),'  - Registros Duplicados' AS DETALLE from tmp_miembros WHERE PUESTO='Cedula ya existe' AND IDFILE=".$_GET["id"]."
 UNION
-SELECT 20 as ID,CONCAT(ROUND((count(CEDULA)/(SELECT (APTOSVOTAR+NOAPTOSVOTAR+DATOSINVALIDOS) from upload_file  WHERE ESTADO='A' AND id=".$_GET["id"]."))*100,2),'%') AS PORCENTAJE,count(CEDULA),'  - Para Reprocesar' AS DETALLE from tmp_miembros WHERE PUESTO<>'Cedula ya existe'AND IDFILE=".$_GET["id"]."";		
+SELECT 20 as ID,CONCAT(ROUND((count(CEDULA)/(SELECT (APTOSVOTAR+NOAPTOSVOTAR+DATOSINVALIDOS) from upload_file  WHERE ESTADO='A' AND id=".$_GET["id"]."))*100,2),'%') AS PORCENTAJE,count(CEDULA),'  - Para Reprocesar' AS DETALLE from tmp_miembros WHERE PUESTO<>'Cedula ya existe' AND IDFILE=".$_GET["id"]."";		
 
 			//echo $sql;
 			$DBGestion->ConsultaArray($sql);				

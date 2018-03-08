@@ -7,7 +7,7 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='simulador_20184_C214.csv';
+$nombre_archivo='simulador_20184_C2111.csv';
 $_SESSION["username"]='52890539';
 $_SESSION["idmunicipio"]=843;
 $_SESSION["municipio"]='CUCUTA';
@@ -16,7 +16,7 @@ $_SESSION["idcandidato"]=35;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/simulador_20184_C214.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/simulador_20184_C2111.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;

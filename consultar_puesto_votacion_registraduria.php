@@ -204,8 +204,7 @@ function puesto_votacion_v2($cedula_Excel){
 			$data = array(
 					'cedula' => $cedula_Excel,
 					'medioconsulta' => 'Web',
-					'recaptcha' => '03ANcjosqr4pwBLcRsmDgRf0TQtvhwM5ge7jDrFJth2hn_yU0ylDKfQ8QE_0fI1Pj1jfZJFKsmD-dSE1shyzGMCtBCO7yFpm1RuNeED3c6dhC3728S1zOaN4ljn2LO97t3BBxO2kEnFcQRRej7u4MxONTdBvnA6T_U6BON-m7_tPQJMGuOTqWusb6h1i8hTuP6UmzRhAdYy2mujxNsBkjHWEJfoIstrogtqZjSPSJGWpvNFfq_CwsDbQ9RWveVsdcf4e7B7S8kQhJ2KHr2NL-GA9UI9H9foJODpraISElGmhq7xQSPyWpz_UcPxAMmW4P_2ZbW0DSRHo6PIA8r2yK0jwMDsm04i-vkf0MA-JQb63ySe26InctsSZGZ0-4AbRXKARPZSFHoUDCs8AxtWHBHvFs4UwtAju8ToQ08-Mi8nzAQ9pmHAos06hU',
-					'versionnavegador' => '58.0',
+					'recaptcha' => '03ANcjosrP2rNJoYWe22oG-SAsl5as-HVgjh-gGe12dobR-0rYuLTdepidQhzIZpmP0HImKJbac35fy63XVvEFsR6WV6L_Lq6cyLB0miEwTKzJHy76MiZUkRBZjYsdGW4rvGInT-98S6sAbat-w4hj4FNAR47R_a5rwlZuO9-_w6GLN16h7ROmg-ndLREZh7ubKDaFzgC_3NORkFOUQZJ2BaZCis2ecc8v3nHGx_VRpDxwSBlO-F32Q3KZZeHfmzlE1Z88Q7DM9Vni9t8Yn0pMHQZbPRXXk5ovFvJ1mDa4O9z9G5EZw3zbmAVLHqtOjgBq5qJK1KMEYGUga0I6cbsgMNwoP9Rgurkjwn4KBqBdErFvWnibsD5jbTpQh4B2C_YD00azPYEXsUg3RPIImBbwaqQy4VB6N-Ehqt9OzB7143MnUHCHpUgrI5W9t0LvlK55NoHNIePaly_63uuxp9-ujsfz0FzLf3-bYw',				'versionnavegador' => '58.0',
 					'versionso' => 'windows-7',
 					'dispositivo' => 'unknown',
 					'navegador' => 'firefox',

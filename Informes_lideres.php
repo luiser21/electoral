@@ -297,6 +297,13 @@ $totales_lideres=$DBGestion->datos;
 							return $img;
 						}
 					},
+					CAPITAN: {
+						title: 'CAPITAN',
+						width: '30%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},
 					NOMBRE: {
 						title: 'NOMBRE',
 						width: '30%',
@@ -309,13 +316,7 @@ $totales_lideres=$DBGestion->datos;
 						create: false,
 						edit: false
 					},
-					PROFESION: {
-						title: 'PROFESION',
-						width: '30%',
-						//type: 'date',
-						create: false,
-						edit: false
-					},
+					
 					MUNICIPIO: {
 						title: 'DOMICILIO',
 						width: '40%',
