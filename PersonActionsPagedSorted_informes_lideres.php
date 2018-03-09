@@ -106,7 +106,7 @@ $_GET["jtStartIndex"]=0;*/
 				$DBGestion->ConsultaArray($sql);				
 				$miembros=$DBGestion->datos;	
 				//echo $sql;
-				$row[$i]['MIEMBROS']=($miembros[0]['MIEMBROS']!='')? $miembros[0]['MIEMBROS']:0;
+				$row[$i]['MIEMBROS']=($miembros[0]['MIEMBROS']!='')? $miembros[0]['MIEMBROS']:'0';
 				//$row[$i]['MIEMBROS']=$miembros[0]['MIEMBROS'];
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
@@ -118,7 +118,7 @@ $_GET["jtStartIndex"]=0;*/
 					WHERE m.IDLIDER  =".$row[$i]['ID']." ";
 				$DBGestion->ConsultaArray($sql);				
 				$reales=$DBGestion->datos;
-				$row[$i]['VOTOSREALES']=$reales[0]['VOTOREAL'];
+				$row[$i]['VOTOSREALES']=($reales[0]['VOTOREAL']!='')?$reales[0]['VOTOREAL']:'0';
 				$row[$i]['VARIACION']=$reales[0]['VOTOREAL']-$miembros[0]['MIEMBROS'];
 				
 				$miembros_total=$miembros_total+$miembros[0]['MIEMBROS'];

@@ -55,7 +55,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "11 march 2018 16:00:00",
+				date: "11 march 2018 08:00:00",
 				format: "on"
 			},
 			function() {

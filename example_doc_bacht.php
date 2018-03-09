@@ -7,16 +7,16 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='simulador_20184_C2111.csv';
-$_SESSION["username"]='52890539';
+$nombre_archivo='simulador_20184_U61.csv';
+$_SESSION["username"]='72161298';
 $_SESSION["idmunicipio"]=843;
 $_SESSION["municipio"]='CUCUTA';
 $_SESSION["tipocandidato"]="SENADO";
-$_SESSION["idcandidato"]=35;
+$_SESSION["idcandidato"]=223;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/simulador_20184_C2111.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/simulador_20184_U61.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -43,7 +43,7 @@ for ($i = 1; $i < $registros; $i++) {
 		$mesa [$y]=(!empty($data->sheets[0]['cells'][$i][7]))? $data->sheets[0]['cells'][$i][7] : '';
 		$MUNICIPIO [$y]=(!empty($data->sheets[0]['cells'][$i][8]))? $data->sheets[0]['cells'][$i][8] : '';
 		$departamento[$y]=(!empty($data->sheets[0]['cells'][$i][9]))? $data->sheets[0]['cells'][$i][9] : '';
-		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 35;	
+		$candidato[$y]=(!empty($data->sheets[0]['cells'][$i][10]))? $data->sheets[0]['cells'][$i][10] : 223;	
 		//echo $nombre_simpartizante[$y].PHP_EOL;
 	}
 		$y++;
@@ -165,7 +165,7 @@ for($i=0; $i<$registros-1; $i++){
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",1)";										
 							$DBGestion->Consulta($sql);	
 						}elseif(trim($puesto[$i])=='Baja por Perdida o Suspension de los Derechos Politicos' 
-								&& trim($puesto[$i])=='VIGENTE CON PERDIDA O SUSPENSION DE LOS DERECHOS POLITICOS'){
+								|| trim($puesto[$i])=='VIGENTE CON PERDIDA O SUSPENSION DE LOS DERECHOS POLITICOS'){
 							$baja++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
