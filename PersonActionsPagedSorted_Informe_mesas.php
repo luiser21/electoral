@@ -315,7 +315,15 @@ ORDER BY votos desc ";
 		//Get record count
 		if($_SESSION["username"]!='alcaldia'){	
 					
-			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." GROUP BY MOVILIZADOS ORDER BY MOVILIZADOS DESC " ;
+			$sql="SELECT ID, CASE
+						WHEN IDPUESTO=13054 THEN 'MARIBEL'
+						WHEN IDPUESTO=13055 THEN 'MARIO IVAN'
+							WHEN IDPUESTO=13056 THEN 'MARIA FERNANDA'
+						ELSE 'NO HAY LIDER'
+
+					END AS ZONA, SUM(MOVILIZADOS) AS MOVILIZADOS
+					from boletines_departamentos where candidato=".$_SESSION["idcandidato"]."
+					GROUP BY IDPUESTO ORDER BY MOVILIZADOS DESC " ;
 								
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;	
@@ -323,8 +331,16 @@ ORDER BY votos desc ";
 			$recordCount=count($partidos);
 			
 			//Get records from database
-			$sql="SELECT ID, ZONA, MOVILIZADOS from boletines_departamentos where candidato=".$_SESSION["idcandidato"]." GROUP BY MOVILIZADOS ORDER BY MOVILIZADOS DESC " ;
-			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
+			$sql="SELECT ID, CASE
+						WHEN IDPUESTO=13054 THEN 'MARIBEL'
+						WHEN IDPUESTO=13055 THEN 'MARIO IVAN'
+							WHEN IDPUESTO=13056 THEN 'MARIA FERNANDA'
+						ELSE 'NO HAY LIDER'
+
+					END AS ZONA,SUM(MOVILIZADOS) AS MOVILIZADOS
+					from boletines_departamentos where candidato=".$_SESSION["idcandidato"]."
+					GROUP BY IDPUESTO ORDER BY MOVILIZADOS DESC " ;
+			//$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";
 
 			$DBGestion->ConsultaArray($sql);				
 			$partidos=$DBGestion->datos;

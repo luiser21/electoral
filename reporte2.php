@@ -188,7 +188,7 @@ button, input[type="button"], input[type="submit"] {
 			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "11 march 2018 08:00:00",
+				date: "11 march 2018 16:00:00",
 				format: "on"
 			},
 			function() {
@@ -457,6 +457,7 @@ $DBGestion->ConsultaArray($sql);
 $totales2=$DBGestion->datos;	
  number_format($totales2[0]['MOVILIZADOS'], 0, '', '.');
 	   $voto_cargue= number_format($totales2[0]['MOVILIZADOS'], 0, '', '.');
+	   $_SESSION['votosprevistos']=$totales2[0]['MOVILIZADOS'];
 	   //echo  $voto_cargue;
 ?>	
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
@@ -472,7 +473,7 @@ $totales2=$DBGestion->datos;
 	     <p><img src="images/mesas.png" width="140" height="auto"></p>
 	   </div> </th>
 	  
-       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">MESAS CON MAYOR VOTOS<br/>
+       <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">LIDERES CON MAYOR VOTOS<br/>
          <strong style="color: #990000">
 		<div class="filtering"><input type="hidden" id="LoadRecordsButton"></input>
 </div>
@@ -502,7 +503,7 @@ $totales2=$DBGestion->datos;
 						list: false
 					},
 					ZONA: {
-						title: 'MESAS',
+						title: 'LIDER',
 						width: '10%',
 						create: false,
 						edit: false
