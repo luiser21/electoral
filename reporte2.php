@@ -126,7 +126,7 @@ if(date('H')>=09 && date('H')<10){
  if(date('H')<16){ ?>
 <meta http-equiv=refresh content=20;URL=reporte2.php>
 <?php }elseif(date('H')>=16){ ?>
-<meta http-equiv=refresh content=20;URL=reporte3.php>
+<!--<meta http-equiv=refresh content=20;URL=reporte3.php>-->
 <?php } ?>
 <script>
 
@@ -139,7 +139,7 @@ ElemsBlink[i].style.visibility = ElemsBlink[i].style.visibility
 }
 </script>
 
-<body onLoad="setInterval('Blink()',500)">
+<body onLoad="setInterval('Blink()',1000)">
 
 
 
@@ -188,7 +188,7 @@ button, input[type="button"], input[type="submit"] {
 			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "25 october 2015 15:59:59",
+				date: "11 march 2018 08:00:00",
 				format: "on"
 			},
 			function() {
@@ -213,7 +213,7 @@ button, input[type="button"], input[type="submit"] {
 	}elseif($_SESSION['tipocandidato']=='CONSEJO'){
 		
 	}elseif($_SESSION['tipocandidato']=='SENADO'){?>
-		<img src="images/ktEO3b-9.png" width="201" height="148"> 
+	<!--	<img src="images/ktEO3b-9.png" width="201" height="148"> -->
 	<?php }elseif($_SESSION['tipocandidato']=='CAMARA'){
 	
 	}elseif($_SESSION['tipocandidato']=='JAL'){
@@ -310,7 +310,7 @@ $sql="SELECT
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-where boletines.ESTADO in (1,2)  and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1 and  HORA_REAL=".(date('H')-1);
+where boletines.ESTADO in (1,2)  and candidato=".$_SESSION['idcandidato']." ##and IDDEPARTAMENTO=1 and  HORA_REAL=".(date('H')-1);
 $DBGestion->ConsultaArray($sql);				
 $totales=$DBGestion->datos;	
 
@@ -322,7 +322,7 @@ CONCAT(boletines.REPORTES) as REPORTES,
 sum(boletines.MOVILIZADOS) AS MOVILIZADOS
 FROM
 boletines
-where boletines.ESTADO in (1,2) and candidato=".$_SESSION['idcandidato']." and IDDEPARTAMENTO=1
+where boletines.ESTADO in (1,2) and candidato=".$_SESSION['idcandidato']." ##and IDDEPARTAMENTO=1
 GROUP BY REPORTES  order by 1 desc";
 $DBGestion->ConsultaArray($sql);				
 $departamentos=$DBGestion->datos;	
@@ -436,18 +436,40 @@ $(function () {
 		</script>
 			<script src="js/js/highcharts.js"></script>
 <script src="js/js/modules/exporting.js"></script>
+<?php 
 
+	$sql="SELECT SUM(MOVILIZADOS) AS MOVILIZADOS FROM (SELECT
+					count(miembros.ID) as MOVILIZADOS
+					FROM
+					puestos_votacion AS p
+					INNER JOIN municipios ON municipios.ID = p.IDMUNICIPIO
+					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO = municipios.IDDEPARTAMENTO
+					LEFT JOIN miembros ON miembros.IDPUESTOSVOTACION = p.IDPUESTO
+					left JOIN lideres ON lideres.ID = miembros.IDLIDER
+					left JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+					LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
+					WHERE usuario.USUARIO='".$_SESSION["username"]."' ";
+				if($_SESSION["tipocandidato"]=="ALCALDIA"){
+					$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
+				}					
+				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
+$DBGestion->ConsultaArray($sql);				
+$totales2=$DBGestion->datos;	
+ number_format($totales2[0]['MOVILIZADOS'], 0, '', '.');
+	   $voto_cargue= number_format($totales2[0]['MOVILIZADOS'], 0, '', '.');
+	   //echo  $voto_cargue;
+?>	
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div></th>
     <th width="15%" scope="col">REPORTES</th> 
 	   <th width="15%" rowspan="2" scope="col" style="border:3px solid #CCCCCC;"><div ><blink>
-	    <strong style="font-size:20px; color:#FF0000"><?php  echo 'Potencial 14.363<br/>';?></strong>
+	    <strong style="font-size:20px; color:#FF0000"><?php  echo "Potencial $voto_cargue <br/>";?></strong>
 	   <strong style="font-size:32px; color:#FF0000"><br/>
 	   <?php   
-	   echo number_format((($totales[0]['MOVILIZADOS']/14373)*100), 2, ',', ',').'%'?><br/><br/>
+	   echo number_format((($totales[0]['MOVILIZADOS']/$totales2[0]['MOVILIZADOS'])*100), 0, ',', ',').'%'?><br/><br/>
 	   <?php echo 
 	   number_format($totales[0]['MOVILIZADOS'], 0, '', '.')?><br/><br/>VOTOS</strong></blink>
 	     <p>&nbsp;</p>
-	     <p><img src="images/votos2.png" width="119" height="131"></p>
+	     <p><img src="images/mesas.png" width="140" height="auto"></p>
 	   </div> </th>
 	  
        <th width="27%" rowspan="3" style="border:3px solid #CCCCCC;" scope="col">MESAS CON MAYOR VOTOS<br/>
@@ -605,8 +627,9 @@ $arrDepartamento4.= "".$suma2."";
 <div id="marquesina">
 <div id="marque">
 <div class="first">
+	
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000">6.100</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Sufragantes';?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 DIA ELECTORAL HA COMENZADO
 </marquee>
 </div>
