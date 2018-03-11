@@ -52,7 +52,7 @@ try
 					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
 					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION
 					INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID and mesa_puesto_miembro.candidato='".$_SESSION["username"]."'
 					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
 					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' ";
 					if($_SESSION["tipocandidato"]=="ALCALDIA"){
