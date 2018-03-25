@@ -13,19 +13,20 @@ try
 			$sql="SELECT
 					miembros.ID,
 					miembros.NOMBRES,
+					miembros.CEDULA,
 					puestos_votacion.NOMBRE_PUESTO,
 					mesas.MESA,
 					mesas.VOTOREAL
 					FROM
 					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION
-					INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID
-					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
-					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' ";
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER 
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO 
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO 
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION 
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID and mesa_puesto_miembro.candidato='".$_SESSION["username"]."' 
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO 
+					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."'";
 					if($_SESSION["tipocandidato"]=="ALCALDIA"){
 						$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 					}				
@@ -47,20 +48,20 @@ try
 					mesas.VOTOREAL
 					FROM
 					miembros
-					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER
-					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION
-					INNER JOIN mesas ON mesas.IDPUESTO = puestos_votacion.IDPUESTO
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.IDMESA = mesas.ID and mesa_puesto_miembro.candidato='".$_SESSION["username"]."'
-					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER 
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO 
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO 
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION 
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID and mesa_puesto_miembro.candidato='".$_SESSION["username"]."' 
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO 
 					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider='".$_GET["idlider"]."' ";
 					if($_SESSION["tipocandidato"]=="ALCALDIA"){
 						$sql.=" and municipios.NOMBRE='".$_SESSION["municipio"]."' ";
 					}
 					$sql.=" GROUP BY miembros.id ";	
 			
-			
+			//echo $sql;
 			//$sql.=" ORDER BY miembros.NOMBRES ";				
 			$sql.=" LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] . " ";	
 			//Add all records to an array
@@ -76,7 +77,7 @@ try
 				$row[$i]['NOMBRE_PUESTO']=$partidos[$i]['NOMBRE_PUESTO'];
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
 				$row[$i]['VOTOREAL']=$partidos[$i]['VOTOREAL'];
-				$row[$i]['VARIACION']=$partidos[$i]['VOTOREAL']-1;
+				$row[$i]['VARIACION']=(($partidos[$i]['VOTOREAL']-1)==0)?  "<img src='img/acs_chk.gif'>":$partidos[$i]['VOTOREAL']-1;
 			}	
 				
 			//Return result to jTable
