@@ -72,9 +72,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <div id="marque">
 <div class="first">
 <marquee>
-<!--<strong> DESDE EL 11 DE ENERO AL 11 DE FEBRERO DE 2018 </strong><span>Sorteo y publicación de listas de jurados de votación (Durante un mes). </span><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong> 29 DE ENERO DE 2018 </strong><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
--->
+<strong> DE TODOS Y PARA TODOS LOS COLOMBIANOS</strong>
 </marquee>
 </div>
 </div>
@@ -83,7 +81,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 						<li>
 							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Ivan Duque</span><span class="color1">Presidenciales</span><span> 2018</span></span>
+								<span class="title"><span class="color2">Elecciones</span><span class="color1">Presidenciales</span><span> 2018</span></span>
 								<p>Cuenta Regresiva para el 27 de Mayo de 2018<div class="timer-area" style=" margin-right:-100px">	
 										<ul id="countdown">
 											<li>
@@ -108,7 +106,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 								
 							</div>
 						</li>
-						<li>
+						<!--<li>
 							<img src="images/img2.png" alt="" >
 							<div class="banner">
 								<span class="title"><span class="" style="color:#FFFFFF">Innovaci&oacute;n</span><span class="color1">y Desarrollo a su</span><span style="font-size:36px">Servicio</span></span>
@@ -123,7 +121,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 								<p></p>
 							
 							</div>
-						</li>
+						</li>-->
 					</ul>
 			  </div>
 			</header>
