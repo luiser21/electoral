@@ -98,8 +98,8 @@ header ("Pragma: no-cache");
 									<ul>
 										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-camisetas.pdf">Camisetas</a></li>
 										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-camisetas 3.pdf">Camisetas v2</a></li>
-										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-botones.pdf">Botones</a></li>
-										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-botones2.pdf">Botones v2</a></li>
+										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-botones-1-1.pdf">Botones</a></li>
+										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-botones nuevos.pdf">Botones v2</a></li>
 										<li ><a href="#">Plegables</a></li>
 										<li ><a href="ver_pdf.php?ac=3">Pedagogia</a></li>
 										<li ><a href="#">Censo Electoral</a></li>
