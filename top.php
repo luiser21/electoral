@@ -92,7 +92,24 @@ header ("Pragma: no-cache");
 						<li class="current"><a href="index.php">Inicio</a></li>
 						<li><a href="quienessomos.php">Quienes Somos</a></li>
 						<li><a href="#">T&eacute;rminos Oficiales</a></li>
-						<li><a href="#">FAQ</a></li>
+						<li><a href="#">Estrategia</a>
+							<ul>
+								<li ><a href="#">T&aacute;cticas</a>
+									<ul>
+										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-camisetas.pdf">Camisetas</a></li>
+										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-camisetas 3.pdf">Camisetas v2</a></li>
+										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-botones.pdf">Botones</a></li>
+										<li ><a target="_black" href="http://localhost/electoral/documentos/duque/ivan duque-botones2.pdf">Botones v2</a></li>
+										<li ><a href="#">Plegables</a></li>
+										<li ><a href="ver_pdf.php?ac=3">Pedagogia</a></li>
+										<li ><a href="#">Censo Electoral</a></li>
+										<li ><a href="ver_pdf.php?ac=4">Movilizacion</a></li>
+										<li ><a href="ver_pdf.php?ac=5">Seguimiento</a></li>
+									</ul>
+								</li>							
+								
+							</ul>
+						</li>
 						<li><a href="sige.php">Acerca del Programa</a></li>
 						<li><a href="casosexito.php">Casos de Exito</a></li>
 						<li><a href="#">Cont&aacute;ctenos</a></li>

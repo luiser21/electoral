@@ -1,4 +1,4 @@
-<?php require_once('topadmin.php');?> 
+<?php require_once('top.php');?> 
 <?php 
 
 
@@ -22,19 +22,24 @@ $ruta = (isset($_GET['ruta']) ? $_GET['ruta'] : 0); ;
 				<?php }if($tipo==2){?>
 				<h4>Candidatos a C&aacute;mara de Representantes</h4>
 					<?php }if($tipo==3){?>
-					<h4>Conoce los Tarjetones Electorales</h4>
+					<h4>Conoce el Tarjeton Electoral</h4>
 					<?php }if($tipo==4){?>
-					<h4>Normatividad Informaci&oacute;n Electoral</h4>
+					<h4>Movilizacion y Seguimiento</h4>
+						<?php }if($tipo==4){?>
+					<h4>Seguimiento</h4>
 						<?php }?>
+						
 			<div id="crudFormLineal" style="width: 910px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" >
 			<?php if($tipo==1){?>			
 			<embed src="documentos/SENADO_<?php echo $_SESSION['partido']?>_candidatos.pdf" type="application/pdf" style="width:910px; height:600px">	
 				<?php }if($tipo==2){?>
 				<embed src="documentos/CAMARA_<?php echo $_SESSION['partido']?>_candidatos.pdf" type="application/pdf" style="width:910px; height:600px">	
-					<?php }if($tipo==3){?>
-					<embed src="documentos/tarjetones.pdf" type="application/pdf" style="width:910px; height:600px">	
+					<?php }if($tipo==3){?>					
+					<embed src="documentos/tarjetonelectoral.pdf" type="application/pdf" style="width:910px; height:600px">	
 						<?php }if($tipo==4){?>
-				<embed src="documentos/.pdf" type="application/pdf" style="width:910px; height:600px">	
+				<embed src="documentos/duque/mapa.output.pdf" type="application/pdf" style="width:910px; height:600px">	
+				<?php }if($tipo==5){?>
+				<embed src="documentos/duque/siguemovil.pdf" type="application/pdf" style="width:910px; height:600px">	
 				<?php }?>
 			</div></div>
 		</header>	
