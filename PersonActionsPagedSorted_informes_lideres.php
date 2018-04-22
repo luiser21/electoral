@@ -112,10 +112,19 @@ $_GET["jtStartIndex"]=0;*/
 				$row[$i]['MESA']=$partidos[$i]['MESA'];
 				$row[$i]['PROFESION']=$partidos[$i]['PROFESION'];
 				$row[$i]['MUNICIPIO']=$partidos[$i]['MUNICIPIO'];
-				$sql="SELECT sum(VOTOREAL) AS VOTOREAL FROM miembros m 
-					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = m.IDLIDER
-					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA 
-					WHERE m.IDLIDER  =".$row[$i]['ID']." ";
+			 	$sql="SELECT
+					
+					sum(mesas.VOTOREAL) as VOTOREAL
+					FROM
+					miembros
+					INNER JOIN lideres ON lideres.ID = miembros.IDLIDER 
+					INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO 
+					INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO 
+					INNER JOIN puestos_votacion ON puestos_votacion.IDPUESTO = miembros.IDPUESTOSVOTACION 
+					INNER JOIN mesa_puesto_miembro ON mesa_puesto_miembro.MIEMBRO = miembros.ID and mesa_puesto_miembro.candidato='".$_SESSION["username"]."' 
+					INNER JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA
+					INNER JOIN municipios ON municipios.ID = puestos_votacion.IDMUNICIPIO 
+					where usuario.USUARIO='".$_SESSION["username"]."'  and miembros.idlider=".$row[$i]['ID']." ";
 				$DBGestion->ConsultaArray($sql);				
 				$reales=$DBGestion->datos;
 				$row[$i]['VOTOSREALES']=($reales[0]['VOTOREAL']!='')?$reales[0]['VOTOREAL']:'0';
@@ -208,6 +217,7 @@ $_GET["jtStartIndex"]=0;*/
 	//Creating a new record (createAction)
 	else if($_GET["action"] == "create")
 	{
+		echo 'asdnfasfsdf';
 		//Insert record into database
 		$result = mysql_query("INSERT INTO people(Name, Age, RecordDate) VALUES('" . $_POST["Name"] . "', " . $_POST["Age"] . ",now());");
 		

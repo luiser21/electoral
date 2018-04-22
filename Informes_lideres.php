@@ -124,17 +124,21 @@ if($_SESSION["username"]!='alcaldia'){
 				}					
 				$sql.=" GROUP BY p.IDPUESTO) AS TABLA";
 				//echo $sql;exit;
-	$sql2="SELECT
-			count(lideres.ID) as TOTAL					
+	 $sql2="SELECT
+				capitanes.IDCAPITAN,
+				NOMBRE_CAPITAN NOMBRE				
 				FROM
 				lideres
-				LEFT JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
-				LEFT JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO
-				LEFT JOIN mesa_puesto_miembro ON mesa_puesto_miembro.LIDER = lideres.ID
-				LEFT JOIN mesas ON mesas.ID = mesa_puesto_miembro.IDMESA AND mesas.IDPUESTO = lideres.IDPUESTOSVOTACION
-				LEFT JOIN puestos_votacion ON puestos_votacion.IDPUESTO = mesas.IDPUESTO
-			  where usuario.usuario='".$_SESSION["username"]."' ";
-	
+				INNER JOIN candidato ON candidato.ID = lideres.IDCANDIDATO
+				INNER JOIN usuario ON usuario.IDUSUARIO = candidato.IDUSUARIO				
+				INNER JOIN capitanes ON capitanes.IDCAPITAN=lideres.IDCAPITAN
+			  where usuario.usuario='".$_SESSION["username"]."'
+				group by IDCAPITAN
+ORDER BY 2  ";
+			
+			
+			$DBGestion->ConsultaArray($sql2);				
+			$lideres=$DBGestion->datos;
 	
 }else{
 	$sql="SELECT count(miembros_2010.codigo) AS TOTAL
@@ -165,38 +169,37 @@ $DBGestion->ConsultaArray($sql2);
 $totales_lideres=$DBGestion->datos;
 ?>
 						<br/>
+<script  type="text/javascript">
+function redireccionar() {
+	
+	var cedula = document.getElementById('idlider').value;
+	document.location = 'ver_mesas_miembros_informe_lideres_excel.php?idlider='+cedula ;
+	
+}
+</script>
 <div class="filtering">
     <form>
-        Nombre: <input type="text" name="name" id="name" />
-       <!-- City:
-        <select id="cityId" name="cityId">
-            <option selected="selected" value="0">All cities</option>
-            <option value="1">Adana</option>
-            <option value="2">Ankara</option>
-            <option value="3">Athens</option>
-            <option value="4">Beijing</option>
-            <option value="5">Berlin</option>
-            <option value="6">Bursa</option>
-            <option value="7">Istanbul</option>
-            <option value="8">London</option>
-            <option value="9">Madrid</option>
-            <option value="10">Mekke</option>
-            <option value="11">New York</option>
-            <option value="12">Paris</option>
-            <option value="13">Samsun</option>
-            <option value="14">Trabzon</option>
-            <option value="15">Volos</option>
-        </select>-->
-        <button type="submit" id="LoadRecordsButton">Buscar</button>
-<input id="cmdexport" class="cmdexport" type="button" onclick="window.location='informe_puestos_exportar.php?action=exportar'" value="Exportar" name="cmdexport">
+        Nombre: <input type="text" name="name" id="name" />  <button type="submit" id="LoadRecordsButton">Buscar</button>
+       ExportExcel:
+        <select id="idlider" name="idlider" onchange="redireccionar();">
+            <option selected="selected" value="0">Capitanes Export</option>
+			<? for($i=0; $i<count($lideres);$i++){
+				
+				 ?>
+            <option value="<? echo $lideres[$i]['IDCAPITAN'] ?>"><? ECHO $lideres[$i]['NOMBRE'] ?></option>
+            <? } ?>
+        </select>
+      
 
     </form>
 </div><p></p>
 					<div id="PeopleTableContainer" style="width: auto;"></div>
 	<script type="text/javascript">
-
+		
+		
+	
 		$(document).ready(function () {
-
+			
 		    //Prepare jTable
 			$('#PeopleTableContainer').jtable({
 				title: "Tabla de Lideres - Total Simpatizantes: <?php echo ($totales[0]['TOTAL']>0)?$totales[0]['TOTAL']:'0'?>",
@@ -238,11 +241,11 @@ $totales_lideres=$DBGestion->datos;
 											sorting: true,
 											defaultSorting: 'Name ASC',
 											actions: {
-												listAction: 'ver_mesas_miembros_informe_lideres.php?idlider=' + studentData.record.ID,
-												caption:"Export to Excel",
+												listAction: 'ver_mesas_miembros_informe_lideres.php?idlider=' + studentData.record.ID
+												//caption:"Export to Excel",
 												//deleteAction: '/Demo/DeletePhone',
 												//updateAction: '/Demo/UpdatePhone',
-												createAction: 'ver_mesas_miembros_informe_lideres_excel.php?idlider=' + studentData.record.ID
+												//createAction: 'ver_mesas_miembros_informe_lideres_excel.php?idlider=' + studentData.record.ID
 											},
 											fields: {
 												ID: {
@@ -316,14 +319,14 @@ $totales_lideres=$DBGestion->datos;
 						create: false,
 						edit: false
 					},
-					
+					/*
 					MUNICIPIO: {
 						title: 'DOMICILIO',
 						width: '40%',
 						//type: 'date',
 						create: false,
 						edit: false
-					},/*
+					},
 					NOMBRE_PUESTO: {
 						title: '# PUESTOS VOTACION',
 						width: '30%',
@@ -344,7 +347,7 @@ $totales_lideres=$DBGestion->datos;
 						//type: 'date',
 						create: false,
 						edit: false
-					}/*,
+					},
 					VOTOSREALES : {
 						title: 'VOTOSREALES',
 						width: '30%',
@@ -358,7 +361,7 @@ $totales_lideres=$DBGestion->datos;
 						//type: 'date',
 						create: false,
 						edit: false
-					}*/
+					}
 				}
 			});
 
