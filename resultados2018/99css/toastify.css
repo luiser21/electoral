@@ -1,0 +1,110 @@
+/*!
+ * Toastify js 1.1.0
+ * https://github.com/apvarun/toastify-js
+ * @license MIT licensed
+ *
+ * Copyright (C) 2018 Varun A P
+ */
+
+
+
+.toastify {
+    padding: 12px 20px;
+    color: #555555;
+    display: inline-block;
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(77, 96, 232, 0.3);
+  /*  background: -webkit-linear-gradient(315deg, #73a5ff, #5477f5);
+    background: linear-gradient(135deg, #73a5ff, #5477f5);*/
+    background-image: -webkit-linear-gradient(left, #ffbc00, #FFB05F);
+    background-image: -o-linear-gradient(left, #ffbc00, #FFB05F);
+    background-image: linear-gradient(to right, #ffbc00, #FFB05F);
+    background-color: #ffffff;
+    position: fixed;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    max-width: calc(50% - 20px);
+    letter-spacing: 0.05em;
+    border-radius: 14px;
+    min-width: 380px;
+    z-index: 9999999;
+}
+
+.toastify:hover{
+        background-image: linear-gradient(to right, #000000d1, #000000c2);
+}
+
+#notif:hover{
+    color: white;
+}
+
+.toastify::before{
+    content: url(../99imgs/logo_elecciones_peq.png);
+    float: left;
+    margin-top: 3px;
+}
+
+#notif{
+    font-size: 94%;
+    letter-spacing: 1px;
+    margin-left: 82px;
+    margin-right: 5px;
+    margin-top: -1px;
+    line-height: 2;
+    padding-top: 0;
+}
+
+#notif b{
+    font-size: 120%;
+}
+
+.toastify.on {
+    opacity: .97;
+}
+.toast-close {
+    opacity: 0.4;
+    padding: 0 5px;
+}
+.right {
+    right: 15px;
+}
+.left {
+    left: 15px;
+}
+.top {
+    top: -150px;
+}
+.bottom {
+    bottom: -150px;
+}
+.rounded {
+    border-radius: 25px;
+}
+.avatar{
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 5px;
+    border-radius: 2px;
+}
+@media only screen and (max-width: 360px){
+    .right, .left{
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        max-width: fit-content;
+    }
+}
+
+div#notif:after {
+    content: url(../99imgs/next.png);
+    font-weight: bold;
+    position: relative;
+    text-align: right;
+    font-size: 115%;
+    margin-left: 22px;
+    vertical-align: text-top;
+}
+

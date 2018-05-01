@@ -1,0 +1,26 @@
+#tituloMapa{
+    background-color: #00b0ac;
+    color: #ffffff;
+    font-weight: normal;
+    border: 1px solid #ddd;
+	border-bottom:none;
+	text-align:center;
+	min-height:3.5em;
+	height:3.5em;
+	line-height:3.5em;
+}
+#tituloMapa span{
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+	width:99.9%;
+	line-height:3.5em;
+}
+
+.cuadroMapa figure img {
+    width: 100%;
+}
+
+.cuadroMapa figure{
+
+}

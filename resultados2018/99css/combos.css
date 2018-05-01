@@ -1,0 +1,632 @@
+#Subheader {
+    width: auto;
+    margin-left: 260px;
+}
+
+.btnSup {
+    width: 100%;
+    float: left;
+}
+
+.icoColombia {
+    width: 30px;
+    vertical-align: middle;
+    padding-top: 11px;
+    margin-right: 10px;
+    margin-left: 8px;
+}
+
+.home {
+    width: 25px;
+    vertical-align: middle;
+    padding-top: 12px;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-left: 6px;
+}
+
+.combosContainer {
+    width: auto;
+    float: left;
+}
+
+.combos {
+    width: 100%;
+    height: 50px;
+}
+
+.combos span {
+    font-size: 120%;
+    float: left;
+}
+
+.combos span.todas {
+    font-size: 93%;
+    margin-left: .8em;
+    margin-top: .4em;
+    color: #444;
+    width: auto;
+}
+
+.combos .seleccion {
+    padding: 0;
+    clear: none;
+    float: left;
+    height: 50px;
+}
+
+
+.combos .seleccion .selSpan {
+    padding-top: 1px;
+}
+
+#textoYchosen .chosen-single.chosen-default {
+    width: 20em;
+}
+
+@media only screen and (max-width: 1280px) {
+    #textoYchosen .chosen-single.chosen-default {
+        width: 17em;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    #textoYchosen .chosen-single.chosen-default {
+        width: 19em;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    #textoYchosen .chosen-single.chosen-default {
+        width: 40em;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #textoYchosen .chosen-single.chosen-default {
+        width: 30em;
+    }
+}
+
+.deptContainer {
+    width: 40%;
+    float: right;
+}
+
+.deptContent {
+    font-size: 100%;
+    text-align: center;
+    line-height: 2em;
+}
+
+.elenvioDatoDeLasContainer {
+    width: 100%;
+    float: left;
+    text-align: left;
+	color:#555;
+}
+
+#elenvioDatoDeLas {
+    display: block;
+	float:left;
+}
+
+
+#elenvio {
+    text-align: left;
+    font-weight: normal;
+    width: 100%;
+}
+
+
+#elenvio span {
+    width: 100%;
+}
+
+#elenvio .resaltar,
+#elenvio .resaltarHora {
+    font-size: 100%;
+}
+
+#elenvio .resaltarFecha {
+    font-size: 100%;
+}
+
+#elenvio .resaltarN {
+    font-size: bold;
+    font-size: 130%;
+    color: #f26722;
+}
+
+#elenvio .resaltarV {
+    font-size: bold;
+    color: #00b0ac;
+    font-size: 130%;
+}
+
+#descargasCSV {
+    border: 1px dashed #ddd;
+    color: #00b0ac;
+    margin-right: .5em;
+    padding: .1em;
+    text-transform: uppercase;
+    width: 80%;
+    min-height: 8em;
+    min-width: 190px;
+    height: 8em;
+    text-align: center;
+    display: block;
+    float: left;
+    margin-left: 10%;
+}
+
+#elenvio #elenvioNacional{
+    color: #00b0ac;
+    text-align: left;
+    display: block;
+    float: left;
+    margin-left: 7%;
+	line-height:2.5em;
+}
+
+#elenvio .sameLine {
+    line-height: 1em;
+}
+
+
+.etiqueta {
+    position: absolute;
+    display: none;
+    text-transform: none;
+    background-color: #EBEBEB;
+}
+
+.baboton {
+    border: 1px solid #ccc;
+    width: 165px;
+    display: none;
+    padding-left: 11px;
+}
+
+.baboton a {
+    z-index: 1000;
+    font-weight: normal;
+}
+
+
+#marcador1,
+#marcador2,
+#marcador3 {
+    margin-top: 1.17em;
+}
+
+#marcador1 {
+    width: 140px;
+}
+
+#marcador2 {
+    width: 120px;
+}
+
+.EST #marcador2 {
+    width: 80px;
+}
+
+
+#marcador3 {
+    width: 200px;
+}
+
+.EST #marcador3 {
+    width: 255px;
+}
+
+#textoYchosen {
+    width: 0;
+}
+
+.breadcrumb {
+    color: #ffffff;
+    line-height: 3.5em;
+    text-decoration: none;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+@media only screen and (max-width: 1280px) {
+    #Subheader {
+        margin-left: 200px;
+    }
+    #elenvio #elenvioNacional {
+        min-width: auto;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    #elenvio #elenvioNacional,
+    #descargasCSV {
+        text-transform: none;
+        min-height: 8em;
+        min-width: auto;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    #Subheader {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .combosContainer,
+    .combosContainer2 {
+        width: 100%;
+    }
+
+    .btnSup {
+        width: 100%;
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+
+    #elenvio #elenvioNacional,
+    #elenvio #elenvioDatoDeLas {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    #elenvio #elenvioNacional {
+        height: 55px;
+        margin-bottom: 5px;
+    }
+
+
+}
+
+
+/************************* ESTILOS CHECKED ***********************/
+
+.dropdown {}
+
+input[type=checkbox] {
+    display: none;
+}
+
+
+ul.desplegable {
+    display: none;
+    margin-top: .1em;
+}
+
+ul.desplegable li {
+    list-style: none;
+    padding-left: 1em;
+    line-height: 1.7em;
+    height: 2.3em;
+}
+
+ul.desplegable li.sinBol{
+    padding-left: 0;
+}
+
+
+ul.desplegable li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 88%;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+ul.desplegable li:hover {	
+	background-image: -webkit-linear-gradient(left, #EB9C4D, #FFCFA0); 
+	background-image:    -moz-linear-gradient(right, #EB9C4D, #FFCFA0); 
+	background-image:     -ms-linear-gradient(left, #EB9C4D, #FFCFA0); 
+	background-image:      -o-linear-gradient(right, #EB9C4D, #FFCFA0); 
+	background-image:         linear-gradient(right, #EB9C4D, #FFCFA0);
+    background-image: linear-gradient(to right, #EB9C4D, #FFCFA0);	
+    color: #fff;
+}
+
+ul.desplegable li a:hover {
+    font-weight: bold;
+    color: #fff;
+}
+
+ul.desplegable li:nth-child(1) a {
+
+    font-weight: bold;
+}
+
+.EST #marcador2 ul.desplegable li:nth-child(1) a,
+.EST #marcador3 ul.desplegable li:nth-child(1) a {
+    font-weight: normal;
+}
+
+.dropdown #mun_toggle:checked~ul.desplegable,
+.dropdown #dep_toggle:checked~ul.desplegable,
+.dropdown #boletines_toggle:checked~ul.desplegable {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.9);	
+    min-width: 140px;
+    max-height: 17em;
+    overflow: auto;
+    border-radius: 4px;
+    box-shadow: 1px 0px 7px 0px #ccc;
+    margin-left: -14px;
+    margin-top: 17px;
+    border-top-left-radius: 0px;
+    z-index: 99999;
+    position: relative;
+}
+
+.dropdown #boletines_toggle:checked~ul.desplegable {
+    top: 2.5em;
+    right: 2px;
+    position: absolute;
+    MARGIN-TOP: 16px;
+    max-width: 325px;
+    max-height: 500px;
+        min-width: 290px;
+
+}
+.dropdown #bol_toggle:checked~ul.desplegable {
+    display: block;
+    min-width: 200px;
+	max-width:200px;
+    max-height: 17em;
+    overflow: auto;
+    position: fixed;
+    margin-top: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 0px 7px 0px #ccc;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 999;
+}
+
+.dropdown #bol2_toggle:checked~ul.desplegable {
+    display: block;
+    min-width: 200px;
+    max-width:200px;
+    max-height: 17em;
+    overflow: auto;
+    position: fixed;
+    margin-top: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 0px 7px 0px #ccc;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 999;
+}
+
+.bol ul.desplegable li {
+    list-style: none;
+    padding-left: 0em;
+    line-height: 1.5em;
+    padding-top: .1em;
+    border: none;
+}
+
+.bol ul.desplegable li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 98%;
+    font-weight: normal;
+    text-align: center;
+    padding: 0 0;
+    line-height: 1.5em;
+}
+
+.bol ul.desplegable li a:hover {
+    color: #fff;
+}
+
+
+label:not(#iconoNotificacion)::after {
+    margin-left: 4px;
+    content: url(../99imgs/fdown.png);
+}
+
+
+
+label {
+    display: inherit;
+    color: #ffffff;
+    padding-left: 5px;
+}
+
+
+label:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.dropdown.opcActiva {
+    background-color: #00b0ac;
+    color: white;
+    height: 3em;
+}
+
+.dropdown.opcActiva label {
+    color: #fff;
+}
+
+.dropdown li.opcActiva {
+    background-color: unset;
+}
+
+li.opcActiva a {
+    color: #00b0ac;
+}
+
+.dropdown.opcActiva input[type=checkbox]:checked~label {
+    color: #fff;
+}
+
+.bol.dropdown label:hover {
+    color: #555;
+    cursor: pointer;
+}
+
+
+.dropdown.opcActiva ul.desplegable {
+    font-weight: normal;
+}
+
+.bol.dropdown label {
+    width: 17.5em;
+    text-align: left;
+    margin-top: 5px;
+    font-size: 85%;
+    color: #555;
+	padding-left:0;
+}
+
+.bol.dropdown label#bolLabel::after {
+    margin-left: 9px;
+    content: url(../99imgs/fdown_black.png);
+}
+
+@media only screen and (max-width: 480px) {
+
+    #marcador3 {
+        width: 140px;
+    }
+
+    #marcador3 #mun_toggle:checked~ul.desplegable{
+        margin-top: 18px;
+    }
+
+    ul.desplegable li{
+
+        padding-top: 1em;
+        line-height: 1em;
+    }
+}
+
+
+
+/**** Formateo de los scrollbar ******/
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+
+
+/**** Notificaciones de nuevos boletines ******/
+
+ul.desplegable #boletines {
+    display: block;
+    height: auto;
+    text-align: center;
+    max-height: 268px;
+    max-width: 290px;
+    overflow: auto;
+}
+
+.dropdown #boletines_toggle:checked~ul.desplegable.sinBol{
+    min-width: 290px;
+    overflow: hidden;
+}
+
+
+#notificacion {    
+	position:absolute;
+	right:0;
+	top:0;
+}
+
+#notificacion label {
+    float: right;
+    display: inline-block;
+}
+
+#notificacion>ul.desplegable {
+    float: right;
+    margin-top: 1.1em;
+}
+
+#notificacion ul.desplegable#boletines>li {
+    list-style: none;
+    width: 100%;
+    padding-left: 0;
+    padding-top: 1.5em;
+    margin-top: 0em;
+    padding-right: 0px;
+    display: inline-table;
+    padding-bottom: 1em;
+
+}
+
+#notificacion ul.desplegable#boletines>li a {
+    font-weight: normal;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 75%;
+    display: block;
+    line-height: 1.5;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin: 0px 10%;
+    height: 146%;
+    width: 80%;
+
+}
+
+#notificacion>ul.desplegable>li span {
+	font-size: inherit;
+	position: relative;
+	display: inline-block;
+	padding-top: .5em;
+	width: 100%;
+	text-align: center;
+    font-weight: bold;
+    height: 2em;
+}
+
+#numeroNotificacion {
+    display: none;
+    padding: 3px 7px 3px 7px;
+    background: #cc0000;
+    color: #ffffff;
+    font-weight: bold;
+    margin-left: 5px;
+    border-radius: 9px;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    position: absolute;
+    margin-top: 4px;
+    font-size: 11px;
+	border: 2px solid white;
+}
+
+.tituloNotificacion {
+    text-transform: uppercase;
+    text-align: center;
+    padding-left: 0;
+    padding-top: .5em;
+}
+#btnHis{
+	display:none;
+}
+
+
+@media only screen and (max-width: 750px) {
+    #notificacion {    
+        top:-51;
+    }
+}

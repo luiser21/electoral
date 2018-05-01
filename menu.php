@@ -138,6 +138,12 @@ $(document).ready(function() {
 			<li ><a href="reporte3.php">Dia Post Electoral</a></li>
 			<li ><a href="consolidado.php">Consolidado Electoral</a></li>			
 			<li ><a href="consolidado3.php">Analisis de Resultados</a></li>
+			<li ><a href="#">Gerente Nacional</a>
+				<ul>			
+					<li ><a href="reportegerentenacional.php" >Nacional</a></li>
+					<li ><a href="reportegerentedepartamental.php" >Departamental</a></li>					
+				</ul>
+			</li>
 			<!--<li ><a href="movilizados.php">Movilizados</a></li>
 			<li ><a href="compromisos.php">Compromisos</a></li>
 			<li ><a href="seguimiento_simpatizantes_movilizados.php">Seguimiento Simpatizantes Movilizados</a></li>

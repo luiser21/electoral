@@ -1,0 +1,202 @@
+  /* the overlayed element */
+
+  .apple_overlay {
+
+      /* initially overlay is hidden */
+      display: none;
+
+      /*
+      width after the growing animation finishes
+      height is automatically calculated
+      */
+      /* some padding to layout nested elements nicely  */
+      padding: 0.4em;
+      position: absolute !important;
+  }
+  /* default close button positioned on upper right corner */
+
+  .apple_overlay .close {
+      font-size: 200%;
+      position: absolute;
+      top: -16px;
+      cursor: pointer;
+      width: 100%;
+      color: white;
+      text-align: right;
+      font-family: Arial;
+      max-width: 900px;
+  }
+
+  .close {
+      float: none;
+      font-weight: normal;
+      line-height: 0;
+      opacity: .7;
+      text-shadow: 0 0px 0 #000;
+  }
+  /* use a semi-transparent image for the overlay */
+
+  #overlay {
+      text-align: center;
+      width: 100%;
+  }
+  /* container for external content. uses vertical scrollbar, if needed */
+
+  div.contentWrap {
+      width: 100%;
+      max-width: 900px;
+      height: 100%;
+      overflow-y: auto;
+      background-color: white;
+      display: inline-block;
+      max-height: 600px;
+      min-width: 320px;
+  }
+
+  #exposeMask {
+
+      width: 100% !important;
+  }
+
+  div.contentWrap #headerBanner-wrap {
+      position: relative;
+  }
+
+
+     div.contentWrap #asideInfoGen{
+      width: auto;
+      height: auto;
+      margin: 4em 7em 4em 1em;
+     }
+
+  .js div.contentWrap #headerSol1,
+  .js div.contentWrap #headerSol2 {
+    display: block;
+      width: 100px;
+      letter-spacing: .25px;
+      border: 1px solid #ddd;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: rgb(221, 221, 221);
+      border-bottom: none;
+      padding: 6px 20px;
+      color: #444;
+      font-weight: bold;
+      height: 40px;
+      line-height: 2;
+      background-color: #009692;
+      color: #fff;
+      margin-left: .5em;
+
+  }
+
+
+    .js div.contentWrap .h{
+      display: table-row;
+    }
+
+
+    div.contentWrap .nomcSolo{
+      text-indent: 1.5em;
+
+    }
+
+
+    div.contentWrap .cajaCIOverlayed{
+      padding-right: 1em;
+          height: 100%;
+    overflow: hidden;
+    padding: 1em;
+    display: block;
+    border-left: 4px solid #ddd;
+    border-top: 4px solid #009692;
+    border-bottom: 4px solid #ddd;
+    }
+
+
+    div.contentWrap #cajaInnerDatos{
+      padding:0 0 0 0 ;
+      width: 100%;
+	  float: left;
+	  margin-left: 0;
+    }
+
+
+     div.contentWrap #headerDatos{
+      width: 100%;
+      float:left;
+      text-align: left;
+    }
+
+
+
+
+
+    div.contentWrap #elenvioDatoDeLas {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: .1em;
+    text-transform: uppercase;
+    min-width: 11em;
+    min-height: 6em;
+    text-align: center;
+    display: block;
+    float: right;
+    margin-right: 1em;
+    font-size: 66%;
+    font-weight: bold;
+    overflow: hidden;
+    margin-top: 1.2em;
+
+}
+    div.contentWrap #elenvioDatoDeLas span {
+    display: inline-block;
+    width: 100%;
+    COLOR: #585858;
+}
+
+    div.contentWrap #elenvioDatoDeLas .resaltar, #elenvioDatoDeLas .resaltarHora {
+    font-size: 100%;
+}
+
+    div.contentWrap #elenvioDatoDeLas .resaltarFecha {
+    font-size: 100%;
+  
+  }
+  
+    div.contentWrap #elenvioDatoDeLas .sameLine {
+    line-height: 2em;
+}
+
+div.contentWrap .scrolled #titulo{
+  display: inline-block;
+}
+
+div.contentWrap .scrolled {
+  height: 80px !important;
+}
+
+div.contentWrap #fecha{
+  display: block;
+}
+
+.overlayed #infoGenTab {
+    width: 100%;
+}
+
+.js .overlayed .navTabs{
+	overflow: visible;
+}
+
+.cajaCIOverlayed{
+	display: none;
+}
+
+#sol1Overlayed{
+	display: block;
+}
+
+.overlayed #header{
+	float: none;
+}

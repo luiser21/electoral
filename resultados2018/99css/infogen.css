@@ -1,0 +1,230 @@
+    @charset "UTF-8";
+
+
+/***************************************************INICIO SECCIÓN INFORMACIÓN GENERAL*******************************************************/
+
+#infoGenContainer {
+    width: 90%;
+    float: left;
+    margin-top: 100px;
+    margin-left: 5%;
+}
+
+#infoGenContent {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+#infoGenTitle {
+    width: 100%;
+    text-align: left;
+    line-height: 30px;
+    font-weight: lighter;
+	color: #00b0ac;
+	margin-bottom: 0;
+    letter-spacing: 1px;
+    font-size: 110%;
+}
+
+#infoGenAmb{
+	text-indent: 5px;
+}
+.titSection {
+    font-size: 170%;
+    margin: 0;
+}
+
+p.subtitSection {
+    color: #00b0ac;
+    text-align: left;
+    margin-bottom: 7px;
+	font-weight:bold;
+}
+
+#bolasContainer {
+    float: left;
+    width: 70%;
+    margin-top: 2em;
+}
+
+#bolasContent {
+    float: left;
+    width: 100%;
+}
+
+#infoGenTab {
+    margin: 0.4em 0 0 0;
+    width: 30%;
+    float: right;
+    clear: none;
+}
+
+
+
+.titGraficas {
+    color: #00b0ac;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.linvotgen .pref {
+    display: none;
+}
+
+.titGraficas span {
+    display: none;
+}
+
+.nbola {
+    display: none;
+    text-align: center;
+    color: #00b0ac;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.piebola {
+    margin: 0;
+    margin-left: 35%;
+    text-align: left;
+    margin-top: 28px;
+}
+
+.piebola span{
+	font-size:90%;
+}
+
+#diagrama_progresion1,
+#diagrama_progresion2 {
+    width: 45.9%;
+    float: left;
+    margin-top: 0.4em;
+    border-right: 1px solid #00b0ac;
+
+}
+
+#diagrama_progresion2 {
+
+margin-left: 10px;
+
+}
+
+
+canvas {
+    width: 130px;
+    margin: 0 auto;
+    display: block;
+    float: left;
+}
+
+
+.linvotgen {
+    margin-bottom: .2em;
+}
+
+.infoInfo {
+    margin-right: .5em;
+}
+
+.cabvotos {
+
+    font-size: 100%;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+#boxgentab {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 30px;
+}
+
+.medinfo {
+    font-size: 90%;
+}
+
+
+.js .nbola {
+    display: none;
+}
+
+.js .titGraficas span {
+    display: none;
+}
+
+.js .titGraficas {
+    margin-bottom: 3px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    #infoGenTab {
+        width: 100%;
+    }
+    #boxgentab {
+        margin-left: 0;
+        margin-top: 0;
+    }
+	#boxgentab .votos{
+		padding: 10px 0em 10px 0;
+	}
+    #bolasContainer {
+        width: 100%;
+		margin-top: 10px;
+    }
+	#diagrama_progresion1, #diagrama_progresion2{
+		border:none;
+	}
+	
+}
+@media only screen and (max-width: 800px) {
+    
+	#diagrama_progresion1, #diagrama_progresion2{
+		width:100%;
+	}
+	#diagrama_progresion2 {
+		margin-left: 0;
+		margin-top:20px;
+	}
+}
+
+
+@media only screen and (max-width: 750px) {
+    #infoGenContainer {
+        margin-top: 148px;
+    }
+	#diagrama_progresion1, #diagrama_progresion2{
+		width:49.9%;
+	}
+	#diagrama_progresion2 {
+		margin-left: 0;
+		margin-top:0.4em;
+	}
+	
+}
+
+@media only screen and (max-width: 700px) {
+   
+	#diagrama_progresion1, #diagrama_progresion2{
+		width:100%;
+	}
+	#diagrama_progresion2 {
+		margin-left: 0;
+		margin-top:20px;
+	}
+	
+}
+@media only screen and (max-width:550px) {
+	#infoGenContainer{
+		width:96%;
+		margin-left:2%;
+		/* font-size:12px; */
+	}
+}
+
+
+

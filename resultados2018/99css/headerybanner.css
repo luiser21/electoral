@@ -1,0 +1,328 @@
+/****************************** HEADERBANNER ******************************/
+#headerResp{
+	display:none;
+	height:50px;
+	position:fixed;
+	top:0;
+	width:100%;
+	background-color: #ddd;
+	z-index:99;
+}
+.menuIcon{
+	float: left;
+    margin-top: 8px;
+    margin-left: 10px;
+	
+}
+.menuLogo{
+	float:left;	
+	height:50px;
+	margin-left:31%;
+}
+.menuLogo img{
+	height:50px;
+}
+
+#header {
+  float: left;
+  width: 100%;
+  transition: height .4s ease, opacity .3s ease;
+  background: linear-gradient(#8dd7d6, #eee);
+}
+.titleColombia { 
+  font-size: 130%;
+  font-weight: 400;
+  text-align:center;
+  height:auto;
+  clear:both; 
+  margin-top:15px;    
+}
+
+.titleElec { 
+  display:none;
+  font-size: 120%;
+  font-weight: 300;
+  text-align:center; 
+  clear:both;
+  height:auto; 
+  margin-top:30px;  
+}
+.titleElecFecha{
+  font-size: 100%;
+  font-weight: 300;
+  text-align:center; 
+  clear:both;
+  height:auto;
+}
+#logoElec {
+	width:auto;	
+	height: -webkit-fill-available;	
+	-webkit-transition: max-height .4s ease, opacity .3s ease;
+	-o-transition: max-height .4s ease, opacity .3s ease;
+	transition: max-height .4s ease, opacity .3s ease;	
+	height: inherit;
+	float: none;
+    margin: 20px 40px;
+}
+
+#logo img {
+  display: block;
+  max-height: 100%;
+}
+
+#logoElec img {
+  display: block;
+  max-height: 100%;
+  float:right;
+  height:auto;
+}
+
+#titulo {
+  text-align: center;
+  font-weight: 600;
+  font-size: 115%;
+  margin-top: .8em;
+  -webkit-transition: font-size .4s ease, opacity .2s ease;
+  -o-transition: font-size .4s ease, opacity .2s ease;
+  transition: font-size .4s ease, opacity .2s ease; }
+
+.scrolled #titulo {
+	float:left;
+	width:60%;
+	margin-top: .5em;
+	font-size: 68%;
+	-webkit-transition: font-size .4s ease, opacity .3s ease;
+	-o-transition: font-size .4s ease, opacity .3s ease;
+	transition: font-size .4s ease, opacity .3s ease;
+}
+
+#repCol {
+  font-size: 300%;
+  display: block;
+  line-height: 1;
+}
+
+#elecCong {
+  font-size: 200%;
+}
+
+#fecha {
+  font-size: 120%;
+  display: none;
+}
+
+#headerBanner-wrap {
+	z-index: 199;
+	width: 100%;
+	height: inherit;
+	-webkit-backface-visibility: hidden;	
+}
+
+@media only screen and (max-width: 940px) {
+	
+	#titulo {
+		margin-top: .5em;
+		font-size: 68%;
+		-webkit-transition: font-size .4s ease, opacity .3s ease;
+		-o-transition: font-size .4s ease, opacity .3s ease;
+		transition: font-size .4s ease, opacity .3s ease;
+	}
+	#repCol {
+	  font-size: 200%;	  
+	}
+
+	#elecCong {
+	  font-size: 120%;
+	}
+
+	
+	#logo {
+		font-size: 100%;
+		-webkit-transition: height .4s ease, opacity .3s ease;
+		-o-transition: height .4s ease, opacity .3s ease;
+		transition: height .4s ease, opacity .3s ease;
+		height: inherit;
+	}
+
+}
+	
+@media only screen and (max-width: 750px) {	
+	#headerResp{
+		display:block;
+	}
+	#colIzqContainer{
+		top: 50px;
+	}
+	#colIzqContainer.oculto{
+		width: 260px;
+		left: -5000px;
+				
+	}
+	#logoElec{
+		display:none;
+	}
+	#result{
+		display:initial;
+	}
+	
+}
+	
+@media only screen and (max-width: 480px) {
+	#header {
+		height: 40px;
+	}
+	#titulo {
+		margin-top: 1.5em;
+		font-size: 53%;
+	}
+
+	.scrolled #titulo {
+		-webkit-transition: 0;
+		-o-transition: 0;
+		transition: 0;
+		font-size: 55%;
+	}
+
+	.resProv {
+		font-size: 80%;
+	}
+
+	.menuLogo{
+		margin-left: 20%;
+	}
+
+	
+
+	
+}
+/****************************** FIN HEADERBANNER ******************************/
+
+/****************************** bannerNavigator ******************************/
+#bannerNav-wrap {
+	
+	display: block;
+	float: left;
+	width: 100%;
+	margin: 0 auto 0 auto;
+	z-index: 99;	
+	-webkit-backface-visibility: hidden;	
+}
+
+.bannerNav-title { 
+  font-size: 140%;
+  font-weight: 300;
+  text-align:center;
+  height:3em;
+}
+
+.resProv {
+  font-weight: 600; }
+
+#result {
+  font-weight: 300; }
+
+.bannerNav-menu {
+  position: relative;
+  float: left;
+  margin-left: 15%;
+  margin-right: 15%;
+  font-size:125%;
+}
+
+.bannerNav-menu ul {
+  margin: 0;
+}
+
+.bannerNav-menu li {
+  position: relative;
+  float: left;
+  list-style: none;
+  width:100%;
+  border-top: 1px solid #ddd;
+}
+.bannerNav-menu li:last-child {
+  border-bottom: 1px solid #ddd;
+}
+
+body:not(.device-touch) .bannerNav-menu li a {
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.bannerNav-menu li a {
+	display: block;
+	padding: 0 5px;
+	text-decoration:none;
+	color: #555;	
+	border-radius: 14px;
+}
+.bannerNav-menu li a:hover {
+	color: #00b0ac;
+}
+
+.bannerNav-menu li#c1 a:hover {
+	color: #887f6f;
+}
+.bannerNav-menu li#c2 a:hover {
+	color: #f47b21;
+}
+.opcActiva{
+	border-radius:0px;
+	font-weight:bold;	
+	color:#555;	
+}
+
+li.opcActiva{
+	background-color:#dbebea;	
+}
+
+
+@media only screen and (max-width: 1280px) {
+	#logoElec img{
+		height:60px;
+	}
+	.bannerNav-menu{
+		margin-left:5%;
+		margin-right:5%;
+		font-size:105%;
+	}
+}
+@media only screen and (max-width: 940px) {
+	
+	#result {
+		display: none;
+	}
+	
+}
+	
+	
+@media only screen and (max-width: 480px) {
+	#headerBanner-wrap, #bannerNav-wrap {
+		position: relative;
+	}
+
+	#bannerNav {
+		height: 3em;
+		line-height: 3em; 
+	}
+
+	.bannerNav-title {
+		margin-left: 4%;
+	}
+
+	.bannerNav-menu {
+		margin-left: 6%;
+		top: 0;
+	}
+
+	.bannerNav-menu ul {
+		-webkit-padding-start: 0px;
+	}
+
+	.bannerNav-menu li a {
+		padding: 0 2px;
+	}
+}
+
+/*# sourceMappingURL=headerybanner.css.map */

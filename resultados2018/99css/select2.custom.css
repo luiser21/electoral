@@ -1,0 +1,304 @@
+.select2,
+.select2-results {
+    text-align: left;
+}
+
+.select2-match {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.select2-results__message {
+    font-style: italic;
+    background: #f5f5ff;
+}
+
+
+
+.select2-selection__choice__remove {
+    display: none !important;
+}
+
+.select2-container--default .select2-autocomplete .select2-selection__choice {
+    background-color: transparent;
+    border: none;
+    border-radius: initial;
+    color: #686868;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    /* border: 1px solid #019DDA; */
+	border: 1px solid transparent; 
+    /* height:2.3em; */
+}
+.select2-container--default .select2-selection--multiple{
+	border: 1px solid transparent; 
+}
+.select2-container .select2-selection--multiple {
+    width: 29em;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border-radius: 0;
+}
+
+
+.select2-container--open .select2-dropdown--below {
+    z-index: 9999;
+    /* width:28em !important; */
+}
+
+.select2-dropdown{
+    border:none;
+    border-radius: 6px;
+    box-shadow: 0px 4px 12px -3px #aaa;
+}
+
+
+@media only screen and (max-width:640px) {
+
+    .select2-container--open .select2-dropdown--below {
+        z-index: 9999;
+        /* width:19em !important; */
+    }
+}
+
+
+
+@media only screen and (max-width:380px) {
+
+    .select2-container--open .select2-dropdown--below {
+
+        /* width:15em !important; */
+    }
+}
+
+
+#busquedaLibre1 {
+    height: inherit;
+}
+
+#caja_BusquedaLibre {
+    height: inherit;
+}
+
+
+
+#busquedaLibre {
+    /*margin-top:0.24em;*/
+    /* margin-right: 1.6%; */
+    float: right;
+    width: auto;
+    /* height: 2.3em; */
+    height: 2.32em; 
+}
+
+#caja_BusquedaLibre {
+    position: fixed;
+    right: 100px;
+    top: 10px;
+    width: 29em;
+}
+
+#sel_BusquedaLibre {
+    /* width:100%; */
+    right: .2%;
+
+
+    display: none;
+}
+
+#pesquisa {
+    font-weight: bold;
+}
+
+#buscadorcontainer {
+    display: inline-block;
+}
+
+#busccab {
+    position: fixed;
+    right: 50px;
+    z-index: 9999;
+    top: 4px;
+    width: 40px;
+    height: 40px;
+}
+
+
+#desplbusc {
+    height: 3em;
+    display: inline-block;
+    float: right;
+}
+
+#desplbusc a {
+    /* margin-top: .2em; */
+    height: 3em;
+    display: inline-block;
+    cursor: pointer;
+    float: right;
+}
+#desplbusc a:visited, #desplbusc a:hover,#desplbusc a:active{
+	border-color:transparent;
+}
+#desplbusc a img {
+    height: 25px;
+    padding: 10px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-image: linear-gradient(to right, #EB9C4D, #FFCFA0);
+    color: #fff;
+    border-radius: 0px;
+    background-color: #ffffffef;
+}
+
+.select2-results__option {
+    background-color: #ffffffef;
+}
+
+.select2-results__option::before {
+    content: url(../99imgs/lupa2.png);
+
+    margin-right: 5px;
+}
+.select2-results__option--highlighted::before {
+    content: url(../99imgs/lupa3.png);
+
+    margin-right: 5px;
+}
+
+.select2-match{
+    color:#ffffff; background-color:#EB9C4D; text-decoration:none;
+
+}
+
+
+/* @media only screen and (max-width: 1280px) { */
+
+    /* #busccab { */
+        /* left: 6px; */
+
+        /* position: absolute; */
+        /* top: 3.5em; */
+        /* width: 100%; */
+    /* } */
+
+    /* #desplbusc { */
+        /* height: 3em; */
+        /* display: block; */
+    /* } */
+
+    /* #desplbusc a { */
+        /* margin-left: 14em; */
+        /* height: 3em; */
+        /* display: inline-block; */
+
+        /* cursor: pointer; */
+    /* } */
+
+    /* #desplbusc a img { */
+        /* height: 27px; */
+        /* padding: 8px; */
+    /* } */
+
+    /* #buscadorcontainer { */
+
+        /* height: 2.5em; */
+        /* display: none; */
+        /* margin-left: 17em; */
+        /* margin-top: -2.4em; */
+        /* position: relative; */
+        /* transition: width .3s linear 0s; */
+    /* } */
+
+    /* .select2-selection.select2-selection--multiple.select2-autocomplete { */
+        /* width: 0; */
+        /* transition: width .3s linear 0s; */
+    /* } */
+
+    /* .select2-container--default .select2-selection--multiple .select2-selection__rendered { */
+        /* transition: width .3s linear 0s; */
+        /* width: 100%; */
+    /* } */
+
+    /* #busquedaLibre { */
+        /* position: relative; */
+        /* height: 2.3em; */
+        /* float: left; */
+        /* margin-left: 1em; */
+    /* } */
+
+    /* #caja_BusquedaLibre { */
+        /* position: relative; */
+        /* top: 0; */
+        /* right: 0; */
+        /* width: auto; */
+    /* } */
+
+    /* .select2-container { */
+        /* box-sizing: border-box; */
+        /* width: 100%; */
+        /* display: inline-block; */
+        /* margin: 0; */
+        /* position: relative; */
+        /* vertical-align: middle; */
+        /* right: 0; */
+    /* } */
+
+    /* .select2-container .select2-selection--multiple { */
+        /* width: 22em; */
+    /* } */
+/* } */
+@media only screen and (max-width: 1100px) {
+	#caja_BusquedaLibre{
+		top: 55px;
+		box-shadow: 3px 3px 3px #ccc;
+		right: 0;
+	}
+}
+@media only screen and (max-width: 750px) {
+	#caja_BusquedaLibre{
+		top: 110px;
+		
+	}
+	/* #busccab{ */
+		/* right:5px; */
+	/* } */
+
+    /* #desplbusc a { */
+        /* margin-left: 0em; */
+    /* } */
+
+    /* #buscadorcontainer { */
+
+
+        /* margin-left: 3em; */
+    /* } */
+}
+
+@media only screen and (max-width:420px) {
+
+    #caja_BusquedaLibre{width: 21em;}
+    .select2-container .select2-selection--multiple {width:21em;}
+}
+
+
+/* @media only screen and (max-width: 640px) { */
+
+    /* .select2-container .select2-selection--multiple { */
+        /* width: 15em; */
+    /* } */
+
+
+    /* .select2-container, */
+    /* .select2-container--default .select2-selection--multiple .select2-selection__rendered, */
+    /* .select2.select2-container.select2-container--default.select2-container--focus.select2-container--below.select2-container--open { */
+
+        /* width: 75%; */
+    /* } */
+/* } */
+
+
+/**** Formateo de lupa para esconder buscador ******/

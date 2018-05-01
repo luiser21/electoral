@@ -1,0 +1,257 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es"> 
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="../../../99css/jquery-jvectormap-1.2.2.css" />
+  <script type="text/javascript" src="../../../99js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../../../99js/jvectormap.js"></script>
+  <script type="text/javascript" src="../../../99js/jquery-jvectormap-25.js"></script>
+  <script type="text/javascript" src="../../../99js/99.js"></script>
+  <script type="text/javascript" src="../../../99js/mapas.js"></script>
+  <script type="text/javascript" src="../../../99js/nomenclator.js"></script>
+  <script type="text/javascript" src="../../../99js/select2.full.js"></script>
+  <script type="text/javascript" src="../../../99js/select2.custom.js"></script>
+  <script type="text/javascript" src="../../../99js/99-mapascolo18.js"></script>
+ </head>
+ <? 
+ $sql="SELECT municipios.MAPA,
+CONCAT('C21 - ',(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='C21' AND municipios.ID=elecciones_senado.IDMUNICIPIO)) AS 'C21',
+CONCAT('U6 - ',(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U6' AND municipios.ID=elecciones_senado.IDMUNICIPIO)) AS 'U6',
+CONCAT('U24 - ',(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U24' AND municipios.ID=elecciones_senado.IDMUNICIPIO)) AS 'U24'
+FROM  elecciones_senado 
+INNER JOIN municipios ON municipios.ID=elecciones_senado.IDMUNICIPIO
+INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO=municipios.IDDEPARTAMENTO
+WHERE departamentos.IDDEPARTAMENTO=24
+GROUP BY municipios.ID
+ORDER BY 2";
+ ?>
+ <body>
+<div id="caja_BusquedaLibre" class="">
+	<div id="busquedaLibre1" class="cajasel_BusquedaLibre">	   
+	</div>
+</div>
+<div class="cajaCI cajaCInoscript" id="sol1">
+	<div class="cajaMapa">		
+		<div class="cuadroMapa">        
+			<div class="Mapa mapacol" id="cajaMapa1"style="height: 438.658px;">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+vmapescrutado[0] = {
+		'g25069': '',
+		'g25001': '',
+		'g25093': '',
+		'g25085': '',
+		'g25073': '', 
+		'g25034': '', 
+		'g25079': '', 
+		'g25054': '', 
+		'g25100': '', 
+		'g25070': '', 
+		'g25046': '', 
+		'g25028': '', 
+		'g25067': '', 
+		'g25049': '', 
+		'g25064': '', 
+		'g25058': '', 
+		'g25016': '', 
+		'g25031': '', 
+		'g25088': '', 
+		'g25025': '', 
+		'g25007': '', 
+		'g25010': '', 
+		'g25094': '', 
+		'g25040': '', 
+		'g25019': '', 
+		'g25004': '', 
+		'g25061': '', 
+		'g25043': '', 
+		'g25052': '', 
+		'g25013': '', 
+		'g25097': '', 
+		'g25055': '', 
+		'g25076': '', 
+		'g25091': '', 
+		'g25022': '', 
+		'g25037': '', 
+		'g25036': '', 
+		'g25082': '', 
+		'g25051': '',
+		'g25038': '',};
+vmapvotos[0] = {
+		'g25069': 'C21 - 0',
+		'g25001': 'C21 - 414',
+		'g25093': 'C21 - 15',
+		'g25085': 'C21 - 0',
+		'g25073': 'C21 - 0', 
+		'g25034': 'C21 - 14', 
+		'g25079': 'C21 - 1', 
+		'g25054': 'C21 - 34', 
+		'g25100': 'C21 - 101', 
+		'g25070': 'C21 - 0', 
+		'g25046': 'C21 - 0', 
+		'g25028': 'C21 - 8', 
+		'g25067': 'C21 - 0', 
+		'g25049': 'C21 - 0', 
+		'g25064': 'C21 - 14', 
+		'g25058': 'C21 - 1', 
+		'g25016': 'C21 - 3', 
+		'g25031': 'C21 - 6', 
+		'g25088': 'C21 - 0', 
+		'g25025': 'C21 - 3', 
+		'g25007': 'C21 - 0', 
+		'g25010': 'C21 - 0', 
+		'g25094': 'C21 - 2', 
+		'g25040': 'C21 - 19', 
+		'g25019': 'C21 - 0', 
+		'g25004': 'C21 - 8', 
+		'g25061': 'C21 - 14', 
+		'g25043': 'C21 - 0', 
+		'g25052': 'C21 - 0', 
+		'g25013': 'C21 - 0', 
+		'g25097': 'C21 - 25', 
+		'g25055': 'C21 - 0', 
+		'g25076': 'C21 - 0', 
+		'g25091': 'C21 - 0', 
+		'g25022': 'C21 - 4', 
+		'g25037': 'C21 - 0', 
+		'g25036': 'C21 - 1', 
+		'g25082': 'C21 - 13', 
+		'g25051': 'C21 - 2',
+		'g25038': 'C21 - 15',};
+//vmappvotos[0] = {'g25001': '20,06%', 'g25004': '29,94%', 'g25007': '36,03%', 'g25010': '26,69%', 'g25013': '33,99%', 'g25016': '40,88%', 'g25019': '29,69%', 'g25022': '32,61%', 'g25025': '29,17%', 'g25028': '29,12%', 'g25031': '25,51%', 'g25034': '41,13%', 'g25036': '29,11%', 'g25037': '34,67%', 'g25038': '27,85%', 'g25040': '33,42%', 'g25043': '40,84%', 'g25046': '48,17%', 'g25049': '32,68%', 'g25051': '32,97%', 'g25052': '43,25%', 'g25054': '23,72%', 'g25055': '38,03%', 'g25058': '42,01%', 'g25061': '27,82%', 'g25064': '18,73%', 'g25067': '51,11%', 'g25069': '35,02%', 'g25070': '37,77%', 'g25073': '32,61%', 'g25076': '31,19%', 'g25079': '30,91%', 'g25082': '56,76%', 'g25085': '25,65%', 'g25088': '27,15%', 'g25091': '34,26%', 'g25093': '26,34%', 'g25094': '32,34%', 'g25097': '37,81%', 'g25100': '22,79%', };
+vmapdata[0] = {
+		'g25069': '001',
+		'g25001': '002',
+		'g25093': '003',
+		'g25085': '004', 
+		'g25073': '005', 
+		'g25034': '006', 
+		'g25079': '007',
+		'g25054': '008',
+		'g25100': '009',
+		'g25070': '010', 
+		'g25046': '011',
+		'g25028': '012', 
+		'g25067': '013',
+		'g25049': '014',
+		'g25064': '015', 
+		'g25058': '016', 
+		'g25016': '017',
+		'g25031': '018', 
+		'g25088': '019', 
+		'g25025': '020', 
+		'g25007': '021', 
+		'g25010': '022', 
+		'g25094': '023', 
+		'g25040': '024', 
+		'g25019': '025', 
+		'g25004': '026', 
+		'g25061': '027', 
+		'g25043': '028', 
+		'g25052': '029', 
+		'g25013': '030', 
+		'g25097': '031',
+		'g25055': '032', 
+		'g25076': '033', 
+		'g25091': '034', 
+		'g25022': '035', 
+		'g25037': '036', 
+		'g25036': '037', 
+		'g25082': '038', 
+		'g25051': '039', 
+		'g25038': '040', };
+vmappartidos[0] = {
+		'001': '', 
+		'002': '',
+		'003': '', 
+		'004': '', 
+		'005': '', 
+		'006': '', 
+		'007': '', 
+		'008': '', 
+		'009': '', 
+		'010': '', 
+		'011': '', 
+		'012': '', 
+		'013': '', 
+		'014': '', 
+		'015': '', 
+		'016': '', 
+		'017': '', 
+		'018': '', 
+		'019': '', 
+		'020': '', 
+		'021': '',
+		'022': '',
+		'023': '', 
+		'024': '',
+		'025': '', 
+		'026': '',
+		'027': '', 
+		'028': '',
+		'029': '',
+		'030': '',
+		'031': '', 
+		'032': '', 
+		'033': '', 
+		'034': '', 
+		'035': '', 
+		'036': '', 
+		'037': '', 
+		'038': '', 
+		'039': '', 
+		'040': '', };
+vmapcolores[0] = {
+		'001': '#0460a7', 
+		'002': '#de818a', 
+		'003': '#0460a7', 
+		'004': '#c0000d', 
+		'005': '#de818a', 
+		'006': '#c0000d', 
+		'007': '#de818a', 
+		'008': '#de818a', 
+		'009': '#de818a', 
+		'010': '#de818a', 
+		'011': '#54b8ec', 
+		'012': '#e46f00', 
+		'013': '#de818a', 
+		'014': '#c0000d', 
+		'015': '#0460a7', 
+		'016': '#de818a', 
+		'017': '#f9e800', 
+		'018': '#de818a', 
+		'019': '#0460a7', 
+		'020': '#0460a7', 
+		'021': '#0460a7', 
+		'022': '#54b8ec', 
+		'023': '#0460a7', 
+		'024': '#e46f00', 
+		'025': '#de818a', 
+		'026': '#de818a', 
+		'027': '#0460a7', 
+		'028': '#0460a7', 
+		'029': '#de818a', 
+		'030': '#de818a', 
+		'031': '#f9e800', 
+		'032': '#e46f00', 
+		'033': '#0460a7', 
+		'034': '#0460a7', 
+		'035': '#54b8ec', 
+		'036': '#f9e800', 
+		'037': '#de818a', 
+		'038': '#c0000d', 
+		'039': '#0460a7', 
+		'040': '#de818a', };
+</script>
+</body> 
+</html>
