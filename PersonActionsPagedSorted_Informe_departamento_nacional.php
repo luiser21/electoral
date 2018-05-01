@@ -38,13 +38,13 @@ $_GET["jtStartIndex"]=0;*/
 			
 			//Get records from database
 		
-			$sql="SELECT departamentos.IDDEPARTAMENTO, departamentos.NOMBRE as DEPARTAMENTO,
+			$sql="SELECT departamentos.IDDEPARTAMENTO, departamentos.NOMBRE as DEPARTAMENTO,INDIGENA,
 						VOTOS,
 						elecciones_senado.PARTICIPACION
 						FROM  elecciones_senado 
 						INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO=elecciones_senado.IDDEPARTAMENTO
 						UNION
-						SELECT 0 AS IDDEPARTAMENTO, 'TOTAL' as DEPARTAMENTO,
+						SELECT 0 AS IDDEPARTAMENTO, 'TOTAL' as DEPARTAMENTO,SUM(INDIGENA) AS INDIGENA,
 						'81.698'  AS VOTOS,
 						'0.53%' AS PARTICIPACION
 						FROM  elecciones_senado 
@@ -60,7 +60,7 @@ $_GET["jtStartIndex"]=0;*/
 			for($i=0; $i<count($partidos);$i++){
 				$row[$i]['ID']=$partidos[$i]['IDDEPARTAMENTO'];
 				$row[$i]['DEPARTAMENTO']=utf8_encode($partidos[$i]['DEPARTAMENTO']);
-				//$row[$i]['MUNICIPIOS']=utf8_encode($partidos[$i]['MUNICIPIOS']);
+				$row[$i]['INDIGENA']=$partidos[$i]['INDIGENA'];
 				$row[$i]['VOTOS']=$partidos[$i]['VOTOS'];
 				//$row[$i]['MESAS']=utf8_encode($partidos[$i]['MESAS']);
 				$row[$i]['PARTICIPACION']=$partidos[$i]['PARTICIPACION'];

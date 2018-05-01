@@ -152,6 +152,13 @@ button, input[type="button"], input[type="submit"] {
 						create: false,
 						edit: false
 					},						
+					INDIGENA: {
+						title: 'E10',
+						width: '6%',
+						//type: 'date',
+						create: false,
+						edit: false
+					},						
 					VOTOS: {
 						title: 'VOTOS U6',
 						width: '6%',

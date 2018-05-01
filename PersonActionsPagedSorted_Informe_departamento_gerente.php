@@ -18,14 +18,14 @@ $_GET["jtStartIndex"]=0;*/
 				$sql="";
 			
 			$sql="SELECT departamentos.IDDEPARTAMENTO, departamentos.NOMBRE as DEPARTAMENTO,
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='C21') AS 'C21',
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U6') AS 'U6',
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U24') AS 'U24',
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO IN ('U24','C21','U6')) AS 'TOTAL'
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='C21' AND IDDEPARTAMENTO=0) AS 'C21',
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U6' AND IDDEPARTAMENTO=0) AS 'U6',
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U24' AND IDDEPARTAMENTO=0) AS 'U24',
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO IN ('U24','C21','U6') AND IDDEPARTAMENTO=0) AS 'TOTAL'
 					FROM  elecciones_senado 
 					INNER JOIN municipios ON municipios.ID=elecciones_senado.IDMUNICIPIO
 					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO=municipios.IDDEPARTAMENTO
-					WHERE departamentos.IDDEPARTAMENTO=24
+					WHERE departamentos.IDDEPARTAMENTO=24  AND elecciones_senado.IDDEPARTAMENTO=0
 					GROUP BY departamentos.IDDEPARTAMENTO
 					 ";				
 			
@@ -37,14 +37,14 @@ $_GET["jtStartIndex"]=0;*/
 			//Get records from database
 		
 			$sql="SELECT departamentos.IDDEPARTAMENTO, departamentos.NOMBRE as DEPARTAMENTO,
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='C21') AS 'C21',
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U6') AS 'U6',
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U24') AS 'U24',
-					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO IN ('U24','C21','U6')) AS 'TOTAL'
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='C21'  AND IDDEPARTAMENTO=0) AS 'C21',
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U6' AND IDDEPARTAMENTO=0) AS 'U6',
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO='U24' AND IDDEPARTAMENTO=0) AS 'U24',
+					(SELECT SUM(VOTOS) FROM elecciones_senado WHERE TIPO IN ('U24','C21','U6') AND IDDEPARTAMENTO=0) AS 'TOTAL'
 					FROM  elecciones_senado 
 					INNER JOIN municipios ON municipios.ID=elecciones_senado.IDMUNICIPIO
 					INNER JOIN departamentos ON departamentos.IDDEPARTAMENTO=municipios.IDDEPARTAMENTO
-					WHERE departamentos.IDDEPARTAMENTO=24
+					WHERE departamentos.IDDEPARTAMENTO=24 AND elecciones_senado.IDDEPARTAMENTO=0
 					GROUP BY departamentos.IDDEPARTAMENTO
 				 ";
 			
