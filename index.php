@@ -55,7 +55,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "17 june 2018 08:00:00",
+				date: "27 october 2019 08:00:00",
 				format: "on"
 			},
 			function() {
@@ -72,10 +72,10 @@ ul.newsticker a:hover {text-decoration: underline;}
 <div id="marque">
 <div class="first">
 <marquee>
-<strong><span style="color:#f45805">DE TODOS Y PARA TODOS LOS COLOMBIANOS</span></strong>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><span style="color:#0008ff">DE TODOS Y PARA TODOS LOS COLOMBIANOS</span></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><span style="color:#f45805">ELECCIONES LOCALES CONCEJALES - MUNICIPALES - GOBERNACIONES</span></strong>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--<strong><span style="color:#0008ff">DE TODOS Y PARA TODOS LOS COLOMBIANOS</span></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong><span style="color:#ff0000">DE TODOS Y PARA TODOS LOS COLOMBIANOS</span></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+-->
 <!--<strong> DESDE EL 11 DE ENERO AL 11 DE FEBRERO DE 2018 </strong><span>Sorteo y publicación de listas de jurados de votación (Durante un mes). </span><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong> 29 DE ENERO DE 2018 </strong><span style="color:#FF0000"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 -->
@@ -87,8 +87,8 @@ ul.newsticker a:hover {text-decoration: underline;}
 						<li>
 							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Elecciones</span><span class="color1">Presidenciales</span><span> 2018</span></span>
-								<p>Segunda Vuelta el 17 de Junio de 2018<div class="timer-area" style=" margin-right:-100px">	
+								<span class="title"><span class="color2">Elecciones</span><span class="color1">Municipales</span><span>2019</span></span>
+								<p>DIA DE LA ELECCION 27 de Octubre de 2019<div class="timer-area" style=" margin-right:-100px">
 										<ul id="countdown">
 											<li>
 												<span class="days">00</span>
