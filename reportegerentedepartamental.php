@@ -100,7 +100,7 @@ button, input[type="button"], input[type="submit"] {
   <tr>
     <td><h4 align="left" style="font-size: 14px; color: #999999">Tarjeton # <?php echo $_SESSION['ntarjeton']?></h4> </td>
   </tr>
- 
+  
 </table>
 
 						<br/>
@@ -184,6 +184,7 @@ button, input[type="button"], input[type="submit"] {
 													create: false,
 													edit: false
 												},
+												<?php if($_SESSION['username']<>'72161298'){?>	
 												C21: {
 													title: 'C21',
 													width: '6%',
@@ -191,6 +192,7 @@ button, input[type="button"], input[type="submit"] {
 													create: false,
 													edit: false
 												},
+												<?php } ?>
 												U6: {
 													title: 'U6',
 													width: '6%',
@@ -228,14 +230,16 @@ button, input[type="button"], input[type="submit"] {
 						//type: 'date',
 						create: false,
 						edit: false
-					},						
+					}, 
+					<?php if($_SESSION['username']<>'72161298'){?>						
 					C21: {
 						title: 'C21',
 						width: '6%',
 						//type: 'date',
 						create: false,
 						edit: false
-					},					
+					},
+					<?php }?>					
 					U6: {
 						title: 'U6',
 						width: '6%',

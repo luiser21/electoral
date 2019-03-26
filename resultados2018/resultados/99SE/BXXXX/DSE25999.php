@@ -20,6 +20,7 @@
   <script type="text/javascript" src="../../../99js/99-mapascolo18.js"></script>
  </head>
  <? 
+ session_start();
   include_once "../../../../includes/GestionBD.new.class.php";
 	$DBGestion = new GestionBD('AGENDAMIENTO');	
  $sql="SELECT municipios.MAPA,
@@ -41,9 +42,12 @@ $mapas=$DBGestion->datos;
 	$armarmapa3='';
 	$y=1;
 	for($i=0; $i<count($mapas);$i++){
-		$armarmapa=$armarmapa."'".$mapas[$i]['MAPA']."':'".$mapas[$i]['C21']."'," ;
-		$armarmapa1=$armarmapa1."'".$mapas[$i]['MAPA']."':'".$mapas[$i]['U6']."'," ;
-		
+	    if($_SESSION['username']<>'72161298'){
+	        $armarmapa=$armarmapa."'".$mapas[$i]['MAPA']."':'".$mapas[$i]['C21']."'," ;	       
+	    }else{
+	        $armarmapa=$armarmapa."'".$mapas[$i]['MAPA']."':'Senado'," ;
+	    }
+	    $armarmapa1=$armarmapa1."'".$mapas[$i]['MAPA']."':'".$mapas[$i]['U6']."'," ;
 		if($y<=9){ 
 			$armarmapa3=$armarmapa3."'".$mapas[$i]['MAPA']."':'00".$y."'," ;
 			$armarmapa2=$armarmapa2."'00".$y."':'".$mapas[$i]['U24']."'," ;
