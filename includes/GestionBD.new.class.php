@@ -78,13 +78,13 @@ class GestionBD{
 			switch ($this->basedatos)
 			{
 				case "MYSQL":
-					if(!$this->IdConexion = mysql_connect($this->servidor,$this->usuario,$this->pass)){
+					if(!$this->IdConexion = mysqli_connect($this->servidor,$this->usuario,$this->pass)){
 						//$err =''//= OCIError();
 						throw new Exception('CONEXION MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.$err['message']. ' | Inicializando | '. $this->Ultima_Consulta );
 						echo $this->Ultima_Consulta;
 					}
 
-					if(!mysql_select_db($this->db,$this->IdConexion)){
+					if(!mysqli_select_db($this->IdConexion,$this->db)){
 						//$err = OCIError();
 						throw new Exception('CONEXION A LA BASE '.$this->db.' EN MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.$err['message']. ' | Inicializando | '. $this->Ultima_Consulta );
 						echo $this->Ultima_Consulta;
@@ -134,7 +134,7 @@ class GestionBD{
 			case 'MYSQL':
 				$this->IdConexion = 0;
 				//echo $this->IdConexion;
-				mysql_close($this->IdConexion);
+				mysqli_close($this->IdConexion);
 			break;
 
 			case 'ORACLE':
@@ -154,7 +154,12 @@ class GestionBD{
 		$this->IdConexion = 0;
 
 	}#fin de la función cerrar
-
+	
+	function mysqli_field_name($result, $field_offset)
+	{
+    	$properties = mysqli_fetch_field_direct($result, $field_offset);
+    	return is_object($properties) ? $properties->name : null;
+	}
 	public function CalcularParametros($p_sql)
 	{
 		if ( strstr($this->Ultima_Consulta,'SELECT') )
@@ -162,19 +167,25 @@ class GestionBD{
 			switch ($this->basedatos)
 			{
 				case 'MYSQL':
-					$this->NumColumnas=mysql_num_fields($this->resultado);
-					$this->NumFilas=mysql_num_rows($this->resultado);
+					$this->NumColumnas=mysqli_num_fields($this->resultado);
+					$this->NumFilas=mysqli_num_rows($this->resultado);
 					if ( strstr($p_sql,'SELECT') )
 					{
 						for ( $n=1;$n<=$this->NumFilas;$n++ )
 						{
-							$row = mysql_fetch_row($this->resultado);
+							$row = mysqli_fetch_row($this->resultado);
 
-							for ( $x=1;$x<=mysql_num_fields($this->resultado);$x++ )
+							for ( $x=1;$x<=mysqli_num_fields($this->resultado);$x++ )
 							{
-								$this->NomColumnas[$x]=mysql_field_name($this->resultado,$x-1);
-								$this->TipoColumnas[$x]=mysql_field_type($this->resultado,$x-1);
-								$this->TamColumnas[$x]=mysql_field_len($this->resultado,$x-1);
+								$table_info = mysqli_fetch_field_direct($this->resultado,$x-1);
+							//	$lenght = $table_info->length;
+							//	$name = $table_info->name;
+							//	$type = $table_info->type;
+							//	$flag = $table_info->flags;
+								
+								$this->NomColumnas[$x]=$table_info->name;
+								$this->TipoColumnas[$x]=$table_info->type;
+								$this->TamColumnas[$x]=$table_info->length;
 
 								$this->filas[$this->NomColumnas[$x]][$n]=$row[$x-1];
 							}
@@ -299,7 +310,7 @@ class GestionBD{
 		
 		switch ($this->basedatos){
 			case 'MYSQL':
-				$this->resultado = mysql_query($p_sql,$this->IdConexion) or die (mysql_error());
+				$this->resultado = mysqli_query($this->IdConexion,$p_sql) or die (mysqli_error());
 			break;
 
 			case 'ORACLE':
@@ -374,13 +385,13 @@ class GestionBD{
 		switch ($this->basedatos){
 			case 'MYSQL':
 			
-				$this->resultado = mysql_query($p_sql,$this->IdConexion) or die (mysql_error());
+				$this->resultado = mysqli_query($this->IdConexion,$p_sql) or die (mysqli_error());
 
 			if ( strstr($p_sql,'SELECT') ) {
 			
 		//	echo "<br>Ejecutando Consulta a Array..";
 
-				 while($row = mysql_fetch_assoc($this->resultado)) {
+				 while($row = mysqli_fetch_assoc($this->resultado)) {
 						$this->datos[] = $row;
 				 }
 			//imprimir($this->datos);
@@ -456,7 +467,7 @@ class GestionBD{
 		switch ($this->basedatos){
 			case 'MYSQL':
 					if ( strstr($p_sql,'SELECT') ) {
-						 if($row = mysql_fetch_assoc($this->resultado)) {
+						 if($row = mysqli_fetch_assoc($this->resultado)) {
 								$this->fila_actual = $row;
 								return $this->fila_actual;
 							} else {
