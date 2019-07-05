@@ -140,7 +140,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 					<div class="col1 marg_right1">
 						<h2 style="font-size:25px; margin-left: 30px;">¿D&oacute;nde Votar? </h2>
 						<p><img src="images/ico-registraduria.png" width="149" height="101" style="margin-left: 30px;">
-						<a  class='iframe2' href="https://wsp.registraduria.gov.co/censo/_censoResultado.php" target="iframe_a">
+						<a  class='iframe2' href="https://wsp.registraduria.gov.co/censo/consultar/" target="iframe_a">
 						<input type="button"  value="BUSQUE SU PUESTO" name="cmdexport" style=" margin-left: 30px; margin-top:33px" >
 						</a>
 						</p>

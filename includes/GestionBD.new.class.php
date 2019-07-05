@@ -25,15 +25,15 @@ class GestionBD{
 	public $Error;
 
 	public function GestionBD($TipoDB, $database = ""){
-		//$this->servidor = "198.71.235.68";
-		$this->servidor = "127.0.0.1";
-		//$this->usuario = "user-sige";
-		$this->usuario = "root";
+		$this->servidor = "sql137.main-hosting.eu";
+		//$this->servidor = "127.0.0.1";
+		//$this->usuario = "root";
+		$this->usuario = "u504621598_elect";
 		$this->basedatos = "";
-		//$this->db = "w3w4e4";
-		$this->db = "electoral";
-		//$this->pass = "Consuelo81";
-		$this->pass = "";
+		//$this->db = "electoral";
+		$this->db = "u504621598_elect";
+		$this->pass = "1qiq9A4gBF0T";
+		//$this->pass = "";
 		$this->datos = array();
 		$this->filas = array();
 		$this->NumColumnas = 0;
@@ -57,12 +57,12 @@ class GestionBD{
 			$BasesDatos = XML2Array(BASESDEDATOS);
 		//date_default_timezone_set('America/Bogota');		
 				$this->basedatos = 'MYSQL';
-				//$this->servidor = '198.71.235.68';
+				$this->servidor = 'sql137.main-hosting.eu';
 				//$this->usuario = 'user-sige';
 				//$this->pass = 'Consuelo81';	
-				$this->servidor = '127.0.0.1';
-				$this->usuario = 'root';
-				$this->pass = '';	
+				//$this->servidor = '127.0.0.1';
+				$this->usuario = 'u504621598_elect';
+				$this->pass = '1qiq9A4gBF0T';	
 			
 		}
 	protected function InicializarBD($TipoDB, $db = ""){
@@ -74,7 +74,7 @@ class GestionBD{
 		//imprimir($this);
 		set_time_limit(0);
 		//$this->db = 'w3w4e4';
-		$this->db = 'electoral';
+		$this->db = 'u504621598_elect';
 			switch ($this->basedatos)
 			{
 				case "MYSQL":

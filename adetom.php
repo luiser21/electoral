@@ -92,17 +92,19 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatiz
 							<div class="banner">
 							<? if($_SESSION["username"]!=52890539){?>
 								<span class="title"><span class="color2" style="font-size:35px"><?php echo $_SESSION["nombre"]?></span>
-								<span class="color1" style="color: #E60000; font-size:35px">
+								<span class="color1" style="color: #E60000; font-size:28px">
 								<?php if($_SESSION["tipocandidato"]=='SENADO'){ 
 										echo 'Senador </span><span style="font-size:35px"> 2018-2022'; 
 									}else if($_SESSION["tipocandidato"]=='ALCALDIA' || $_SESSION["tipocandidato"]=='CONSEJO'){ 
 										if($_SESSION["tipocandidato"]=='ALCALDIA'){
-											echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' del </span><span style="font-size:35px">';
+											echo 'Alcalde Municipal de</span><span style="font-size:35px">';
+											
 										}
 										if($_SESSION["tipocandidato"]=='CONSEJO'){
 											echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])).' del </span><span style="font-size:35px">';
 										}
-										echo 'Municipio '.ucwords(strtolower($_SESSION['municipio'])); 
+										echo ' '.ucwords(strtolower($_SESSION['municipio'])).' '.$_SESSION['abreviatura']; 
+										echo '<span style="font-size:35px"> 2020-2024</span>'; 
 									}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ 
 										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span style="font-size:35px">';										
 										echo ucwords(strtolower($_SESSION['departamento'])); 
@@ -117,7 +119,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatiz
 							<img src="images/lideres.png" alt="">
 								<div class="banner">
 								<span class="title"><span class="color2">Gestion con Efectividad</span><span class="color1">Hacia sus</span><span>Lideres</span></span>
-								<p>Aumente su capacidad de llegar con credibilidad y confianza.</p>
+								<!-- <p>Aumente su capacidad de llegar con credibilidad y confianza.</p> -->
 								
 							</div>
 						</li>
@@ -125,7 +127,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatiz
 							<img src="images/miembros.png" alt="" >
 							<div class="banner">
 								<span class="title"><span class="color2">Conozca sus</span><span class="color1">Simpatizantes</span><span>y Lideres que lo respaldan</span></span>
-								<p>SIGE una Herramienta que acerca al candidato con los ciudadanos.</p>
+								<!-- <p>SIGE una Herramienta que acerca al candidato con los ciudadanos.</p> -->
 							
 							</div>
 						</li>

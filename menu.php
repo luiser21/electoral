@@ -17,7 +17,7 @@ $(document).ready(function() {
 -->
 <ul id="nav">
 	<li class="current"><a href="adetom.php">Inicio</a></li>
-	<li><a href="calendario.php"  >Calendario Electoral 2018</a></li> 		
+	<li><a href="calendario.php"  >Calendario Electoral</a></li> 		
 		<ul>			
 			<li ><a href="#" >Proyectos de Ley</a></li>
 		</ul>
@@ -35,6 +35,57 @@ $(document).ready(function() {
 	</li>
 	<li ><a href="#" >Datos Historicos</a>		
 		<ul > <?php if($_SESSION['consulta']=='0'){ ?>
+			<li ><a href="#">Elecciones Locales 2015</a>
+				<ul>
+					<li ><a target="_blank" href="https://elecciones.registraduria.gov.co:81/esc_elec_2015/99AL/DAL15218ZZZZZZZZZZZZ_L1.htm">Alcaldia</a>
+						
+					</li>
+					<li ><a target="_blank" href="https://elecciones.registraduria.gov.co:81/esc_elec_2015/99GO/DGO15218ZZZZZZZZZZZZ_L1.htm">Gobernacion</a>
+						
+					</li>
+					
+				</ul>
+			</li>
+			<li ><a href="#">Elecciones Locales 2011</a>
+				<ul>
+					<li ><a target="_blank" href="https://w3.registraduria.gov.co/escrutinio/resultados?accion=cambiar_municipio&dep_activo=15&mun_activo=218&corp_activo=alcaldia">Alcaldia</a>
+						
+					</li>
+					<li ><a target="_blank" href="https://elecciones.registraduria.gov.co:81/esc_elec_2015/99GO/DGO15218ZZZZZZZZZZZZ_L1.htm">Gobernacion</a>
+						
+					</li>
+					
+				</ul>
+			</li>
+			<li ><a href="#">Elecciones Locales 2007</a>
+				<ul>
+					<li ><a target="_blank" href="https://www.colombia.com/especiales/elecciones_2007/resultados/resultados.asp?T=A&D=15&M=218">Alcaldia</a>
+						
+					</li>
+					
+					
+				</ul>
+			</li>
+			<li ><a href="#">Elecciones Locales 2003</a>
+				<ul>
+					<li ><a target="_blank" href="https://www.colombia.com/especiales/elecciones_2007/resultados/resultados.asp?T=A&D=15&M=218">Alcaldia</a>
+						
+					</li>
+					
+					
+				</ul>
+			</li>
+			<li ><a href="#">Elecciones Congreso 2018</a>
+				<ul>
+					<li ><a href="https://elecciones.registraduria.gov.co:81/elec20180311/resultados/99SE/BXXXX/DSE15218.htm">Senado</a>
+						
+					</li>
+					<li ><a href="https://elecciones.registraduria.gov.co:81/elec20180311/resultados/99CA/BXXXX/DCA15218.htm">Camara</a>
+						
+					</li>
+					
+				</ul>
+			</li>
 			<li ><a href="#">Elecciones Congreso 2010</a>
 				<ul>
 					<li ><a href="#">Senado</a>

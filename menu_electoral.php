@@ -18,6 +18,27 @@
 	</li>
 	<li ><a href="#" >Datos Historicos</a>		
 		<ul >
+			<li ><a href="#">Elecciones Locales 2015</a>
+				<ul>
+					<li ><a href="#">Alcaldia</a>
+						<ul>
+							<li ><a href="causales.php?ac=2">Votacion por Candidatos</a></li>
+							<li ><a href="causales.php?ac=3">Votacion por Partidos</a></li>
+							<li ><a href="causales.php?ac=4">Curules por Partidos</a></li>
+							<li ><a href="causales.php?ac=5">Elegidos Detallado</a></li>
+						</ul>
+					</li>
+					<li ><a href="#">Camara</a>
+						<ul>
+							<li ><a href="causales.php?ac=6">Votacion por Partidos</a></li>
+							<li ><a href="causales.php?ac=7">Curules por Partido</a></li>
+							<li ><a href="causales.php?ac=8">Curules por Departamento</a></li>
+							<li ><a href="causales.php?ac=9">Elegidos Detallado</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+			</li>
 			<li ><a href="#">Elecciones Congreso 2010</a>
 				<ul>
 					<li ><a href="#">Senado</a>

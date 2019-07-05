@@ -44,7 +44,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 						candidato.VOTOSPREVISTOS,
 						candidato.MUNICIPIO AS IDMUNICIPIO,
 						municipios.NOMBRE AS MUNICIPIO,
-						departamentos.NOMBRE AS DEPARTAMENTO
+						departamentos.NOMBRE AS DEPARTAMENTO,
+                        departamentos.ABREVIATURA AS ABREVIATURA
 						FROM
 						usuario
 						LEFT JOIN candidato ON candidato.IDUSUARIO = usuario.IDUSUARIO
@@ -65,6 +66,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					@$municipio = $datos['MUNICIPIO'];	
 					@$idmunicipio = $datos['IDMUNICIPIO'];	
 					@$departamento = $datos['DEPARTAMENTO'];	
+					@$abreviatura = $datos['ABREVIATURA'];	
 					@$tipocandidato = $datos['TIPOCANDIDATO'];
 					@$foto = $datos['FOTO'];	
 					@$ntarjeton = $datos['NTARJETON'];	
@@ -82,7 +84,8 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 					$_SESSION["partido"] = $partido;		
 					$_SESSION["municipio"] = $municipio;	
 					$_SESSION["idmunicipio"] = $idmunicipio;						
-					$_SESSION["departamento"] = $departamento;		
+					$_SESSION["departamento"] = $departamento;	
+					$_SESSION["abreviatura"] = $abreviatura;	
 					$_SESSION["foto"] = $foto;		
 					$_SESSION["ntarjeton"] = $ntarjeton;
 					$_SESSION["tipocandidato"] = $tipocandidato;	
@@ -115,6 +118,7 @@ $DBGestion = new GestionBD('AGENDAMIENTO');
 		   @$municipio = $_SESSION["municipio"];	
 		    @$idmunicipio = $_SESSION["idmunicipio"];	
 		    @$departamento = $_SESSION["departamento"];	
+		    @$abreviatura = $_SESSION["abreviatura"];	
 			 @$partido = $_SESSION["partido"];	
 			  @$foto = $_SESSION["foto"];	
 			   @$ntarjeton = $_SESSION["ntarjeton"];	
