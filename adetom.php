@@ -104,7 +104,7 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatiz
 											echo 'al '.ucwords(strtolower($_SESSION["tipocandidato"])).' del </span><span style="font-size:35px">';
 										}
 										echo ' '.ucwords(strtolower($_SESSION['municipio'])).' '.$_SESSION['abreviatura']; 
-										echo '<span style="font-size:35px"> 2020-2024</span>'; 
+										echo '<span style="font-size:35px"> 2020-2023</span>'; 
 									}else if($_SESSION["tipocandidato"]=='CAMARA' || $_SESSION["tipocandidato"]=='GOBERNACION'){ 
 										echo 'a la '.ucwords(strtolower($_SESSION["tipocandidato"])).' por </span><span style="font-size:35px">';										
 										echo ucwords(strtolower($_SESSION['departamento'])); 

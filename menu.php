@@ -201,5 +201,23 @@ $(document).ready(function() {
 			<li ><a href="informe_movilizados.php">Informe Comparativo Compromisos - Movilizados - Votos Reales</a></li>-->
 			<?php } ?>
 		</ul>
+	</li>
+	<li><a href="#"  >Formatos</a>
+		<ul> 
+			<?php if($_SESSION['consulta']=='0'){ ?>
+			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-
+			<li ><a href="Informes.php">Seguimiento por Puesto de Votaci&oacute;n</a></li>
+			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>
+			<li ><a href="Informes_departamento.php">Seguimiento por Departamentos</a></li>
+			<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>
+			<li ><a href="Informes_lideres.php">Seguimiento por Lideres</a></li>
+			<li ><a href="Informes_diferente_puestos.php"><?php if($_SESSION['tipocandidato']=='CONSEJO' || $_SESSION['tipocandidato']=='ALCALDIA'){ echo "Seguimiento por Simpatizantes No Inscritos en el Municipio"; } ?>
+			<?php if($_SESSION['tipocandidato']=='CAMARA' || $_SESSION['tipocandidato']=='GOBERNACION'){ echo "Seguimiento por Simpatizantes No Inscritos en el Departamento"; } ?></a></li>
+			<li ><a href="Informes_miembros_duplicados.php">Seguimiento por Simpatizantes Duplicados por Lider</a></li>
+			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
+			<?php //if($_SESSION['username']=='duvanpineda'){?>-->			
+			
+				<?php } ?>
+		</ul>
 	</li>	
 </ul>

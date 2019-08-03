@@ -1,4 +1,6 @@
 <?php 
+	error_reporting(E_ALL);
+ini_set('display_errors', '1');
 session_start();
 include_once "includes/GestionBD.new.class.php";
 require("secure/hash.class.php");

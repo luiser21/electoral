@@ -146,19 +146,19 @@ ul.newsticker a:hover {text-decoration: underline;}
 						</p>
 										</div>
 					<div class="col1 marg_right1" style="width:348px">
-						<h2 style="font-size:25px; margin-left: 50px;">Conozca a sus Candidatos </h2> 
-						<p><img src="images/ico-congreso-visible.png" width="183" height="116" style="margin-left: 90px;">
-					 <a  href="http://www.congresovisible.org/congresistas/" target="_blank" >
-					<input type="button"  value="ENCUENTRE SU CANDIDATO" name="cmdexport" style=" margin-left: 65px; margin-top:18px">
+						<h2 style="font-size:25px; margin-left: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;Autoridades  Locales </h2> 
+						<p><img src="images/mesas.png" width="183" height="116" style="margin-left: 90px;">
+					 <a  href="https://www.registraduria.gov.co/-AL-2019-.html" target="_blank" >
+					<input type="button"  value="ELECCIONES ORDINARIAS 2019" name="cmdexport" style=" margin-left: 65px; margin-top:18px">
 					</a></p>
 					
 					</div>
 					<div class="col1 marg_right1"  style="width:250px">
-							<h2 style="font-size:22px;  margin-left: 58px;">¿Quienes financian los Candidatos? </h2>
+							<h2 style="font-size:22px;  margin-left: 58px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SICE <br/> (Sistema Integral)</h2>
 						    <blockquote>
 						      <p><img src="images/ico-cuentas.png" width="117" height="101" style="margin-left: 90px;">
-							   <a  href="http://www5.registraduria.gov.co/CuentasClaraspublicoCon2014/consultas/consultacandidatos"  target="_blank">
-							  <input type="button"  value="VER APORTES DE LA CAMPA&Ntilde;A" name="cmdexport" style=" margin-left: 35px; margin-top:12px;">
+							   <a  href="https://www.registraduria.gov.co/-Sistema-Integral-de-Capacitacion-.html"  target="_blank">
+							  <input type="button"  value="CAPACITACION ELECTORAL" name="cmdexport" style=" margin-left: 35px; margin-top:12px;">
 							  </a>
 							  </p>
 				      </blockquote>
