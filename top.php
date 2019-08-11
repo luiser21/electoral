@@ -112,7 +112,7 @@ header ("Pragma: no-cache");
 						</li>
 						<li><a href="sige.php">Acerca del Programa</a></li>
 						<li><a href="casosexito.php">Casos de Exito</a></li>
-						<li><a href="#">Cont&aacute;ctenos</a></li>
+						<li><a href="https://webmail1.hostinger.co/?_user=clientes2019@solumarsas.com.co">Correo Corporativo</a></li>
 					</ul>
 				</div>					
 				</nav>				

@@ -7,16 +7,16 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='simulador_20184_C2123.csv';
-$_SESSION["username"]='52890539';
-$_SESSION["idmunicipio"]=843;
-$_SESSION["municipio"]='CUCUTA';
-$_SESSION["tipocandidato"]="SENADO";
-$_SESSION["idcandidato"]=35;
+$nombre_archivo='YESIS_RICAURTE_3.csv';
+$_SESSION["username"]='yesid';
+$_SESSION["idmunicipio"]=540;
+$_SESSION["municipio"]='RICAURTE';
+$_SESSION["tipocandidato"]="ALCALDIA";
+$_SESSION["idcandidato"]=224;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/simulador_20184_C2123.csv", "r")) !== FALSE) {
+if (($gestor = fopen("Excel/cargas/YESIS_RICAURTE_3.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
@@ -157,7 +157,9 @@ for($i=0; $i<$registros-1; $i++){
 					$municipios=$DBGestion->datos;	
 					if(count($municipios)>=1){
 						$idmunicipios=$municipios[0]['ID'];
+						
 						if(trim($puesto[$i])=='Cancelada por Muerte' || trim($puesto[$i])=='CANCELADA POR MUERTE'){
+						    echo "Cancelada por Doble Cedulacion".PHP_EOL;
 							$muerte++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
@@ -212,6 +214,7 @@ for($i=0; $i<$registros-1; $i++){
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",7)";									
 							$DBGestion->Consulta($sql);	
 						}elseif(trim($puesto[$i])=='Cancelada por Doble Cedulacion'){
+						    echo "Cancelada por Doble Cedulacion".PHP_EOL;
 							$doblecedula++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
@@ -233,13 +236,15 @@ for($i=0; $i<$registros-1; $i++){
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",11)";									
 							$DBGestion->Consulta($sql);	
 						}elseif(trim($puesto[$i])=='Numero de documento Incorrecto'){
-							$incorrecto++;
+						    echo "Documento Incorrecto".PHP_EOL;
+						    $incorrecto++;
 							$aptosnovotar++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 
 									VALUES ('".strtoupper(trim($nombre_simpartizante[$i]))."',".trim($cedula_simpatizante[$i]).",
 									".$idmunicipios.",0,".$idlider[0]['ID'].",".$idfile.",12)";									
 							$DBGestion->Consulta($sql);	
 						}elseif(trim($puesto[$i])=='INDEFINIDO'){
+						    echo "INDIFINIDO".PHP_EOL;
 							$indefinido++;
 							$datosinvalidos++;
 							$sql="INSERT INTO miembros (NOMBRES, CEDULA, MUNICIPIO, IDPUESTOSVOTACION, IDLIDER,IDFILE,ERROR) 

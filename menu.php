@@ -185,6 +185,7 @@ $(document).ready(function() {
 					<?php //} ?>
 				</ul>
 			</li>
+			<li ><a href="porpuestovotacion.php">Por Puesto de Votacion</a></li>
 			<li ><a href="reporte2.php">Dia Electoral</a></li>
 			<li ><a href="reporte3.php">Dia Post Electoral</a></li>
 			<li ><a href="consolidado.php">Consolidado Electoral</a></li>			
