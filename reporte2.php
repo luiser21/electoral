@@ -188,7 +188,7 @@ button, input[type="button"], input[type="submit"] {
 			<div id="crudFormLineal" style="width: 920px; height: auto; clear:both; background-color:#FFFFFF; border-right:medium; border-right-color:#999999; border-right-width:medium" ><script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "11 march 2018 16:00:00",
+				date: "27 october 2019 16:00:00",
 				format: "on"
 			},
 			function() {

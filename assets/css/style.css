@@ -23,6 +23,7 @@ Dashboard stats
   float: left;
   padding-top: 10px;
   padding-left: 15px;
+  
 }
 
 .dashboard-stat .visual i {
@@ -119,5 +120,14 @@ Dashboard stats
 
 .dashboard-stat.purple .more { 
   background-color: #6e1881;
+}
+
+.dashboard-stat.white {
+  background-color: #eeeeee;
+  
+}
+
+.dashboard-stat.white .more { 
+  background-color: #208dbe;
 } 
 

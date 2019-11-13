@@ -7,7 +7,7 @@ include_once "includes/GestionBD.new.class.php";
 include_once "consultar_puesto_votacion_registraduria.php";
 include_once "includes/funciones.inc.php";
 @$data->setOutputEncoding('CP1251');
-$nombre_archivo='YESIS_RICAURTE_3.csv';
+$nombre_archivo='Libro1.csv';
 $_SESSION["username"]='yesid';
 $_SESSION["idmunicipio"]=540;
 $_SESSION["municipio"]='RICAURTE';
@@ -16,19 +16,28 @@ $_SESSION["idcandidato"]=224;
 //$data->read('Excel/cargas/Base_Modelo_Senado_2018.xls');
 $y=0;
 $fila = 1;
-if (($gestor = fopen("Excel/cargas/YESIS_RICAURTE_3.csv", "r")) !== FALSE) {
+ $file = fopen("archivo.txt", "w");
+if (($gestor = fopen("Excel/cargas/Libro1.csv", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
         $numero = count($datos);       
         $fila++;
         for ($c=0; $c < $numero; $c++) {
-			$data->sheets[0]['cells'][]=explode(";",$datos[$c]);
+			if(!empty($datos[$c])){
+				$datos[$c] =preg_replace('/[^0-9]+/', '', $datos[$c]); 
+				if (preg_match ("/^[0-9]+$/", $datos[$c])) {
+					fwrite($file,$datos[$c]. PHP_EOL);
+					$data->sheets[0]['cells'][]=explode(",",$datos[$c]);
+				}	
+			}
+			
         }
     }
     fclose($gestor);
 }
+fclose($file);
 $registros=count($data->sheets[0]['cells']);
-//imprimir($data->sheets[0]['cells'][1]);
-//exit;
+imprimir($data->sheets[0]['cells']);
+exit;
 for ($i = 1; $i < $registros; $i++) {
 	if(isset($data->sheets[0]['cells'][$i][1]) && isset($data->sheets[0]['cells'][$i][3])){
 	$cedula_simpatizante[$y]=trim($data->sheets[0]['cells'][$i][2]);	
@@ -119,7 +128,8 @@ for($i=0; $i<$registros-1; $i++){
 			trim($puesto[$i])=="SIN NUMERO DE CEDULA"   ||
 			trim($puesto[$i])=="CANCELADA POR MUERTE"   ||
 			trim($puesto[$i])=="VIGENTE CON PERDIDA O SUSPENSION DE LOS DERECHOS POLITICOS" ||
-			trim($puesto[$i])=="NO SE ENCUENTRA HABILITADO PARA VOTAR")
+			trim($puesto[$i])=="NO SE ENCUENTRA HABILITADO PARA VOTAR" ||
+			trim($puesto[$i])=="Numero de documento Incorrecto")
 		){
 			echo ' - '.$puesto[$i].PHP_EOL;
 			

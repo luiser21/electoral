@@ -1,0 +1,11 @@
+.span4{width:300px}
+.span3{width:220px}
+.row-fluid:after{display:table;line-height:0;content:""}
+.row-fluid:after{clear:both}
+.row-fluid [class*="span"]{display:block;float:left;width:100%;min-height:30px;margin-left:2.127659574468085%;*margin-left:2.074468085106383%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.row-fluid [class*="span"]:first-child{margin-left:0}
+.row-fluid 
+.row-fluid 
+.span12{width:100%;*width:99.94680851063829%}
+.row-fluid 
+.span3{width:17.404255319148934%;*width:17.351063829787233%}

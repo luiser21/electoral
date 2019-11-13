@@ -204,8 +204,19 @@ $(document).ready(function() {
 		</ul>
 	</li>
 	<li><a href="#"  >Formatos</a>
-		<ul> 
-			<?php if($_SESSION['consulta']=='0'){ ?>
+		<ul> <?php  if($_SESSION['username']=='yesid'){ ?>
+			<li ><a href="/electoral/documentos/TARJETON_DIDACTICO_RICAURTE.pdf" download="TarjetonelectoralDidactico2019.pdf">Tarjeton Electoral Didactico PDF </a></li>
+			<li ><a href="/electoral/documentos/TARJETON_DIDACTICO_RICAURTE.pptx" download="TarjetonelectoralDidactico2019.pptx">Tarjeton Electoral Didactico PPTX</a></li>
+			<li ><a href="/electoral/documentos/TARJETON CONSEJO RICAURTE.pdf" download="TARJETON_CONSEJO_RICAURTE.pdf">Tarjeton Electoral Consejo PDF</a></li>
+			<li ><a href="/electoral/documentos/CONSEJO1.pptx" download="TARJETON_CONSEJO_RICAURTE.pptx">Tarjeton Electoral Consejo PPTX</a></li>
+			<li ><a href="/electoral/documentos/1564869199246_plantilla 3.pptx" download="PLANTILLAPRESENTACION_1.pptx">Plantilla Presentacion 1</a></li>
+			<li ><a href="/electoral/documentos/plantilla 2.pptx" download="PLANTILLAPRESENTACION_2.pptx">Plantilla Presentacion 2</a></li>
+			<li ><a href="/electoral/documentos/plantilla 3.pptx" download="PLANTILLAPRESENTACION_3.pptx">Plantilla Presentacion 3</a></li>
+			<li ><a href="/electoral/documentos/plantilla.pptx" download="PLANTILLAPRESENTACION_4.pptx">Plantilla Presentacion 4</a></li>
+			<li ><a href="http://solumarsas.com.co/electoral/documentos/videocampanaricaurte.mp4" target="_blank">Video Campaña Alcaldia</a></li>
+			<li ><a href="http://solumarsas.com.co/electoral/documentos/videocampanaricaurte_consejo.mp4" target="_blank">Video Campaña Consejo</a></li>
+			
+			<?php } if($_SESSION['consulta']=='0'){ ?>
 			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-
 			<li ><a href="Informes.php">Seguimiento por Puesto de Votaci&oacute;n</a></li>
 			<!--<li ><a href="Informes_municipios.php">Seguimiento por Municipios</a></li>

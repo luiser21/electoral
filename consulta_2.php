@@ -1,1 +1,1 @@
- <iframe width='900px' height='600px' src="https://wsp.registraduria.gov.co/censo/_censoResultado.php?nCedula=1007011751" ></iframe> 
+ <iframe width='900px' height='600px' src="https://wsp.registraduria.gov.co/censo/consultar/" ></iframe> 

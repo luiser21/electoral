@@ -77,8 +77,10 @@ $totales=$DBGestion->datos;
 <div id="marque">
 <div class="first">
 <marquee>
-VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatizantes';?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  
+<!-- VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatizantes';?></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -->
+ <? if($_SESSION["username"]=='yesid'){?>
+ Por un Ricaurte prospero para Todos
+  <? } ?>
 </marquee>
 </div>
 </div>
@@ -139,7 +141,9 @@ VOTOS PREVISTOS:  <span style="color:#FF0000"><?php echo $voto_cargue.' Simpatiz
 					<div class="col1 marg_right1">
 						<h2 style="font-size:25px; margin-left: 22px;">&iquest;D&oacute;nde Votar? </h2>
 						<p><img src="images/ico-registraduria.png" width="149" height="101" style="margin-left: 30px;">
-						<a  class='iframe2' href="consulta_2.php" ><input type="button"  value="BUSQUE SU PUESTO" name="cmdexport" style=" margin-left: 30px; margin-top:33px; width:180px" ></a></p>
+						<a  href="https://wsp.registraduria.gov.co/censo/consultar/"  target="_blank">
+						<input type="button"  value="BUSQUE SU PUESTO" name="cmdexport" style=" margin-left: 30px; margin-top:33px; width:180px" >
+						</a></p>
 										</div>
 					<div class="col1 marg_right1" style="width:348px">
 						<h2 style="font-size:25px; margin-left: 50px;">Conozca a sus Candidatos </h2> 
