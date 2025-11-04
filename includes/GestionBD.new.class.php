@@ -25,15 +25,15 @@ class GestionBD{
 	public $Error;
 
 	public function GestionBD($TipoDB, $database = ""){
-		$this->servidor = "sql137.main-hosting.eu";
-		//$this->servidor = "127.0.0.1";
-		//$this->usuario = "root";
-		$this->usuario = "u504621598_elect";
+		//$this->servidor = "198.71.235.68";
+		$this->servidor = "localhost";
+		//$this->usuario = "user-sige";
+		$this->usuario = "electoral";
 		$this->basedatos = "";
-		//$this->db = "electoral";
-		$this->db = "u504621598_elect";
-		$this->pass = "1qiq9A4gBF0T";
-		//$this->pass = "";
+		//$this->db = "w3w4e4";
+		$this->db = "electoral";
+		//$this->pass = "Consuelo81";
+		$this->pass = "electoral";
 		$this->datos = array();
 		$this->filas = array();
 		$this->NumColumnas = 0;
@@ -57,12 +57,12 @@ class GestionBD{
 			$BasesDatos = XML2Array(BASESDEDATOS);
 		//date_default_timezone_set('America/Bogota');		
 				$this->basedatos = 'MYSQL';
-				$this->servidor = 'sql137.main-hosting.eu';
+				//$this->servidor = '198.71.235.68';
 				//$this->usuario = 'user-sige';
 				//$this->pass = 'Consuelo81';	
-				//$this->servidor = '127.0.0.1';
-				$this->usuario = 'u504621598_elect';
-				$this->pass = '1qiq9A4gBF0T';	
+				$this->servidor = 'localhost';
+				$this->usuario = 'electoral';
+				$this->pass = 'electoral';	
 			
 		}
 	protected function InicializarBD($TipoDB, $db = ""){
@@ -73,23 +73,16 @@ class GestionBD{
 		$err ='';
 		//imprimir($this);
 		set_time_limit(0);
-		//$this->db = 'w3w4e4';
-		$this->db = 'u504621598_elect';
+		$this->db = 'plygraph';
+		$this->db = 'electoral';
 			switch ($this->basedatos)
 			{
 				case "MYSQL":
-					if(!$this->IdConexion = mysql_connect($this->servidor,$this->usuario,$this->pass)){
-						//$err =''//= OCIError();
-						throw new Exception('CONEXION MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.$err['message']. ' | Inicializando | '. $this->Ultima_Consulta );
-						echo $this->Ultima_Consulta;
+					// Cambiar mysql_connect por mysqli_connect
+					$this->IdConexion = mysqli_connect($this->servidor, $this->usuario, $this->pass, $this->db);
+					if(!$this->IdConexion){
+						throw new Exception('CONEXION MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.mysqli_connect_error(). ' | Inicializando | '. $this->Ultima_Consulta );
 					}
-
-					if(!mysql_select_db($this->db,$this->IdConexion)){
-						//$err = OCIError();
-						throw new Exception('CONEXION A LA BASE '.$this->db.' EN MYSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | '.$err['message']. ' | Inicializando | '. $this->Ultima_Consulta );
-						echo $this->Ultima_Consulta;
-					}
-
 				break;
 
 				case "ORACLE":
@@ -132,9 +125,9 @@ class GestionBD{
 
 		switch ($this->basedatos){
 			case 'MYSQL':
+				// Cambiar mysql_close por mysqli_close
+				mysqli_close($this->IdConexion);
 				$this->IdConexion = 0;
-				//echo $this->IdConexion;
-				mysql_close($this->IdConexion);
 			break;
 
 			case 'ORACLE':
@@ -153,7 +146,7 @@ class GestionBD{
 
 		$this->IdConexion = 0;
 
-	}#fin de la función cerrar
+	}#fin de la funci n cerrar
 
 	public function CalcularParametros($p_sql)
 	{
@@ -162,19 +155,19 @@ class GestionBD{
 			switch ($this->basedatos)
 			{
 				case 'MYSQL':
-					$this->NumColumnas=mysql_num_fields($this->resultado);
-					$this->NumFilas=mysql_num_rows($this->resultado);
+					$this->NumColumnas = mysqli_num_fields($this->resultado);
+					$this->NumFilas = mysqli_num_rows($this->resultado);
 					if ( strstr($p_sql,'SELECT') )
 					{
 						for ( $n=1;$n<=$this->NumFilas;$n++ )
 						{
-							$row = mysql_fetch_row($this->resultado);
+							$row = mysqli_fetch_row($this->resultado);
 
-							for ( $x=1;$x<=mysql_num_fields($this->resultado);$x++ )
+							for ( $x=1;$x<=mysqli_num_fields($this->resultado);$x++ )
 							{
-								$this->NomColumnas[$x]=mysql_field_name($this->resultado,$x-1);
-								$this->TipoColumnas[$x]=mysql_field_type($this->resultado,$x-1);
-								$this->TamColumnas[$x]=mysql_field_len($this->resultado,$x-1);
+								$this->NomColumnas[$x]=mysqli_fetch_field_direct($this->resultado,$x-1)->name;
+								$this->TipoColumnas[$x]=mysqli_fetch_field_direct($this->resultado,$x-1)->type;
+								$this->TamColumnas[$x]=mysqli_fetch_field_direct($this->resultado,$x-1)->length;
 
 								$this->filas[$this->NomColumnas[$x]][$n]=$row[$x-1];
 							}
@@ -299,7 +292,10 @@ class GestionBD{
 		
 		switch ($this->basedatos){
 			case 'MYSQL':
-				$this->resultado = mysql_query($p_sql,$this->IdConexion) or die (mysql_error());
+				$this->resultado = mysqli_query($this->IdConexion, $p_sql);
+				if(!$this->resultado) {
+					die(mysqli_error($this->IdConexion));
+				}
 			break;
 
 			case 'ORACLE':
@@ -330,7 +326,7 @@ class GestionBD{
 					if(!@oci_execute($this->resultado)) {
 						$err = oci_error($this->resultado);
 						throw new Exception('ERROR EN SQL: <br><br>'.$p_sql.'<BR>TRANSACCION EXECSQL NO DISPONIBLE, FAVOR CONSULTAR CON EL ADMINISTRADOR DEL SISTEMA.. | ' . $err['message'].'|'.$this->Ultima_Consulta);
-//						echo $this->Ultima_Consulta;
+						#echo $this->Ultima_Consulta;
 					}
 					$this->NumColumnas = oci_num_fields($this->resultado);
 					$this->NumFilas = oci_num_rows($this->resultado);
@@ -374,18 +370,15 @@ class GestionBD{
 		switch ($this->basedatos){
 			case 'MYSQL':
 			
-				$this->resultado = mysql_query($p_sql,$this->IdConexion) or die (mysql_error());
-
-			if ( strstr($p_sql,'SELECT') ) {
-			
-		//	echo "<br>Ejecutando Consulta a Array..";
-
-				 while($row = mysql_fetch_assoc($this->resultado)) {
+				$this->resultado = mysqli_query($this->IdConexion, $p_sql);
+				if(!$this->resultado) {
+					die(mysqli_error($this->IdConexion));
+				}
+				if ( strstr($p_sql,'SELECT') ) {
+					while($row = mysqli_fetch_assoc($this->resultado)) {
 						$this->datos[] = $row;
-				 }
-			//imprimir($this->datos);
-			} // Fin if StrStr('SELECT') si la consulta es de tipo select
-
+					}
+				}
 			break;
 
 			case 'ORACLE':
@@ -455,16 +448,16 @@ class GestionBD{
 
 		switch ($this->basedatos){
 			case 'MYSQL':
-					if ( strstr($p_sql,'SELECT') ) {
-						 if($row = mysql_fetch_assoc($this->resultado)) {
-								$this->fila_actual = $row;
-								return $this->fila_actual;
-							} else {
-								$this->fila_actual = false;
-								return $this->fila_actual;
-							}
-					} // Fin if StrStr('SELECT') si la consulta es de tipo select
-					break;
+				if ( strstr($p_sql,'SELECT') ) {
+                    if($row = mysqli_fetch_assoc($this->resultado)) {
+                        $this->fila_actual = $row;
+                        return $this->fila_actual;
+                    } else {
+                        $this->fila_actual = false;
+                        return $this->fila_actual;
+                    }
+                }
+				break;
 
 			case 'ORACLE':
 					if (OCIFetchInto($this->resultado,$row,OCI_ASSOC+OCI_RETURN_NULLS))
@@ -669,30 +662,29 @@ class GestionBD{
 	}#fin de funcion
 
 	function __destruct() {
-		if ($this->IdConexion != 0)
-		{
-			switch ($this->basedatos){
-				case 'MYSQL':
-					$this->IdConexion = 0;
-					//echo $this->IdConexion;
-					//mysql_close($this->IdConexion);
-				break;
+        if ($this->IdConexion != 0)
+        {
+            switch ($this->basedatos){
+                case 'MYSQL':
+                    mysqli_close($this->IdConexion);
+                    $this->IdConexion = 0;
+                break;
 
-				case 'ORACLE':
-					OCILogOff($this->IdConexion);
-				break;
+                case 'ORACLE':
+                    OCILogOff($this->IdConexion);
+                break;
 
-				case 'ORACLE5':
-					oci_close($this->IdConexion);
-				break;
+                case 'ORACLE5':
+                    oci_close($this->IdConexion);
+                break;
 
-				case 'ODBC':
-					odbc_close($this->IdConexion);
+                case 'ODBC':
+                    odbc_close($this->IdConexion);
 		//			odbc_free_result($this->IdConexion);
-				break;
-			} #fin switch
-		}
-	}#fin de funcion
+                break;
+            } #fin switch
+        }
+    }#fin de funcion
 
 }#fin de class
 
@@ -757,5 +749,3 @@ function scriptCheckin($forcelog=0,$txt = ''){
 	$DBGestion->Consulta($LOG);
 	$DBGestion->Commit();
 }
-
-?>
