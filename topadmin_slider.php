@@ -76,6 +76,7 @@ color:#008000;
 <link href="Scripts/jtable/themes/metro/lightgray/jtable.css" rel="stylesheet" type="text/css" />
 <title>SIGE</title>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="images/favicon(2).ico">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -166,11 +167,16 @@ color:#008000;
 					</div>
 					<nav >
 					<div id="menu">
-						<?php    
+						<button id="menu-toggle" class="menu-toggle">
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+						<?php
 						if($permiso!='1'){
-							include_once "menu.php"; 
+							include_once "menu.php";
 						}else{
 							include_once "menuadmin.php";
-						} ?>					 
-					</div>						
+						} ?>
+					</div>
 					</nav>			

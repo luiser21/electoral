@@ -2,21 +2,28 @@
 a {
 	color: #333;
 }
+
+#menu {
+	max-width: 1280px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
 #nav {
-	
+
 	width: 945px;
+	max-width: 100%;
 	font: normal .8em/1.5em Arial, Helvetica, sans-serif;
-	margin: 0;
+	margin: 0 auto;
 	padding: 7px 6px 0;
-	
-	margin-left: 194px;
-	margin-left: 168px\9;
+
+	margin-left: 168px;
 	line-height: 100%;
 	/*border-radius: 2em;
 
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em; */
-	
+
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 
@@ -26,6 +33,7 @@ a {
 	background: -moz-linear-gradient(top,  #a9a9a9,  #7a7a7a); /* for firefox 3.6+ */
 
 	border: solid 1px #6d6d6d;
+	box-sizing: border-box;
 }
 #nav li {
 	margin: 0 5px;
@@ -155,4 +163,152 @@ html[xmlns] #nav {
 }
 * html #nav {
 	height: 1%;
+}
+
+/* ===== BOT\u00d3N HAMBURGUESA ===== */
+.menu-toggle {
+	display: none;
+	background: #5f870e;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 1000;
+}
+
+.menu-toggle span {
+	display: block;
+	width: 25px;
+	height: 3px;
+	background: #fff;
+	margin: 5px 0;
+	transition: 0.3s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+	transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+	opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+	transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ===== MEDIA QUERIES RESPONSIVE ===== */
+
+/* Pantallas grandes */
+@media screen and (max-width: 1280px) {
+	#menu {
+		padding: 0 10px;
+	}
+	#nav {
+		margin-left: 120px;
+	}
+}
+
+/* Tablets y pantallas medianas */
+@media screen and (max-width: 1200px) {
+	#nav {
+		width: 90%;
+		max-width: 945px;
+		margin-left: 5%;
+		padding: 7px 10px 0;
+	}
+	#nav li {
+		margin: 0 2px;
+	}
+	#nav a {
+		padding: 8px 10px;
+		font-size: 0.85em;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	#nav {
+		width: 95%;
+		margin-left: 2.5%;
+		padding: 7px 5px 0;
+	}
+	#nav li {
+		margin: 0 1px;
+	}
+	#nav a {
+		padding: 8px 6px;
+		font-size: 0.75em;
+	}
+}
+
+/* Tablets peque\u00f1as */
+@media screen and (max-width: 768px) {
+	.menu-toggle {
+		display: block;
+	}
+	#menu {
+		position: relative;
+	}
+	#nav {
+		display: none;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#nav.active {
+		display: block;
+	}
+	#nav li {
+		float: none;
+		margin: 0;
+		border-bottom: 1px solid #6d6d6d;
+	}
+	#nav a {
+		padding: 12px 15px;
+		border-radius: 0;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+	}
+	#nav ul {
+		position: static;
+		display: none;
+		width: 100%;
+		border: none;
+		box-shadow: none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		border-radius: 0;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		background: #999;
+	}
+	#nav ul ul {
+		left: 0;
+		top: auto;
+	}
+	#nav li:hover > ul {
+		display: block;
+	}
+	#nav ul li {
+		border-bottom: 1px solid #777;
+	}
+	#nav ul a {
+		padding-left: 30px;
+	}
+	#nav ul ul a {
+		padding-left: 50px;
+	}
+}
+
+/* M\u00f3viles */
+@media screen and (max-width: 480px) {
+	#nav a {
+		font-size: 0.85em;
+		padding: 10px 12px;
+	}
 }

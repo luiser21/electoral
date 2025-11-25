@@ -55,7 +55,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <script>
 		$(document).ready(function(){
 			$("#countdown").countdown({
-				date: "27 october 2019 08:00:00",
+				date: "8 march 2026 08:00:00",
 				format: "on"
 			},
 			function() {
@@ -72,7 +72,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 <div id="marque">
 <div class="first">
 <marquee>
-<strong><span style="color:#f45805">ELECCIONES LOCALES CONCEJALES - MUNICIPALES - GOBERNACIONES</span></strong>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><span style="color:#f45805">ELECCIONES DE CONGRESO DE LA REPUBLICA 2026</span></strong>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <!--<strong><span style="color:#0008ff">DE TODOS Y PARA TODOS LOS COLOMBIANOS</span></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong><span style="color:#ff0000">DE TODOS Y PARA TODOS LOS COLOMBIANOS</span></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 -->
@@ -87,8 +87,8 @@ ul.newsticker a:hover {text-decoration: underline;}
 						<li>
 							<img src="images/img1.png" alt="">
 							<div class="banner">
-								<span class="title"><span class="color2">Elecciones</span><span class="color1">Municipales</span><span>2019</span></span>
-								<p>DIA DE LA ELECCION 27 de Octubre de 2019<div class="timer-area" style=" margin-right:-100px">
+								<span class="title"><span class="color2">Elecciones</span><span class="color1">Congreso</span><span>2026</span></span>
+								<p>DIA DE LA ELECCION 8 de Marzo de 2026<div class="timer-area" style=" margin-right:-100px">
 										<ul id="countdown">
 											<li>
 												<span class="days">00</span>
@@ -139,7 +139,7 @@ ul.newsticker a:hover {text-decoration: underline;}
 				<div class="wrapper">
 					<div class="col1 marg_right1">
 						<h2 style="font-size:25px; margin-left: 30px;">¿D&oacute;nde Votar? </h2>
-						<p><img src="images/ico-registraduria.png" width="149" height="101" style="margin-left: 30px;">
+						<p><img src="images/1533886.png" width="149" height="101" style="margin-left: 30px;">
 						<a  class='iframe2' href="https://wsp.registraduria.gov.co/censo/consultar/" target="iframe_a">
 						<input type="button"  value="BUSQUE SU PUESTO" name="cmdexport" style=" margin-left: 30px; margin-top:33px" >
 						</a>
@@ -154,11 +154,11 @@ ul.newsticker a:hover {text-decoration: underline;}
 					
 					</div>
 					<div class="col1 marg_right1"  style="width:250px">
-							<h2 style="font-size:22px;  margin-left: 58px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SICE <br/> (Sistema Integral)</h2>
+							<h2 style="font-size:20px;  text-align:center;">Sistema de Gesti&oacute;n de <br/> Testigos Electorales</h2>
 						    <blockquote>
-						      <p><img src="images/ico-cuentas.png" width="117" height="101" style="margin-left: 90px;">
-							   <a  href="https://www.registraduria.gov.co/-Sistema-Integral-de-Capacitacion-.html"  target="_blank">
-							  <input type="button"  value="CAPACITACION ELECTORAL" name="cmdexport" style=" margin-left: 35px; margin-top:12px;">
+						      <p style="text-align:center;"><img src="images/testigos.png" width="117" height="101" style="display:block; margin:0 auto;">
+							   <a  href="../metronic/login.html" target="_blank">
+							  <input type="button"  value="INGRESO AL SISTEMA" name="cmdexport" style="margin-top:12px;">
 							  </a>
 							  </p>
 				      </blockquote>

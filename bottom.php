@@ -40,6 +40,23 @@
     <td width="359" align="right" >&copy;2010 SIGE. Todos los Derechos Reservados</td>
   </tr>
 </table></div>
-		
+
+	<script type="text/javascript">
+	// Menu toggle para m\u00f3viles
+	$(document).ready(function() {
+		$('#menu-toggle').click(function() {
+			$(this).toggleClass('active');
+			$('#nav').toggleClass('active');
+		});
+
+		// Cerrar men\u00fa al hacer clic en un enlace (opcional)
+		$('#nav a').click(function() {
+			if ($(window).width() <= 768) {
+				$('#menu-toggle').removeClass('active');
+				$('#nav').removeClass('active');
+			}
+		});
+	});
+	</script>
 	</body>
 </html>

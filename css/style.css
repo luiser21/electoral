@@ -4,19 +4,19 @@ mark, rp, rt, ruby, summary, time {display:inline}
 /* Left & Right alignment */
 .left  {float:left}
 .right  {float:right}
-.wrapper {width:100%;
+.wrapper {width:100%;max-width:1280px;margin:0 auto;
 /*overflow:hidden*/
+box-sizing:border-box;
 }
 /* Global properties ======================================================== */
-body {background:url(../images/bg_top.gif) 0 0 repeat-x  #CCCCCC;border:0;font:14px Arial, Helvetica, sans-serif;color:#808080;line-height:24px;min-width:980px}
+body {background:url(../images/bg_top.gif) 0 0 repeat-x  #CCCCCC;border:0;font:14px Arial, Helvetica, sans-serif;color:#808080;line-height:24px;min-width:980px;overflow-x:hidden;}
 .ic, .ic a {border:0;float:right;background:#fff;color:#f00;width:50%;line-height:10px;font-size:10px;margin:-220% 0 0 0;overflow:hidden;padding:0}
 .css3{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;box-shadow:0 0 4px rgba(0, 0, 0, .4);-moz-box-shadow:0 0 4px rgba(0, 0, 0, .4);-webkit-box-shadow:0 0 4px rgba(0, 0, 0, .4);position:relative}
 /* Global Structure ============================================================= */
-.main {margin:0 auto;	width:960px;position:relative; bottom: 175px;}
-.main2 {margin:0 auto;	width:960px;position:relative; bottom: 40px;}
-.bg1 {background:#090909; position:relative; top: 20px;right: 199px;
-    
-    width: 141%;}; 
+.main {margin:0 auto;	width:960px;max-width:100%;position:relative; bottom: 175px;box-sizing:border-box;}
+.main2 {margin:0 auto;	width:960px;max-width:100%;position:relative; bottom: 40px;box-sizing:border-box;}
+.bg1 {background:#090909; position:relative; top: 20px;
+    width: 100%;left:0;right:0;}; 
 /* ============================= main layout ====================== */
 a {color:#5f870e;text-decoration:none;outline:none}
 a:hover {color:#fff}
@@ -93,3 +93,115 @@ footer a:hover {color:#fff}
 #ContactForm .input  {margin:0;width:420px;height:18px;background:none;padding:4px 10px;color:#000;font:14px Arial, Helvetica, sans-serif}
 #ContactForm textarea  {overflow:auto;width:820px;height:160px;background:none;padding:4px 10px;color:#000;font:14px Arial, Helvetica, sans-serif;margin:0}
 #ContactForm  .bg {background:#fff; position:relative;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;float:left}
+
+/* ============================= MEDIA QUERIES RESPONSIVE ============================= */
+
+/* Pantallas grandes */
+@media screen and (max-width: 1280px) {
+	body {
+		min-width: auto;
+	}
+	.wrapper {
+		padding: 0 10px;
+	}
+	#logo {
+		margin-left: 200px;
+	}
+	#logo2 {
+		margin-left: 120px;
+	}
+}
+
+/* Tablets y pantallas medianas */
+@media screen and (max-width: 1024px) {
+	body {
+		min-width: auto;
+	}
+	.main, .main2 {
+		width: 95%;
+		padding: 0 10px;
+	}
+	#logo {
+		margin-left: 100px;
+	}
+	#logo2 {
+		margin-left: 30px;
+	}
+}
+
+/* Tablets peque\u00f1as */
+@media screen and (max-width: 768px) {
+	.main, .main2 {
+		width: 100%;
+		bottom: 100px;
+	}
+	.wrapper {
+		width: 100%;
+		padding: 0 10px;
+		box-sizing: border-box;
+	}
+	#logo {
+		margin-left: 50px;
+	}
+	#logo2 {
+		margin-left: 10px;
+	}
+	#slider {
+		position: relative;
+		top: 0;
+		height: auto;
+	}
+	#content {
+		margin-top: 50px;
+	}
+	.col1, .col2, .col3 {
+		width: 100% !important;
+		float: none;
+		margin-right: 0 !important;
+		margin-bottom: 20px;
+	}
+	#marquesina {
+		position: relative;
+		width: 100%;
+		margin: 10px 0;
+	}
+	.tickercontainer {
+		width: 100%;
+	}
+	.tickercontainer .mask {
+		width: 90%;
+	}
+}
+
+/* M\u00f3viles */
+@media screen and (max-width: 480px) {
+	h1 {
+		padding: 10px 0;
+	}
+	h2 {
+		font-size: 24px;
+	}
+	h3 {
+		font-size: 20px;
+	}
+	.title {
+		font-size: 28px;
+	}
+	.banner {
+		width: 90%;
+		right: 5%;
+		top: 50px;
+	}
+	#logo, #logo2 {
+		width: 150px;
+		height: 60px;
+		background-size: contain;
+		margin-left: 5px;
+	}
+	#ContactForm .input {
+		width: 100%;
+	}
+	#ContactForm textarea {
+		width: 100%;
+	}
+}
