@@ -213,8 +213,8 @@ $(document).ready(function() {
 			<li ><a href="/electoral/documentos/plantilla 2.pptx" download="PLANTILLAPRESENTACION_2.pptx">Plantilla Presentacion 2</a></li>
 			<li ><a href="/electoral/documentos/plantilla 3.pptx" download="PLANTILLAPRESENTACION_3.pptx">Plantilla Presentacion 3</a></li>
 			<li ><a href="/electoral/documentos/plantilla.pptx" download="PLANTILLAPRESENTACION_4.pptx">Plantilla Presentacion 4</a></li>
-			<li ><a href="http://solumarsas.com.co/electoral/documentos/videocampanaricaurte.mp4" target="_blank">Video Campaña Alcaldia</a></li>
-			<li ><a href="http://solumarsas.com.co/electoral/documentos/videocampanaricaurte_consejo.mp4" target="_blank">Video Campaña Consejo</a></li>
+			<li ><a href="http://solumarsas.com.co/electoral/documentos/videocampanaricaurte.mp4" target="_blank">Video Campaï¿½a Alcaldia</a></li>
+			<li ><a href="http://solumarsas.com.co/electoral/documentos/videocampanaricaurte_consejo.mp4" target="_blank">Video Campaï¿½a Consejo</a></li>
 			
 			<?php } if($_SESSION['consulta']=='0'){ ?>
 			<!-- <li ><a href="Informe_lideres.php">Seguimiento por Lideres</a></li>-
@@ -228,8 +228,29 @@ $(document).ready(function() {
 			<li ><a href="Informes_miembros_duplicados.php">Seguimiento por Simpatizantes Duplicados por Lider</a></li>
 			<li ><a href="Informes_miembros_datos.php">Seguimiento por Simpatizantes con datos Incompletos</a></li>
 			<?php //if($_SESSION['username']=='duvanpineda'){?>-->			
-			
+
 				<?php } ?>
 		</ul>
-	</li>	
+	</li>
+	<li><a href="#">Hist&oacute;rico Resultados Elecciones</a>
+		<ul>
+			<li><a href="https://www.colombia.com/elecciones/2014/legislativas/resultados/electorales.aspx?C=SE" target="_blank">Elecciones legislativas 2014</a></li>
+			<li><a href="#">Elecciones legislativas 2018</a>
+				<ul>
+					<li><a href="https://escr_congreso_2018.registraduria.gov.co/#/" target="_blank">Escrutinio</a></li>
+					<li><a href="https://e14_congreso2018.registraduria.gov.co/" target="_blank">Resultado escrutinio</a></li>
+					<li><a href="https://e14_congreso2018.registraduria.gov.co/" target="_blank">E14 Delegados</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Elecciones legislativas 2022</a>
+				<ul>
+					<li><a href="https://resultadospreccongreso.registraduria.gov.co/" target="_blank">Preconteo</a></li>
+					<li><a href="https://congreso2022.registraduria.gov.co/" target="_blank">Resultado escrutinio</a></li>
+					<li><a href="https://e14_congreso_2022.registraduria.gov.co/" target="_blank">E14D Delegados</a></li>
+				</ul>
+			</li>
+			<li><a href="https://estadisticaselectorales.registraduria.gov.co" target="_blank">Elecciones Territoriales</a></li>
+			<li><a href="https://observatorio.registraduria.gov.co/views/electoral/historicos-resultados.php" target="_blank">Hist&oacute;rico resultado</a></li>
+		</ul>
+	</li>
 </ul>

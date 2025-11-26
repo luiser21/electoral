@@ -32,6 +32,12 @@ button, input[type="button"], input[type="submit"] {
     width: 960px;
 }
 
+/* Centrar marquesina */
+#marquesina {
+    width: 960px;
+    margin: 5px auto 6px auto;
+}
+
 </style>
 <?php 
 $sql="";
